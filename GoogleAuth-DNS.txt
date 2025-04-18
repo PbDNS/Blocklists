@@ -1,4 +1,4 @@
-! Title: Blocklist Google – DNS Level
+! Google Auth – DNS Level
 ! Description: Blocage DNS des domaines Google liés à la connexion, l’authentification OAuth2, Firebase, et aux scripts d’intégration sociale.
 ! Version: 2025.04.17
 
