@@ -1,7 +1,6 @@
 ! 📄 Blocklist Google - Extension Navigateur
 ! Description : Blocage de scripts, iframes et boutons liés à l’auth Google
 ! Version : 2025.04.17
-
 ! === Scripts JS Google ===
 ||apis.google.com/js/platform.js
 ||apis.google.com/js/api.js
