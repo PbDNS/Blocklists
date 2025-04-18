@@ -1,4 +1,4 @@
-! Blocklist Google – Extension Navigateur
+! Google Auth – Extension Navigateur
 ! Description : Blocage côté client des scripts, iframes, boutons, et intégrations OAuth liés à Google
 ! Version : 2025.04.17
 
