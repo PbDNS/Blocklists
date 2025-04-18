@@ -1,22 +1,26 @@
-! 📄 Blocklist Google - Extension Navigateur
-! Description : Blocage de scripts, iframes et boutons liés à l’auth Google
+! Blocklist Google – Extension Navigateur
+! Description : Blocage côté client des scripts, iframes, boutons, et intégrations OAuth liés à Google
 ! Version : 2025.04.17
 
-! === Scripts JS Google ===
+! Scripts JS Google (auth, plateforme, API)
 ||apis.google.com/js/platform.js
 ||apis.google.com/js/api.js
 ||accounts.google.com/gsi/client
 ||accounts.google.com/gsi/*
+||www.gstatic.com/firebasejs/*
+||www.gstatic.com/identity/*
 
-! === Iframes de connexion ===
+! Iframes de connexion OAuth / GSI
 ||accounts.google.com/o/oauth2/*
 ||accounts.google.com/gsi/*
 ||accounts.google.com/signin/*
 ||*.googleusercontent.com/gsi/*
 ||*.googleusercontent.com/accounts/*
 ||*.gstatic.com/accounts/*
+||*.gstatic.com/identity/*
+||*.gstatic.com/firebasejs/auth*
 
-! === Blocage de CSS/éléments visuels ===
+! Sélecteurs CSS pour masquer boutons et intégrations
 ##.google-signin
 ##.g-signin2
 ##.signin-with-google
@@ -25,20 +29,30 @@
 ##button[onclick*="google"]
 ##button[onclick*="signin"]
 ##button[onclick*="gsi"]
-##iframe[src*="accounts.google.com"]
-##a[href*="accounts.google.com"]
+##button[class*="google"]
+##a[class*="google"]
 ##form[action*="accounts.google.com"]
-
-! === Autres boutons d’auth Google déguisés ===
+##a[href*="accounts.google.com"]
+##iframe[src*="accounts.google.com"]
+##iframe[src*="oauth2"]
 ##a[href*="oauth2"]
 ##form[action*="oauth2"]
 ##.social-login
 ##.sso-button
 ##.oauth-login
+##.login-google
+##.btn-social-google
+##.g-auth
+##[data-provider="google"]
+##[onclick*="gapi"]
+##[onclick*="googleLogin"]
 
-! Infobulles Youtube
+! Ciblage Youtube (infobulles, cartes, mini widgets OAuth)
 www.youtube.com##.ytp-cards-button-icon
 www.youtube.com##.ytp-cards-teaser
+www.youtube.com##.ytp-button[aria-label*="Sign in"]
+www.youtube.com##.ytd-button-renderer[is-paper-button]
+www.youtube.com##.ytd-masthead-signin
 
 ! Images shopping Youtube
 ||encrypted-tbn3.gstatic.com/shopping*
