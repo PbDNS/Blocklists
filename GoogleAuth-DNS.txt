@@ -1,6 +1,7 @@
 ! Blocklist Google - DNS Level
 ! Description : Blocage des domaines Google utilisés pour la connexion, l'authentification OAuth2, et les scripts de connexion
 ! Version : 2025.04.17
+
 ||accounts.google.com^
 ||accounts.youtube.com^
 ||myaccount.google.com^
