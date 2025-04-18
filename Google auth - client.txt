@@ -1,0 +1,44 @@
+! 📄 Blocklist Google - Extension Navigateur
+! Description : Blocage de scripts, iframes et boutons liés à l’auth Google
+! Version : 2025.04.17
+
+! === Scripts JS Google ===
+||apis.google.com/js/platform.js
+||apis.google.com/js/api.js
+||accounts.google.com/gsi/client
+||accounts.google.com/gsi/*
+
+! === Iframes de connexion ===
+||accounts.google.com/o/oauth2/*
+||accounts.google.com/gsi/*
+||accounts.google.com/signin/*
+||*.googleusercontent.com/gsi/*
+||*.googleusercontent.com/accounts/*
+||*.gstatic.com/accounts/*
+
+! === Blocage de CSS/éléments visuels ===
+##.google-signin
+##.g-signin2
+##.signin-with-google
+##.gsi-material-button
+##.btn-google
+##button[onclick*="google"]
+##button[onclick*="signin"]
+##button[onclick*="gsi"]
+##iframe[src*="accounts.google.com"]
+##a[href*="accounts.google.com"]
+##form[action*="accounts.google.com"]
+
+! === Autres boutons d’auth Google déguisés ===
+##a[href*="oauth2"]
+##form[action*="oauth2"]
+##.social-login
+##.sso-button
+##.oauth-login
+
+! Infobulles Youtube
+www.youtube.com##.ytp-cards-button-icon
+www.youtube.com##.ytp-cards-teaser
+
+! Images shopping Youtube
+||encrypted-tbn3.gstatic.com/shopping*
