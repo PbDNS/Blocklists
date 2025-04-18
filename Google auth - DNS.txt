@@ -1,0 +1,35 @@
+! 📄 Blocklist Google - DNS Level
+! Description : Blocage des domaines Google utilisés pour la connexion, l'authentification OAuth2, et les scripts de connexion
+! Auteur : ChatGPT
+! Version : 2025.04.17
+! Usage : AdGuard Home, Pi-hole, etc.
+||accounts.google.com^
+||accounts.youtube.com^
+||myaccount.google.com^
+||oauth.googleusercontent.com^
+||*.oauth2.googleapis.com^
+||signin.googleapis.com^
+||clients6.google.com^
+||clients3.google.com^
+||clients1.google.com^
+||clients2.google.com^
+||clients4.google.com^
+||clients5.google.com^
+||apis.google.com^
+||www.gstatic.com^
+||ssl.gstatic.com^
+||people.googleapis.com^
+||content.googleapis.com^
+||www.googleapis.com^
+||firebaseapp.com^
+||firebaseio.com^
+||*.firebaseio.com^
+||*.firebaseapp.com^
+! 👇 Domains spécifiques à l’intégration “Se connecter avec Google”
+||smartlock.google.com^
+||script.google.com^
+||script.googleusercontent.com^
+! 👇 Services Google liés aux widgets sociaux, boutons, analytics légers
+||plus.google.com^
+||apis.google.com^
+||*.googleusercontent.com
