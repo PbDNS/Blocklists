@@ -50,7 +50,6 @@
 ||mouseflow.com
 ||nkdccsiwixvzj.world
 ||nzyqdqbfixkmq.buzz
-||oauth2.googleapis.com
 ||o418887.ingest.sentry.io
 ||o83571.ingest.sentry.io
 ||onesignal.com
