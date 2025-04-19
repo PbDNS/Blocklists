@@ -33,13 +33,6 @@
 ||script.googleusercontent.com^
 ||smartlock.google.com^
 
-! === Gstatic (hébergement de scripts, librairies, icônes) ===
-||www.gstatic.com^
-||ssl.gstatic.com^
-
-! === Googleusercontent (avatars, fichiers liés à des users) ===
-||*.googleusercontent.com^
-
 ! === Réseaux sociaux Google (anciens, mais encore utilisés) ===
 ||plus.google.com^
 
