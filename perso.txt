@@ -1,28 +1,32 @@
 ! Blockliste complémentaire
 ! Description: Urls absentes des principales blocklistes
-! Version: 2025.04.19
+! Version: 2025.04.20
 ||21mastery.uk
-||a.magsrv.com
+||a.magsrv.com^
+||adserv-fra1.snigelweb.com^
 ||adm.hotjar.com
 ||afrdtech.com
 ||analytics-api.tolk.ai
 ||analytics.clubic.com
-||analytics.korben.info
+||analytics.korben.info^
 ||analytics.macpaw.com
 ||analytics.notube.lol
-||analytics.optimalpeople.fr
+||analytics.optimalpeople.fr^
+||analytics.tiktok.com^
 ||analyticsengine.s3.amazonaws.com
 ||angularpoppyrobbing.com
 ||api.ipinfo.be
 ||appointeeivyspongy.com
-||bat.bing.com
 ||blanchidurham.shop
 ||bonnetsgunks.shop
+||cdn.adgtw.orangeads.fr^
 ||cdn.gravitec.media
 ||cdn.onesignal.com
+||cdn.strackr.com^
 ||check.analytics.rlcdn.com
 ||chiverlogical.shop
 ||ckydlxzejeepc.rocks
+||coreads.pmdstatic.net^
 ||cradkiocdax.com
 ||cqyumobnri.com
 ||dmojymtmhtguv.buzz
@@ -36,7 +40,7 @@
 ||hfopewkdgmcal.site
 ||hjoddysekhmji.site
 ||img.onesignal.com
-||intake-analytics.wikimedia.org
+||intake-analytics.wikimedia.org^
 ||js.sentry-cdn.com
 ||lepomisprinted.shop
 ||logs1412.xiti.com
@@ -55,6 +59,7 @@
 ||onesignal.com
 ||otoyueuprumok.icu
 ||paupsoborofoow.net
+||phburwtzjusbh.site^
 ||player.qualifio.com
 ||prbchvsbsgixu.global
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net
@@ -67,19 +72,25 @@
 ||sjgtsqnmrqswz.space
 ||slwrozacmq.com
 ||smetrics.darty.com
+||s.magsrv.com^
 ||sntf.femmeactuelle.fr
 ||static.qualif.io
 ||t.news.mediacloseremail.com
+||tpb.intrustzone.site^
 ||track-eu1.hubspot.com
 ||tracker.wpserveur.net
+||tracking-api.production.g2.com^
+||tracking.groupe-ldlc.com^
 ||trk-lb3.easydmp.net
 ||trustedvpn.site
 ||ufjwqdmqzlquq.world
 ||uoenkcbxwumqh.xyz
 ||varnish.qualif.io
+||web-tracking.splio.com^
 ||www.isoskgoousw.com
 ||www.mediacloseremail.com
 ||www.xadsmart.com
 ||xtdztyiqyhmet.global
 ||youradexchange.com
 ||zendesk-eu.my.sentry.io
+||smarttv.zeasn.tv^
