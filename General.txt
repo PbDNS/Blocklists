@@ -1,6 +1,6 @@
 ! Blockliste complémentaire
 ! Description: Urls absentes des principales blocklistes
-! Version: 2025.04.20
+! Version: 2025.04.21
 ||21mastery.uk
 ||a.magsrv.com^
 ||adserv-fra1.snigelweb.com^

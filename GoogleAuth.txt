@@ -1,6 +1,6 @@
 ! Google Auth – Extension Navigateur
 ! Description : Blocage des scripts, iframes, boutons, et intégrations OAuth liés à Google
-! Version : 2025.04.17
+! Version : 2025.04.20
 
 ! === Connexion & Authentification ===
 ||accounts.google.com^
