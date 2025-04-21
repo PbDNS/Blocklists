@@ -1,5 +1,5 @@
 ! Facebook Auth – Extension Navigateur
-! Description : Blocage des scripts, iframes, boutons, et intégrations OAuth liés à Facebook Login
+! Description : Blocage des scripts, iframes, boutons, endpoints OAuth et SDK liés à Facebook Login
 ! Version : 2025.04.21
 
 ! === Connexion & Authentification ===
@@ -10,6 +10,9 @@
 ||facebook.com/login.php^
 ||www.facebook.com/dialog/oauth^
 ||www.facebook.com/login.php^
+||facebook.com/x/oauth/status^
+||facebook.com/x/oauth/revoke^
+||facebook.com/x/oauth/confirm^
 
 ! === API Graph (authentification, profil, token) ===
 ||graph.facebook.com/oauth/access_token^
@@ -17,14 +20,7 @@
 ||graph.facebook.com/v*/me^
 ||graph.facebook.com/v*/oauth/access_token^
 
-! === Scripts & SDK Facebook ===
-||connect.facebook.net/*/sdk.js^
-||connect.facebook.net/*/all.js^
-||connect.facebook.net/*/xfbml.customerchat.js^
-||connect.facebook.net/en_US/sdk.js^
-||connect.facebook.net/fr_FR/sdk.js^
-
-! === Plugins Facebook ===
+! === Plugins Facebook (boutons, commentaires, pages) ===
 ||facebook.com/plugins/login_button.php^
 ||facebook.com/plugins/like.php^
 ||facebook.com/plugins/share_button.php^
@@ -32,15 +28,42 @@
 ||facebook.com/plugins/comments.php^
 ||facebook.com/plugins/post.php^
 
-! === Scripts tiers d'intégration Facebook ===
-||staticxx.facebook.com^
-||m.facebook.net^
-||static.facebook.com^
-||developers.facebook.com^
-||fbcdn.net^
-||*.fbcdn.net^
+! === Scripts & SDK Facebook ===
+||connect.facebook.net/en_US/sdk.js^
+||connect.facebook.net/fr_FR/sdk.js^
+||connect.facebook.net/*/sdk.js^
+||connect.facebook.net/*/all.js^
+||connect.facebook.net/*/xfbml.customerchat.js^
 
-! Sélecteurs CSS pour masquer boutons et intégrations Facebook
+! === CDN Facebook (fbcdn.net) – Sans joker *
+||static.fbcdn.net^
+||staticxx.fbcdn.net^
+||connect.fbcdn.net^
+||connectxx.fbcdn.net^
+||static.fbcdn.net/rsrc.php/*/fonts/*
+||static.fbcdn.net/rsrc.php/*/sprites/*
+||staticxx.fbcdn.net/rsrc.php/*/fonts/*
+||staticxx.fbcdn.net/rsrc.php/*/sprites/*
+||static.fbcdn.net/rsrc.php/v*/yZ/r/*
+||static.fbcdn.net/rsrc.php/v*/yB/r/*
+||static.fbcdn.net/rsrc.php/v*/yD/r/*
+||staticxx.fbcdn.net/rsrc.php/v*/yZ/r/*
+||staticxx.fbcdn.net/rsrc.php/v*/yB/r/*
+||staticxx.fbcdn.net/rsrc.php/v*/yD/r/*
+||static.fbcdn.net/images/login/*
+||staticxx.fbcdn.net/images/login/*
+||static.fbcdn.net/connect/xd_arbiter.php
+||static.fbcdn.net/connect/xd_proxy.php
+
+! === Autres domaines Facebook associés
+||m.facebook.net^
+||developers.facebook.com^
+
+! === Pixels de tracking (facultatif)
+||pixel.facebook.com^
+||www.facebook.com/tr^
+
+! === Sélecteurs CSS – Masquage des boutons et intégrations
 ##.fb-login-button
 ##.fb_iframe_widget
 ##.fb_iframe_widget_fluid
@@ -59,14 +82,3 @@
 ##.btn-social-facebook
 ##.facebook-auth
 ##[data-provider="facebook"]
-
-! === Blocage des iframes OAuth cachées ===
-||facebook.com/connect/ping^
-||facebook.com/connect/status^
-||facebook.com/x/oauth/status^
-||facebook.com/x/oauth/revoke^
-||facebook.com/x/oauth/confirm^
-
-! === Images tracking ou éléments "invisibles" d’auth ou de like ===
-||pixel.facebook.com^
-||www.facebook.com/tr^
