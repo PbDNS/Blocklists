@@ -89,4 +89,7 @@ www.youtube.com##.ytd-button-renderer[is-paper-button]
 www.youtube.com##.ytd-masthead-signin
 
 ! Images shopping Youtube
+||encrypted-tbn0.gstatic.com/shopping*
+||encrypted-tbn1.gstatic.com/shopping*
+||encrypted-tbn2.gstatic.com/shopping*
 ||encrypted-tbn3.gstatic.com/shopping*
