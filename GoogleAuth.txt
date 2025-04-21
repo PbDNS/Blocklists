@@ -8,7 +8,10 @@
 ||myaccount.google.com^
 ||signin.googleapis.com^
 ||oauth.googleusercontent.com^
-||*.oauth2.googleapis.com^
+||oauth2.googleapis.com/token^
+||oauth2.googleapis.com/revoke^
+||oauth2.googleapis.com/device/code^
+||oauth2.googleapis.com/tokeninfo^
 
 ! === Services clients & API Google ===
 ||clients1.google.com^
