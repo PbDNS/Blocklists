@@ -38,7 +38,6 @@
 ||lepomisprinted.shop^
 ||logs1412.xiti.com^
 ||mammasdamps.shop^
-||masogjmltljhl.one^
 ||mc.webvisor.org^
 ||mc.yandex.ru^
 ||mediacloseremail.com^
@@ -48,7 +47,6 @@
 ||o418887.ingest.sentry.io^
 ||o83571.ingest.sentry.io^
 ||onesignal.com^
-||phburwtzjusbh.site^
 ||player.qualifio.com^
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net^
 ||pub-cdn.cdn-0.diff.tf1.fr^
@@ -57,8 +55,6 @@
 ||saleclosersemail.com^
 ||scdns.link^
 ||siteintercept.qualtrics.com^
-||sjgtsqnmrqswz.space^
-||slwrozacmq.com^
 ||smetrics.darty.com^
 ||s.magsrv.com^
 ||sntf.femmeactuelle.fr^
@@ -71,12 +67,10 @@
 ||tracking.groupe-ldlc.com^
 ||trk-lb3.easydmp.net^
 ||trustedvpn.site^
-||uoenkcbxwumqh.xyz^
 ||varnish.qualif.io^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
 ||www.xadsmart.com^
-||xtdztyiqyhmet.global^
 ||youradexchange.com^
 ||zendesk-eu.my.sentry.io^
 ||smarttv.zeasn.tv^
@@ -84,4 +78,5 @@
 ||cloudflare-ech.com^
 ||zr.virldasyure.com^
 ||app.staticmoly.me^
+||mendationforc.info^
 
