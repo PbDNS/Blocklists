@@ -59,10 +59,10 @@
 ||script.googleusercontent.com^
 ||smartlock.google.com^
 
-! === Réseaux sociaux Google (anciens, mais encore utilisés) ===
+! === Réseaux sociaux Google (encore utilisé) ===
 ||plus.google.com^
 
-! Scripts JS Google (auth, plateforme, API)
+! === Scripts JS Google (auth, plateforme, API) ===
 ||apis.google.com/js/platform.js
 ||apis.google.com/js/api.js
 ||accounts.google.com/gsi/client
@@ -70,7 +70,7 @@
 ||www.gstatic.com/firebasejs/*
 ||www.gstatic.com/identity/*
 
-! Iframes de connexion OAuth / GSI
+! === Iframes de connexion OAuth / GSI ===
 ||accounts.google.com/o/oauth2/*
 ||accounts.google.com/gsi/*
 ||accounts.google.com/signin/*
@@ -80,7 +80,7 @@
 ||*.gstatic.com/identity/*
 ||*.gstatic.com/firebasejs/auth*
 
-! Sélecteurs CSS pour masquer boutons et intégrations
+! === Sélecteurs CSS pour masquer boutons et intégrations ===
 ##.google-signin
 ##.g-signin2
 ##.signin-with-google
@@ -107,14 +107,14 @@
 ##[onclick*="gapi"]
 ##[onclick*="googleLogin"]
 
-! Ciblage Youtube (infobulles, cartes, mini widgets OAuth)
+! === Ciblage Youtube (infobulles, cartes, mini widgets OAuth) ===
 www.youtube.com##.ytp-cards-button-icon
 www.youtube.com##.ytp-cards-teaser
 www.youtube.com##.ytp-button[aria-label*="Sign in"]
 www.youtube.com##.ytd-button-renderer[is-paper-button]
 www.youtube.com##.ytd-masthead-signin
 
-! Images shopping Youtube
+! === Images shopping Youtube ===
 ||encrypted-tbn0.gstatic.com/shopping*
 ||encrypted-tbn1.gstatic.com/shopping*
 ||encrypted-tbn2.gstatic.com/shopping*
