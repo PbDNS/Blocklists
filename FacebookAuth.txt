@@ -35,7 +35,7 @@
 ||connect.facebook.net/*/all.js^
 ||connect.facebook.net/*/xfbml.customerchat.js^
 
-! === CDN Facebook (fbcdn.net) – Sans joker *
+! === CDN Facebook (fbcdn.net) ===
 ||static.fbcdn.net^
 ||staticxx.fbcdn.net^
 ||connect.fbcdn.net^
@@ -55,15 +55,15 @@
 ||static.fbcdn.net/connect/xd_arbiter.php
 ||static.fbcdn.net/connect/xd_proxy.php
 
-! === Autres domaines Facebook associés
+! === Autres domaines Facebook associés ===
 ||m.facebook.net^
 ||developers.facebook.com^
 
-! === Pixels de tracking (facultatif)
+! === Pixels de tracking ===
 ||pixel.facebook.com^
 ||www.facebook.com/tr^
 
-! === Sélecteurs CSS – Masquage des boutons et intégrations
+! === Sélecteurs CSS – Masquage des boutons et intégrations ===
 ##.fb-login-button
 ##.fb_iframe_widget
 ##.fb_iframe_widget_fluid
