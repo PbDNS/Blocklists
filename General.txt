@@ -9,7 +9,6 @@
 ||cdn.gravitec.media^
 ||cdn.strackr.com^
 ||check.analytics.rlcdn.com^
-||cloudflare-ech.com^
 ||dunya.fraarhun.com^
 ||files.qualifio.com^
 ||hawk-tracker.360yield.com^
