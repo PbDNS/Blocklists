@@ -1,9 +1,9 @@
-import requests
+import urllib.request
 
 def telecharger_blocklist(url):
-    response = requests.get(url)
-    response.raise_for_status()  # Vérifie si la requête a réussi
-    return set(response.text.splitlines())
+    with urllib.request.urlopen(url) as response:
+        contenu = response.read().decode('utf-8')  # Décoder les octets en texte
+    return set(contenu.splitlines())
 
 def ecrire_blocklist(fichier, lignes):
     with open(fichier, 'w') as f:
