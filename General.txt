@@ -6,7 +6,6 @@
 ||api.ipinfo.be^
 ||app.staticmoly.me^
 ||cdn.adgtw.orangeads.fr^
-||cdn.gravitec.media^
 ||check.analytics.rlcdn.com^
 ||dunya.fraarhun.com^
 ||hawk-tracker.360yield.com^
@@ -20,7 +19,6 @@
 ||scdns.link^
 ||smarttv.zeasn.tv^
 ||sntf.femmeactuelle.fr^
-||static.qualif.io^
 ||t.news.mediacloseremail.com^
 ||tpb.intrustzone.site^
 ||track-eu1.hubspot.com^
