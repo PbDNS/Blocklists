@@ -1,5 +1,4 @@
 ||21mastery.uk^
-||a.magsrv.com^
 ||adserv-fra1.snigelweb.com^
 ||analytics-api.tolk.ai^
 ||analytics.korben.info^
@@ -13,7 +12,6 @@
 ||mediacloseremail.com^
 ||mendationforc.info^
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net^
-||s.magsrv.com^
 ||s.pemsrv.com^
 ||saleclosersemail.com^
 ||scdns.link^
@@ -29,6 +27,4 @@
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
 ||zendesk-eu.my.sentry.io^
-||zr.virldasyure.com^
-||acheckropery.shop^
 
