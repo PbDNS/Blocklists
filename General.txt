@@ -6,11 +6,16 @@
 ||app.staticmoly.me^
 ||cdn.adgtw.orangeads.fr^
 ||check.analytics.rlcdn.com^
+||dgw.c10r.facebook.com^
+||dmads.dailymotion.com^
 ||dunya.fraarhun.com^
 ||hawk-tracker.360yield.com^
+||icu.newsroom.bi^
 ||logs1412.xiti.com^
 ||mediacloseremail.com^
 ||mendationforc.info^
+||ottdatacollector.orange.fr^
+||petardstaximan.shop^
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net^
 ||s.pemsrv.com^
 ||saleclosersemail.com^
