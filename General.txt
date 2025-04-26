@@ -9,8 +9,11 @@
 ||dgw.c10r.facebook.com^
 ||dmads.dailymotion.com^
 ||dunya.fraarhun.com^
+||error-analytics-sessions-production.shopifysvc.com^
+||hactifawlgro.com^
 ||hawk-tracker.360yield.com^
 ||icu.newsroom.bi^
+||jacquesmodally.shop^
 ||logs1412.xiti.com^
 ||mediacloseremail.com^
 ||mendationforc.info^
@@ -31,7 +34,3 @@
 ||trustedvpn.site^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
-||jacquesmodally.shop^
-||hactifawlgro.com^
-||error-analytics-sessions-production.shopifysvc.com^
-
