@@ -31,4 +31,5 @@
 ||trustedvpn.site^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
+||jacquesmodally.shop^
 
