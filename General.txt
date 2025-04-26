@@ -31,4 +31,4 @@
 ||trustedvpn.site^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
-||zendesk-eu.my.sentry.io^
+
