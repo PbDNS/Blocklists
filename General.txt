@@ -34,3 +34,5 @@
 ||trustedvpn.site^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
+||trk-maiorum.com^
+||event.trk-maiorum.com^
