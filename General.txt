@@ -36,3 +36,4 @@
 ||www.mediacloseremail.com^
 ||trk-maiorum.com^
 ||event.trk-maiorum.com^
+||tracking.aws.judge.me^
