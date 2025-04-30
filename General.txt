@@ -37,3 +37,20 @@
 ||trk-maiorum.com^
 ||event.trk-maiorum.com^
 ||tracking.aws.judge.me^
+
+# Blocage de Sentry (sentry.io), service de collecte de rapports d’erreurs.
+||sentry.io^
+||browser.sentry.io^
+||cdn.sentry.io^
+||ingest.sentry.io^
+||o0.ingest.sentry.io^
+||o1.ingest.sentry.io^
+||o2.ingest.sentry.io^
+||o3.ingest.sentry.io^
+||o4.ingest.sentry.io^
+||o5.ingest.sentry.io^
+||o6.ingest.sentry.io^
+||o7.ingest.sentry.io^
+||o8.ingest.sentry.io^
+||o9.ingest.sentry.io^
+
