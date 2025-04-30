@@ -84,3 +84,43 @@
 # Errorception - outil de capture d’erreurs JavaScript en production
 ||errorception.com^
 ||api.errorception.com^
+
+# New Relic - surveillance de performance applicative
+||newrelic.com^
+||bam.nr-data.net^
+||nr-data.net^
+
+# Datadog - surveillance d’infrastructure et de logs
+||datadoghq.com^
+||browser-intake-datadoghq.com^
+||mobile-http-intake.logs.datadoghq.com^
+
+# LogRocket - enregistrement de sessions et débogage
+||logrocket.com^
+||cdn.logrocket.io^
+||ingest.lr-ingest.io^
+||api.lr-ingest.io^
+||cdn.lr-ingest.io^
+
+# Amplitude - analytics produit
+||amplitude.com^
+||api.amplitude.com^
+
+# Mixpanel - analytics utilisateur
+||mixpanel.com^
+||cdn.mxpnl.com^
+
+# Heap Analytics - analyse comportement utilisateur
+||heapanalytics.com^
+||cdn.heapanalytics.com^
+
+# Segment - plateforme de collecte et redistribution de données
+||segment.com^
+||cdn.segment.com^
+||api.segment.io^
+
+# Firebase Analytics - outil Google de mesure d’audience
+||firebaseio.com^
+||app-measurement.com^
+||google-analytics.com^
+||analytics.google.com^
