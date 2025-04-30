@@ -123,3 +123,16 @@ www.youtube.com##.ytd-masthead-signin
 ! === badge "Inclut une promotion rémunérée" ===
 youtube.com##ytd-promoted-video-renderer
 youtube.com##.ytp-paid-content-overlay
+
+! Supprime les sections Shorts de la page d'accueil
+youtube.com##ytd-rich-section-renderer:has(a[href^="/shorts/"])
+youtube.com##ytd-rich-grid-slim-media:has(a[href^="/shorts/"])
+
+! Supprime les Shorts dans les résultats de recherche
+youtube.com##ytd-video-renderer:has(a[href^="/shorts/"])
+
+! Supprime les suggestions de Shorts dans la colonne latérale
+youtube.com##ytd-compact-video-renderer:has(a[href^="/shorts/"])
+
+! Supprime les Shorts dans l'onglet abonnements
+youtube.com##ytd-grid-video-renderer:has(a[href^="/shorts/"])
