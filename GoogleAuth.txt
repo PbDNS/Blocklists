@@ -124,15 +124,14 @@ www.youtube.com##.ytd-masthead-signin
 youtube.com##ytd-promoted-video-renderer
 youtube.com##.ytp-paid-content-overlay
 
-! Supprime les sections Shorts de la page d'accueil
-youtube.com##ytd-rich-section-renderer:has(a[href^="/shorts/"])
-youtube.com##ytd-rich-grid-slim-media:has(a[href^="/shorts/"])
+! Masquer les vidéos Shorts sur la page d'accueil
+youtube.com##ytd-rich-grid-renderer:has(a[href^="/shorts/"])
 
-! Supprime les Shorts dans les résultats de recherche
+! Masquer les vidéos Shorts dans les résultats de recherche
 youtube.com##ytd-video-renderer:has(a[href^="/shorts/"])
 
-! Supprime les suggestions de Shorts dans la colonne latérale
+! Masquer les vidéos Shorts dans la colonne latérale
 youtube.com##ytd-compact-video-renderer:has(a[href^="/shorts/"])
 
-! Supprime les Shorts dans l'onglet abonnements
+! Masquer les vidéos Shorts dans l'onglet "Abonnements"
 youtube.com##ytd-grid-video-renderer:has(a[href^="/shorts/"])
