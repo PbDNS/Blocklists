@@ -54,3 +54,33 @@
 ||o8.ingest.sentry.io^
 ||o9.ingest.sentry.io^
 
+# Bugsnag - service de rapport de crash pour applications web et mobiles
+||bugsnag.com^
+||api.bugsnag.com^
+||notify.bugsnag.com^
+
+# Rollbar - outil de suivi des erreurs multi-langages
+||rollbar.com^
+||api.rollbar.com^
+||cdn.rollbar.com^
+
+# Raygun - solution de surveillance des erreurs et performances
+||raygun.com^
+||api.raygun.io^
+||raygun.io^
+
+# Honeybadger - suivi des exceptions pour développeurs Ruby et autres
+||honeybadger.io^
+||api.honeybadger.io^
+
+# Airbrake - outil de gestion des exceptions et rapports de bug
+||airbrake.io^
+||api.airbrake.io^
+
+# TrackJS - suivi des erreurs JavaScript côté client
+||trackjs.com^
+||cdn.trackjs.com^
+
+# Errorception - outil de capture d’erreurs JavaScript en production
+||errorception.com^
+||api.errorception.com^
