@@ -119,3 +119,7 @@ www.youtube.com##.ytd-masthead-signin
 ||encrypted-tbn1.gstatic.com/shopping*
 ||encrypted-tbn2.gstatic.com/shopping*
 ||encrypted-tbn3.gstatic.com/shopping*
+
+! === badge "Inclut une promotion rémunérée" ===
+youtube.com##ytd-promoted-video-renderer
+youtube.com##.ytp-paid-content-overlay
