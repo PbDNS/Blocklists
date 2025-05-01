@@ -37,7 +37,7 @@
 ||event.trk-maiorum.com^
 ||tracking.aws.judge.me^
 
-# Blocage de Sentry (sentry.io), service de collecte de rapports d’erreurs.
+# Blocage de Sentry (sentry.io), service de collecte de rapports d’erreurs ===
 ||sentry.io^
 ||browser.sentry.io^
 ||cdn.sentry.io^
@@ -53,186 +53,83 @@
 ||o8.ingest.sentry.io^
 ||o9.ingest.sentry.io^
 
-# Bugsnag - service de rapport de crash pour applications web et mobiles
+# Bugsnag - service de rapport de crash pour applications web et mobiles ===
 ||bugsnag.com^
 ||api.bugsnag.com^
 ||notify.bugsnag.com^
 
-# Rollbar - outil de suivi des erreurs multi-langages
+# Rollbar - outil de suivi des erreurs multi-langages ===
 ||rollbar.com^
 ||api.rollbar.com^
 ||cdn.rollbar.com^
 
-# Raygun - solution de surveillance des erreurs et performances
+# Raygun - solution de surveillance des erreurs et performances ===
 ||raygun.com^
 ||api.raygun.io^
 ||raygun.io^
 
-# Honeybadger - suivi des exceptions pour développeurs Ruby et autres
+# Honeybadger - suivi des exceptions pour développeurs Ruby et autres ===
 ||honeybadger.io^
 ||api.honeybadger.io^
 
-# Airbrake - outil de gestion des exceptions et rapports de bug
-||airbrake.io^
-||api.airbrake.io^
-
-# TrackJS - suivi des erreurs JavaScript côté client
-||trackjs.com^
-||cdn.trackjs.com^
-
-# Errorception - outil de capture d’erreurs JavaScript en production
-||errorception.com^
-||api.errorception.com^
-
-# New Relic - surveillance de performance applicative
+# New Relic - surveillance de performance applicative ===
 ||newrelic.com^
 ||bam.nr-data.net^
 ||nr-data.net^
 
-# Datadog - surveillance d’infrastructure et de logs
+# Datadog - surveillance d’infrastructure et de logs ===
 ||datadoghq.com^
 ||browser-intake-datadoghq.com^
 ||mobile-http-intake.logs.datadoghq.com^
 
-# LogRocket - enregistrement de sessions et débogage
-||logrocket.com^
-||cdn.logrocket.io^
-||ingest.lr-ingest.io^
-||api.lr-ingest.io^
-||cdn.lr-ingest.io^
-
-# Amplitude - analytics produit
-||amplitude.com^
-||api.amplitude.com^
-
-# Mixpanel - analytics utilisateur
-||mixpanel.com^
-||cdn.mxpnl.com^
-
-# Heap Analytics - analyse comportement utilisateur
-||heapanalytics.com^
-||cdn.heapanalytics.com^
-
-# Segment - plateforme de collecte et redistribution de données
-||segment.com^
-||cdn.segment.com^
-||api.segment.io^
-
-# Firebase Analytics - outil Google de mesure d’audience
-
-||google-analytics.com^
-||analytics.google.com^
-
-# New Relic - surveillance de performance applicative
+# New Relic - surveillance de performance applicative ===
 ||newrelic.com^
 ||bam.nr-data.net^
 ||nr-data.net^
 
-# Datadog - surveillance d’infrastructure et de logs
+# Datadog - surveillance d’infrastructure et de logs ===
 ||datadoghq.com^
 ||browser-intake-datadoghq.com^
 ||mobile-http-intake.logs.datadoghq.com^
 
-# LogRocket - enregistrement de sessions et débogage
-||logrocket.com^
-||cdn.logrocket.io^
-||ingest.lr-ingest.io^
-||api.lr-ingest.io^
-||cdn.lr-ingest.io^
-
-# Amplitude - analytics produit
-||amplitude.com^
-||api.amplitude.com^
-
-# Mixpanel - analytics utilisateur
-||mixpanel.com^
-||cdn.mxpnl.com^
-
-# Heap Analytics - analyse comportement utilisateur
-||heapanalytics.com^
-||cdn.heapanalytics.com^
-
-# Segment - collecte et redistribution de données utilisateur
-||segment.com^
-||cdn.segment.com^
-||api.segment.io^
-
-# Firebase Analytics - Google
-||firebaseio.com^
-||app-measurement.com^
-||google-analytics.com^
-||analytics.google.com^
-
-# Adobe Analytics - tracking d'entreprise
-||omtrdc.net^
+# Adobe Analytics - tracking d'entreprise ===
 ||adobe.io^
-||sc.omtrdc.net^
 
-# Matomo - alternative open-source à Google Analytics
+# Matomo - alternative open-source à Google Analytics ===
 ||matomo.org^
 
-# Snowplow Analytics - tracking comportemental
+# Snowplow Analytics - tracking comportemental ===
 ||snowplowanalytics.com^
 ||collector.snplow.net^
 
-# Hotjar - heatmaps et enregistrement de sessions
-||hotjar.com^
-||static.hotjar.com^
-||insights.hotjar.com^
-
-# Microsoft Clarity - enregistrement des sessions
-||clarity.ms^
-||www.clarity.ms^
-
-# Smartlook - session replay
-||smartlook.com^
-||rec.smartlook.com^
-
-# FullStory - session replay
-||fullstory.com^
-||edge.fullstory.com^
-
-# Facebook Pixel - publicité et analytics
+# Facebook Pixel - publicité et analytics ===
 ||facebook.net^
 ||connect.facebook.net^
 
-# TikTok Analytics
-||analytics.tiktok.com^
+# TikTok Analytics ===
 ||business.tiktok.com^
 
-# Google Ads / DoubleClick
-||doubleclick.net^
-||pagead2.googlesyndication.com^
-||googleadservices.com^
-
-# Twitter Analytics
-||analytics.twitter.com^
-||ads-twitter.com^
-
-# Gravatar - avatars utilisateur automatiques
+# Gravatar - avatars utilisateur automatiques ===
 ||gravatar.com^
 
-# Disqus - système de commentaires
+# Disqus - système de commentaires ===
 ||disqus.com^
 ||disquscdn.com^
 
-# Livefyre - système de commentaires sociaux
+# Livefyre - système de commentaires sociaux ===
 ||livefyre.com^
 
-# IntenseDebate - plateforme de commentaires
-||intensedebate.com^
-
-# AddThis / ShareThis - widgets de partage
+# AddThis / ShareThis - widgets de partage ===
 ||addthis.com^
 ||sharethis.com^
 
-# CDNs non essentiels (fonts, librairies JS, etc.)
+# CDNs non essentiels (fonts, librairies JS, etc.) ===
 ||use.fontawesome.com^
 ||cdnjs.cloudflare.com^
 ||cdn.jsdelivr.net^
 ||cdn.rawgit.com^
 
-# Outils d’interface et de feedback client
+# Outils d’interface et de feedback client ===
 ||widget.freshworks.com^
 ||intercom.io^
 ||api.intercom.io^
@@ -241,31 +138,13 @@
 ||snapengage.com^
 ||uservoice.com^
 
-# Fingerprinting et identification navigateur
-||fingerprintjs.com^
-||client.fingerprintjs.com^
+# Fingerprinting et identification navigateur ===
 ||cdn.fingerprint.com^
-||perimeterx.net^
 
-# Télémétrie Microsoft
-||telemetry.microsoft.com^
-||vortex.data.microsoft.com^
-||settings-win.data.microsoft.com^
-
-# Télémétrie Apple
-||metrics.apple.com^
+# Télémétrie Apple ===
 ||configuration.apple.com^
 
-# Télémétrie Ubuntu / Canonical
-||metrics.ubuntu.com^
-
-# SDKs mobiles (tracking pub & attribution)
-||appsflyer.com^
-||branch.io^
-||adjust.com^
-||kochava.com^
-
-# Pages de support en ligne intégrées
+# Pages de support en ligne intégrées ===
 ||zendesk.com^
 ||cdn.zendesk.com^
 ||helpdocs.io^
