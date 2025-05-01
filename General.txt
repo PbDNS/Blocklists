@@ -229,8 +229,6 @@
 ||sharethis.com^
 
 # CDNs non essentiels (fonts, librairies JS, etc.)
-||fonts.googleapis.com^
-||fonts.gstatic.com^
 ||use.fontawesome.com^
 ||cdnjs.cloudflare.com^
 ||cdn.jsdelivr.net^
