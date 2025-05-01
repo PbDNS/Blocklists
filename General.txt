@@ -119,8 +119,7 @@
 ||api.segment.io^
 
 # Firebase Analytics - outil Google de mesure d’audience
-||firebaseio.com^
-||app-measurement.com^
+# ||app-measurement.com^
 ||google-analytics.com^
 ||analytics.google.com^
 
