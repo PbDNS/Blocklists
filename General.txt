@@ -124,3 +124,152 @@
 ||app-measurement.com^
 ||google-analytics.com^
 ||analytics.google.com^
+
+# New Relic - surveillance de performance applicative
+||newrelic.com^
+||bam.nr-data.net^
+||nr-data.net^
+
+# Datadog - surveillance d’infrastructure et de logs
+||datadoghq.com^
+||browser-intake-datadoghq.com^
+||mobile-http-intake.logs.datadoghq.com^
+
+# LogRocket - enregistrement de sessions et débogage
+||logrocket.com^
+||cdn.logrocket.io^
+||ingest.lr-ingest.io^
+||api.lr-ingest.io^
+||cdn.lr-ingest.io^
+
+# Amplitude - analytics produit
+||amplitude.com^
+||api.amplitude.com^
+
+# Mixpanel - analytics utilisateur
+||mixpanel.com^
+||cdn.mxpnl.com^
+
+# Heap Analytics - analyse comportement utilisateur
+||heapanalytics.com^
+||cdn.heapanalytics.com^
+
+# Segment - collecte et redistribution de données utilisateur
+||segment.com^
+||cdn.segment.com^
+||api.segment.io^
+
+# Firebase Analytics - Google
+||firebaseio.com^
+||app-measurement.com^
+||google-analytics.com^
+||analytics.google.com^
+
+# Adobe Analytics - tracking d'entreprise
+||omtrdc.net^
+||adobe.io^
+||sc.omtrdc.net^
+
+# Matomo - alternative open-source à Google Analytics
+||matomo.org^
+
+# Snowplow Analytics - tracking comportemental
+||snowplowanalytics.com^
+||collector.snplow.net^
+
+# Hotjar - heatmaps et enregistrement de sessions
+||hotjar.com^
+||static.hotjar.com^
+||insights.hotjar.com^
+
+# Microsoft Clarity - enregistrement des sessions
+||clarity.ms^
+||www.clarity.ms^
+
+# Smartlook - session replay
+||smartlook.com^
+||rec.smartlook.com^
+
+# FullStory - session replay
+||fullstory.com^
+||edge.fullstory.com^
+
+# Facebook Pixel - publicité et analytics
+||facebook.net^
+||connect.facebook.net^
+
+# TikTok Analytics
+||analytics.tiktok.com^
+||business.tiktok.com^
+
+# Google Ads / DoubleClick
+||doubleclick.net^
+||pagead2.googlesyndication.com^
+||googleadservices.com^
+
+# Twitter Analytics
+||analytics.twitter.com^
+||ads-twitter.com^
+
+# Gravatar - avatars utilisateur automatiques
+||gravatar.com^
+
+# Disqus - système de commentaires
+||disqus.com^
+||disquscdn.com^
+
+# Livefyre - système de commentaires sociaux
+||livefyre.com^
+
+# IntenseDebate - plateforme de commentaires
+||intensedebate.com^
+
+# AddThis / ShareThis - widgets de partage
+||addthis.com^
+||sharethis.com^
+
+# CDNs non essentiels (fonts, librairies JS, etc.)
+||fonts.googleapis.com^
+||fonts.gstatic.com^
+||use.fontawesome.com^
+||cdnjs.cloudflare.com^
+||cdn.jsdelivr.net^
+||cdn.rawgit.com^
+
+# Outils d’interface et de feedback client
+||widget.freshworks.com^
+||intercom.io^
+||api.intercom.io^
+||drift.com^
+||cdn.drift.com^
+||snapengage.com^
+||uservoice.com^
+
+# Fingerprinting et identification navigateur
+||fingerprintjs.com^
+||client.fingerprintjs.com^
+||cdn.fingerprint.com^
+||perimeterx.net^
+
+# Télémétrie Microsoft
+||telemetry.microsoft.com^
+||vortex.data.microsoft.com^
+||settings-win.data.microsoft.com^
+
+# Télémétrie Apple
+||metrics.apple.com^
+||configuration.apple.com^
+
+# Télémétrie Ubuntu / Canonical
+||metrics.ubuntu.com^
+
+# SDKs mobiles (tracking pub & attribution)
+||appsflyer.com^
+||branch.io^
+||adjust.com^
+||kochava.com^
+
+# Pages de support en ligne intégrées
+||zendesk.com^
+||cdn.zendesk.com^
+||helpdocs.io^
