@@ -1,0 +1,25 @@
+! Blockliste Client – Extension Navigateur
+! Description : Evite requêtes DNS inutiles
+! Version : 2025.05.02
+
+://139.45.197.
+||*.top^$dnstype=~CNAME,denyallow=caitlin.top|callmebymygender.top|corriente.top|gdtot.top|nicenature.top|reminder.top|magocoro.top|castlevania.top|suiten.top|shucks.top|1stream.top|ambr.top|changlam10.top|changlam11.top|pdcdn1.top|pressplay.top|chillx.top|strims.top|thedesk.top|audioforyou.top|awavenue.top|reyhub.top|iboxs.top|adrules.top|hostingowy.top|to|yggtorrent.top|asiaon.top
+||aax-eu-retail-direct.amazon-adsystem.com^
+||advertising.amazon.fr^
+||analytics.tiktok.com^
+||axp.amazon-adsystem.com^
+||browser-intake-datadoghq.com^
+||cdn.cquotient.com^
+||fls-eu.amazon.fr^
+||intercom.io^
+||metrics.icloud.com^
+||optimizely.com^
+||phywi.org^
+||pixel.ionos.fr^
+||smilewanted.com^
+||taboola.com^
+||utiq-aws.net^
+||www.wysistat.com^
+||xp.apple.com^
+||tr.lfeeder.com^
+||futurehybrid.tech^
