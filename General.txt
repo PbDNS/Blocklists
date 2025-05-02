@@ -17,7 +17,6 @@
 ||logs1412.xiti.com^
 ||mediacloseremail.com^
 ||mendationforc.info^
-||ottdatacollector.orange.fr^
 ||petardstaximan.shop^
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net^
 ||s.pemsrv.com^
@@ -29,7 +28,6 @@
 ||track-eu1.hubspot.com^
 ||tracking-api.production.g2.com^
 ||tracking.groupe-ldlc.com^
-||trk-lb3.easydmp.net^
 ||trustedvpn.site^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
