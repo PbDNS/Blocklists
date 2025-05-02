@@ -10,6 +10,7 @@
 ||dmads.dailymotion.com^
 ||dunya.fraarhun.com^
 ||error-analytics-sessions-production.shopifysvc.com^
+||event.trk-maiorum.com^
 ||hactifawlgro.com^
 ||hawk-tracker.360yield.com^
 ||icu.newsroom.bi^
@@ -27,13 +28,12 @@
 ||tpb.intrustzone.site^
 ||track-eu1.hubspot.com^
 ||tracking-api.production.g2.com^
+||tracking.aws.judge.me^
 ||tracking.groupe-ldlc.com^
+||trk-maiorum.com^
 ||trustedvpn.site^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
-||trk-maiorum.com^
-||event.trk-maiorum.com^
-||tracking.aws.judge.me^
 
 # Blocage de Sentry (sentry.io), service de collecte de rapports d’erreurs ===
 ||sentry.io^
