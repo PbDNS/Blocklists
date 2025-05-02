@@ -15,10 +15,7 @@
 ||facebook.com/x/oauth/confirm^
 
 ! === API Graph (authentification, profil, token) ===
-||graph.facebook.com/oauth/access_token^
-||graph.facebook.com/me^
-||graph.facebook.com/v*/me^
-||graph.facebook.com/v*/oauth/access_token^
+||graph.facebook.com^
 
 ! === Plugins Facebook (boutons, commentaires, pages) ===
 ||facebook.com/plugins/login_button.php^
@@ -29,31 +26,10 @@
 ||facebook.com/plugins/post.php^
 
 ! === Scripts & SDK Facebook ===
-||connect.facebook.net/en_US/sdk.js^
-||connect.facebook.net/fr_FR/sdk.js^
-||connect.facebook.net/*/sdk.js^
-||connect.facebook.net/*/all.js^
-||connect.facebook.net/*/xfbml.customerchat.js^
+||connect.facebook.net^
 
 ! === CDN Facebook (fbcdn.net) ===
-||static.fbcdn.net^
-||staticxx.fbcdn.net^
-||connect.fbcdn.net^
-||connectxx.fbcdn.net^
-||static.fbcdn.net/rsrc.php/*/fonts/*
-||static.fbcdn.net/rsrc.php/*/sprites/*
-||staticxx.fbcdn.net/rsrc.php/*/fonts/*
-||staticxx.fbcdn.net/rsrc.php/*/sprites/*
-||static.fbcdn.net/rsrc.php/v*/yZ/r/*
-||static.fbcdn.net/rsrc.php/v*/yB/r/*
-||static.fbcdn.net/rsrc.php/v*/yD/r/*
-||staticxx.fbcdn.net/rsrc.php/v*/yZ/r/*
-||staticxx.fbcdn.net/rsrc.php/v*/yB/r/*
-||staticxx.fbcdn.net/rsrc.php/v*/yD/r/*
-||static.fbcdn.net/images/login/*
-||staticxx.fbcdn.net/images/login/*
-||static.fbcdn.net/connect/xd_arbiter.php
-||static.fbcdn.net/connect/xd_proxy.php
+||fbcdn.net^
 
 ! === Autres domaines Facebook associés ===
 ||m.facebook.net^
