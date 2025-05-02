@@ -8,10 +8,7 @@
 ||myaccount.google.com^
 ||signin.googleapis.com^
 ||oauth.googleusercontent.com^
-||oauth2.googleapis.com/token^
-||oauth2.googleapis.com/revoke^
-||oauth2.googleapis.com/device/code^
-||oauth2.googleapis.com/tokeninfo^
+||oauth2.googleapis.com^
 
 ! === Services clients & API Google ===
 ||clients1.google.com^
@@ -26,32 +23,8 @@
 ||content.googleapis.com^
 
 ! === Firebase (cloud, login, push, realtime DB) ===
-||auth.firebaseio.com^
-||database.firebaseio.com^
 ||storage.googleapis.com^
-||us-central1.firebaseio.com^
-||europe-west1.firebaseio.com^
-||asia-east1.firebaseio.com^
-||app.firebaseio.com^
-||client.firebaseio.com^
-||api.firebaseio.com^
-||prod.firebaseio.com^
-||dev.firebaseio.com^
-||test.firebaseio.com^
-||static.firebaseio.com^
-||web.firebaseio.com^
-||cdn.firebaseio.com^
-||myapp.firebaseio.com^
-||project.firebaseio.com^
 ||firebaseio.com^
-||web.firebaseapp.com^
-||cdn.firebaseapp.com^
-||app.firebaseapp.com^
-||client.firebaseapp.com^
-||dev.firebaseapp.com^
-||prod.firebaseapp.com^
-||test.firebaseapp.com^
-||project.firebaseapp.com^
 ||firebaseapp.com^
 
 ! === Scripts, intégrations OAuth & extensions Google Apps Script ===
@@ -65,15 +38,10 @@
 ! === Scripts JS Google (auth, plateforme, API) ===
 ||apis.google.com/js/platform.js
 ||apis.google.com/js/api.js
-||accounts.google.com/gsi/client
-||accounts.google.com/gsi/*
 ||www.gstatic.com/firebasejs/*
 ||www.gstatic.com/identity/*
 
 ! === Iframes de connexion OAuth / GSI ===
-||accounts.google.com/o/oauth2/*
-||accounts.google.com/gsi/*
-||accounts.google.com/signin/*
 ||*.googleusercontent.com/gsi/*
 ||*.googleusercontent.com/accounts/*
 ||*.gstatic.com/accounts/*
