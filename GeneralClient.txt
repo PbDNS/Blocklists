@@ -11,6 +11,7 @@
 ||browser-intake-datadoghq.com^
 ||cdn.cquotient.com^
 ||fls-eu.amazon.fr^
+||futurehybrid.tech^
 ||intercom.io^
 ||metrics.icloud.com^
 ||optimizely.com^
@@ -18,8 +19,7 @@
 ||pixel.ionos.fr^
 ||smilewanted.com^
 ||taboola.com^
+||tr.lfeeder.com^
 ||utiq-aws.net^
 ||www.wysistat.com^
 ||xp.apple.com^
-||tr.lfeeder.com^
-||futurehybrid.tech^
