@@ -1,5 +1,6 @@
 ! Google Auth – Extension Navigateur
-! Description : Blocage des scripts, iframes, boutons, et intégrations OAuth liés à Google
+! Description : Blocage authentification et objets associés Google utilisés pour Tracking
+!               et divers objets
 ! Version : 2025.04.21
 
 ! === Connexion & Authentification ===
@@ -89,5 +90,5 @@ www.youtube.com##.ytd-masthead-signin
 ||encrypted-tbn3.gstatic.com/shopping*
 
 ! === badge "Inclut une promotion rémunérée" ===
-youtube.com##ytd-promoted-video-renderer
+youtube.com##.ytd-promoted-video-renderer
 youtube.com##.ytp-paid-content-overlay
