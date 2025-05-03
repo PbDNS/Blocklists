@@ -138,9 +138,6 @@
 # Fingerprinting et identification navigateur ===
 ||cdn.fingerprint.com^
 
-# Télémétrie Apple ===
-||configuration.apple.com^
-
 # Pages de support en ligne intégrées ===
 ||zendesk.com^
 ||cdn.zendesk.com^
