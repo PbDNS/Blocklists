@@ -36,9 +36,7 @@
 ||www.mediacloseremail.com^
 
 # Blocage de Sentry (sentry.io), service de collecte de rapports d’erreurs ===
-||sentry.io^
 ||browser.sentry.io^
-||cdn.sentry.io^
 ||ingest.sentry.io^
 ||o0.ingest.sentry.io^
 ||o1.ingest.sentry.io^
@@ -80,16 +78,6 @@
 ||browser-intake-datadoghq.com^
 ||mobile-http-intake.logs.datadoghq.com^
 
-# New Relic - surveillance de performance applicative ===
-||newrelic.com^
-||bam.nr-data.net^
-||nr-data.net^
-
-# Datadog - surveillance d’infrastructure et de logs ===
-||datadoghq.com^
-||browser-intake-datadoghq.com^
-||mobile-http-intake.logs.datadoghq.com^
-
 # Adobe Analytics - tracking d'entreprise ===
 ||adobe.io^
 
@@ -110,35 +98,10 @@
 # Gravatar - avatars utilisateur automatiques ===
 ||gravatar.com^
 
-# Disqus - système de commentaires ===
-||disqus.com^
-||disquscdn.com^
-
-# Livefyre - système de commentaires sociaux ===
-||livefyre.com^
-
 # AddThis / ShareThis - widgets de partage ===
 ||addthis.com^
 ||sharethis.com^
 
-# CDNs non essentiels (fonts, librairies JS, etc.) ===
-||use.fontawesome.com^
-||cdn.jsdelivr.net^
-||cdn.rawgit.com^
-
-# Outils d’interface et de feedback client ===
-||widget.freshworks.com^
-||intercom.io^
-||api.intercom.io^
-||drift.com^
-||cdn.drift.com^
-||snapengage.com^
-||uservoice.com^
-
 # Fingerprinting et identification navigateur ===
 ||cdn.fingerprint.com^
 
-# Pages de support en ligne intégrées ===
-||zendesk.com^
-||cdn.zendesk.com^
-||helpdocs.io^
