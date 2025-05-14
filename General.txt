@@ -28,26 +28,10 @@
 ||tpb.intrustzone.site^
 ||track-eu1.hubspot.com^
 ||tracking-api.production.g2.com^
-||tracking.aws.judge.me^
 ||tracking.groupe-ldlc.com^
-||trk-maiorum.com^
 ||trustedvpn.site^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
-
-# Blocage de Sentry (sentry.io), service de collecte de rapports d’erreurs ===
-||browser.sentry.io^
-||ingest.sentry.io^
-||o0.ingest.sentry.io^
-||o1.ingest.sentry.io^
-||o2.ingest.sentry.io^
-||o3.ingest.sentry.io^
-||o4.ingest.sentry.io^
-||o5.ingest.sentry.io^
-||o6.ingest.sentry.io^
-||o7.ingest.sentry.io^
-||o8.ingest.sentry.io^
-||o9.ingest.sentry.io^
 
 # Bugsnag - service de rapport de crash pour applications web et mobiles ===
 ||bugsnag.com^
@@ -73,11 +57,6 @@
 ||bam.nr-data.net^
 ||nr-data.net^
 
-# Datadog - surveillance d’infrastructure et de logs ===
-||datadoghq.com^
-||browser-intake-datadoghq.com^
-||mobile-http-intake.logs.datadoghq.com^
-
 # Adobe Analytics - tracking d'entreprise ===
 ||adobe.io^
 
@@ -95,13 +74,9 @@
 # TikTok Analytics ===
 ||business.tiktok.com^
 
-# Gravatar - avatars utilisateur automatiques ===
-||gravatar.com^
-
 # AddThis / ShareThis - widgets de partage ===
 ||addthis.com^
 ||sharethis.com^
 
 # Fingerprinting et identification navigateur ===
 ||cdn.fingerprint.com^
-
