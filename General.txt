@@ -41,6 +41,7 @@
 ||trustedvpn.site^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
+||telemetry.seenthis.io^
 
 # Bugsnag - service de rapport de crash pour applications web et mobiles ===
 ||bugsnag.com^
