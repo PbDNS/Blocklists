@@ -34,15 +34,16 @@
 ||stw.annuaire-telechargement.pictures^
 ||stw.dl-protect.link^
 ||t.news.mediacloseremail.com^
+||telemetry.seenthis.io^
 ||tpb.intrustzone.site^
 ||track-eu1.hubspot.com^
 ||tracking-api.production.g2.com^
 ||tracking-europe.ad360.media^
 ||tracking.groupe-ldlc.com^
 ||trustedvpn.site^
+||utiq.programme-tv.net^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
-||telemetry.seenthis.io^
 
 # Bugsnag - service de rapport de crash pour applications web et mobiles ===
 ||bugsnag.com^
