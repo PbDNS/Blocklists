@@ -3,6 +3,7 @@
 ||adserv-fra1.snigelweb.com^
 ||analytics-api.tolk.ai^
 ||analytics.korben.info^
+||api-user-message.programme-tv.net^
 ||api.ipinfo.be^
 ||app.staticmoly.me^
 ||cdn.adgtw.orangeads.fr^
@@ -30,6 +31,7 @@
 ||saleclosersemail.com^
 ||scdns.link^
 ||sntf.femmeactuelle.fr^
+||static.addtoany.com^
 ||stw.annuaire-telechargement.pet^
 ||stw.annuaire-telechargement.pictures^
 ||stw.dl-protect.link^
