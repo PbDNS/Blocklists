@@ -47,6 +47,12 @@
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
 
+# ZT
+||tdzegpeatygun.tech^
+
+# Dood
+||sanovhva.com^
+
 # Bugsnag - service de rapport de crash pour applications web et mobiles ===
 ||bugsnag.com^
 ||api.bugsnag.com^
