@@ -6,8 +6,9 @@ from datetime import datetime
 # Liste des URLs des blocklists à fusionner
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt"
-    # Ajoute ici tes vraies URLs
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
+    "https://small.oisd.nl/"
 ]
 
 # Conteneur pour les lignes valides
