@@ -8,7 +8,8 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
-    "https://small.oisd.nl/"
+    "https://small.oisd.nl/",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt"
 ]
 
 # Conteneur pour les lignes valides
