@@ -1,0 +1,30 @@
+name: Génération de blocklist
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'  # Tous les jours à 00:00 et 12:00 UTC
+  workflow_dispatch:        # Permet aussi un lancement manuel
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: Installer Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Exécuter blocklist.py
+        run: python blocklist.py
+
+      - name: Commit et push de blocklist.txt
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add blocklist.txt
+          git commit -m "Mise à jour automatique de blocklist.txt [$(date -u)]" || echo "Rien à committer"
+          git push
