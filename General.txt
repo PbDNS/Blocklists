@@ -100,3 +100,22 @@
 
 # Fingerprinting et identification navigateur ===
 ||cdn.fingerprint.com^
+
+# Fonts web
+||fonts.googleapis.com^
+||fonts.gstatic.com^
+||use.typekit.net^
+||use.typekit.com^
+||p.typekit.net^
+||p.typekit.com^
+||fonts.adobe.com^
+||kit.fontawesome.com^
+||pro.fontawesome.com^
+||fontawesome.com^
+||cdnjs.cloudflare.com^
+||cdn.jsdelivr.net^
+||fonts.bunny.net^
+||fonts.cdnfonts.com^
+||static.parastorage.com^
+||fonts.gstatic.cn^
+||fonts.googleapis.cn^
