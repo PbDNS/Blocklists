@@ -3,6 +3,18 @@
 import urllib.request
 from datetime import datetime
 
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# ShadowWhisperer's Malware List
+# OISD Small
+# Dandelion Sprout's Anti-Malware List
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# AWAvenue Ads Rule
+# HaGeZi's Apple Tracker DNS Blocklist
+# d3Host
+# Energized Pro Extreme
+# Perso
+
 # Liste des URLs des blocklists à fusionner
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -12,7 +24,10 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_52.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt"
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
+    "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
+    "https://energized.pro/extreme/adblock.txt",
+    "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
 # Conteneur pour les lignes valides
