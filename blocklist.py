@@ -18,6 +18,11 @@ from datetime import datetime, timedelta
 # HaGeZi's Apple Tracker DNS Blocklist
 # d3Host
 # Energized Pro Extreme
+# Phishing URL Blocklist (PhishTank and OpenPhish)
+# Malicious URL Blocklist (URLHaus)
+# Scam Blocklist by DurableNapkin
+# AdGuard French adservers
+# AdGuard French adservers first party
 # Perso
 
 # Liste des URLs des blocklists à fusionner
@@ -37,6 +42,11 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
     "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
     "https://energized.pro/extreme/adblock.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
