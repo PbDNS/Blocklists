@@ -42,6 +42,7 @@
 ||tracking-api.production.g2.com^
 ||tracking-europe.ad360.media^
 ||tracking.groupe-ldlc.com^
+||tracking.lafourchette.com^
 ||trustedvpn.site^
 ||utiq.programme-tv.net^
 ||web-tracking.splio.com^
