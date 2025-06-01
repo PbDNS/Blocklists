@@ -3,10 +3,26 @@
 import urllib.request
 from datetime import datetime, timedelta
 
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's Amazon Tracker DNS Blocklist
+# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# ShadowWhisperer's Malware List
+# OISD Small
+# Dandelion Sprout's Anti-Malware List
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# AWAvenue Ads Rule
+# HaGeZi's Apple Tracker DNS Blocklist
+# d3Host
+# Energized Pro Extreme
+# Perso
+
 # Liste des URLs des blocklists à fusionner
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
     "https://small.oisd.nl/",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt",
