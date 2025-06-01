@@ -7,6 +7,9 @@ from datetime import datetime, timedelta
 # HaGeZi's Pop-Up Ads DNS Blocklist
 # HaGeZi's Amazon Tracker DNS Blocklist
 # HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# HaGeZi's Badware Hoster Blocklist
+# HaGeZi's DynDNS Blocklist
+# HaGeZi's Windows/Office Tracker DNS Blocklist
 # ShadowWhisperer's Malware List
 # OISD Small
 # Dandelion Sprout's Anti-Malware List
@@ -23,6 +26,9 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
     "https://small.oisd.nl/",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt",
