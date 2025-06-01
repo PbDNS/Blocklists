@@ -26,7 +26,7 @@ from datetime import datetime, timedelta
 # AdGuard French adservers first party
 # Perso
 
-# Liste des URLs des blocklists à fusionner
+# Blocklists à fusionner
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
@@ -52,30 +52,54 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
-# Conteneur pour les lignes valides
-filtered_lines = set()
+# Téléchargement des règles valides (||domaine^)
+raw_filtered_lines = set()
 
 for url in blocklist_urls:
     try:
         print(f"Téléchargement depuis {url}")
         with urllib.request.urlopen(url) as response:
-            content = response.read().decode('utf-8')
+            content = response.read().decode('utf-8', errors='ignore')
             for line in content.splitlines():
                 line = line.strip()
                 if line.startswith("||") and line.endswith("^"):
-                    filtered_lines.add(line)
+                    raw_filtered_lines.add(line)
     except Exception as e:
-        print(f"Erreur lors du téléchargement de {url}: {e}")
+        print(f"❌ Erreur lors du téléchargement de {url}: {e}")
 
-# Horodatage UTC+1
+print(f"\n✔️ {len(raw_filtered_lines)} règles initiales chargées.\n")
+
+# 🔍 Extraction des domaines bruts (sans || et ^)
+def extract_domain(rule):
+    return rule[2:-1]
+
+# 🔁 Vérifie si un domaine est un sous-domaine d’un autre
+def is_subdomain(sub, parent):
+    return sub == parent or sub.endswith("." + parent)
+
+# 💡 Suppression des règles redondantes
+all_domains = set(extract_domain(rule) for rule in raw_filtered_lines)
+sorted_domains = sorted(all_domains, key=lambda d: d.count('.'))  # du plus général au plus spécifique
+
+non_redundant_domains = set()
+
+for domain in sorted_domains:
+    if not any(is_subdomain(domain, kept) for kept in non_redundant_domains):
+        non_redundant_domains.add(domain)
+
+# 🧾 Reconstruction des règles Adblock
+final_rules = {f"||{domain}^" for domain in non_redundant_domains}
+
+# 📅 Horodatage
 now_utc_plus1 = datetime.utcnow() + timedelta(hours=1)
 timestamp_str = now_utc_plus1.strftime("%d-%m-%Y  %H:%M")
 
-# Écriture dans le fichier
-with open("blocklist.txt", "w") as f:
+# 💾 Écriture dans le fichier
+with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp_str}\n")
-    f.write(f"! {len(filtered_lines):06} entrées\n\n")  # Ligne vide avant les filtres
-    for entry in sorted(filtered_lines):
+    f.write(f"! {len(final_rules):06} entrées après nettoyage\n\n")
+    for entry in sorted(final_rules):
         f.write(f"{entry}\n")
 
-print("blocklist.txt générée avec succès.")
+print("✅ Fichier blocklist.txt généré avec succès.")
+print(f"➤ {len(final_rules)} règles finales conservées.")
