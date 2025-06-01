@@ -1,19 +1,7 @@
 # blocklist.py
 
 import urllib.request
-from datetime import datetime
-
-# HaGeZi's Normal DNS Blocklist
-# HaGeZi's Pop-Up Ads DNS Blocklist
-# ShadowWhisperer's Malware List
-# OISD Small
-# Dandelion Sprout's Anti-Malware List
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-# AWAvenue Ads Rule
-# HaGeZi's Apple Tracker DNS Blocklist
-# d3Host
-# Energized Pro Extreme
-# Perso
+from datetime import datetime, timedelta
 
 # Liste des URLs des blocklists à fusionner
 blocklist_urls = [
@@ -40,16 +28,20 @@ for url in blocklist_urls:
             content = response.read().decode('utf-8')
             for line in content.splitlines():
                 line = line.strip()
-                # Filtre : ne garder que les lignes commençant par '||' et finissant par '^'
                 if line.startswith("||") and line.endswith("^"):
                     filtered_lines.add(line)
     except Exception as e:
         print(f"Erreur lors du téléchargement de {url}: {e}")
 
-# Écriture dans le fichier de sortie
+# Horodatage UTC+1
+now_utc_plus1 = datetime.utcnow() + timedelta(hours=1)
+timestamp_str = now_utc_plus1.strftime("%d-%m-%Y  %H:%M")
+
+# Écriture dans le fichier
 with open("blocklist.txt", "w") as f:
-    f.write(f"! Blocklist filtrée - générée le {datetime.utcnow().isoformat()} UTC\n")
+    f.write(f"! Agrégation - {timestamp_str}\n")
+    f.write(f"! {len(filtered_lines):06} entrées\n\n")  # Ligne vide avant les filtres
     for entry in sorted(filtered_lines):
-        f.write(entry + "\n")
+        f.write(f"{entry}\n")
 
 print("blocklist.txt générée avec succès.")
