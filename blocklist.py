@@ -64,54 +64,54 @@ def download_and_extract(url):
             rules = set()
             for line in content.splitlines():
                 line = line.strip()
-                
-                # Ignorer commentaires et lignes vides
                 if not line or line.startswith("!") or line.startswith("#"):
                     continue
-                
-                # Règle Adblock : ||example.com^
                 if line.startswith("||") and line.endswith("^"):
                     domain = line[2:-1]
                     if "*" not in domain:
                         rules.add(domain)
-                
-                # Format hosts : 0.0.0.0 example.com
                 elif line.startswith("0.0.0.0"):
                     parts = re.split(r"\s+", line)
                     if len(parts) >= 2:
                         domain = parts[1].strip()
                         if domain and "*" not in domain:
                             rules.add(domain)
-            
             return rules
-
     except Exception as e:
         print(f"❌ Erreur : {url} → {e}")
         return set()
 
-# 🧵 Téléchargement parallèle
+# 🚀 Téléchargement parallèle
 all_domains = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
     for domain_set in results:
         all_domains.update(domain_set)
 
-print(f"\n✅ {len(all_domains)} domaines extraits (sans vérification DNS).")
+print(f"\n✅ {len(all_domains)} domaines extraits (brut).")
+
+# 🧪 Filtrage (optionnel ici, mais prêt à étendre)
+def filter_domains(domain):
+    # Ajoute des conditions si nécessaire (ex: DNS validation)
+    return True  # Tous les domaines valides sont conservés ici
+
+with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    filtered_domains = list(filter(None, executor.map(
+        lambda d: d if filter_domains(d) else None,
+        all_domains
+    )))
+
+print(f"✅ {len(filtered_domains)} domaines filtrés conservés.")
 
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 
-# 💾 Écriture dans le fichier blocklist.txt
+# 💾 Écriture du fichier
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(all_domains):06} entrées finales\n\n")
-    for domain in sorted(all_domains):
+    f.write(f"! {len(filtered_domains):06} entrées finales\n\n")
+    for domain in sorted(filtered_domains):
         f.write(f"||{domain}^\n")
 
 print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(all_domains)} règles finales conservées.")
-
-
-
-
-
+print(f"📦 {len(filtered_domains)} règles finales conservées.")
