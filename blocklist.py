@@ -5,6 +5,30 @@ import concurrent.futures
 from datetime import datetime, timedelta
 import re
 
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's Amazon Tracker DNS Blocklist
+# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# HaGeZi's Badware Hoster Blocklist
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
+# HaGeZi's DynDNS Blocklist
+# HaGeZi's Windows/Office Tracker DNS Blocklist
+# ShadowWhisperer's Malware List
+# OISD Small
+# Dandelion Sprout's Anti-Malware List
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# AWAvenue Ads Rule
+# HaGeZi's Apple Tracker DNS Blocklist
+# d3Host
+# AdGuard DNS filter
+# Phishing URL Blocklist (PhishTank and OpenPhish)
+# Malicious URL Blocklist (URLHaus)
+# Scam Blocklist by DurableNapkin
+# AdGuard French adservers
+# AdGuard French adservers first party
+# Steven Black's List
+# Perso
+
 # 📥 Liste des blocklists
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -57,14 +81,41 @@ def download_and_extract(url):
         print(f"❌ Erreur : {url} → {e}")
         return set()
 
-# 🧵 Téléchargement parallèle
+# 📦 Téléchargement parallèle
 all_domains = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
     for domain_set in results:
         all_domains.update(domain_set)
 
-print(f"\n✅ {len(all_domains)} domaines extraits (sans vérification DNS).")
+print(f"\n📊 {len(all_domains)} domaines extraits avant suppression des doublons de sous-domaines.")
+
+# 🌳 Suppression des sous-domaines redondants
+class DomainTrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_terminal = False
+
+    def insert(self, parts):
+        node = self
+        for part in parts:
+            if node.is_terminal:
+                return False
+            node = node.children.setdefault(part, DomainTrieNode())
+        node.is_terminal = True
+        return True
+
+def domain_to_parts(domain):
+    return domain.strip().split(".")[::-1]  # ex: ["com", "example", "ads"]
+
+trie_root = DomainTrieNode()
+final_domains = set()
+
+for domain in sorted(all_domains, key=lambda d: d.count(".")):
+    if trie_root.insert(domain_to_parts(domain)):
+        final_domains.add(domain)
+
+print(f"✅ {len(final_domains)} domaines après suppression des sous-domaines.")
 
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
@@ -72,9 +123,10 @@ timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 # 💾 Écriture du fichier
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(all_domains):06} entrées finales\n\n")
-    for domain in sorted(all_domains):
+    f.write(f"! {len(final_domains):06} entrées finales\n\n")
+    for domain in sorted(final_domains):
         f.write(f"||{domain}^\n")
 
 print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(all_domains)} règles finales conservées.")
+print(f"📦 {len(final_domains)} règles finales conservées.")
+
