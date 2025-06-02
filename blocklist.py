@@ -4,6 +4,7 @@ import urllib.request
 import concurrent.futures
 import socket
 from datetime import datetime, timedelta
+import re
 
 # HaGeZi's Normal DNS Blocklist
 # HaGeZi's Pop-Up Ads DNS Blocklist
@@ -26,6 +27,7 @@ from datetime import datetime, timedelta
 # Scam Blocklist by DurableNapkin
 # AdGuard French adservers
 # AdGuard French adservers first party
+# Steven Black's List
 # Perso
 
 # 📥 Liste des blocklists
@@ -51,6 +53,7 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
@@ -59,24 +62,35 @@ def download_and_extract(url):
         print(f"🔄 Téléchargement : {url}")
         with urllib.request.urlopen(url, timeout=30) as response:
             content = response.read().decode("utf-8", errors="ignore")
-            return [line.strip() for line in content.splitlines() if line.startswith("||") and line.endswith("^")]
+            rules = set()
+            for line in content.splitlines():
+                line = line.strip()
+                if not line or line.startswith("!"):
+                    continue
+                if line.startswith("||") and line.endswith("^"):
+                    domain = line[2:-1]
+                    rules.add(domain)
+                elif line.startswith("0.0.0.0"):
+                    parts = re.split(r"\s+", line)
+                    if len(parts) >= 2:
+                        domain = parts[1].strip()
+                        if domain and not domain.startswith("#"):
+                            rules.add(domain)
+            return rules
     except Exception as e:
         print(f"❌ Erreur : {url} → {e}")
-        return []
+        return set()
 
 # 🧵 Téléchargement parallèle
-all_lines = set()
+all_domains = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
-    for rules in results:
-        all_lines.update(rules)
+    for domain_set in results:
+        all_domains.update(domain_set)
 
-print(f"\n✅ {len(all_lines)} règles valides récupérées.")
+print(f"\n✅ {len(all_domains)} domaines extraits (avant filtrage DNS).")
 
-def extract_domain(rule):
-    return rule[2:-1]
-
-# 🔗 DNS check (multithread)
+# 🔗 DNS check
 def is_domain_resolvable(domain):
     try:
         socket.gethostbyname(domain)
@@ -85,15 +99,12 @@ def is_domain_resolvable(domain):
         return False
 
 print("\n🔍 Vérification DNS des domaines...")
-domains_to_check = list(set(extract_domain(r) for r in all_lines))
-
-# Paralléliser DNS check
 with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
-    domain_results = dict(zip(domains_to_check, executor.map(is_domain_resolvable, domains_to_check)))
+    domain_results = dict(zip(all_domains, executor.map(is_domain_resolvable, all_domains)))
 
 # ✅ Seuls les domaines résolvables sont conservés
-filtered_lines = {f"||{domain}^" for domain, ok in domain_results.items() if ok}
-print(f"✅ {len(filtered_lines)} domaines DNS résolvables conservés.")
+resolvable_domains = sorted(domain for domain, ok in domain_results.items() if ok)
+print(f"✅ {len(resolvable_domains)} domaines DNS résolvables conservés.")
 
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
@@ -101,9 +112,15 @@ timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 # 💾 Écriture dans le fichier blocklist.txt
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(filtered_lines):06} entrées finales\n\n")
-    for rule in sorted(filtered_lines):
-        f.write(f"{rule}\n")
+    f.write(f"! {len(resolvable_domains):06} entrées finales\n\n")
+    for domain in resolvable_domains:
+        f.write(f"||{domain}^\n")
 
 print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(filtered_lines)} règles finales conservées.")
+print(f"📦 {len(resolvable_domains)} règles finales conservées.")
+
+
+
+
+
+
