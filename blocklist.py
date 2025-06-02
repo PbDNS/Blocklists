@@ -64,7 +64,7 @@ def download_and_extract(url):
             rules = set()
             for line in content.splitlines():
                 line = line.strip()
-                if not line or line.startswith("!"):
+                if not line or line.startswith("!") or line.startswith("#"):
                     continue
                 if line.startswith("||") and line.endswith("^"):
                     domain = line[2:-1]
@@ -73,7 +73,7 @@ def download_and_extract(url):
                     parts = re.split(r"\s+", line)
                     if len(parts) >= 2:
                         domain = parts[1].strip()
-                        if domain and not domain.startswith("#"):
+                        if domain:
                             rules.add(domain)
             return rules
     except Exception as e:
