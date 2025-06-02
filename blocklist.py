@@ -46,12 +46,13 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
     "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
-    "https://energized.pro/extreme/adblock.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
