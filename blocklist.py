@@ -19,7 +19,7 @@ from datetime import datetime, timedelta
 # AWAvenue Ads Rule
 # HaGeZi's Apple Tracker DNS Blocklist
 # d3Host
-# Energized Pro Extreme
+# AdGuard DNS filter
 # Phishing URL Blocklist (PhishTank and OpenPhish)
 # Malicious URL Blocklist (URLHaus)
 # Scam Blocklist by DurableNapkin
@@ -44,7 +44,7 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
     "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
-    "https://energized.pro/extreme/adblock.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
