@@ -1,3 +1,4 @@
+# blocklist.py
 
 import urllib.request
 import concurrent.futures
@@ -25,8 +26,9 @@ from datetime import datetime, timedelta
 # Scam Blocklist by DurableNapkin
 # AdGuard French adservers
 # AdGuard French adservers first party
-# Perso# 📥 Liste des blocklists
+# Perso
 
+# 📥 Liste des blocklists
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
@@ -74,9 +76,6 @@ print(f"\n✅ {len(all_lines)} règles valides récupérées.")
 def extract_domain(rule):
     return rule[2:-1]
 
-def domain_to_parts(domain):
-    return domain.split(".")[::-1]
-
 # 🔗 DNS check (multithread)
 def is_domain_resolvable(domain):
     try:
@@ -96,41 +95,15 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
 filtered_lines = {f"||{domain}^" for domain, ok in domain_results.items() if ok}
 print(f"✅ {len(filtered_lines)} domaines DNS résolvables conservés.")
 
-# 🧠 Suppression des sous-domaines redondants
-class DomainTrieNode:
-    def __init__(self):
-        self.children = {}
-        self.is_terminal = False
-
-    def insert(self, parts):
-        node = self
-        for part in parts:
-            if node.is_terminal:
-                return False
-            if part not in node.children:
-                node.children[part] = DomainTrieNode()
-            node = node.children[part]
-        node.is_terminal = True
-        return True
-
-trie_root = DomainTrieNode()
-final_domains = set()
-
-for rule in sorted(filtered_lines, key=lambda r: extract_domain(r).count(".")):
-    domain = extract_domain(rule)
-    if trie_root.insert(domain_to_parts(domain)):
-        final_domains.add(rule)
-
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 
 # 💾 Écriture dans le fichier blocklist.txt
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(final_domains):06} entrées finales\n\n")
-    for rule in sorted(final_domains):
+    f.write(f"! {len(filtered_lines):06} entrées finales\n\n")
+    for rule in sorted(filtered_lines):
         f.write(f"{rule}\n")
 
 print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(final_domains)} règles finales conservées.")
-
+print(f"📦 {len(filtered_lines)} règles finales conservées.")
