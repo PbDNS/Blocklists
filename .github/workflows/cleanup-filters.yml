@@ -1,0 +1,26 @@
+name: Nettoyage des filtres AdGuard
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: "Forcer l'exécution"
+        required: true
+        default: 'true'
+
+jobs:
+  clean_filters:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Vérifier le dépôt
+      uses: actions/checkout@v3
+
+    - name: Télécharger General.txt et blocklist.txt
+      run: |
+        curl -O https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt
+        curl -O https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt
+
+    - name: Exécuter le script de nettoyage des filtres
+      run: |
+        python3 cleanup_filters.py
