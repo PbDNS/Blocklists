@@ -1,6 +1,7 @@
 # blocklist.py
 
 import urllib.request
+import concurrent.futures
 from datetime import datetime, timedelta
 
 # HaGeZi's Normal DNS Blocklist
@@ -26,7 +27,7 @@ from datetime import datetime, timedelta
 # AdGuard French adservers first party
 # Perso
 
-# Blocklists à fusionner
+# 📦 Liste complète des blocklists à fusionner
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
@@ -52,54 +53,68 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
-# Téléchargement des règles valides (||domaine^)
-raw_filtered_lines = set()
-
-for url in blocklist_urls:
+# 🚀 Fonction de téléchargement et filtrage
+def download_and_extract(url):
     try:
-        print(f"Téléchargement depuis {url}")
-        with urllib.request.urlopen(url) as response:
-            content = response.read().decode('utf-8', errors='ignore')
-            for line in content.splitlines():
-                line = line.strip()
-                if line.startswith("||") and line.endswith("^"):
-                    raw_filtered_lines.add(line)
+        print(f"🔄 Téléchargement : {url}")
+        with urllib.request.urlopen(url, timeout=30) as response:
+            content = response.read().decode("utf-8", errors="ignore")
+            return [line.strip() for line in content.splitlines() if line.startswith("||") and line.endswith("^")]
     except Exception as e:
-        print(f"❌ Erreur lors du téléchargement de {url}: {e}")
+        print(f"❌ Erreur : {url} → {e}")
+        return []
 
-print(f"\n✔️ {len(raw_filtered_lines)} règles initiales chargées.\n")
+# 🧵 Téléchargement parallèle
+all_lines = set()
+with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+    results = executor.map(download_and_extract, blocklist_urls)
+    for rules in results:
+        all_lines.update(rules)
 
-# 🔍 Extraction des domaines bruts (sans || et ^)
+print(f"\n✅ {len(all_lines)} règles valides récupérées.")
+
+# 🧠 Nettoyage des sous-domaines redondants
 def extract_domain(rule):
-    return rule[2:-1]
+    return rule[2:-1]  # Supprime || et ^
 
-# 🔁 Vérifie si un domaine est un sous-domaine d’un autre
-def is_subdomain(sub, parent):
-    return sub == parent or sub.endswith("." + parent)
+def domain_to_parts(domain):
+    return domain.split(".")[::-1]  # Pour trie inversé
 
-# 💡 Suppression des règles redondantes
-all_domains = set(extract_domain(rule) for rule in raw_filtered_lines)
-sorted_domains = sorted(all_domains, key=lambda d: d.count('.'))  # du plus général au plus spécifique
+# 🔁 Trie inversé pour éviter les redondances
+class DomainTrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_terminal = False
 
-non_redundant_domains = set()
+    def insert(self, parts):
+        node = self
+        for part in parts:
+            if node.is_terminal:
+                return False  # déjà couvert par un domaine parent
+            if part not in node.children:
+                node.children[part] = DomainTrieNode()
+            node = node.children[part]
+        node.is_terminal = True
+        return True
 
-for domain in sorted_domains:
-    if not any(is_subdomain(domain, kept) for kept in non_redundant_domains):
-        non_redundant_domains.add(domain)
+trie_root = DomainTrieNode()
+final_domains = set()
 
-# 🧾 Reconstruction des règles Adblock
-final_rules = {f"||{domain}^" for domain in non_redundant_domains}
+for rule in sorted(all_lines, key=lambda r: extract_domain(r).count(".")):
+    domain = extract_domain(rule)
+    if trie_root.insert(domain_to_parts(domain)):
+        final_domains.add(f"||{domain}^")
 
-# 📅 Horodatage
-now_utc_plus1 = datetime.utcnow() + timedelta(hours=1)
-timestamp_str = now_utc_plus1.strftime("%d-%m-%Y  %H:%M")
+# 🕒 Horodatage UTC+1
+timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 
-# 💾 Écriture dans le fichier
+# 💾 Écriture dans le fichier blocklist.txt
 with open("blocklist.txt", "w", encoding="utf-8") as f:
-    f.write(f"! Agrégation - {timestamp_str}\n")
-    f.write(f"! {len(final_rules):06} entrées après nettoyage\n\n")
-    for entry in sorted(final_rules):
-        f.write(f"{entry}\n")
+    f.write(f"! Agrégation - {timestamp}\n")
+    f.write(f"! {len(final_domains):06} entrées finales\n\n")
+    for rule in sorted(final_domains):
+        f.write(f"{rule}\n")
 
-print("✅ Fichier blocklist.txt généré avec succès.")
-print(f"➤ {len(final_rules)} règles finales conservées.")
+print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
+print(f"📦 {len(final_domains)} règles finales conservées.")
+
