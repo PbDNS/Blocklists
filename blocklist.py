@@ -27,6 +27,7 @@ import re
 # AdGuard French adservers
 # AdGuard French adservers first party
 # Steven Black's List
+# Peter Lowe's Blocklist
 # Perso
 
 # 📥 Liste des blocklists
@@ -53,6 +54,7 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
