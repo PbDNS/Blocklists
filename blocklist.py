@@ -2,7 +2,6 @@
 
 import urllib.request
 import concurrent.futures
-import socket
 from datetime import datetime, timedelta
 import re
 
@@ -30,6 +29,7 @@ import re
 # Steven Black's List
 # Peter Lowe's Blocklist
 # Dan Pollock's List
+# Easylist FR
 # Perso
 
 # 📥 Liste des blocklists
@@ -58,18 +58,9 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
+    "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
-
-# Fonction pour tester si un domaine est valide par DNS
-def is_domain_valid(domain):
-    try:
-        # Tentative de résolution DNS du domaine
-        socket.gethostbyname(domain)
-        return True
-    except socket.gaierror:
-        # Le domaine est invalide si une exception est levée
-        return False
 
 def download_and_extract(url):
     try:
@@ -140,30 +131,15 @@ for domain in sorted(all_domains, key=lambda d: d.count(".")):
 
 print(f"✅ {len(final_domains)} domaines après suppression des sous-domaines.")
 
-# 🌍 Vérification de la validité DNS des domaines
-def filter_valid_domains(domains):
-    valid_domains = set()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
-        results = executor.map(is_domain_valid, domains)
-        for domain, is_valid in zip(domains, results):
-            if is_valid:
-                valid_domains.add(domain)
-            else:
-                print(f"❌ Domaine invalide : {domain}")
-    return valid_domains
-
-# Tester la validité des domaines avant d'écrire dans le fichier
-valid_domains = filter_valid_domains(final_domains)
-
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 
 # 💾 Écriture du fichier
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(valid_domains):06} entrées finales\n\n")
-    for domain in sorted(valid_domains):
+    f.write(f"! {len(final_domains):06} entrées finales\n\n")
+    for domain in sorted(final_domains):
         f.write(f"||{domain}^\n")
 
 print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(valid_domains)} règles finales conservées.")
+print(f"📦 {len(final_domains)} règles finales conservées.")
