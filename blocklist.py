@@ -2,7 +2,6 @@
 
 import urllib.request
 import concurrent.futures
-import socket
 from datetime import datetime, timedelta
 import re
 
@@ -53,7 +52,6 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
@@ -88,23 +86,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     for domain_set in results:
         all_domains.update(domain_set)
 
-print(f"\n✅ {len(all_domains)} domaines extraits (avant filtrage DNS).")
-
-# 🔗 DNS check
-def is_domain_resolvable(domain):
-    try:
-        socket.gethostbyname(domain)
-        return True
-    except socket.error:
-        return False
-
-print("\n🔍 Vérification DNS des domaines...")
-with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
-    domain_results = dict(zip(all_domains, executor.map(is_domain_resolvable, all_domains)))
-
-# ✅ Seuls les domaines résolvables sont conservés
-resolvable_domains = sorted(domain for domain, ok in domain_results.items() if ok)
-print(f"✅ {len(resolvable_domains)} domaines DNS résolvables conservés.")
+print(f"\n✅ {len(all_domains)} domaines extraits (sans vérification DNS).")
 
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
@@ -112,13 +94,12 @@ timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 # 💾 Écriture dans le fichier blocklist.txt
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(resolvable_domains):06} entrées finales\n\n")
-    for domain in resolvable_domains:
+    f.write(f"! {len(all_domains):06} entrées finales\n\n")
+    for domain in sorted(all_domains):
         f.write(f"||{domain}^\n")
 
 print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(resolvable_domains)} règles finales conservées.")
-
+print(f"📦 {len(all_domains)} règles finales conservées.")
 
 
 
