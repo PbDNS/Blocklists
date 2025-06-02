@@ -1,7 +1,7 @@
-# blocklist.py
 
 import urllib.request
 import concurrent.futures
+import socket
 from datetime import datetime, timedelta
 
 # HaGeZi's Normal DNS Blocklist
@@ -25,9 +25,8 @@ from datetime import datetime, timedelta
 # Scam Blocklist by DurableNapkin
 # AdGuard French adservers
 # AdGuard French adservers first party
-# Perso
+# Perso# 📥 Liste des blocklists
 
-# 📦 Liste complète des blocklists à fusionner
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
@@ -44,7 +43,7 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
     "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
+    "https://energized.pro/extreme/adblock.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
@@ -53,7 +52,6 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
-# 🚀 Fonction de téléchargement et filtrage
 def download_and_extract(url):
     try:
         print(f"🔄 Téléchargement : {url}")
@@ -73,14 +71,32 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
 
 print(f"\n✅ {len(all_lines)} règles valides récupérées.")
 
-# 🧠 Nettoyage des sous-domaines redondants
 def extract_domain(rule):
-    return rule[2:-1]  # Supprime || et ^
+    return rule[2:-1]
 
 def domain_to_parts(domain):
-    return domain.split(".")[::-1]  # Pour trie inversé
+    return domain.split(".")[::-1]
 
-# 🔁 Trie inversé pour éviter les redondances
+# 🔗 DNS check (multithread)
+def is_domain_resolvable(domain):
+    try:
+        socket.gethostbyname(domain)
+        return True
+    except socket.error:
+        return False
+
+print("\n🔍 Vérification DNS des domaines...")
+domains_to_check = list(set(extract_domain(r) for r in all_lines))
+
+# Paralléliser DNS check
+with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
+    domain_results = dict(zip(domains_to_check, executor.map(is_domain_resolvable, domains_to_check)))
+
+# ✅ Seuls les domaines résolvables sont conservés
+filtered_lines = {f"||{domain}^" for domain, ok in domain_results.items() if ok}
+print(f"✅ {len(filtered_lines)} domaines DNS résolvables conservés.")
+
+# 🧠 Suppression des sous-domaines redondants
 class DomainTrieNode:
     def __init__(self):
         self.children = {}
@@ -90,7 +106,7 @@ class DomainTrieNode:
         node = self
         for part in parts:
             if node.is_terminal:
-                return False  # déjà couvert par un domaine parent
+                return False
             if part not in node.children:
                 node.children[part] = DomainTrieNode()
             node = node.children[part]
@@ -100,12 +116,12 @@ class DomainTrieNode:
 trie_root = DomainTrieNode()
 final_domains = set()
 
-for rule in sorted(all_lines, key=lambda r: extract_domain(r).count(".")):
+for rule in sorted(filtered_lines, key=lambda r: extract_domain(r).count(".")):
     domain = extract_domain(rule)
     if trie_root.insert(domain_to_parts(domain)):
-        final_domains.add(f"||{domain}^")
+        final_domains.add(rule)
 
-# 🕒 Horodatage UTC+1
+# 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 
 # 💾 Écriture dans le fichier blocklist.txt
