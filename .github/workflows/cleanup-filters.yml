@@ -18,8 +18,8 @@ jobs:
 
     - name: Télécharger General.txt et blocklist.txt
       run: |
-        curl -O https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt
-        curl -O https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt
+        curl -O https://raw.githubusercontent.com/mondepot/Blocklists/refs/heads/main/General.txt
+        curl -O https://raw.githubusercontent.com/mondepot/Blocklists/refs/heads/main/blocklist.txt
 
     - name: Exécuter le script de nettoyage des filtres
       run: |
@@ -27,14 +27,20 @@ jobs:
 
     - name: Vérifier le répertoire après nettoyage
       run: |
-        ls -la
+        ls -la  # Liste les fichiers du répertoire actuel pour vérifier si General_clean_*.txt existe
 
     - name: Déplacer et ajouter le fichier nettoyé au dépôt
       run: |
-        mkdir -p cleaned_filters
-        mv General_clean_*.txt ./cleaned_filters/
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-        git add ./cleaned_filters/*
-        git commit -m "Ajouter le fichier nettoyé des filtres"
-        git push
+        # Vérifier si le fichier a bien été créé avant de tenter de le déplacer
+        if ls General_clean_*.txt 1> /dev/null 2>&1; then
+          mkdir -p cleaned_filters
+          mv General_clean_*.txt ./cleaned_filters/
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add ./cleaned_filters/*
+          git commit -m "Ajouter le fichier nettoyé des filtres"
+          git push
+        else
+          echo "Le fichier General_clean_*.txt n'a pas été trouvé"
+          exit 1
+        fi
