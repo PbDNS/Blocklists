@@ -66,19 +66,27 @@ def download_and_extract(url):
             rules = set()
             for line in content.splitlines():
                 line = line.strip()
+
+                # Ignore les lignes vides, les commentaires et les lignes inutiles
                 if not line or line.startswith("!") or line.startswith("#"):
                     continue
-                if line.startswith("||") and line.endswith("^"):
+
+                # Gérer les lignes de type 0.0.0.0 <domain> # <commentaire>
+                if line.startswith("0.0.0.0"):
+                    parts = re.split(r"\s+", line)  # Séparer par espaces
+                    if len(parts) >= 2:
+                        domain = parts[1].strip()  # Extraire le domaine
+                        if domain and "*" not in domain:
+                            rules.add(domain)
+
+                # Gérer les règles du format ||<domain>^
+                elif line.startswith("||") and line.endswith("^"):
                     domain = line[2:-1]
                     if "*" not in domain:
                         rules.add(domain)
-                elif line.startswith("0.0.0.0"):
-                    parts = re.split(r"\s+", line)
-                    if len(parts) >= 2:
-                        domain = parts[1].strip()
-                        if domain and "*" not in domain:
-                            rules.add(domain)
+
             return rules
+
     except Exception as e:
         print(f"❌ Erreur : {url} → {e}")
         return set()
