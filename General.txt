@@ -11,32 +11,24 @@
 ||dgw.c10r.facebook.com^
 ||dmads.dailymotion.com^
 ||dunya.fraarhun.com^
-||error-analytics-sessions-production.shopifysvc.com^
 ||event.trk-maiorum.com^
-||geolocation.onetrust.com^
 ||graphql.api.dailymotion.com^
-||hactifawlgro.com^
 ||hawk-tracker.360yield.com^
 ||icu.newsroom.bi^
-||jacquesmodally.shop^
 ||l.marmiton.org^
-||leglikedescantwonder.com^
 ||logs1412.xiti.com^
 ||mediacloseremail.com^
 ||mendationforc.info^
-||petardstaximan.shop^
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net^
 ||s.pemsrv.com^
 ||s0.2mdn.net^
 ||saleclosersemail.com^
 ||scdns.link^
 ||sntf.femmeactuelle.fr^
-||static.addtoany.com^
 ||stw.annuaire-telechargement.pet^
 ||stw.annuaire-telechargement.pictures^
 ||stw.dl-protect.link^
 ||t.news.mediacloseremail.com^
-||telemetry.seenthis.io^
 ||tpb.intrustzone.site^
 ||track-eu1.hubspot.com^
 ||tracking-api.production.g2.com^
@@ -48,21 +40,8 @@
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
 
-# ZT
-||tdzegpeatygun.tech^
-
-# Dood
-||sanovhva.com^
-
-# Bugsnag - service de rapport de crash pour applications web et mobiles ===
-||bugsnag.com^
-||api.bugsnag.com^
-||notify.bugsnag.com^
-
 # Rollbar - outil de suivi des erreurs multi-langages ===
 ||rollbar.com^
-||api.rollbar.com^
-||cdn.rollbar.com^
 
 # Raygun - solution de surveillance des erreurs et performances ===
 ||raygun.com^
@@ -76,7 +55,6 @@
 # New Relic - surveillance de performance applicative ===
 ||newrelic.com^
 ||bam.nr-data.net^
-||nr-data.net^
 
 # Adobe Analytics - tracking d'entreprise ===
 ||adobe.io^
@@ -86,7 +64,6 @@
 
 # Snowplow Analytics - tracking comportemental ===
 ||snowplowanalytics.com^
-||collector.snplow.net^
 
 # Facebook Pixel - publicité et analytics ===
 ||facebook.net^
@@ -96,7 +73,6 @@
 ||business.tiktok.com^
 
 # AddThis / ShareThis - widgets de partage ===
-||addthis.com^
 ||sharethis.com^
 
 # Fingerprinting et identification navigateur ===
@@ -111,7 +87,6 @@
 ! Adobe Fonts (Typekit)  
 ||use.typekit.net^  
 ||use.typekit.com^  
-||p.typekit.net^  
 ||p.typekit.com^  
 ||fonts.adobe.com^  
 
