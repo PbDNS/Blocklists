@@ -40,49 +40,45 @@
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
 
-# Rollbar - outil de suivi des erreurs multi-langages ===
+! Rollbar - outil de suivi des erreurs multi-langages ===
 ||rollbar.com^
 
-# Raygun - solution de surveillance des erreurs et performances ===
+! Raygun - solution de surveillance des erreurs et performances ===
 ||raygun.com^
-||api.raygun.io^
 ||raygun.io^
 
-# Honeybadger - suivi des exceptions pour développeurs Ruby et autres ===
+! Honeybadger - suivi des exceptions pour développeurs Ruby et autres ===
 ||honeybadger.io^
-||api.honeybadger.io^
 
-# New Relic - surveillance de performance applicative ===
+! New Relic - surveillance de performance applicative ===
 ||newrelic.com^
 ||bam.nr-data.net^
 
-# Adobe Analytics - tracking d'entreprise ===
+! Adobe Analytics - tracking d'entreprise ===
 ||adobe.io^
 
-# Matomo - alternative open-source à Google Analytics ===
+! Matomo - alternative open-source à Google Analytics ===
 ||matomo.org^
 
-# Snowplow Analytics - tracking comportemental ===
+! Snowplow Analytics - tracking comportemental ===
 ||snowplowanalytics.com^
 
-# Facebook Pixel - publicité et analytics ===
+! Facebook Pixel - publicité et analytics ===
 ||facebook.net^
 ||connect.facebook.net^
 
-# TikTok Analytics ===
+! TikTok Analytics ===
 ||business.tiktok.com^
 
-# AddThis / ShareThis - widgets de partage ===
+! AddThis / ShareThis - widgets de partage ===
 ||sharethis.com^
 
-# Fingerprinting et identification navigateur ===
+! Fingerprinting et identification navigateur ===
 ||cdn.fingerprint.com^
 
 ! Google Fonts  
 ||fonts.googleapis.com^  
 ||fonts.gstatic.com^ 
-||fonts.gstatic.cn^  
-||fonts.googleapis.cn^  
 
 ! Adobe Fonts (Typekit)  
 ||use.typekit.net^  
@@ -91,8 +87,6 @@
 ||fonts.adobe.com^  
 
 ! Font Awesome kits  
-||kit.fontawesome.com^  
-||pro.fontawesome.com^  
 ||fontawesome.com^  
 
 ! Bunny Fonts (alternative à Google Fonts)  
