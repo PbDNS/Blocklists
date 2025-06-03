@@ -1,37 +1,8 @@
-# blocklist.py
-
 import urllib.request
 import concurrent.futures
 from datetime import datetime, timedelta
 import re
-
-# HaGeZi's Normal DNS Blocklist
-# HaGeZi's Pop-Up Ads DNS Blocklist
-# HaGeZi's Amazon Tracker DNS Blocklist
-# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
-# HaGeZi's Badware Hoster Blocklist
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
-# HaGeZi's DynDNS Blocklist
-# HaGeZi's Windows/Office Tracker DNS Blocklist
-# ShadowWhisperer's Malware List
-# OISD Small
-# Dandelion Sprout's Anti-Malware List
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-# AWAvenue Ads Rule
-# HaGeZi's Apple Tracker DNS Blocklist
-# d3Host
-# AdGuard DNS filter
-# Phishing URL Blocklist (PhishTank and OpenPhish)
-# Malicious URL Blocklist (URLHaus)
-# Scam Blocklist by DurableNapkin
-# AdGuard French adservers
-# AdGuard French adservers first party
-# Steven Black's List
-# Peter Lowe's Blocklist
-# Dan Pollock's List
-# Easylist FR
-# The Big List of Hacked Malware Web Sites
-# Perso
+import socket
 
 # 📥 Liste des blocklists
 blocklist_urls = [
@@ -61,9 +32,9 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
-#    "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
+# 🔄 Téléchargement et extraction des domaines
 def download_and_extract(url):
     try:
         print(f"🔄 Téléchargement : {url}")
@@ -73,26 +44,24 @@ def download_and_extract(url):
             for line in content.splitlines():
                 line = line.strip()
 
-                # Ignore les lignes vides, les commentaires et les lignes inutiles
                 if not line or line.startswith("!") or line.startswith("#"):
                     continue
 
-                # Gérer les lignes de type 0.0.0.0 <domain> # <commentaire>
+                # Forme 0.0.0.0 <domaine>
                 if line.startswith("0.0.0.0"):
-                    parts = re.split(r"\s+", line)  # Séparer par espaces
+                    parts = re.split(r"\s+", line)
                     if len(parts) >= 2:
-                        domain = parts[1].strip()  # Extraire le domaine
+                        domain = parts[1].strip()
                         if domain and "*" not in domain:
                             rules.add(domain)
 
-                # Gérer les règles du format ||<domain>^
+                # Forme ||domaine^
                 elif line.startswith("||") and line.endswith("^"):
                     domain = line[2:-1]
                     if "*" not in domain:
                         rules.add(domain)
 
             return rules
-
     except Exception as e:
         print(f"❌ Erreur : {url} → {e}")
         return set()
@@ -122,7 +91,7 @@ class DomainTrieNode:
         return True
 
 def domain_to_parts(domain):
-    return domain.strip().split(".")[::-1]  # ex: ["com", "example", "ads"]
+    return domain.strip().split(".")[::-1]
 
 trie_root = DomainTrieNode()
 final_domains = set()
@@ -133,15 +102,43 @@ for domain in sorted(all_domains, key=lambda d: d.count(".")):
 
 print(f"✅ {len(final_domains)} domaines après suppression des sous-domaines.")
 
+# 🧪 Vérification DNS : les domaines doivent être résolvables
+def is_domain_resolvable(domain, timeout=2):
+    try:
+        socket.setdefaulttimeout(timeout)
+        socket.getaddrinfo(domain, None)
+        return True
+    except socket.gaierror:
+        return False
+    except Exception:
+        return False
+
+print("🔍 Vérification des domaines valides par résolution DNS...")
+
+valid_domains = set()
+
+# Limiter le nombre de threads pour GitHub Actions
+with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    future_to_domain = {executor.submit(is_domain_resolvable, domain): domain for domain in final_domains}
+    for future in concurrent.futures.as_completed(future_to_domain):
+        domain = future_to_domain[future]
+        try:
+            if future.result():
+                valid_domains.add(domain)
+        except Exception:
+            pass
+
+print(f"✅ {len(valid_domains)} domaines valides après vérification DNS.")
+
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 
-# 💾 Écriture du fichier
+# 💾 Écriture du fichier final
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(final_domains):06} entrées finales\n\n")
-    for domain in sorted(final_domains):
+    f.write(f"! {len(valid_domains):06} entrées finales\n\n")
+    for domain in sorted(valid_domains):
         f.write(f"||{domain}^\n")
 
 print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(final_domains)} règles finales conservées.")
+print(f"📦 {len(valid_domains)} règles finales conservées.")
