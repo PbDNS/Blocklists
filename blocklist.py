@@ -60,11 +60,17 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
-#   "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
-]
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"]
 
+# 🔍 Vérification stricte des domaines
+def is_valid_domain(domain):
+    return re.match(
+        r"^(?!\-)(?!.*\-$)(?!.*?\.\.)([a-zA-Z0-9][a-zA-Z0-9\-]{0,62}\.)+[a-zA-Z]{2,}$",
+        domain
+    )
+
+# 📥 Téléchargement et extraction
 def download_and_extract(url):
     try:
         print(f"🔄 Téléchargement : {url}")
@@ -74,27 +80,27 @@ def download_and_extract(url):
             for line in content.splitlines():
                 line = line.strip()
 
-                # Ignore les lignes vides, les commentaires et les lignes inutiles
+                # Ignore les commentaires et lignes vides
                 if not line or line.startswith("!") or line.startswith("#"):
                     continue
 
-                # Gérer les lignes de type 0.0.0.0 <domain>
+                # Format 0.0.0.0 <domaine>
                 if line.startswith("0.0.0.0"):
                     parts = re.split(r"\s+", line)
                     if len(parts) >= 2:
                         domain = parts[1].strip()
-                        if domain and "*" not in domain:
+                        if domain and "*" not in domain and is_valid_domain(domain):
                             rules.add(domain)
 
-                # Gérer les règles du format ||<domain>^
+                # Format ||<domaine>^
                 elif line.startswith("||") and line.endswith("^"):
                     domain = line[2:-1]
-                    if "*" not in domain:
+                    if "*" not in domain and is_valid_domain(domain):
                         rules.add(domain)
 
-                # Gérer les noms de domaine nus comme "12d60.appspot.com"
+                # Format <domaine> nu (ex: appspot.com)
                 elif re.match(r"^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", line):
-                    if "*" not in line:
+                    if "*" not in line and is_valid_domain(line):
                         rules.add(line)
 
             return rules
@@ -128,7 +134,7 @@ class DomainTrieNode:
         return True
 
 def domain_to_parts(domain):
-    return domain.strip().split(".")[::-1]  # ex: ["com", "example", "ads"]
+    return domain.strip().split(".")[::-1]
 
 trie_root = DomainTrieNode()
 final_domains = set()
@@ -142,7 +148,7 @@ print(f"✅ {len(final_domains)} domaines après suppression des sous-domaines."
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 
-# 💾 Écriture du fichier
+# 💾 Écriture du fichier final
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {len(final_domains):06} entrées finales\n\n")
