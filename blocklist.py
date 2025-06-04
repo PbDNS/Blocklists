@@ -62,8 +62,7 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
-    "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt"    
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"   
 ]
 
 # Vérification stricte des domaines
