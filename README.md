@@ -13,7 +13,7 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 - bloquer les publicités,
 - limiter le suivi (trackers, fingerprinting),
 - bloquer les logiciels malveillants, scams, phishing,
-- améliorer la sécurité des réseaux personnels et professionnels.
+- améliorer la sécurité.
 
 
 ---
