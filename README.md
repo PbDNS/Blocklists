@@ -17,8 +17,6 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 
 ## 📦 Blocklistes incluses
 
-Liste complète des blocklists utilisées, classée par ordre alphabétique :
-
 - **AdGuard DNS filter**
 - **AdGuard French adservers**
 - **AdGuard French adservers first party**
