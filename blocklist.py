@@ -4,34 +4,7 @@ import urllib.request
 import concurrent.futures
 from datetime import datetime, timedelta
 import re
-
-# HaGeZi's Normal DNS Blocklist
-# HaGeZi's Pop-Up Ads DNS Blocklist
-# HaGeZi's Amazon Tracker DNS Blocklist
-# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
-# HaGeZi's Badware Hoster Blocklist
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
-# HaGeZi's DynDNS Blocklist
-# HaGeZi's Windows/Office Tracker DNS Blocklist
-# ShadowWhisperer's Malware List
-# OISD Small
-# Dandelion Sprout's Anti-Malware List
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-# AWAvenue Ads Rule
-# HaGeZi's Apple Tracker DNS Blocklist
-# d3Host
-# AdGuard DNS filter
-# Phishing URL Blocklist (PhishTank and OpenPhish)
-# Malicious URL Blocklist (URLHaus)
-# Scam Blocklist by DurableNapkin
-# AdGuard French adservers
-# AdGuard French adservers first party
-# Steven Black's List
-# Peter Lowe's Blocklist
-# Dan Pollock's List
-# Easylist FR
-# The Big List of Hacked Malware Web Sites
-# Stalkerware Indicators List
+import ipaddress
 
 # 📥 Liste des blocklists
 blocklist_urls = [
@@ -60,16 +33,30 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
 ]
 
 # 🔍 Vérification stricte des domaines
 def is_valid_domain(domain):
     return re.match(
-        r"^(?!\-)(?!.*\-$)(?!.*?\.\.)([a-zA-Z0-9][a-zA-Z0-9\-]{0,62}\.)+[a-zA-Z]{2,}$",
+        r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
         domain
     )
+
+# 🔍 Vérification IP publique uniquement
+def is_valid_ip(ip):
+    try:
+        ip_obj = ipaddress.ip_address(ip)
+        return ip_obj.version == 4 and not (
+            ip_obj.is_loopback or
+            ip_obj.is_private or
+            ip_obj.is_link_local or
+            ip_obj.is_reserved or
+            ip_obj.is_multicast
+        )
+    except ValueError:
+        return False
 
 # 📥 Téléchargement et extraction
 def download_and_extract(url):
@@ -81,27 +68,32 @@ def download_and_extract(url):
             for line in content.splitlines():
                 line = line.strip()
 
-                # Ignore les commentaires et lignes vides
                 if not line or line.startswith("!") or line.startswith("#"):
                     continue
 
-                # Format 0.0.0.0 <domaine>
-                if line.startswith("0.0.0.0"):
+                # Format 0.0.0.0 <domaine ou IP>
+                if line.startswith("0.0.0.0") or line.startswith("127.0.0.1"):
                     parts = re.split(r"\s+", line)
                     if len(parts) >= 2:
-                        domain = parts[1].strip()
-                        if domain and "*" not in domain and is_valid_domain(domain):
-                            rules.add(domain)
+                        target = parts[1].strip()
+                        if "*" in target:
+                            continue
+                        if is_valid_domain(target) or is_valid_ip(target):
+                            rules.add(target)
 
-                # Format ||<domaine>^
+                # Format ||<entrée>^
                 elif line.startswith("||") and line.endswith("^"):
-                    domain = line[2:-1]
-                    if "*" not in domain and is_valid_domain(domain):
-                        rules.add(domain)
+                    target = line[2:-1]
+                    if "*" in target:
+                        continue
+                    if is_valid_domain(target) or is_valid_ip(target):
+                        rules.add(target)
 
-                # Format <domaine> nu (ex: appspot.com)
-                elif re.match(r"^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", line):
-                    if "*" not in line and is_valid_domain(line):
+                # Format simple : domaine ou IP nue
+                elif re.match(r"^[a-zA-Z0-9.-]+$", line):
+                    if "*" in line:
+                        continue
+                    if is_valid_domain(line) or is_valid_ip(line):
                         rules.add(line)
 
             return rules
@@ -111,15 +103,15 @@ def download_and_extract(url):
         return set()
 
 # 📦 Téléchargement parallèle
-all_domains = set()
+all_entries = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
-    for domain_set in results:
-        all_domains.update(domain_set)
+    for entry_set in results:
+        all_entries.update(entry_set)
 
-print(f"\n📊 {len(all_domains)} domaines extraits avant suppression des doublons de sous-domaines.")
+print(f"\n📊 {len(all_entries)} entrées extraites avant déduplication de sous-domaines.")
 
-# 🌳 Suppression des sous-domaines redondants
+# 🌳 Suppression des sous-domaines redondants (pour les domaines uniquement)
 class DomainTrieNode:
     def __init__(self):
         self.children = {}
@@ -138,13 +130,16 @@ def domain_to_parts(domain):
     return domain.strip().split(".")[::-1]
 
 trie_root = DomainTrieNode()
-final_domains = set()
+final_entries = set()
 
-for domain in sorted(all_domains, key=lambda d: d.count(".")):
-    if trie_root.insert(domain_to_parts(domain)):
-        final_domains.add(domain)
+for entry in sorted(all_entries, key=lambda e: e.count(".")):
+    if is_valid_domain(entry):
+        if trie_root.insert(domain_to_parts(entry)):
+            final_entries.add(entry)
+    elif is_valid_ip(entry):
+        final_entries.add(entry)
 
-print(f"✅ {len(final_domains)} domaines après suppression des sous-domaines.")
+print(f"✅ {len(final_entries)} entrées après suppression des sous-domaines.")
 
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
@@ -152,9 +147,9 @@ timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 # 💾 Écriture du fichier final
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(final_domains):06} entrées finales\n\n")
-    for domain in sorted(final_domains):
-        f.write(f"||{domain}^\n")
+    f.write(f"! {len(final_entries):06} entrées finales\n\n")
+    for entry in sorted(final_entries):
+        f.write(f"||{entry}^\n")
 
 print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(final_domains)} règles finales conservées.")
+print(f"📦 {len(final_entries)} règles finales conservées.")
