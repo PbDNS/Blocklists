@@ -51,10 +51,3 @@ Liste complète des blocklists utilisées, classée par ordre alphabétique :
 ## 📁 Format & Utilisation
 
 Le fichier de sortie est format Adguard utilisable avec Adguard Home, Pihole...
-
----
-
-
-## 🤝 Contribuer
-
-Les suggestions de nouvelles listes ou améliorations sont les bienvenues via des **issues** ou **pull requests**.
