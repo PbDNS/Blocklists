@@ -13,6 +13,13 @@ jobs:
       - name: Cloner le dépôt
         uses: actions/checkout@v3
 
+      - name: Vérifier la présence de General.txt
+        run: |
+          if [ ! -f General.txt ]; then
+            echo "❌ Erreur : General.txt est introuvable."
+            exit 1
+          fi
+
       - name: Installer Python
         uses: actions/setup-python@v4
         with:
@@ -21,10 +28,13 @@ jobs:
       - name: Exécuter blocklist.py
         run: python blocklist.py
 
-      - name: Commit et push de blocklist.txt
+      - name: Commit et push des fichiers mis à jour
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add blocklist.txt
-          git commit -m "AutoUpdate [$(date -u)]" || echo "Rien à committer"
-          git push
+          git add blocklist.txt General.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "AutoUpdate [$(date -u)]"
+            git push
+          else
+            echo "✅ Aucun changement à committer."
