@@ -1,4 +1,3 @@
-||l.grazia.fr^
 ||21mastery.uk^
 ||a.magsrv.com^
 ||adserv-fra1.snigelweb.com^
@@ -7,7 +6,6 @@
 ||api-user-message.programme-tv.net^
 ||api.ipinfo.be^
 ||app.staticmoly.me^
-||axbdwahu.com^
 ||cdn.adgtw.orangeads.fr^
 ||check.analytics.rlcdn.com^
 ||dgw.c10r.facebook.com^
@@ -17,10 +15,8 @@
 ||graphql.api.dailymotion.com^
 ||hawk-tracker.360yield.com^
 ||icu.newsroom.bi^
-||jguroejplzivn.site^
 ||l.marmiton.org^
 ||logs1412.xiti.com^
-||loyalercondor.top^
 ||mediacloseremail.com^
 ||mendationforc.info^
 ||metrics.cybertek.fr^
@@ -40,7 +36,6 @@
 ||tracking.groupe-ldlc.com^
 ||tracking.lafourchette.com^
 ||trustedvpn.site^
-||utiq.programme-tv.net^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
 
