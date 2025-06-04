@@ -1,6 +1,5 @@
 ! Google Auth – Extension Navigateur
-! Description : Blocage authentification et objets associés Google utilisés pour Tracking
-!               et divers objets
+! Description : Blocage authentification Google, objets associés utilisés pour tracking et divers objets
 ! Version : 2025.04.21
 
 ! === Connexion & Authentification ===
