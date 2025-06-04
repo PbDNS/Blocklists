@@ -34,7 +34,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add blocklist.txt General.txt
           if ! git diff --cached --quiet; then
-            git commit -m "AutoUpdate [$(date -u)]"
+            git commit -m "AutoUpdate [$(/bin/date -u)]"
             git push
           else
             echo "✅ Aucun changement à committer."
