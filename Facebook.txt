@@ -1,0 +1,15 @@
+! Facebook
+! Description : Blocage de Facebook
+! Version : 2025.06.04
+
+||facebook.com^
+||facebook.net^
+||facebookcorewwwi.onion^
+||fb.com^
+||fb.me^
+||fb.watch^
+||fbcdn.net^
+||fbsbx.com^
+||messenger.com^
+||meta.com^
+||workplace.com^
