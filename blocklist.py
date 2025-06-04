@@ -6,7 +6,35 @@ from datetime import datetime, timedelta
 import re
 import ipaddress
 
-# 📥 Liste des blocklists
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's Amazon Tracker DNS Blocklist
+# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# HaGeZi's Badware Hoster Blocklist
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
+# HaGeZi's DynDNS Blocklist
+# HaGeZi's Windows/Office Tracker DNS Blocklist
+# ShadowWhisperer's Malware List
+# OISD Small
+# Dandelion Sprout's Anti-Malware List
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# AWAvenue Ads Rule
+# HaGeZi's Apple Tracker DNS Blocklist
+# d3Host
+# AdGuard DNS filter
+# Phishing URL Blocklist (PhishTank and OpenPhish)
+# Malicious URL Blocklist (URLHaus)
+# Scam Blocklist by DurableNapkin
+# AdGuard French adservers
+# AdGuard French adservers first party
+# Steven Black's List
+# Peter Lowe's Blocklist
+# Dan Pollock's List
+# Easylist FR
+# The Big List of Hacked Malware Web Sites
+# Stalkerware Indicators List
+
+# Liste des blocklists
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
@@ -37,14 +65,14 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
 ]
 
-# 🔍 Vérification stricte des domaines
+# Vérification stricte des domaines
 def is_valid_domain(domain):
     return re.match(
         r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
         domain
     )
 
-# 🔍 Vérification IP publique uniquement
+# Vérification IP publique uniquement
 def is_valid_ip(ip):
     try:
         ip_obj = ipaddress.ip_address(ip)
@@ -58,10 +86,9 @@ def is_valid_ip(ip):
     except ValueError:
         return False
 
-# 📥 Téléchargement et extraction
+# Téléchargement et extraction
 def download_and_extract(url):
     try:
-        print(f"🔄 Téléchargement : {url}")
         with urllib.request.urlopen(url, timeout=30) as response:
             content = response.read().decode("utf-8", errors="ignore")
             rules = set()
@@ -98,20 +125,17 @@ def download_and_extract(url):
 
             return rules
 
-    except Exception as e:
-        print(f"❌ Erreur : {url} → {e}")
+    except Exception:
         return set()
 
-# 📦 Téléchargement parallèle
+# Téléchargement parallèle
 all_entries = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
     for entry_set in results:
         all_entries.update(entry_set)
 
-print(f"\n📊 {len(all_entries)} entrées extraites avant déduplication de sous-domaines.")
-
-# 🌳 Suppression des sous-domaines redondants (pour les domaines uniquement)
+# Suppression des sous-domaines redondants (pour les domaines uniquement)
 class DomainTrieNode:
     def __init__(self):
         self.children = {}
@@ -139,17 +163,12 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
     elif is_valid_ip(entry):
         final_entries.add(entry)
 
-print(f"✅ {len(final_entries)} entrées après suppression des sous-domaines.")
-
-# 🕒 Timestamp UTC+1
+# Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 
-# 💾 Écriture du fichier final
+# Écriture du fichier final
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {len(final_entries):06} entrées finales\n\n")
     for entry in sorted(final_entries):
         f.write(f"||{entry}^\n")
-
-print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(final_entries)} règles finales conservées.")
