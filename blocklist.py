@@ -31,7 +31,7 @@ import re
 # Dan Pollock's List
 # Easylist FR
 # The Big List of Hacked Malware Web Sites
-# Perso
+# Stalkerware Indicators List
 
 # 📥 Liste des blocklists
 blocklist_urls = [
@@ -60,8 +60,9 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
-#    "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
+#   "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/General.txt"
 ]
 
 def download_and_extract(url):
@@ -77,11 +78,11 @@ def download_and_extract(url):
                 if not line or line.startswith("!") or line.startswith("#"):
                     continue
 
-                # Gérer les lignes de type 0.0.0.0 <domain> # <commentaire>
+                # Gérer les lignes de type 0.0.0.0 <domain>
                 if line.startswith("0.0.0.0"):
-                    parts = re.split(r"\s+", line)  # Séparer par espaces
+                    parts = re.split(r"\s+", line)
                     if len(parts) >= 2:
-                        domain = parts[1].strip()  # Extraire le domaine
+                        domain = parts[1].strip()
                         if domain and "*" not in domain:
                             rules.add(domain)
 
@@ -90,6 +91,11 @@ def download_and_extract(url):
                     domain = line[2:-1]
                     if "*" not in domain:
                         rules.add(domain)
+
+                # Gérer les noms de domaine nus comme "12d60.appspot.com"
+                elif re.match(r"^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", line):
+                    if "*" not in line:
+                        rules.add(line)
 
             return rules
 
