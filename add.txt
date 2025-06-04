@@ -40,7 +40,3 @@
 ||trustedvpn.site^
 ||web-tracking.splio.com^
 ||www.mediacloseremail.com^
-
-
-! Wix Fonts  
-||static.parastorage.com^  
