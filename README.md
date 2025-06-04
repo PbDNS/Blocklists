@@ -4,7 +4,9 @@ Agrégation de listes de blocage internationales & francophones destinée à am�
 
 Cette compilation vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, ordonnée et cohérente.
 
+
 ---
+
 
 ## 🔍 Objectif
 
@@ -13,7 +15,9 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 - bloquer les logiciels malveillants, scams, phishing,
 - améliorer la sécurité des réseaux personnels et professionnels.
 
+
 ---
+
 
 ## 📦 Blocklistes incluses
 
@@ -44,7 +48,9 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 - **Steven Black's List**
 - **The Big List of Hacked Malware Web Sites**
 
+
 ---
+
 
 ## 📁 Format & Utilisation
 
