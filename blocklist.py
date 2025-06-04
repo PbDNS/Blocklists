@@ -1,12 +1,10 @@
-# blocklist.py
-
 import urllib.request
 import concurrent.futures
 from datetime import datetime, timedelta
 import re
 import ipaddress
+import os
 
-# 📥 Liste des blocklists
 blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
@@ -37,28 +35,19 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
 ]
 
-# 🔍 Vérification stricte des domaines
 def is_valid_domain(domain):
-    return re.match(
-        r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
-        domain
-    )
+    return re.match(r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$", domain)
 
-# 🔍 Vérification IP publique uniquement
 def is_valid_ip(ip):
     try:
         ip_obj = ipaddress.ip_address(ip)
         return ip_obj.version == 4 and not (
-            ip_obj.is_loopback or
-            ip_obj.is_private or
-            ip_obj.is_link_local or
-            ip_obj.is_reserved or
-            ip_obj.is_multicast
+            ip_obj.is_loopback or ip_obj.is_private or ip_obj.is_link_local or
+            ip_obj.is_reserved or ip_obj.is_multicast
         )
     except ValueError:
         return False
 
-# 📥 Téléchargement et extraction
 def download_and_extract(url):
     try:
         print(f"🔄 Téléchargement : {url}")
@@ -67,89 +56,69 @@ def download_and_extract(url):
             rules = set()
             for line in content.splitlines():
                 line = line.strip()
-
                 if not line or line.startswith("!") or line.startswith("#"):
                     continue
-
-                # Format 0.0.0.0 <domaine ou IP>
                 if line.startswith("0.0.0.0") or line.startswith("127.0.0.1"):
                     parts = re.split(r"\s+", line)
                     if len(parts) >= 2:
                         target = parts[1].strip()
-                        if "*" in target:
-                            continue
-                        if is_valid_domain(target) or is_valid_ip(target):
+                        if "*" not in target and (is_valid_domain(target) or is_valid_ip(target)):
                             rules.add(target)
-
-                # Format ||<entrée>^
                 elif line.startswith("||") and line.endswith("^"):
                     target = line[2:-1]
-                    if "*" in target:
-                        continue
-                    if is_valid_domain(target) or is_valid_ip(target):
+                    if "*" not in target and (is_valid_domain(target) or is_valid_ip(target)):
                         rules.add(target)
-
-                # Format simple : domaine ou IP nue
                 elif re.match(r"^[a-zA-Z0-9.-]+$", line):
-                    if "*" in line:
-                        continue
-                    if is_valid_domain(line) or is_valid_ip(line):
+                    if "*" not in line and (is_valid_domain(line) or is_valid_ip(line)):
                         rules.add(line)
-
             return rules
-
     except Exception as e:
         print(f"❌ Erreur : {url} → {e}")
         return set()
 
-# 📦 Téléchargement parallèle
+# 🔁 Télécharger les blocklists
 all_entries = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
     for entry_set in results:
         all_entries.update(entry_set)
 
-print(f"\n📊 {len(all_entries)} entrées extraites avant déduplication de sous-domaines.")
+print(f"\n📊 {len(all_entries)} entrées extraites des blocklists.")
 
-# 🌳 Suppression des sous-domaines redondants (pour les domaines uniquement)
-class DomainTrieNode:
-    def __init__(self):
-        self.children = {}
-        self.is_terminal = False
+# 📖 Lecture et nettoyage de General.txt
+general_file_path = "General.txt"
+if not os.path.isfile(general_file_path):
+    print("❌ Fichier General.txt introuvable.")
+    exit(1)
 
-    def insert(self, parts):
-        node = self
-        for part in parts:
-            if node.is_terminal:
-                return False
-            node = node.children.setdefault(part, DomainTrieNode())
-        node.is_terminal = True
-        return True
+raw_general = set()
+with open(general_file_path, "r", encoding="utf-8") as f:
+    for line in f:
+        line = line.strip()
+        if not line or line.startswith("!") or line.startswith("#"):
+            continue
+        if line.startswith("||") and line.endswith("^"):
+            line = line[2:-1]
+        if is_valid_domain(line) or is_valid_ip(line):
+            raw_general.add(line)
 
-def domain_to_parts(domain):
-    return domain.strip().split(".")[::-1]
-
-trie_root = DomainTrieNode()
-final_entries = set()
-
-for entry in sorted(all_entries, key=lambda e: e.count(".")):
-    if is_valid_domain(entry):
-        if trie_root.insert(domain_to_parts(entry)):
-            final_entries.add(entry)
-    elif is_valid_ip(entry):
-        final_entries.add(entry)
-
-print(f"✅ {len(final_entries)} entrées après suppression des sous-domaines.")
+cleaned_general = raw_general - all_entries
+print(f"✅ {len(cleaned_general)} entrées conservées dans General.txt après nettoyage.")
 
 # 🕒 Timestamp UTC+1
 timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
 
-# 💾 Écriture du fichier final
+# 💾 Écriture du fichier blocklist.txt (format ||domain^)
 with open("blocklist.txt", "w", encoding="utf-8") as f:
-    f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(final_entries):06} entrées finales\n\n")
-    for entry in sorted(final_entries):
+    f.write(f"! Généré automatiquement - {timestamp}\n")
+    f.write(f"! {len(cleaned_general):06} entrées\n\n")
+    for entry in sorted(cleaned_general):
         f.write(f"||{entry}^\n")
 
-print(f"\n✅ Fichier 'blocklist.txt' généré avec succès.")
-print(f"📦 {len(final_entries)} règles finales conservées.")
+# 💾 Réécriture de General.txt (format brut)
+with open("General.txt", "w", encoding="utf-8") as f:
+    for entry in sorted(cleaned_general):
+        f.write(f"{entry}\n")
+
+print("\n✅ Fichier 'blocklist.txt' généré.")
+print("✅ Fichier 'General.txt' nettoyé et mis à jour.")
