@@ -1,7 +1,6 @@
 # 🛡️ Agrégation de Blocklistes
 
-Agrégation de listes de blocage internationales & francophones destinée à améliorer la confidentialité,
-la sécurité, réduire la publicité et le suivi en ligne.
+Agrégation de listes de blocage internationales & francophones destinée à améliorer la confidentialité, la sécurité, réduire la publicité et le suivi en ligne.
 
 Cette compilation vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, ordonnée et cohérente.
 
