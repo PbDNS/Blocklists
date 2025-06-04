@@ -15,7 +15,7 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 
 ---
 
-## 📦 Blocklists incluses
+## 📦 Blocklistes incluses
 
 Liste complète des blocklists utilisées, classée par ordre alphabétique :
 
