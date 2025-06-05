@@ -1,6 +1,5 @@
 # 🛡️ Agrégation de Blocklistes
 
----
 
 ## Agrégation de listes de blocage internationales et francophones.
 
