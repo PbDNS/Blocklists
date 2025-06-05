@@ -49,3 +49,8 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 ## 📁 Format & Utilisation
 
 Le fichier de sortie est format Adguard utilisable avec Adguard Home, Pihole...
+
+
+
+Le format ||domaine^ est optimisé pour un usage DNS/adblock au niveau réseau.
+Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole, ou Unbound, sans nécessiter d’analyse côté navigateur.
