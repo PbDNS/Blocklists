@@ -1,10 +1,10 @@
-# 🛡️ Agrégation de listes de blocage internationales et francophones.
+# Agrégation de listes de blocage internationales et francophones.
 
 Cette compilation vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés.
 
 ---
 
-## 🔍 Objectif
+## Objectif
 
 - bloquer les publicités,
 - limiter le suivi (trackers, fingerprinting),
@@ -13,7 +13,7 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 
 ---
 
-## 📦 Blocklistes incluses
+## Blocklistes incluses
 
 - **AdGuard DNS filter**
 - **AdGuard French adservers**
@@ -44,7 +44,7 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 
 ---
 
-## 📁 Format & Utilisation
+## Format & Utilisation
 
 - Format Adblock Plus ||example.com^
 - Optimisé pour un usage DNS/adblock au niveau réseau.
