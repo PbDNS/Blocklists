@@ -1,8 +1,10 @@
 # 🛡️ Agrégation de Blocklistes
 
-Agrégation de listes de blocage internationales et francophones.
+---
 
-Cette compilation vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, ordonnée et cohérente. L’objectif est de fournir une solution fiable, simple à intégrer, et adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés.
+##Agrégation de listes de blocage internationales et francophones.
+
+Cette compilation vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés.
 
 ---
 
