@@ -6,10 +6,10 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 
 ## Objectif
 
-- bloquer les publicités,
-- limiter le suivi (trackers, fingerprinting),
-- bloquer les logiciels malveillants, scams, phishing,
-- améliorer la sécurité.
+- bloquer les publicités
+- limiter le suivi (trackers, fingerprinting)
+- bloquer les logiciels malveillants, scams, phishing
+- améliorer la sécurité
 
 ---
 
@@ -47,5 +47,5 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 ## Format & Utilisation
 
 - Format Adblock Plus ||example.com^
-- Optimisé pour un usage DNS/adblock au niveau réseau.
-- Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole, ou Unbound.
+- Optimisé pour un usage DNS/adblock au niveau réseau
+- Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole, ou Unbound
