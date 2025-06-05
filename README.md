@@ -1,7 +1,4 @@
-# 🛡️ Agrégation de Blocklistes
-
-
-## Agrégation de listes de blocage internationales et francophones.
+# 🛡️ Agrégation de listes de blocage internationales et francophones.
 
 Cette compilation vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés.
 
