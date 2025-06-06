@@ -8,7 +8,6 @@ MAX_THREADS = 2  # Nombre maximum de threads pour GitHub Actions
 BATCH_SIZE = 15000  # Taille des lots pour l'exécution par lots
 TIMEOUT = 0.7  # Timeout plus court pour les requêtes DNS
 
-# Liste élargie de résolveurs DNS publics "non filtrants"
 dns_resolvers_raw = [
     "1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001",
     "8.8.8.8", "8.8.4.4", "2001:4860:4860::8888", "2001:4860:4860::8844",
@@ -50,17 +49,14 @@ dns_resolvers_raw = [
 adblock_url = "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt"
 
 def download_filters(url):
-    """Télécharge les filtres depuis l'URL spécifiée."""
     with urllib.request.urlopen(url) as response:
         return response.read().decode("utf-8")
 
 def extract_domains(content):
-    """Extrait les domaines au format ||example.com^ depuis le contenu des filtres."""
     pattern = re.compile(r"^\|\|([^\^\/]+)\^", re.MULTILINE)
     return list(set(re.findall(pattern, content)))
 
 def is_resolver_alive(ip):
-    """Teste si le résolveur DNS spécifié est vivant."""
     resolver = dns.resolver.Resolver()
     resolver.nameservers = [ip]
     resolver.timeout = 0.4
@@ -72,7 +68,6 @@ def is_resolver_alive(ip):
         return False
 
 def filter_alive_resolvers(resolvers):
-    """Filtre les résolveurs DNS vivants."""
     alive = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as ex:
         futures = {ex.submit(is_resolver_alive, ip): ip for ip in resolvers}
@@ -82,78 +77,75 @@ def filter_alive_resolvers(resolvers):
     return alive
 
 def is_domain_resolvable(domain, resolvers):
-    """Vérifie si un domaine est résolvable avec les résolveurs DNS spécifiés."""
-    # D'abord, essayez de résoudre avec A (IPv4)
     for resolver_ip in resolvers:
         resolver = dns.resolver.Resolver()
         resolver.nameservers = [resolver_ip]
         resolver.timeout = TIMEOUT
         resolver.lifetime = TIMEOUT + 0.3
         try:
-            resolver.resolve(domain, 'A')  # Premier essai pour IPv4
+            resolver.resolve(domain, 'A')
             return True
         except Exception:
             pass
-    
-    # Si cela échoue, essayez avec AAAA (IPv6)
     for resolver_ip in resolvers:
         resolver = dns.resolver.Resolver()
         resolver.nameservers = [resolver_ip]
         resolver.timeout = TIMEOUT
         resolver.lifetime = TIMEOUT + 0.3
         try:
-            resolver.resolve(domain, 'AAAA')  # Second essai pour IPv6
+            resolver.resolve(domain, 'AAAA')
             return True
         except Exception:
             pass
-    
-    # Ensuite, essayez avec MX
     for resolver_ip in resolvers:
         resolver = dns.resolver.Resolver()
         resolver.nameservers = [resolver_ip]
         resolver.timeout = TIMEOUT
         resolver.lifetime = TIMEOUT + 0.3
         try:
-            resolver.resolve(domain, 'MX')  # Dernier essai pour MX
+            resolver.resolve(domain, 'MX')
             return True
         except Exception:
             pass
-    
-    # Enfin, essayez avec TXT si nécessaire
     for resolver_ip in resolvers:
         resolver = dns.resolver.Resolver()
         resolver.nameservers = [resolver_ip]
         resolver.timeout = TIMEOUT
         resolver.lifetime = TIMEOUT + 0.3
         try:
-            resolver.resolve(domain, 'TXT')  # Essai pour TXT
+            resolver.resolve(domain, 'TXT')
             return True
         except Exception:
             pass
-
-    # Si aucune requête ne réussit, retourner False
     return False
 
 def check_domain(domain, resolvers):
-    """Vérifie si un domaine est valide ou mort."""
     try:
         return (domain, is_domain_resolvable(domain, resolvers))
     except Exception:
         return (domain, False)
 
+def check_domain_batch(domains, resolvers):
+    """Vérifie un lot de domaines en parallèle, retourne un dict {domaine: état}."""
+    results = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+        future_to_domain = {executor.submit(check_domain, domain, resolvers): domain for domain in domains}
+        for future in concurrent.futures.as_completed(future_to_domain):
+            domain, alive = future.result()
+            results[domain] = alive
+    return results
+
 def main():
-    """Fonction principale pour télécharger les filtres, extraire les domaines et les vérifier."""
     content = download_filters(adblock_url)
     domains = extract_domains(content)
 
     resolvers = filter_alive_resolvers(dns_resolvers_raw)
     if not resolvers:
+        print("Aucun résolveur DNS vivant trouvé.")
         return
 
     dead_domains = []
     total = len(domains)
-
-    # Diviser les domaines en sous-lots de 1 000 à 3 000 pour chaque lot
     sub_batch_size = 3000
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
         for batch_start in range(0, total, sub_batch_size):
@@ -169,3 +161,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
