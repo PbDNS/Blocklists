@@ -48,4 +48,4 @@ Cette compilation vise à combiner les forces de nombreuses blocklistes réputé
 
 - Format Adblock Plus ||example.com^
 - Optimisé pour un usage DNS/adblock au niveau réseau
-- Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole, ou Unbound
+- Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole ou Unbound
