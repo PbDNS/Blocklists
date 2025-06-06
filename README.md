@@ -46,6 +46,6 @@ Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blo
 
 ## Format & Utilisation
 
-- Format Adblock Plus (**||example.com^**)
+- Format Adblock Plus **||exemple.com^**
 - Optimisé pour un usage DNS/adblock au niveau réseau
 - Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole ou Unbound
