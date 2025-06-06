@@ -49,4 +49,4 @@ Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blo
 - Format Adblock Plus **||exemple.com^**
 - Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole ou Unbound
 - Optimisé pour un usage DNS/adblock au niveau réseau
-- Sous-domaines redondants supprimés **||ads.exemple.com^** ➡️ **||exemple.com^** 
+- Sous-domaines redondants supprimés, **||cdn.exemple.com^** si **||exemple.com^** est présent
