@@ -35,3 +35,11 @@ jobs:
       with:
         name: dead-domains
         path: dead.txt
+
+    - name: Commit and Push dead.txt to repository
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "github-actions@github.com"
+        git add dead.txt
+        git commit -m "Update dead domains list"
+        git push
