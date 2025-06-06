@@ -2,11 +2,12 @@ import urllib.request
 import re
 import dns.resolver
 import concurrent.futures
+import random
 
 # -- CONFIG --
 MAX_THREADS = 2  # Nombre maximum de threads pour GitHub Actions
-BATCH_SIZE = 15000  # Taille des lots pour l'exécution par lots
-TIMEOUT = 0.7  # Timeout plus court pour les requêtes DNS
+BATCH_SIZE = 1000  # Taille des lots pour l'exécution par lots (plus petit pour feedback rapide)
+TIMEOUT = 0.7  # Timeout pour les requêtes DNS
 
 dns_resolvers_raw = [
     "1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001",
@@ -76,47 +77,26 @@ def filter_alive_resolvers(resolvers):
                 alive.append(futures[future])
     return alive
 
+def prepare_resolvers(resolver_ips):
+    """Prépare un objet dns.resolver.Resolver par IP, réutilisable."""
+    resolvers = []
+    for ip in resolver_ips:
+        resolver = dns.resolver.Resolver()
+        resolver.nameservers = [ip]
+        resolver.timeout = TIMEOUT
+        resolver.lifetime = TIMEOUT + 0.3
+        resolvers.append(resolver)
+    return resolvers
+
 def is_domain_resolvable(domain, resolvers):
-    for resolver_ip in resolvers:
-        resolver = dns.resolver.Resolver()
-        resolver.nameservers = [resolver_ip]
-        resolver.timeout = TIMEOUT
-        resolver.lifetime = TIMEOUT + 0.3
-        try:
-            resolver.resolve(domain, 'A')
-            return True
-        except Exception:
-            pass
-    for resolver_ip in resolvers:
-        resolver = dns.resolver.Resolver()
-        resolver.nameservers = [resolver_ip]
-        resolver.timeout = TIMEOUT
-        resolver.lifetime = TIMEOUT + 0.3
-        try:
-            resolver.resolve(domain, 'AAAA')
-            return True
-        except Exception:
-            pass
-    for resolver_ip in resolvers:
-        resolver = dns.resolver.Resolver()
-        resolver.nameservers = [resolver_ip]
-        resolver.timeout = TIMEOUT
-        resolver.lifetime = TIMEOUT + 0.3
-        try:
-            resolver.resolve(domain, 'MX')
-            return True
-        except Exception:
-            pass
-    for resolver_ip in resolvers:
-        resolver = dns.resolver.Resolver()
-        resolver.nameservers = [resolver_ip]
-        resolver.timeout = TIMEOUT
-        resolver.lifetime = TIMEOUT + 0.3
-        try:
-            resolver.resolve(domain, 'TXT')
-            return True
-        except Exception:
-            pass
+    record_types = ['A', 'AAAA', 'MX', 'TXT']
+    for resolver in resolvers:
+        for rtype in record_types:
+            try:
+                resolver.resolve(domain, rtype)
+                return True
+            except Exception:
+                continue
     return False
 
 def check_domain(domain, resolvers):
@@ -139,21 +119,26 @@ def main():
     content = download_filters(adblock_url)
     domains = extract_domains(content)
 
-    resolvers = filter_alive_resolvers(dns_resolvers_raw)
-    if not resolvers:
+    alive_resolver_ips = filter_alive_resolvers(dns_resolvers_raw)
+    if not alive_resolver_ips:
         print("Aucun résolveur DNS vivant trouvé.")
         return
 
+    # Limite à 5 résolveurs vivants choisis aléatoirement
+    random.shuffle(alive_resolver_ips)
+    selected_resolver_ips = alive_resolver_ips[:5]
+    resolvers = prepare_resolvers(selected_resolver_ips)
+
     dead_domains = []
     total = len(domains)
-    sub_batch_size = 3000
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-        for batch_start in range(0, total, sub_batch_size):
-            batch = domains[batch_start:batch_start + sub_batch_size]
-            results = check_domain_batch(batch, resolvers)
-            for domain, alive in results.items():
-                if not alive:
-                    dead_domains.append(domain)
+
+    for batch_start in range(0, total, BATCH_SIZE):
+        batch = domains[batch_start:batch_start + BATCH_SIZE]
+        results = check_domain_batch(batch, resolvers)
+        for domain, alive in results.items():
+            if not alive:
+                dead_domains.append(domain)
+        print(f"Batch {batch_start // BATCH_SIZE + 1} traité ({batch_start + len(batch)} / {total})")
 
     with open("dead.txt", "w") as f:
         for dead in dead_domains:
@@ -161,4 +146,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
