@@ -64,31 +64,55 @@ def filter_alive_resolvers(resolvers):
 
 def is_domain_resolvable(domain, resolvers):
     """Vérifie si un domaine est résolvable avec les résolveurs DNS spécifiés."""
+    # D'abord, essayez de résoudre avec A (IPv4)
     for resolver_ip in resolvers:
         resolver = dns.resolver.Resolver()
         resolver.nameservers = [resolver_ip]
         resolver.timeout = TIMEOUT
         resolver.lifetime = TIMEOUT + 0.3
         try:
-            resolver.resolve(domain, 'A')
+            resolver.resolve(domain, 'A')  # Premier essai pour IPv4
             return True
         except Exception:
             pass
+    
+    # Si cela échoue, essayez avec AAAA (IPv6)
+    for resolver_ip in resolvers:
+        resolver = dns.resolver.Resolver()
+        resolver.nameservers = [resolver_ip]
+        resolver.timeout = TIMEOUT
+        resolver.lifetime = TIMEOUT + 0.3
         try:
-            resolver.resolve(domain, 'AAAA')
+            resolver.resolve(domain, 'AAAA')  # Second essai pour IPv6
             return True
         except Exception:
             pass
+    
+    # Ensuite, essayez avec MX
+    for resolver_ip in resolvers:
+        resolver = dns.resolver.Resolver()
+        resolver.nameservers = [resolver_ip]
+        resolver.timeout = TIMEOUT
+        resolver.lifetime = TIMEOUT + 0.3
         try:
-            resolver.resolve(domain, 'MX')
+            resolver.resolve(domain, 'MX')  # Dernier essai pour MX
             return True
         except Exception:
             pass
+    
+    # Enfin, essayez avec TXT si nécessaire
+    for resolver_ip in resolvers:
+        resolver = dns.resolver.Resolver()
+        resolver.nameservers = [resolver_ip]
+        resolver.timeout = TIMEOUT
+        resolver.lifetime = TIMEOUT + 0.3
         try:
-            resolver.resolve(domain, 'TXT')
+            resolver.resolve(domain, 'TXT')  # Essai pour TXT
             return True
         except Exception:
             pass
+
+    # Si aucune requête ne réussit, retourner False
     return False
 
 def check_domain(domain, resolvers):
@@ -110,13 +134,13 @@ def main():
     dead_domains = []
     total = len(domains)
 
+    # Diviser les domaines en sous-lots de 1 000 à 3 000 pour chaque lot
+    sub_batch_size = 3000
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-        for batch_start in range(0, total, BATCH_SIZE):
-            batch = domains[batch_start:batch_start + BATCH_SIZE]
-            futures = {executor.submit(check_domain, d, resolvers): d for d in batch}
-
-            for future in concurrent.futures.as_completed(futures):
-                domain, alive = future.result()
+        for batch_start in range(0, total, sub_batch_size):
+            batch = domains[batch_start:batch_start + sub_batch_size]
+            results = check_domain_batch(batch, resolvers)
+            for domain, alive in results.items():
                 if not alive:
                     dead_domains.append(domain)
 
