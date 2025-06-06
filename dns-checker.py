@@ -28,7 +28,7 @@ dns_resolvers_raw = [
     "9.9.9.10", "149.112.112.10",
 ]
 
-adblock_url = "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt"
+adblock_url = "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt"
 
 def download_filters(url):
     """Télécharge les filtres depuis l'URL spécifiée."""
