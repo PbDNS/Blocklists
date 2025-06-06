@@ -1,7 +1,6 @@
 # Agrégation de listes de blocage internationales et francophones
 
 Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés
-<br>
 
 ---
 
@@ -48,5 +47,6 @@ Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blo
 ## Format & Utilisation
 
 - Format Adblock Plus **||exemple.com^**
-- Optimisé pour un usage DNS/adblock au niveau réseau
 - Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole ou Unbound
+- Optimisé pour un usage DNS/adblock au niveau réseau
+- Sous-domaines redondants supprimés **||ads.exemple.com^** ➡️ **||exemple.com^** 
