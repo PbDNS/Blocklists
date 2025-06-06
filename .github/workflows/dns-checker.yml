@@ -1,4 +1,3 @@
-
 name: DNS Domain Checker
 
 # Déclencheurs
@@ -21,7 +20,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.10'
+        python-version: '3.x'
 
     - name: Install dependencies
       run: |
@@ -33,7 +32,7 @@ jobs:
         python dns-checker.py
 
     - name: Upload dead domains
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: dead-domains
         path: dead.txt
