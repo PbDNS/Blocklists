@@ -4,9 +4,9 @@ import dns.resolver
 import concurrent.futures
 
 # -- CONFIG --
-MAX_THREADS = 100     # Nombre maximum de threads pour accélérer
-BATCH_SIZE = 15000    # Taille des lots pour l'exécution par lots
-TIMEOUT = 0.7         # Timeout plus court pour les requêtes DNS
+MAX_THREADS = 2  # Nombre maximum de threads pour GitHub Actions
+BATCH_SIZE = 15000  # Taille des lots pour l'exécution par lots
+TIMEOUT = 0.7  # Timeout plus court pour les requêtes DNS
 
 # Liste élargie de résolveurs DNS publics "non filtrants"
 dns_resolvers_raw = [
@@ -55,7 +55,7 @@ def is_resolver_alive(ip):
 def filter_alive_resolvers(resolvers):
     """Filtre les résolveurs DNS vivants."""
     alive = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as ex:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as ex:
         futures = {ex.submit(is_resolver_alive, ip): ip for ip in resolvers}
         for future in concurrent.futures.as_completed(futures):
             if future.result():
