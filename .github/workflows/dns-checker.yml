@@ -28,7 +28,7 @@ jobs:
         pip install dnspython
 
     - name: Run Python script
-      run: python your_script.py
+      run: python dns-checker.py
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
