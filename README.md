@@ -6,10 +6,10 @@ Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blo
 
 ## Objectif
 
-- bloquer les publicités
-- limiter le suivi (trackers, fingerprinting)
-- bloquer les logiciels malveillants, scams, phishing
-- améliorer la sécurité
+- Bloquer les publicités
+- Limiter le suivi (trackers, fingerprinting)
+- Bloquer les logiciels malveillants, scams, phishing
+- Améliorer la sécurité
 
 ---
 
