@@ -4,8 +4,6 @@ Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blo
 
 ---
 
-
-
 ## Objectif
 
 - bloquer les publicités
