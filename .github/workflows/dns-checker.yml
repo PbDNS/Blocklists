@@ -1,24 +1,24 @@
-name: DNS Domain Checker
+name: Check Dead Domains
 
-# Déclencheurs
 on:
-  # Lancement automatique tous les jours à 1h GMT
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   schedule:
-    - cron: '0 1 * * *'  # Exécution tous les jours à 1h GMT
-
-  # Lancement manuel via l'interface GitHub
-  workflow_dispatch:
+    - cron: '0 1 * * *' # Exécute à 1h GMT tous les jours
+  workflow_dispatch: # Permet de lancer manuellement le workflow
 
 jobs:
-  check_domains:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the code
-      uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.x'
 
@@ -27,12 +27,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install dnspython
 
-    - name: Run the domain check script
-      run: |
-        python dns-checker.py
+    - name: Run Python script
+      run: python your_script.py
 
-    - name: Upload dead domains
-      uses: actions/upload-artifact@v3
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
       with:
         name: dead-domains
         path: dead.txt
