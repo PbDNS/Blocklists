@@ -2,7 +2,7 @@
 
 # Agrégation de listes de blocage internationales et francophones
 
-Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés
+Cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés
 
 ---
 
