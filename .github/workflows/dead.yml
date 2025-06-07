@@ -1,0 +1,26 @@
+name: dead
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-dead-domains:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        part: [1, 2, 3, 4, 5]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install aiodns
+
+      - name: Run DNS checker
+        run: |
+          python dns_checker.py
