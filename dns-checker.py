@@ -6,14 +6,13 @@ import random
 import time
 
 # -- CONFIG --
-MAX_THREADS = 2  # Réduit à 2 threads pour éviter de surcharger GitHub Actions
-BATCH_SIZE = 500  # Réduit la taille des lots pour réduire la charge
-TIMEOUT = 1.0  # Augmente le timeout pour les résolveurs DNS
-CHECK_INTERVAL = 2  # Intervalle entre les requêtes de vérification de domaine pour éviter les erreurs DNS liées à la surcharge
+MAX_THREADS = 10  # Augmenté à 10 threads pour paralléliser davantage
+BATCH_SIZE = 200  # Réduit la taille des lots à 200
+TIMEOUT = 1.0  # Timeout DNS inchangé
+CHECK_INTERVAL = 1  # Réduit à 1 seconde pour accélérer le processus
 
-# Liste des résolveurs DNS publics
+# Liste des résolveurs DNS publics (inchangée)
 dns_resolvers_raw = [
-    # Liste des résolveurs DNS (inchangée)
     "1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001",
     "8.8.8.8", "8.8.4.4", "2001:4860:4860::8888", "2001:4860:4860::8844",
     "9.9.9.9", "149.112.112.112", "2620:fe::fe", "2620:fe::9",
@@ -79,15 +78,35 @@ def is_resolver_alive(ip):
     except Exception:
         return False
 
-def filter_alive_resolvers(resolvers):
-    """Filtre les résolveurs vivants en parallèle."""
-    alive = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-        futures = {executor.submit(is_resolver_alive, ip): ip for ip in resolvers}
+def test_resolver_speed(ip):
+    """Teste la rapidité d'un résolveur DNS en mesurant le temps de réponse."""
+    resolver = dns.resolver.Resolver()
+    resolver.nameservers = [ip]
+    resolver.timeout = TIMEOUT
+    resolver.lifetime = TIMEOUT + 0.3
+    start_time = time.time()
+    try:
+        resolver.resolve('example.com', 'A')
+        end_time = time.time()
+        return end_time - start_time  # Retourne le temps en secondes
+    except Exception:
+        return float('inf')  # Retourne une valeur infinie si le test échoue
+
+def filter_best_resolvers(resolvers, top_n=5):
+    """Filtre les meilleurs résolveurs DNS basés sur la vitesse."""
+    resolver_times = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+        futures = {executor.submit(test_resolver_speed, ip): ip for ip in resolvers}
         for future in concurrent.futures.as_completed(futures):
-            if future.result():
-                alive.append(futures[future])
-    return alive
+            ip = futures[future]
+            time_taken = future.result()
+            resolver_times.append((ip, time_taken))
+    
+    # Trie les résolveurs par temps de réponse (le plus rapide d'abord)
+    resolver_times.sort(key=lambda x: x[1])
+    
+    # Retourne les `top_n` résolveurs les plus rapides
+    return [ip for ip, _ in resolver_times[:top_n]]
 
 def prepare_resolvers(resolver_ips):
     """Prépare un objet dns.resolver.Resolver pour chaque IP de résolveur."""
@@ -136,19 +155,14 @@ def main():
     """Exécute le script principal."""
     content = download_filters(adblock_url)
     domains = extract_domains(content)
+    domains = filter_domains_starting_with_a(domains)  # Filtrer les domaines commençant par "a"
 
-    # Filtrer les domaines commençant par 'a'
-    domains = filter_domains_starting_with_a(domains)
-
-    alive_resolver_ips = filter_alive_resolvers(dns_resolvers_raw)
+    alive_resolver_ips = filter_best_resolvers(dns_resolvers_raw)  # Sélectionner les meilleurs résolveurs
     if not alive_resolver_ips:
         print("Aucun résolveur DNS vivant trouvé.")
         return
 
-    # Limite à 5 résolveurs vivants choisis aléatoirement
-    random.shuffle(alive_resolver_ips)
-    selected_resolver_ips = alive_resolver_ips[:5]
-    resolvers = prepare_resolvers(selected_resolver_ips)
+    resolvers = prepare_resolvers(alive_resolver_ips)
 
     dead_domains = []
     total = len(domains)
