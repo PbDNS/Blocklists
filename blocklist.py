@@ -34,7 +34,7 @@ import ipaddress
 # The Big List of Hacked Malware Web Sites
 # Stalkerware Indicators List
 
-# Liste des blocklists
+# Blocklistes Incluses
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -136,7 +136,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     for entry_set in results:
         all_entries.update(entry_set)
 
-# Suppression des sous-domaines redondants (pour les domaines uniquement)
+# Suppression des sous-domaines redondants
 class DomainTrieNode:
     def __init__(self):
         self.children = {}
@@ -164,8 +164,10 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
     elif is_valid_ip(entry):
         final_entries.add(entry)
 
-# Timestamp UTC+1
-timestamp = (datetime.utcnow() + timedelta(hours=1)).strftime("%d-%m-%Y  %H:%M")
+from datetime import datetime
+
+# Timestamp UTC (GMT 0)
+timestamp = datetime.utcnow().strftime("%d-%m-%Y %H:%M")
 
 # Écriture du fichier final
 with open("blocklist.txt", "w", encoding="utf-8") as f:
