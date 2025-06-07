@@ -36,9 +36,9 @@ def extract_domains(content):
     pattern = re.compile(r"^\|\|([^\^\/]+)\^", re.MULTILINE)
     return list(set(re.findall(pattern, content)))
 
-def filter_domains_starting_with_a(domains):
-    """Filtre les domaines qui commencent par 'a'."""
-    return [domain for domain in domains if domain.startswith('a')]
+def filter_all_domains(domains):
+    """Retourne tous les domaines sans filtrage."""
+    return domains
 
 def is_resolver_alive(ip):
     """Teste si un résolveur DNS est vivant en vérifiant une résolution de domaine."""
@@ -117,7 +117,7 @@ def main(batch):
     """Exécute le script principal."""
     content = download_filters(adblock_url)
     domains = extract_domains(content)
-    domains = filter_domains_starting_with_a(domains)  # Filtrer les domaines commençant par "a"
+    domains = filter_all_domains(domains)  # Aucun filtrage, tous les domaines sont conservés
 
     alive_resolver_ips = filter_best_resolvers(dns_resolvers_raw)  # Sélectionner les meilleurs résolveurs
     if not alive_resolver_ips:
