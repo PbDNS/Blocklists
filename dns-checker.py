@@ -40,7 +40,7 @@ def is_resolver_alive(ip):
     """Teste si un résolveur DNS est vivant en vérifiant une résolution de domaine."""
     resolver = dns.resolver.Resolver()
     resolver.nameservers = [ip]
-    resolver.timeout = 0.7
+    resolver.timeout = 1.0
     resolver.lifetime = 1.0
     try:
         resolver.resolve('example.com', 'A')
