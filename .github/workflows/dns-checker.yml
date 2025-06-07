@@ -32,13 +32,13 @@ jobs:
 
       - name: Run Python script
         run: |
-          python dns-checker.py --batch ${matrix.batch}  # Passe le numéro du batch
+          python dns-checker.py --batch ${{ matrix.batch }}  # Passe le numéro du batch
 
       - name: Upload batch result artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dead-domains-batch-${matrix.batch}  # Nom de l'artefact par batch
-          path: dead_batch_${matrix.batch}.txt  # Fichier résultant pour chaque batch
+          name: dead-domains-batch-${{ matrix.batch }}  # Nom de l'artefact par batch
+          path: dead_batch_${{ matrix.batch }}.txt  # Fichier résultant pour chaque batch
 
   # Étape de fusion des résultats des fichiers batchs
   merge_results:
@@ -60,4 +60,3 @@ jobs:
           git add combined_dead_domains.txt
           git commit -m "Update dead domains list"
           git push
-
