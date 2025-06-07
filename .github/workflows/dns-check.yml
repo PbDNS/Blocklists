@@ -6,21 +6,32 @@ on:
 jobs:
   check-dead-domains:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        part: [1, 2, 3, 4, 5]
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install dependencies
         run: pip install aiodns
 
       - name: Run DNS checker
+        run: python dns_checker.py
+
+      - name: Configure Git
         run: |
-          python dns_checker.py
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push dead.txt
+        run: |
+          git add dead.txt
+          git commit -m "Update dead.txt [CI]" || echo "Nothing to commit"
+          git push
