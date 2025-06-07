@@ -1,7 +1,7 @@
-name: DNS Dead Checker
+name: DNS Dead Domain Checker
 
 on:
-  workflow_dispatch:  # ✅ permet de lancer manuellement
+  workflow_dispatch:  # permet de lancer le workflow manuellement
 
 jobs:
   dns-check:
@@ -16,18 +16,17 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 📦 Installer dépendances
+      - name: 📦 Installer les dépendances
         run: |
-          pip install dnspython
+          pip install dnspython httpx
 
-      - name: 🔍 Exécuter le script de vérification DNS
-        run: |
-          python dns_checker.py
+      - name: 🔍 Exécuter le script DNS
+        run: python dns_checker.py
 
-      - name: ✅ Commit & Push dead.txt
+      - name: ✅ Commit et push du fichier dead.txt
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add dead.txt
-          git commit -m "Mise à jour automatique de dead.txt" || echo "Aucun changement"
+          git commit -m "🔁 Mise à jour automatique de dead.txt" || echo "Pas de changements"
           git push
