@@ -12,7 +12,7 @@ Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blo
 - Limiter le suivi (trackers, fingerprinting)
 - Bloquer les logiciels malveillants, scams, phishing
 - Améliorer la sécurité
-- Améliorer la confidentialité en empêchant la collecte de données personnelles
+- Empêcher la collecte de données personnelles
   
 ---
 
