@@ -6,7 +6,7 @@ from pathlib import Path
 
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
-MAX_CONCURRENT_QUERIES = 50
+MAX_CONCURRENT_QUERIES = 100
 DNS_TIMEOUT = 3
 
 RESOLVERS = [
