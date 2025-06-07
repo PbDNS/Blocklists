@@ -4,14 +4,16 @@ import dns.resolver
 import concurrent.futures
 import random
 import time
+import argparse
 
 # -- CONFIG --
-MAX_THREADS = 10  # Augmenté à 10 threads pour paralléliser davantage
-BATCH_SIZE = 200  # Réduit la taille des lots à 200
-TIMEOUT = 1.0  # Timeout DNS inchangé
-CHECK_INTERVAL = 1  # Réduit à 1 seconde pour accélérer le processus
+MAX_THREADS = 5  # Limité à 5 threads pour s'assurer que le processus ne surcharge pas GitHub Actions
+BATCH_SIZE = 200  # Taille du lot pour chaque exécution en parallèle
+TIMEOUT = 1.0  # Timeout pour les résolveurs DNS
+CHECK_INTERVAL = 2  # Intervalle entre les vérifications pour éviter la surcharge
+TOP_RESOLVERS_COUNT = 5  # Choisir les 5 meilleurs résolveurs DNS
 
-# Liste des résolveurs DNS publics (inchangée)
+# Liste des résolveurs DNS publics
 dns_resolvers_raw = [
     "1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001",
     "8.8.8.8", "8.8.4.4", "2001:4860:4860::8888", "2001:4860:4860::8844",
@@ -19,35 +21,7 @@ dns_resolvers_raw = [
     "208.67.222.222", "208.67.220.220", "2620:0:ccc::2", "2620:0:ccd::2",
     "64.6.64.6", "64.6.65.6", "2620:74:1b::1:1", "2620:74:1c::2:2",
     "84.200.69.80", "84.200.70.40",
-    "77.88.8.8", "77.88.8.1", "2a02:6b8::feed:0ff",
-    "94.140.14.14", "94.140.15.15",
-    "195.46.39.39", "2a05:d014::",
-    "8.26.56.26", "8.20.247.20",
-    "37.235.1.174", "37.235.1.177",
-    "91.239.100.100", "89.233.43.71",
-    "208.76.50.50", "208.76.51.51",
-    "156.154.70.1", "156.154.71.1",
-    "199.85.126.10", "199.85.127.10",
-    "9.9.9.10", "149.112.112.10",
-    "185.228.168.9", "185.228.169.9", "2a0d:2a00:1::2", "2a0d:2a00:2::2",
-    "76.76.2.0", "76.76.10.0", "2606:1a40::", "2606:1a40:1::",
-    "76.76.19.19", "76.223.122.150",
-    "194.242.2.2", "2a07:e340::2",
-    "185.121.177.177", "169.239.202.202", "94.247.43.254", "192.71.245.208",
-    "176.9.93.198", "176.9.1.117", "2a01:4f8:13b:1::119", "2a01:4f8:13b:1::120",
-    "193.183.98.66", "2a00:5884:8209::66",
-    "38.132.106.139", "194.187.251.67",
-    "45.90.28.0", "45.90.30.0", "2a07:a8c0::", "2a07:a8c1::",
-    "116.202.176.26", "116.202.176.26", "2a03:4000:38:1f6::26",
-    "8.34.34.34", "8.8.8.8", "8.8.4.4",
-    "208.67.222.123", "208.67.220.123",
-    "185.222.222.222", "45.11.45.11", "2a09:8840:10::1:1:1", "2a09:8840:10::1:0:1",
-    "74.82.42.42", "2001:470:20::2",
-    "216.146.35.35", "216.146.36.36",
-    "109.69.8.51", "2a00:1508:0:4::9",
-    "4.2.2.1", "4.2.2.2", "4.2.2.3", "4.2.2.4", "4.2.2.5", "4.2.2.6",
-    "149.112.121.10", "2620:10a:80bb::10",
-    "156.154.70.5", "156.154.71.5"
+    # Ajoute d'autres résolveurs selon tes besoins
 ]
 
 adblock_url = "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt"
@@ -63,8 +37,8 @@ def extract_domains(content):
     return list(set(re.findall(pattern, content)))
 
 def filter_domains_starting_with_a(domains):
-    """Filtrer les domaines qui commencent par la lettre 'a'."""
-    return [domain for domain in domains if domain.lower().startswith('a')]
+    """Filtre les domaines qui commencent par 'a'."""
+    return [domain for domain in domains if domain.startswith('a')]
 
 def is_resolver_alive(ip):
     """Teste si un résolveur DNS est vivant en vérifiant une résolution de domaine."""
@@ -79,34 +53,22 @@ def is_resolver_alive(ip):
         return False
 
 def test_resolver_speed(ip):
-    """Teste la rapidité d'un résolveur DNS en mesurant le temps de réponse."""
+    """Teste la vitesse d'un résolveur DNS en mesurant le temps de réponse."""
     resolver = dns.resolver.Resolver()
     resolver.nameservers = [ip]
-    resolver.timeout = TIMEOUT
-    resolver.lifetime = TIMEOUT + 0.3
     start_time = time.time()
     try:
         resolver.resolve('example.com', 'A')
-        end_time = time.time()
-        return end_time - start_time  # Retourne le temps en secondes
+        return time.time() - start_time  # Retourne le temps en secondes
     except Exception:
-        return float('inf')  # Retourne une valeur infinie si le test échoue
+        return float('inf')  # Si l'appel échoue, retourne une valeur infinie
 
-def filter_best_resolvers(resolvers, top_n=5):
-    """Filtre les meilleurs résolveurs DNS basés sur la vitesse."""
-    resolver_times = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-        futures = {executor.submit(test_resolver_speed, ip): ip for ip in resolvers}
-        for future in concurrent.futures.as_completed(futures):
-            ip = futures[future]
-            time_taken = future.result()
-            resolver_times.append((ip, time_taken))
-    
-    # Trie les résolveurs par temps de réponse (le plus rapide d'abord)
-    resolver_times.sort(key=lambda x: x[1])
-    
-    # Retourne les `top_n` résolveurs les plus rapides
-    return [ip for ip, _ in resolver_times[:top_n]]
+def filter_best_resolvers(resolvers):
+    """Filtre les meilleurs résolveurs DNS en fonction de leur vitesse de réponse."""
+    speeds = {ip: test_resolver_speed(ip) for ip in resolvers}
+    sorted_resolvers = sorted(speeds.items(), key=lambda x: x[1])
+    best_resolvers = [resolver[0] for resolver in sorted_resolvers[:TOP_RESOLVERS_COUNT]]
+    return best_resolvers
 
 def prepare_resolvers(resolver_ips):
     """Prépare un objet dns.resolver.Resolver pour chaque IP de résolveur."""
@@ -151,7 +113,7 @@ def check_domain_batch(domains, resolvers):
             time.sleep(CHECK_INTERVAL)  # Ajout d'un délai entre les vérifications pour éviter la surcharge
     return results
 
-def main():
+def main(batch):
     """Exécute le script principal."""
     content = download_filters(adblock_url)
     domains = extract_domains(content)
@@ -167,19 +129,26 @@ def main():
     dead_domains = []
     total = len(domains)
 
-    for batch_start in range(0, total, BATCH_SIZE):
-        batch = domains[batch_start:batch_start + BATCH_SIZE]
-        results = check_domain_batch(batch, resolvers)
-        for domain, alive in results.items():
-            if not alive:
-                dead_domains.append(domain)
-        print(f"Batch {batch_start // BATCH_SIZE + 1} traité ({batch_start + len(batch)} / {total})")
+    # Traitement des domaines par lot
+    batch_start = batch * BATCH_SIZE
+    batch_end = batch_start + BATCH_SIZE
+    batch_domains = domains[batch_start:batch_end]
+    
+    results = check_domain_batch(batch_domains, resolvers)
+    for domain, alive in results.items():
+        if not alive:
+            dead_domains.append(domain)
 
     # Enregistrer les domaines morts dans un fichier
-    with open("dead.txt", "w") as f:
+    with open(f"dead_batch_{batch}.txt", "w") as f:
         for dead in dead_domains:
             f.write(f"{dead}\n")
-    print(f"Processus terminé. {len(dead_domains)} domaines morts trouvés.")
+    print(f"Batch {batch} traité ({batch_start + len(batch_domains)} / {total})")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--batch', type=int, required=True, help="Le numéro du batch à traiter")
+    args = parser.parse_args()
+
+    main(args.batch)
+
