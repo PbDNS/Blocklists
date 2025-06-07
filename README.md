@@ -8,11 +8,11 @@ Cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 
 ## Objectif
 
-- Bloquer les publicités
-- Limiter le suivi (trackers, fingerprinting)
-- Bloquer les logiciels malveillants, scams, phishing
-- Améliorer la sécurité
-- Empêcher la collecte de données personnelles
+- bloquer les publicités
+- limiter le suivi (trackers, fingerprinting)
+- bloquer les logiciels malveillants, scams, phishing
+- améliorer la sécurité
+- empêcher la collecte de données personnelles
   
 ---
 
@@ -47,9 +47,9 @@ Cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 
 ---
 
-## Format & Utilisation
+## Format et utilisation
 
-- Format Adblock Plus
-- Sous-domaines redondants supprimés
-- Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole ou Unbound
-- Optimisé pour un usage DNS/adblock au niveau réseau
+- format Adblock Plus
+- sous-domaines redondants supprimés
+- compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole ou Unbound
+- optimisé pour un usage DNS/adblock au niveau réseau
