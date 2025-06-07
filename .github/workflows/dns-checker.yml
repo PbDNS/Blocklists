@@ -60,7 +60,7 @@ jobs:
 
       - name: Combine all dead domains files
         run: |
-          # Fusionne tous les fichiers dead_batch_X.txt  en un seul fichier final
+          # Fusionne tous les fichiers dead_batch_X.txt en un seul fichier final
           cat dead_batch_*.txt > combined_dead_domains.txt
 
       - name: Commit and Push final result to repository
