@@ -1,9 +1,4 @@
-# Projet XYZ
-
-🔗 [Télécharger le fichier blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
-
-Bienvenue dans le projet XYZ. Ce projet est destiné à...
-
+🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
 # Agrégation de listes de blocage internationales et francophones
 
