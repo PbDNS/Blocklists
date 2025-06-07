@@ -48,6 +48,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Download all dead domains batch artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dead-domains-batch-0  # Télécharge l'artefact pour le batch 0
+          
+      - name: Check if all batch files are present
+        run: |
+          # Liste les fichiers dans le répertoire pour vérifier la présence des artefacts
+          ls -l
+
       - name: Combine all dead domains files
         run: |
           # Fusionne tous les fichiers dead_batch_X.txt en un seul fichier final
