@@ -1,37 +1,33 @@
-name: DNS Dead Domain Check
+name: DNS Dead Checker
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # ✅ permet de lancer manuellement
 
 jobs:
-  check-dead-domains:
+  dns-check:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: true
-          fetch-depth: 0
+      - name: 📥 Checkout du dépôt
+        uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: 🐍 Installer Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install aiodns
-
-      - name: Run DNS checker
-        run: python dns_checker.py
-
-      - name: Configure Git
+      - name: 📦 Installer dépendances
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          pip install dnspython
 
-      - name: Commit and push dead.txt
+      - name: 🔍 Exécuter le script de vérification DNS
         run: |
+          python dns_checker.py
+
+      - name: ✅ Commit & Push dead.txt
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
           git add dead.txt
-          git commit -m "Update dead.txt [CI]" || echo "Nothing to commit"
+          git commit -m "Mise à jour automatique de dead.txt" || echo "Aucun changement"
           git push
