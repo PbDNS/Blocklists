@@ -113,7 +113,7 @@ def main(batch):
     """Exécute le script principal."""
     content = download_filters(adblock_url)
     domains = extract_domains(content)
-    # domains = filter_domains_starting_with_a(domains)  # Filtrer les domaines commençant par "a" - À supprimer !
+    domains = filter_domains_starting_with_a(domains)  # Filtrer les domaines commençant par "a" - À supprimer !
 
     alive_resolver_ips = filter_best_resolvers(dns_resolvers_raw)  # Sélectionner les meilleurs résolveurs
     if not alive_resolver_ips:
