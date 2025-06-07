@@ -169,7 +169,7 @@ from datetime import datetime
 # Timestamp UTC (GMT 0)
 timestamp = datetime.utcnow().strftime("%d-%m-%Y %H:%M")
 
-# Écriture du fichier final
+# Écriture du fichier sortie
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {len(final_entries):06} entrées finales\n\n")
