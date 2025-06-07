@@ -8,9 +8,9 @@ from pathlib import Path
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
 DNS_TIMEOUT = 3
-MAX_CONCURRENT_QUERIES = 50
+MAX_CONCURRENT_QUERIES = 50  # ← réduit pour éviter plantage GitHub Actions
 
-# Liste de résolveurs DNS publics réputés, non filtrants (IPv4 + IPv6)
+# Liste de résolveurs DNS publics (IPv4 + IPv6)
 RESOLVERS = [
     "1.1.1.1", "1.0.0.1",                      # Cloudflare
     "8.8.8.8", "8.8.4.4",                      # Google
@@ -27,7 +27,6 @@ RESOLVERS = [
 ]
 
 def extract_domain(line):
-    # Extrait le domaine d'une ligne Adblock-style (||example.com^)
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
     return match.group(1) if match else None
 
@@ -54,6 +53,7 @@ async def test_resolver(resolver_ip):
         return None
 
 async def get_working_resolvers():
+    print("⏳ Test des résolveurs...")
     tested = await asyncio.gather(*(test_resolver(ip) for ip in RESOLVERS))
     return [r for r in tested if r]
 
@@ -68,6 +68,7 @@ async def resolve_domain(domain, resolvers, record_type, semaphore):
             return domain, False
 
 async def filter_dead(domains, resolvers, record_type):
+    print(f"🔍 Test {record_type} sur {len(domains)} domaines...")
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_QUERIES)
     tasks = [resolve_domain(domain, resolvers, record_type, semaphore) for domain in domains]
     results = await asyncio.gather(*tasks)
@@ -76,32 +77,28 @@ async def filter_dead(domains, resolvers, record_type):
 async def main():
     Path(DEAD_FILE).touch(exist_ok=True)
 
-    print("Chargement des domaines...")
+    print("📥 Chargement des domaines depuis blocklist.txt...")
     domains = read_blocklist_by_letter("a")
-    print(f"{len(domains)} domaines commençant par 'a' détectés.")
+    print(f"✅ {len(domains)} domaines valides trouvés commençant par 'a'.")
+
+    # Optionnel pour tests : limiter
+    # domains = domains[:100]
 
     resolvers = await get_working_resolvers()
     if not resolvers:
-        print("Aucun résolveur DNS fonctionnel trouvé.")
+        print("❌ Aucun résolveur fonctionnel trouvé.")
         return
-    print(f"{len(resolvers)} résolveurs fonctionnels détectés.")
+    print(f"✅ {len(resolvers)} résolveurs DNS prêts.")
 
-    print("Test A...")
     dead = await filter_dead(domains, resolvers, "A")
-    print(f"{len(dead)} domaines morts après test A.")
-
-    print("Test AAAA...")
     dead = await filter_dead(dead, resolvers, "AAAA")
-    print(f"{len(dead)} domaines morts après test AAAA.")
-
-    print("Test MX...")
     dead = await filter_dead(dead, resolvers, "MX")
-    print(f"{len(dead)} domaines morts après test MX.")
 
-    print("Écriture du fichier dead.txt...")
+    print(f"☠️ {len(dead)} domaines toujours morts après tous les tests.")
+
+    print("💾 Écriture dans dead.txt...")
     write_dead_domains(dead)
-    print("Terminé.")
+    print("✅ Terminé.")
 
 if __name__ == "__main__":
     asyncio.run(main())
-
