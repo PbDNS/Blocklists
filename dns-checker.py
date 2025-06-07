@@ -13,7 +13,8 @@ CHECK_INTERVAL = 2  # Intervalle entre les requêtes de vérification de domaine
 
 # Liste des résolveurs DNS publics
 dns_resolvers_raw = [
-      "1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001",
+    # Liste des résolveurs DNS (inchangée)
+    "1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001",
     "8.8.8.8", "8.8.4.4", "2001:4860:4860::8888", "2001:4860:4860::8844",
     "9.9.9.9", "149.112.112.112", "2620:fe::fe", "2620:fe::9",
     "208.67.222.222", "208.67.220.220", "2620:0:ccc::2", "2620:0:ccd::2",
@@ -61,6 +62,10 @@ def extract_domains(content):
     """Extrait les domaines à partir du contenu du fichier de blocage."""
     pattern = re.compile(r"^\|\|([^\^\/]+)\^", re.MULTILINE)
     return list(set(re.findall(pattern, content)))
+
+def filter_domains_starting_with_a(domains):
+    """Filtrer les domaines qui commencent par la lettre 'a'."""
+    return [domain for domain in domains if domain.lower().startswith('a')]
 
 def is_resolver_alive(ip):
     """Teste si un résolveur DNS est vivant en vérifiant une résolution de domaine."""
@@ -131,6 +136,9 @@ def main():
     """Exécute le script principal."""
     content = download_filters(adblock_url)
     domains = extract_domains(content)
+
+    # Filtrer les domaines commençant par 'a'
+    domains = filter_domains_starting_with_a(domains)
 
     alive_resolver_ips = filter_alive_resolvers(dns_resolvers_raw)
     if not alive_resolver_ips:
