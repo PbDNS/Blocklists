@@ -12,7 +12,8 @@ Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blo
 - Limiter le suivi (trackers, fingerprinting)
 - Bloquer les logiciels malveillants, scams, phishing
 - Améliorer la sécurité
-
+- Améliorer la confidentialité en empêchant la collecte de données personnelles
+  
 ---
 
 ## Blocklistes incluses
@@ -48,7 +49,7 @@ Cette compilation mise à jour 2/J vise à combiner les forces de nombreuses blo
 
 ## Format & Utilisation
 
-- Format Adblock Plus **||exemple.com^**
+- Format Adblock Plus
+- Sous-domaines redondants supprimés
 - Compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole ou Unbound
 - Optimisé pour un usage DNS/adblock au niveau réseau
-- Sous-domaines redondants supprimés, **||trk.exemple.com^** supprimé si **||exemple.com^** présent
