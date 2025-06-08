@@ -81,15 +81,27 @@ def filter_dns_dead(domains, record_type):
     return dead
 
 async def check_http(domain):
+    VALID_STATUS_CODES = {200, 301, 302}
     urls = [f"http://{domain}", f"https://{domain}"]
     async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
         for url in urls:
             try:
                 resp = await client.head(url)
-                if resp.status_code < 500:
+                if resp.status_code in VALID_STATUS_CODES:
                     return True
-            except:
-                continue
+            except httpx.RequestError:
+                pass
+            except Exception as e:
+                print(f"[HEAD] Erreur pour {url} : {e}")
+
+            try:
+                resp = await client.get(url, stream=True)
+                if resp.status_code in VALID_STATUS_CODES:
+                    return True
+            except httpx.RequestError:
+                pass
+            except Exception as e:
+                print(f"[GET] Erreur pour {url} : {e}")
     return False
 
 async def filter_http_dead(domains):
