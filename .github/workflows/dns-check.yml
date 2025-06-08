@@ -23,15 +23,18 @@ on:
     - cron: '0 20 * * *'   # t
     - cron: '0 21 * * *'   # u v
     - cron: '0 22 * * *'   # w x y z
+
   workflow_dispatch:
 
 jobs:
-  dns-check:
+
+  dns-check-scheduled:
+    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     strategy:
       matrix:
         prefix:
-          - 0 - 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9
+          - "0123456789"
           - a
           - b
           - c
@@ -40,101 +43,64 @@ jobs:
           - f
           - g
           - h
-          - i
-          - j
+          - ij
           - k
           - l
           - m
           - n
           - o
           - p
-          - q
-          - r
+          - qr
           - s
           - t
-          - u
-          - v
-          - w
-          - x
-          - y
-          - z
+          - uv
+          - wxyz
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt || true
+        run: pip install dnspython httpx
 
-      - name: Run DNS checker
-        env:
-          SCHEDULE: ${{ github.event.schedule }}
-          PREFIX: ${{ matrix.prefix }}
-        run: |
-          run_prefix=false
-          case "$SCHEDULE" in
-            "0 2 * * *")
-              [[ "$PREFIX" =~ ^[0-9]$ ]] && run_prefix=true ;;
-            "0 3 * * *")
-              [[ "$PREFIX" == "a" ]] && run_prefix=true ;;
-            "30 4 * * *")
-              [[ "$PREFIX" == "b" ]] && run_prefix=true ;;
-            "20 5 * * *")
-              [[ "$PREFIX" == "c" ]] && run_prefix=true ;;
-            "10 6 * * *")
-              [[ "$PREFIX" == "d" ]] && run_prefix=true ;;
-            "0 7 * * *")
-              [[ "$PREFIX" == "e" ]] && run_prefix=true ;;
-            "0 8 * * *")
-              [[ "$PREFIX" == "f" ]] && run_prefix=true ;;
-            "0 9 * * *")
-              [[ "$PREFIX" == "g" ]] && run_prefix=true ;;
-            "0 10 * * *")
-              [[ "$PREFIX" == "h" ]] && run_prefix=true ;;
-            "0 11 * * *")
-              [[ "$PREFIX" == "i" || "$PREFIX" == "j" ]] && run_prefix=true ;;
-            "0 12 * * *")
-              [[ "$PREFIX" == "k" ]] && run_prefix=true ;;
-            "0 13 * * *")
-              [[ "$PREFIX" == "l" ]] && run_prefix=true ;;
-            "0 14 * * *")
-              [[ "$PREFIX" == "m" ]] && run_prefix=true ;;
-            "0 15 * * *")
-              [[ "$PREFIX" == "n" ]] && run_prefix=true ;;
-            "0 16 * * *")
-              [[ "$PREFIX" == "o" ]] && run_prefix=true ;;
-            "0 17 * * *")
-              [[ "$PREFIX" == "p" ]] && run_prefix=true ;;
-            "0 18 * * *")
-              [[ "$PREFIX" == "q" || "$PREFIX" == "r" ]] && run_prefix=true ;;
-            "0 19 * * *")
-              [[ "$PREFIX" == "s" ]] && run_prefix=true ;;
-            "0 20 * * *")
-              [[ "$PREFIX" == "t" ]] && run_prefix=true ;;
-            "0 21 * * *")
-              [[ "$PREFIX" == "u" || "$PREFIX" == "v" ]] && run_prefix=true ;;
-            "0 22 * * *")
-              [[ "$PREFIX" == "w" || "$PREFIX" == "x" || "$PREFIX" == "y" || "$PREFIX" == "z" ]] && run_prefix=true ;;
-            "")
-              [[ "$PREFIX" == "z" ]] && run_prefix=true ;;
-          esac
+      - name: Run DNS check scheduled for prefix ${{ matrix.prefix }}
+        run: python dns_checker.py "${{ matrix.prefix }}"
 
-          if [ "$run_prefix" = true ]; then
-            echo "Running DNS check for prefix: $PREFIX"
-            python dns_checker.py "$PREFIX"
-          else
-            echo "Skipping prefix $PREFIX for this schedule."
-          fi
-
-      - name: Commit updated dead.txt
+      - name: Commit dead.txt update
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add dead.txt
           git commit -m "Update dead.txt for prefix '${{ matrix.prefix }}'" || echo "No changes to commit"
+          git push
+
+  dns-check-manual:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install dnspython httpx
+
+      - name: Run DNS check manual for prefix z
+        run: python dns_checker.py "z"
+
+      - name: Commit dead.txt update manual
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git commit -m "Update dead.txt for prefix 'z' (manual run)" || echo "No changes to commit"
           git push
