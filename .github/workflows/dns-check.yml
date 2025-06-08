@@ -40,10 +40,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up script
-        run: chmod +x dns_checker.py
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-      - name: Run DNS check
+      - name: Install requirements (if needed)
+        run: |
+          pip install -r requirements.txt || true
+
+      - name: Run DNS checker
         if: >
           github.event_name == 'workflow_dispatch' ||
           (github.event.schedule == '0 2 * * *' && contains('0123456789', matrix.prefix)) ||
@@ -67,7 +73,7 @@ jobs:
           (github.event.schedule == '0 20 * * *' && matrix.prefix == 't') ||
           (github.event.schedule == '0 21 * * *' && contains('uv', matrix.prefix)) ||
           (github.event.schedule == '0 22 * * *' && contains('wxyz', matrix.prefix))
-        run: ./dns-check.sh ${{ matrix.prefix }}
+        run: python dns_checker.py ${{ matrix.prefix }}
 
       - name: Commit dead.txt update
         run: |
