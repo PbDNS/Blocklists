@@ -4,7 +4,6 @@ import re
 import dns.resolver
 import httpx
 import asyncio
-from pathlib import Path
 
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
@@ -20,9 +19,6 @@ def extract_domain(line):
 def read_domains(prefixes):
     prefixes = tuple(prefixes.lower())
     domains = set()
-    if not os.path.exists(BLOCKLIST_FILE):
-        print("❌ Fichier blocklist.txt introuvable.")
-        return []
     with open(BLOCKLIST_FILE, "r", encoding="utf-8") as f:
         for line in f:
             domain = extract_domain(line)
@@ -57,17 +53,18 @@ def dns_check(domain, record_type):
     except dns.resolver.NoAnswer:
         return False
     except:
-        return True  # considéré vivant si doute
+        return True  # considérer vivant si doute
 
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
     dead = []
     for domain in domains:
         if not dns_check(domain, record_type):
-            print(f"☠️  {domain}")
+            # print(f"☠️  {domain}")  # supprimé pour moins de logs
             dead.append(domain)
-        else:
-            print(f"✅ {domain}")
+        # else:
+            # print(f"✅ {domain}")  # supprimé pour moins de logs
+    print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
 
 async def check_http(domain):
@@ -85,50 +82,44 @@ async def check_http(domain):
 async def filter_http_dead(domains):
     print("🌐 Vérification HTTP des domaines...")
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_HTTP)
-    results = []
 
     async def task(domain):
         async with semaphore:
             alive = await check_http(domain)
-            print(f"{'✅' if alive else '☠️ '} {domain}")
+            # print(f"{'✅' if alive else '☠️ '} {domain}")  # supprimé pour moins de logs
             return domain if not alive else None
 
     tasks = [task(domain) for domain in domains]
     filtered = await asyncio.gather(*tasks)
+    dead_count = len([d for d in filtered if d])
+    print(f"→ {dead_count} domaines morts détectés via HTTP.")
     return [d for d in filtered if d]
 
 async def main():
-    try:
-        if len(sys.argv) != 2:
-            print("❌ Usage: python dns_checker.py <prefixes>")
-            return
+    if len(sys.argv) != 2:
+        print("Usage: python dns_checker.py <prefixes>")
+        sys.exit(1)
 
-        prefixes = sys.argv[1].lower()
-        print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
-        domains = read_domains(prefixes)
+    prefixes = sys.argv[1].lower()
 
-        if not domains:
-            print("⚠️ Aucun domaine à traiter.")
-            return
+    print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
+    domains = read_domains(prefixes)
+    print(f"🔎 {len(domains)} domaines à tester.")
 
-        print(f"🔎 {len(domains)} domaines à tester.")
+    dead = filter_dns_dead(domains, "A")
+    update_dead_file(prefixes, dead)
 
-        dead = filter_dns_dead(domains, "A")
-        update_dead_file(prefixes, dead)
+    dead = filter_dns_dead(dead, "AAAA")
+    update_dead_file(prefixes, dead)
 
-        dead = filter_dns_dead(dead, "AAAA")
-        update_dead_file(prefixes, dead)
+    dead = filter_dns_dead(dead, "MX")
+    update_dead_file(prefixes, dead)
 
-        dead = filter_dns_dead(dead, "MX")
-        update_dead_file(prefixes, dead)
+    dead = await filter_http_dead(dead)
+    update_dead_file(prefixes, dead)
 
-        dead = await filter_http_dead(dead)
-        update_dead_file(prefixes, dead)
-
-        print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
-
-    except Exception as e:
-        print(f"🚨 Erreur inattendue : {e}")
+    print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
 
 if __name__ == "__main__":
     asyncio.run(main())
+
