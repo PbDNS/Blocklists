@@ -1,32 +1,405 @@
-name: DNS Dead Domain Checker
+name: DNS Dead Domain Checker - Horaire Séquencé
 
 on:
-  workflow_dispatch:  # permet de lancer le workflow manuellement
+  schedule:
+    - cron: '0 2 * * *'    # 02:00 UTC → chiffres (0-9)
+    - cron: '0 3 * * *'    # 03:00 UTC → a
+    - cron: '30 4 * * *'   # 04:30 UTC → b
+    - cron: '20 5 * * *'   # 05:20 UTC → c
+    - cron: '10 6 * * *'   # 06:10 UTC → d
+    - cron: '0 7 * * *'    # 07:00 UTC → e
+    - cron: '0 8 * * *'    # 08:00 UTC → f
+    - cron: '0 9 * * *'    # 09:00 UTC → g
+    - cron: '0 10 * * *'   # 10:00 UTC → h
+    - cron: '0 11 * * *'   # 11:00 UTC → i j
+    - cron: '0 12 * * *'   # 12:00 UTC → k
+    - cron: '0 13 * * *'   # 13:00 UTC → l
+    - cron: '0 14 * * *'   # 14:00 UTC → m
+    - cron: '0 15 * * *'   # 15:00 UTC → n
+    - cron: '0 16 * * *'   # 16:00 UTC → o
+    - cron: '0 17 * * *'   # 17:00 UTC → p
+    - cron: '0 18 * * *'   # 18:00 UTC → q r
+    - cron: '0 19 * * *'   # 19:00 UTC → s
+    - cron: '0 20 * * *'   # 20:00 UTC → t
+    - cron: '0 21 * * *'   # 21:00 UTC → u v
+    - cron: '0 22 * * *'   # 22:00 UTC → w x y z
+  workflow_dispatch:
 
 jobs:
-  dns-check:
+  chiffres:
+    if: github.event.schedule == '0 2 * * *' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-
     steps:
-      - name: 📥 Checkout du dépôt
-        uses: actions/checkout@v3
-
-      - name: 🐍 Installer Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-
-      - name: 📦 Installer les dépendances
-        run: |
+      - run: |
+          python -m pip install --upgrade pip
           pip install dnspython httpx
-
-      - name: 🔍 Exécuter le script DNS
-        run: python dns_checker.py
-
-      - name: ✅ Commit et push du fichier dead.txt
-        run: |
+      - run: python dns_checker.py 0123456789
+      - run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add dead.txt
-          git commit -m "🔁 Mise à jour automatique de dead.txt" || echo "Pas de changements"
-          git push
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: 0123456789)" && git push)
+
+  a:
+    if: github.event.schedule == '0 3 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py a
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: a)" && git push)
+
+  b:
+    if: github.event.schedule == '30 4 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py b
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: b)" && git push)
+
+  c:
+    if: github.event.schedule == '20 5 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py c
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: c)" && git push)
+
+  d:
+    if: github.event.schedule == '10 6 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py d
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: d)" && git push)
+
+  e:
+    if: github.event.schedule == '0 7 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py e
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: e)" && git push)
+
+  f:
+    if: github.event.schedule == '0 8 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py f
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: f)" && git push)
+
+  g:
+    if: github.event.schedule == '0 9 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py g
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: g)" && git push)
+
+  h:
+    if: github.event.schedule == '0 10 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py h
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: h)" && git push)
+
+  ij:
+    if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py ij
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: ij)" && git push)
+
+  k:
+    if: github.event.schedule == '0 12 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py k
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: k)" && git push)
+
+  l:
+    if: github.event.schedule == '0 13 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py l
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: l)" && git push)
+
+  m:
+    if: github.event.schedule == '0 14 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py m
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: m)" && git push)
+
+  n:
+    if: github.event.schedule == '0 15 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py n
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: n)" && git push)
+
+  o:
+    if: github.event.schedule == '0 16 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py o
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: o)" && git push)
+
+  p:
+    if: github.event.schedule == '0 17 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py p
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: p)" && git push)
+
+  qr:
+    if: github.event.schedule == '0 18 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py qr
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: qr)" && git push)
+
+  s:
+    if: github.event.schedule == '0 19 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py s
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: s)" && git push)
+
+  t:
+    if: github.event.schedule == '0 20 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py t
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: t)" && git push)
+
+  uv:
+    if: github.event.schedule == '0 21 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py uv
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: uv)" && git push)
+
+  wxyz:
+    if: github.event.schedule == '0 22 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+      - run: python dns_checker.py wxyz
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add dead.txt
+          git diff --cached --quiet || (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: wxyz)" && git push)
