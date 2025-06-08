@@ -4,13 +4,14 @@ import re
 import dns.resolver
 import httpx
 import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
 DNS_TIMEOUT = 3
 HTTP_TIMEOUT = 3
-MAX_CONCURRENT_QUERIES = 50
-MAX_CONCURRENT_HTTP = 30
+MAX_CONCURRENT_DNS = 50
+MAX_CONCURRENT_HTTP = 50
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
@@ -42,41 +43,43 @@ def update_dead_file(prefixes, new_dead):
     updated = filtered_dead + new_dead
     save_dead(updated)
 
+# Global resolver reused for better performance
+resolver = dns.resolver.Resolver()
+resolver.lifetime = DNS_TIMEOUT
+
 def dns_check(domain, record_type):
     try:
-        resolver = dns.resolver.Resolver()
-        resolver.lifetime = DNS_TIMEOUT
         resolver.resolve(domain, record_type)
         return True
-    except dns.resolver.NXDOMAIN:
-        return False
-    except dns.resolver.NoAnswer:
+    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
         return False
     except:
         return True  # considérer vivant si doute
 
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
+
     dead = []
-    for domain in domains:
-        if not dns_check(domain, record_type):
-            # print(f"☠️  {domain}")  # supprimé pour moins de logs
+    with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
+        results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
+
+    for domain, alive in results:
+        if not alive:
             dead.append(domain)
-        # else:
-            # print(f"✅ {domain}")  # supprimé pour moins de logs
+
     print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
 
 async def check_http(domain):
     urls = [f"http://{domain}", f"https://{domain}"]
-    for url in urls:
-        try:
-            async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
+    async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
+        for url in urls:
+            try:
                 resp = await client.head(url)
                 if resp.status_code < 500:
                     return True
-        except:
-            continue
+            except:
+                continue
     return False
 
 async def filter_http_dead(domains):
@@ -86,7 +89,6 @@ async def filter_http_dead(domains):
     async def task(domain):
         async with semaphore:
             alive = await check_http(domain)
-            # print(f"{'✅' if alive else '☠️ '} {domain}")  # supprimé pour moins de logs
             return domain if not alive else None
 
     tasks = [task(domain) for domain in domains]
@@ -122,4 +124,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
