@@ -4,6 +4,7 @@ import re
 import dns.resolver
 import httpx
 import asyncio
+import ipaddress
 from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
@@ -37,13 +38,19 @@ def save_dead(lines):
     with open(DEAD_FILE, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sorted(set(lines))) + '\n')
 
+def is_ip(domain):
+    try:
+        ipaddress.ip_address(domain)
+        return True
+    except ValueError:
+        return False
+
 def update_dead_file(prefixes, new_dead):
     existing_dead = load_dead()
     filtered_dead = [d for d in existing_dead if d[0].lower() not in prefixes]
-    updated = filtered_dead + new_dead
+    updated = filtered_dead + [d for d in new_dead if not is_ip(d)]
     save_dead(updated)
 
-# Global resolver reused for better performance
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
 
