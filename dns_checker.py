@@ -4,18 +4,26 @@ import re
 import dns.resolver
 import httpx
 import asyncio
-from concurrent.futures import ThreadPoolExecutor
+import ipaddress
+from pathlib import Path
 
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
 DNS_TIMEOUT = 3
 HTTP_TIMEOUT = 3
-MAX_CONCURRENT_DNS = 50
-MAX_CONCURRENT_HTTP = 50
+MAX_CONCURRENT_QUERIES = 50
+MAX_CONCURRENT_HTTP = 30
 
 def extract_domain(line):
-    match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
-    return match.group(1) if match else None
+    match = re.match(r"\|\|([a-zA-Z0-9\.-]+)\^?", line.strip())
+    if not match:
+        return None
+    domain = match.group(1)
+    try:
+        ipaddress.ip_address(domain)  # Ignore IP addresses
+        return None
+    except ValueError:
+        return domain.lower()
 
 def read_domains(prefixes):
     prefixes = tuple(prefixes.lower())
@@ -24,7 +32,7 @@ def read_domains(prefixes):
         for line in f:
             domain = extract_domain(line)
             if domain and domain[0].lower() in prefixes:
-                domains.add(domain.lower())
+                domains.add(domain)
     return sorted(domains)
 
 def load_dead():
@@ -43,48 +51,43 @@ def update_dead_file(prefixes, new_dead):
     updated = filtered_dead + new_dead
     save_dead(updated)
 
-# Global resolver reused for better performance
-resolver = dns.resolver.Resolver()
-resolver.lifetime = DNS_TIMEOUT
-
 def dns_check(domain, record_type):
     try:
+        resolver = dns.resolver.Resolver()
+        resolver.lifetime = DNS_TIMEOUT
         resolver.resolve(domain, record_type)
         return True
-    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+    except dns.resolver.NXDOMAIN:
+        return False
+    except dns.resolver.NoAnswer:
         return False
     except:
-        return True  # considérer vivant si doute
+        return True  # Considérer vivant en cas de doute
 
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
-
     dead = []
-    with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
-        results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
-
-    for domain, alive in results:
-        if not alive:
+    for domain in domains:
+        if not dns_check(domain, record_type):
             dead.append(domain)
-
-    print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
 
 async def check_http(domain):
     urls = [f"http://{domain}", f"https://{domain}"]
-    async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
-        for url in urls:
-            try:
+    for url in urls:
+        try:
+            async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
                 resp = await client.head(url)
                 if resp.status_code < 500:
                     return True
-            except:
-                continue
+        except:
+            continue
     return False
 
 async def filter_http_dead(domains):
     print("🌐 Vérification HTTP des domaines...")
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_HTTP)
+    results = []
 
     async def task(domain):
         async with semaphore:
@@ -93,8 +96,6 @@ async def filter_http_dead(domains):
 
     tasks = [task(domain) for domain in domains]
     filtered = await asyncio.gather(*tasks)
-    dead_count = len([d for d in filtered if d])
-    print(f"→ {dead_count} domaines morts détectés via HTTP.")
     return [d for d in filtered if d]
 
 async def main():
@@ -103,10 +104,9 @@ async def main():
         sys.exit(1)
 
     prefixes = sys.argv[1].lower()
-
-    print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
     domains = read_domains(prefixes)
-    print(f"🔎 {len(domains)} domaines à tester.")
+
+    print(f"🔎 {len(domains)} domaines à tester pour les préfixes: {prefixes}")
 
     dead = filter_dns_dead(domains, "A")
     update_dead_file(prefixes, dead)
