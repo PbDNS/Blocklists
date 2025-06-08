@@ -1,4 +1,4 @@
-name: DNS Dead Domain Checker - Horaire Séquencé
+name: DNS Dead Check
 
 on:
   schedule:
@@ -26,72 +26,53 @@ on:
   workflow_dispatch:
 
 jobs:
-  run:
-    name: Check Dead Domains
+  dns-check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
-          - time: '0 2 * * *'
-            prefix: '0123456789'
-          - time: '0 3 * * *'
-            prefix: 'a'
-          - time: '30 4 * * *'
-            prefix: 'b'
-          - time: '20 5 * * *'
-            prefix: 'c'
-          - time: '10 6 * * *'
-            prefix: 'd'
-          - time: '0 7 * * *'
-            prefix: 'e'
-          - time: '0 8 * * *'
-            prefix: 'f'
-          - time: '0 9 * * *'
-            prefix: 'g'
-          - time: '0 10 * * *'
-            prefix: 'h'
-          - time: '0 11 * * *'
-            prefix: 'ij'
-          - time: '0 12 * * *'
-            prefix: 'k'
-          - time: '0 13 * * *'
-            prefix: 'l'
-          - time: '0 14 * * *'
-            prefix: 'm'
-          - time: '0 15 * * *'
-            prefix: 'n'
-          - time: '0 16 * * *'
-            prefix: 'o'
-          - time: '0 17 * * *'
-            prefix: 'p'
-          - time: '0 18 * * *'
-            prefix: 'qr'
-          - time: '0 19 * * *'
-            prefix: 's'
-          - time: '0 20 * * *'
-            prefix: 't'
-          - time: '0 21 * * *'
-            prefix: 'uv'
-          - time: '0 22 * * *'
-            prefix: 'wxyz'
+        prefix:
+          - 0 - 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9
+          - a - b - c - d - e - f - g - h - i - j
+          - k - l - m - n - o - p - q - r - s - t
+          - u - v - w - x - y - z
 
-    if: github.event.schedule == matrix.time || github.event_name == 'workflow_dispatch'
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+      - name: Set up script
+        run: chmod +x dns-check.sh
 
-      - run: |
-          python -m pip install --upgrade pip
-          pip install dnspython httpx
+      - name: Run DNS check
+        if: >
+          github.event_name == 'workflow_dispatch' ||
+          (github.event.schedule == '0 2 * * *' && contains('0123456789', matrix.prefix)) ||
+          (github.event.schedule == '0 3 * * *' && matrix.prefix == 'a') ||
+          (github.event.schedule == '30 4 * * *' && matrix.prefix == 'b') ||
+          (github.event.schedule == '20 5 * * *' && matrix.prefix == 'c') ||
+          (github.event.schedule == '10 6 * * *' && matrix.prefix == 'd') ||
+          (github.event.schedule == '0 7 * * *' && matrix.prefix == 'e') ||
+          (github.event.schedule == '0 8 * * *' && matrix.prefix == 'f') ||
+          (github.event.schedule == '0 9 * * *' && matrix.prefix == 'g') ||
+          (github.event.schedule == '0 10 * * *' && matrix.prefix == 'h') ||
+          (github.event.schedule == '0 11 * * *' && contains('ij', matrix.prefix)) ||
+          (github.event.schedule == '0 12 * * *' && matrix.prefix == 'k') ||
+          (github.event.schedule == '0 13 * * *' && matrix.prefix == 'l') ||
+          (github.event.schedule == '0 14 * * *' && matrix.prefix == 'm') ||
+          (github.event.schedule == '0 15 * * *' && matrix.prefix == 'n') ||
+          (github.event.schedule == '0 16 * * *' && matrix.prefix == 'o') ||
+          (github.event.schedule == '0 17 * * *' && matrix.prefix == 'p') ||
+          (github.event.schedule == '0 18 * * *' && contains('qr', matrix.prefix)) ||
+          (github.event.schedule == '0 19 * * *' && matrix.prefix == 's') ||
+          (github.event.schedule == '0 20 * * *' && matrix.prefix == 't') ||
+          (github.event.schedule == '0 21 * * *' && contains('uv', matrix.prefix)) ||
+          (github.event.schedule == '0 22 * * *' && contains('wxyz', matrix.prefix))
+        run: ./dns-check.sh ${{ matrix.prefix }}
 
-      - run: python dns_checker.py ${{ matrix.prefix }}
-
-      - run: |
+      - name: Commit dead.txt update
+        run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add dead.txt
-          git diff --cached --quiet || \
-            (git commit -m "🔁 Mise à jour automatique dead.txt (prefixes: ${{ matrix.prefix }})" && git push)
+          git commit -m "Update dead.txt for prefix '${{ matrix.prefix }}'" || echo "No changes to commit"
+          git push
