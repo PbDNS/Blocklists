@@ -116,6 +116,10 @@ def is_expired(domain):
         info = whois.whois(domain)
         if not info or not info.domain_name:
             return True
+        if hasattr(info, 'text') and info.text:
+            text_upper = info.text.upper()
+            if "NO MATCH FOR" in text_upper or "NOT FOUND" in text_upper:
+                return True
         return False
     except Exception as e:
         print(f"[WHOIS] Erreur pour {domain} : {e}")
