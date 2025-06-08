@@ -1,4 +1,4 @@
-name: DNS Dead Check
+name: DNS Dead Check - Scheduled
 
 on:
   schedule:
@@ -24,83 +24,56 @@ on:
     - cron: '0 21 * * *'   # u v
     - cron: '0 22 * * *'   # w x y z
 
-  workflow_dispatch:
-
 jobs:
-
   dns-check-scheduled:
-    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        prefix:
-          - "0123456789"
-          - a
-          - b
-          - c
-          - d
-          - e
-          - f
-          - g
-          - h
-          - ij
-          - k
-          - l
-          - m
-          - n
-          - o
-          - p
-          - qr
-          - s
-          - t
-          - uv
-          - wxyz
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: 3.x
 
       - name: Install dependencies
         run: pip install dnspython httpx
 
-      - name: Run DNS check scheduled for prefix ${{ matrix.prefix }}
-        run: python dns_checker.py "${{ matrix.prefix }}"
-
-      - name: Commit dead.txt update
+      - name: Determine prefix
+        id: prefix
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add dead.txt
-          git commit -m "Update dead.txt for prefix '${{ matrix.prefix }}'" || echo "No changes to commit"
-          git push
+          case "${{ github.event.schedule }}" in
+            '0 2 * * *') echo "value=0123456789" >> $GITHUB_OUTPUT ;;
+            '0 3 * * *') echo "value=a" >> $GITHUB_OUTPUT ;;
+            '30 4 * * *') echo "value=b" >> $GITHUB_OUTPUT ;;
+            '20 5 * * *') echo "value=c" >> $GITHUB_OUTPUT ;;
+            '10 6 * * *') echo "value=d" >> $GITHUB_OUTPUT ;;
+            '0 7 * * *') echo "value=e" >> $GITHUB_OUTPUT ;;
+            '0 8 * * *') echo "value=f" >> $GITHUB_OUTPUT ;;
+            '0 9 * * *') echo "value=g" >> $GITHUB_OUTPUT ;;
+            '0 10 * * *') echo "value=h" >> $GITHUB_OUTPUT ;;
+            '0 11 * * *') echo "value=ij" >> $GITHUB_OUTPUT ;;
+            '0 12 * * *') echo "value=k" >> $GITHUB_OUTPUT ;;
+            '0 13 * * *') echo "value=l" >> $GITHUB_OUTPUT ;;
+            '0 14 * * *') echo "value=m" >> $GITHUB_OUTPUT ;;
+            '0 15 * * *') echo "value=n" >> $GITHUB_OUTPUT ;;
+            '0 16 * * *') echo "value=o" >> $GITHUB_OUTPUT ;;
+            '0 17 * * *') echo "value=p" >> $GITHUB_OUTPUT ;;
+            '0 18 * * *') echo "value=qr" >> $GITHUB_OUTPUT ;;
+            '0 19 * * *') echo "value=s" >> $GITHUB_OUTPUT ;;
+            '0 20 * * *') echo "value=t" >> $GITHUB_OUTPUT ;;
+            '0 21 * * *') echo "value=uv" >> $GITHUB_OUTPUT ;;
+            '0 22 * * *') echo "value=wxyz" >> $GITHUB_OUTPUT ;;
+            *) echo "Unknown schedule" && exit 1 ;;
+          esac
 
-  dns-check-manual:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Run DNS checker
+        run: python dns_checker.py ${{ steps.prefix.outputs.value }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: pip install dnspython httpx
-
-      - name: Run DNS check manual for prefix z
-        run: python dns_checker.py "z"
-
-      - name: Commit dead.txt update manual
+      - name: Commit dead.txt
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add dead.txt
-          git commit -m "Update dead.txt for prefix 'z' (manual run)" || echo "No changes to commit"
+          git commit -m "🕒 Cron update: ${{ steps.prefix.outputs.value }}" || echo "No changes"
           git push
