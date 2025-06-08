@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up script
-        run: chmod +x dns-check.py
+        run: chmod +x dns_checker.py
 
       - name: Run DNS check
         if: >
