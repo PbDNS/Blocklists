@@ -63,88 +63,70 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up DNS script
-        run: chmod +x dns-check.sh
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-      - name: Run DNS check
+      - name: Install dependencies
+        run: pip install -r requirements.txt || true
+
+      - name: Run DNS checker
         env:
           SCHEDULE: ${{ github.event.schedule }}
           PREFIX: ${{ matrix.prefix }}
         run: |
           run_prefix=false
-
           case "$SCHEDULE" in
             "0 2 * * *")
-              [[ "$PREFIX" =~ ^[0-9]$ ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" =~ ^[0-9]$ ]] && run_prefix=true ;;
             "0 3 * * *")
-              [[ "$PREFIX" == "a" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "a" ]] && run_prefix=true ;;
             "30 4 * * *")
-              [[ "$PREFIX" == "b" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "b" ]] && run_prefix=true ;;
             "20 5 * * *")
-              [[ "$PREFIX" == "c" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "c" ]] && run_prefix=true ;;
             "10 6 * * *")
-              [[ "$PREFIX" == "d" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "d" ]] && run_prefix=true ;;
             "0 7 * * *")
-              [[ "$PREFIX" == "e" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "e" ]] && run_prefix=true ;;
             "0 8 * * *")
-              [[ "$PREFIX" == "f" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "f" ]] && run_prefix=true ;;
             "0 9 * * *")
-              [[ "$PREFIX" == "g" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "g" ]] && run_prefix=true ;;
             "0 10 * * *")
-              [[ "$PREFIX" == "h" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "h" ]] && run_prefix=true ;;
             "0 11 * * *")
-              [[ "$PREFIX" == "i" || "$PREFIX" == "j" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "i" || "$PREFIX" == "j" ]] && run_prefix=true ;;
             "0 12 * * *")
-              [[ "$PREFIX" == "k" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "k" ]] && run_prefix=true ;;
             "0 13 * * *")
-              [[ "$PREFIX" == "l" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "l" ]] && run_prefix=true ;;
             "0 14 * * *")
-              [[ "$PREFIX" == "m" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "m" ]] && run_prefix=true ;;
             "0 15 * * *")
-              [[ "$PREFIX" == "n" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "n" ]] && run_prefix=true ;;
             "0 16 * * *")
-              [[ "$PREFIX" == "o" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "o" ]] && run_prefix=true ;;
             "0 17 * * *")
-              [[ "$PREFIX" == "p" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "p" ]] && run_prefix=true ;;
             "0 18 * * *")
-              [[ "$PREFIX" == "q" || "$PREFIX" == "r" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "q" || "$PREFIX" == "r" ]] && run_prefix=true ;;
             "0 19 * * *")
-              [[ "$PREFIX" == "s" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "s" ]] && run_prefix=true ;;
             "0 20 * * *")
-              [[ "$PREFIX" == "t" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "t" ]] && run_prefix=true ;;
             "0 21 * * *")
-              [[ "$PREFIX" == "u" || "$PREFIX" == "v" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "u" || "$PREFIX" == "v" ]] && run_prefix=true ;;
             "0 22 * * *")
-              [[ "$PREFIX" == "w" || "$PREFIX" == "x" || "$PREFIX" == "y" || "$PREFIX" == "z" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "w" || "$PREFIX" == "x" || "$PREFIX" == "y" || "$PREFIX" == "z" ]] && run_prefix=true ;;
             "")
-              [[ "$PREFIX" == "z" ]] && run_prefix=true
-              ;;
+              [[ "$PREFIX" == "z" ]] && run_prefix=true ;;
           esac
 
           if [ "$run_prefix" = true ]; then
             echo "Running DNS check for prefix: $PREFIX"
-            ./dns-check.sh "$PREFIX"
+            python dns_checker.py "$PREFIX"
           else
             echo "Skipping prefix $PREFIX for this schedule."
           fi
