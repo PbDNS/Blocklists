@@ -86,6 +86,7 @@ async def check_http(domain):
     async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
         for url in urls:
             try:
+                # HEAD request
                 resp = await client.head(url)
                 if resp.status_code in VALID_STATUS_CODES:
                     return True
@@ -95,7 +96,8 @@ async def check_http(domain):
                 print(f"[HEAD] Erreur pour {url} : {e}")
 
             try:
-                resp = await client.get(url, stream=True)
+                # Fallback GET request, sans stream
+                resp = await client.get(url)
                 if resp.status_code in VALID_STATUS_CODES:
                     return True
             except httpx.RequestError:
