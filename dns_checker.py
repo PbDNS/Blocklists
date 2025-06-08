@@ -16,7 +16,16 @@ MAX_CONCURRENT_HTTP = 50
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
-    return match.group(1) if match else None
+    if not match:
+        return None
+    domain = match.group(1)
+    try:
+        # Exclut les adresses IP valides
+        ipaddress.ip_address(domain)
+        return None
+    except ValueError:
+        # Ce n’est pas une IP => on garde
+        return domain
 
 def read_domains(prefixes):
     prefixes = tuple(prefixes.lower())
@@ -38,19 +47,13 @@ def save_dead(lines):
     with open(DEAD_FILE, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sorted(set(lines))) + '\n')
 
-def is_ip(domain):
-    try:
-        ipaddress.ip_address(domain)
-        return True
-    except ValueError:
-        return False
-
 def update_dead_file(prefixes, new_dead):
     existing_dead = load_dead()
     filtered_dead = [d for d in existing_dead if d[0].lower() not in prefixes]
-    updated = filtered_dead + [d for d in new_dead if not is_ip(d)]
+    updated = filtered_dead + new_dead
     save_dead(updated)
 
+# Global resolver reused for better performance
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
 
