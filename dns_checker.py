@@ -5,7 +5,6 @@ import dns.resolver
 import httpx
 import asyncio
 import ipaddress
-import whois
 from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
@@ -21,9 +20,11 @@ def extract_domain(line):
         return None
     domain = match.group(1)
     try:
+        # Exclut les adresses IP valides
         ipaddress.ip_address(domain)
         return None
     except ValueError:
+        # Ce n’est pas une IP => on garde
         return domain
 
 def read_domains(prefixes):
@@ -52,6 +53,7 @@ def update_dead_file(prefixes, new_dead):
     updated = filtered_dead + new_dead
     save_dead(updated)
 
+# Global resolver reused for better performance
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
 
@@ -62,16 +64,19 @@ def dns_check(domain, record_type):
     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
         return False
     except:
-        return True
+        return True  # considérer vivant si doute
 
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
+
     dead = []
     with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
         results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
+
     for domain, alive in results:
         if not alive:
             dead.append(domain)
+
     print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
 
@@ -81,6 +86,7 @@ async def check_http(domain):
     async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
         for url in urls:
             try:
+                # HEAD request
                 resp = await client.head(url)
                 if resp.status_code in VALID_STATUS_CODES:
                     return True
@@ -88,7 +94,9 @@ async def check_http(domain):
                 pass
             except Exception as e:
                 print(f"[HEAD] Erreur pour {url} : {e}")
+
             try:
+                # Fallback GET request, sans stream
                 resp = await client.get(url)
                 if resp.status_code in VALID_STATUS_CODES:
                     return True
@@ -101,38 +109,17 @@ async def check_http(domain):
 async def filter_http_dead(domains):
     print("🌐 Vérification HTTP des domaines...")
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_HTTP)
+
     async def task(domain):
         async with semaphore:
             alive = await check_http(domain)
             return domain if not alive else None
+
     tasks = [task(domain) for domain in domains]
     filtered = await asyncio.gather(*tasks)
     dead_count = len([d for d in filtered if d])
     print(f"→ {dead_count} domaines morts détectés via HTTP.")
     return [d for d in filtered if d]
-
-def is_expired(domain):
-    try:
-        info = whois.whois(domain)
-        if not info or not info.domain_name:
-            return True
-        if hasattr(info, 'text') and info.text:
-            text_upper = info.text.upper()
-            if "NO MATCH FOR" in text_upper or "NOT FOUND" in text_upper:
-                return True
-        return False
-    except Exception as e:
-        print(f"[WHOIS] Erreur pour {domain} : {e}")
-        return False
-
-def filter_whois_dead(domains):
-    print("🔍 Vérification WHOIS des domaines...")
-    dead = []
-    for domain in domains:
-        if is_expired(domain):
-            dead.append(domain)
-    print(f"→ {len(dead)} domaines morts détectés via WHOIS.")
-    return dead
 
 async def main():
     if len(sys.argv) != 2:
@@ -155,9 +142,6 @@ async def main():
     update_dead_file(prefixes, dead)
 
     dead = await filter_http_dead(dead)
-    update_dead_file(prefixes, dead)
-
-    dead = filter_whois_dead(dead)
     update_dead_file(prefixes, dead)
 
     print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
