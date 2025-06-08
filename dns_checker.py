@@ -20,6 +20,9 @@ def extract_domain(line):
 def read_domains(prefixes):
     prefixes = tuple(prefixes.lower())
     domains = set()
+    if not os.path.exists(BLOCKLIST_FILE):
+        print("❌ Fichier blocklist.txt introuvable.")
+        return []
     with open(BLOCKLIST_FILE, "r", encoding="utf-8") as f:
         for line in f:
             domain = extract_domain(line)
@@ -54,7 +57,7 @@ def dns_check(domain, record_type):
     except dns.resolver.NoAnswer:
         return False
     except:
-        return True  # considérer vivant si doute
+        return True  # considéré vivant si doute
 
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
@@ -95,29 +98,37 @@ async def filter_http_dead(domains):
     return [d for d in filtered if d]
 
 async def main():
-    if len(sys.argv) != 2:
-        print("Usage: python dns_checker.py <prefixes>")
-        sys.exit(1)
+    try:
+        if len(sys.argv) != 2:
+            print("❌ Usage: python dns_checker.py <prefixes>")
+            return
 
-    prefixes = sys.argv[1].lower()
+        prefixes = sys.argv[1].lower()
+        print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
+        domains = read_domains(prefixes)
 
-    print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
-    domains = read_domains(prefixes)
-    print(f"🔎 {len(domains)} domaines à tester.")
+        if not domains:
+            print("⚠️ Aucun domaine à traiter.")
+            return
 
-    dead = filter_dns_dead(domains, "A")
-    update_dead_file(prefixes, dead)
+        print(f"🔎 {len(domains)} domaines à tester.")
 
-    dead = filter_dns_dead(dead, "AAAA")
-    update_dead_file(prefixes, dead)
+        dead = filter_dns_dead(domains, "A")
+        update_dead_file(prefixes, dead)
 
-    dead = filter_dns_dead(dead, "MX")
-    update_dead_file(prefixes, dead)
+        dead = filter_dns_dead(dead, "AAAA")
+        update_dead_file(prefixes, dead)
 
-    dead = await filter_http_dead(dead)
-    update_dead_file(prefixes, dead)
+        dead = filter_dns_dead(dead, "MX")
+        update_dead_file(prefixes, dead)
 
-    print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
+        dead = await filter_http_dead(dead)
+        update_dead_file(prefixes, dead)
+
+        print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
+
+    except Exception as e:
+        print(f"🚨 Erreur inattendue : {e}")
 
 if __name__ == "__main__":
     asyncio.run(main())
