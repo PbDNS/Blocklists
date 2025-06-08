@@ -32,7 +32,7 @@ def main():
         sys.exit(1)
 
     prefixes = sys.argv[1]
-    input_file = "domains.txt"
+    input_file = "blocklist.txt"
     dead_file = "dead.txt"
 
     if not os.path.exists(input_file):
