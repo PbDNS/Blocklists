@@ -9,11 +9,10 @@ Cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 ## Objectif
 
 - bloquer les publicités
-- limiter le suivi (trackers, fingerprinting)
+- limiter la collecte de données personnelles (trackers, fingerprinting)
 - bloquer les logiciels malveillants, scams, phishing
 - améliorer la sécurité
-- empêcher la collecte de données personnelles
-  
+
 ---
 
 ## Blocklistes incluses
