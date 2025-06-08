@@ -5,7 +5,6 @@ import dns.resolver
 import httpx
 import asyncio
 import ipaddress
-import time
 from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
@@ -14,8 +13,7 @@ DNS_TIMEOUT = 5
 HTTP_TIMEOUT = 6
 MAX_CONCURRENT_DNS = 50
 MAX_CONCURRENT_HTTP = 50
-DNS_RETRIES = 2
-HTTP_RETRIES = 2
+RETRY_COUNT = 2  # Nombre de tentatives en cas d’échec
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
@@ -58,20 +56,20 @@ resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
 
 def dns_check(domain, record_type):
-    for attempt in range(1, DNS_RETRIES + 2):
+    for attempt in range(RETRY_COUNT):
         try:
             resolver.resolve(domain, record_type)
             return True
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
             return False
         except Exception:
-            if attempt < DNS_RETRIES + 1:
-                time.sleep(attempt)  # backoff: 1s, 2s
-            else:
-                return True  # en cas d’erreur inconnue, on considère vivant
+            if attempt < RETRY_COUNT - 1:
+                continue
+            return True  # considérer vivant si doute
 
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
+
     dead = []
     with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
         results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
@@ -84,24 +82,33 @@ def filter_dns_dead(domains, record_type):
     return dead
 
 async def check_http(domain):
+    VALID_STATUS_CODES = {200, 301, 302}
     urls = [f"http://{domain}", f"https://{domain}"]
-    async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
-        for url in urls:
-            for attempt in range(1, HTTP_RETRIES + 2):
+
+    for attempt in range(RETRY_COUNT):
+        async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
+            for url in urls:
                 try:
                     resp = await client.head(url)
-                    if 200 <= resp.status_code < 400 or resp.status_code in {401, 403, 405}:
+                    if resp.status_code in VALID_STATUS_CODES:
                         return True
-                except Exception:
-                    if attempt < HTTP_RETRIES + 1:
-                        await asyncio.sleep(attempt)
+                except httpx.RequestError:
+                    pass
+                except Exception as e:
+                    print(f"[HEAD] Erreur pour {url} : {e}")
+
                 try:
                     resp = await client.get(url)
-                    if 200 <= resp.status_code < 400 or resp.status_code in {401, 403, 405}:
+                    if resp.status_code in VALID_STATUS_CODES:
                         return True
-                except Exception:
-                    if attempt < HTTP_RETRIES + 1:
-                        await asyncio.sleep(attempt)
+                except httpx.RequestError:
+                    pass
+                except Exception as e:
+                    print(f"[GET] Erreur pour {url} : {e}")
+
+        if attempt < RETRY_COUNT - 1:
+            await asyncio.sleep(0.5)
+
     return False
 
 async def filter_http_dead(domains):
