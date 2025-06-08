@@ -13,6 +13,7 @@ DNS_TIMEOUT = 3
 HTTP_TIMEOUT = 3
 MAX_CONCURRENT_DNS = 50
 MAX_CONCURRENT_HTTP = 50
+RETRY_COUNT = 2  # Nombre de tentatives en cas d’échec
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
@@ -20,11 +21,9 @@ def extract_domain(line):
         return None
     domain = match.group(1)
     try:
-        # Exclut les adresses IP valides
         ipaddress.ip_address(domain)
         return None
     except ValueError:
-        # Ce n’est pas une IP => on garde
         return domain
 
 def read_domains(prefixes):
@@ -53,18 +52,20 @@ def update_dead_file(prefixes, new_dead):
     updated = filtered_dead + new_dead
     save_dead(updated)
 
-# Global resolver reused for better performance
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
 
 def dns_check(domain, record_type):
-    try:
-        resolver.resolve(domain, record_type)
-        return True
-    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
-        return False
-    except:
-        return True  # considérer vivant si doute
+    for attempt in range(RETRY_COUNT):
+        try:
+            resolver.resolve(domain, record_type)
+            return True
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+            return False
+        except Exception:
+            if attempt < RETRY_COUNT - 1:
+                continue
+            return True  # considérer vivant si doute
 
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
@@ -83,27 +84,31 @@ def filter_dns_dead(domains, record_type):
 async def check_http(domain):
     VALID_STATUS_CODES = {200, 301, 302}
     urls = [f"http://{domain}", f"https://{domain}"]
-    async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
-        for url in urls:
-            try:
-                # HEAD request
-                resp = await client.head(url)
-                if resp.status_code in VALID_STATUS_CODES:
-                    return True
-            except httpx.RequestError:
-                pass
-            except Exception as e:
-                print(f"[HEAD] Erreur pour {url} : {e}")
 
-            try:
-                # Fallback GET request, sans stream
-                resp = await client.get(url)
-                if resp.status_code in VALID_STATUS_CODES:
-                    return True
-            except httpx.RequestError:
-                pass
-            except Exception as e:
-                print(f"[GET] Erreur pour {url} : {e}")
+    for attempt in range(RETRY_COUNT):
+        async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
+            for url in urls:
+                try:
+                    resp = await client.head(url)
+                    if resp.status_code in VALID_STATUS_CODES:
+                        return True
+                except httpx.RequestError:
+                    pass
+                except Exception as e:
+                    print(f"[HEAD] Erreur pour {url} : {e}")
+
+                try:
+                    resp = await client.get(url)
+                    if resp.status_code in VALID_STATUS_CODES:
+                        return True
+                except httpx.RequestError:
+                    pass
+                except Exception as e:
+                    print(f"[GET] Erreur pour {url} : {e}")
+
+        if attempt < RETRY_COUNT - 1:
+            await asyncio.sleep(0.5)
+
     return False
 
 async def filter_http_dead(domains):
@@ -127,7 +132,6 @@ async def main():
         sys.exit(1)
 
     prefixes = sys.argv[1].lower()
-
     print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
