@@ -17,9 +17,7 @@ on:
     - cron: '0 14 * * *'   # m
     - cron: '0 15 * * *'   # n
     - cron: '0 16 * * *'   # o
-    - cron: '0 17 * * *'   # p
-    - cron: '0 18 * * *'   # q r
-    - cron: '0 19 * * *'   # s
+    - cron: '0 17 * * *'   # p q r s
     - cron: '0 20 * * *'   # t
     - cron: '0 21 * * *'   # u v
     - cron: '0 22 * * *'   # w x y z
@@ -58,9 +56,7 @@ jobs:
             '0 14 * * *') echo "value=m" >> $GITHUB_OUTPUT ;;
             '0 15 * * *') echo "value=n" >> $GITHUB_OUTPUT ;;
             '0 16 * * *') echo "value=o" >> $GITHUB_OUTPUT ;;
-            '0 17 * * *') echo "value=p" >> $GITHUB_OUTPUT ;;
-            '0 18 * * *') echo "value=qr" >> $GITHUB_OUTPUT ;;
-            '0 19 * * *') echo "value=s" >> $GITHUB_OUTPUT ;;
+            '0 17 * * *') echo "value=pqrs" >> $GITHUB_OUTPUT ;;
             '0 20 * * *') echo "value=t" >> $GITHUB_OUTPUT ;;
             '0 21 * * *') echo "value=uv" >> $GITHUB_OUTPUT ;;
             '0 22 * * *') echo "value=wxyz" >> $GITHUB_OUTPUT ;;
