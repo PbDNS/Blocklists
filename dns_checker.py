@@ -10,6 +10,7 @@ BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
 DNS_TIMEOUT = 3
 HTTP_TIMEOUT = 3
+MAX_CONCURRENT_QUERIES = 50
 MAX_CONCURRENT_HTTP = 30
 
 def extract_domain(line):
