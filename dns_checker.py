@@ -9,8 +9,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
-DNS_TIMEOUT = 3
-HTTP_TIMEOUT = 3
+DNS_TIMEOUT = 5
+HTTP_TIMEOUT = 6
 MAX_CONCURRENT_DNS = 50
 MAX_CONCURRENT_HTTP = 50
 RETRY_COUNT = 2  # Nombre de tentatives en cas d’échec
