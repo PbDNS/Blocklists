@@ -2,66 +2,68 @@ name: DNS Dead Check - Scheduled
 
 on:
   schedule:
-    - cron: '0 16 * * *'   # chiffres (0-9)
-    - cron: '0 17 * * *'   # a b c d e
-    - cron: '0 18 * * *'   # f g h i
-    - cron: '0 19 * * *'   # j k l m
-    - cron: '0 20 * * *'   # n o p q
-    - cron: '0 21 * * *'   # r s t u
-    - cron: '0 22 * * *'   # v w x y z
+    - cron: '0 2 * * *'    # chiffres (0-9)
+    - cron: '0 3 * * *'    # a
+    - cron: '30 4 * * *'   # b
+    - cron: '20 5 * * *'   # c
+    - cron: '10 6 * * *'   # d
+    - cron: '0 7 * * *'    # e
+    - cron: '0 8 * * *'    # f
+    - cron: '0 9 * * *'    # g
+    - cron: '0 10 * * *'   # h
+    - cron: '0 11 * * *'   # i j
+    - cron: '0 12 * * *'   # k
+    - cron: '0 13 * * *'   # l
+    - cron: '0 14 * * *'   # m
+    - cron: '0 15 * * *'   # n o p q
+    - cron: '0 16 * * *'   # r s t u
+    - cron: '0 17 * * *'   # v w x y z
 
 jobs:
-  prepare-matrix:
+  dns-check-scheduled:
     runs-on: ubuntu-latest
-    outputs:
-      # On expose les préfixes au format JSON dans un output
-      matrix-prefixes: ${{ steps.set-matrix.outputs.matrix-prefixes }}
     steps:
-      - id: set-matrix
-        name: Préparer la liste des préfixes selon le cron déclencheur
-        run: |
-          SCHEDULE="${{ github.event.schedule }}"
-          case "$SCHEDULE" in
-            '0 16 * * *') PREFIXES='0 1 2 3 4 5 6 7 8 9' ;;
-            '0 17 * * *') PREFIXES='a b c d e' ;;
-            '0 18 * * *') PREFIXES='f g h i' ;;
-            '0 19 * * *') PREFIXES='j k l m' ;;
-            '0 20 * * *') PREFIXES='n o p q' ;;
-            '0 21 * * *') PREFIXES='r s t u' ;;
-            '0 22 * * *') PREFIXES='v w x y z' ;;
-            *) echo "Unknown schedule" && exit 1 ;;
-          esac
-          # Conversion en JSON array (ex: ["a","b","c"]) avec jq
-          JSON_MATRIX=$(printf '%s' "$PREFIXES" | jq -R 'split(" ")')
-          echo "matrix-prefixes=$JSON_MATRIX" >> $GITHUB_OUTPUT
-
-  dns-check:
-    needs: prepare-matrix
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        # Lecture du JSON array et création de la matrice sur les préfixes
-        prefix: ${{ fromJson(needs.prepare-matrix.outputs.matrix-prefixes) }}
-      max-parallel: 5  # Limite à 5 jobs simultanés
-    steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python 3.x
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.x
 
-      - name: Install dependencies (dnspython, httpx)
+      - name: Install dependencies
         run: pip install dnspython httpx
 
-      - name: Run DNS checker for prefix "${{ matrix.prefix }}"
-        run: python dns_checker.py ${{ matrix.prefix }}
+      - name: Determine prefix
+        id: prefix
+        run: |
+          case "${{ github.event.schedule }}" in
+            '0 2 * * *') echo "value=0123456789" >> $GITHUB_OUTPUT ;;
+            '0 3 * * *') echo "value=a" >> $GITHUB_OUTPUT ;;
+            '30 4 * * *') echo "value=b" >> $GITHUB_OUTPUT ;;
+            '20 5 * * *') echo "value=c" >> $GITHUB_OUTPUT ;;
+            '10 6 * * *') echo "value=d" >> $GITHUB_OUTPUT ;;
+            '0 7 * * *') echo "value=e" >> $GITHUB_OUTPUT ;;
+            '0 8 * * *') echo "value=f" >> $GITHUB_OUTPUT ;;
+            '0 9 * * *') echo "value=g" >> $GITHUB_OUTPUT ;;
+            '0 10 * * *') echo "value=h" >> $GITHUB_OUTPUT ;;
+            '0 11 * * *') echo "value=ij" >> $GITHUB_OUTPUT ;;
+            '0 12 * * *') echo "value=k" >> $GITHUB_OUTPUT ;;
+            '0 13 * * *') echo "value=l" >> $GITHUB_OUTPUT ;;
+            '0 14 * * *') echo "value=m" >> $GITHUB_OUTPUT ;;
+            '0 15 * * *') echo "value=nopq" >> $GITHUB_OUTPUT ;;
+            '0 16 * * *') echo "value=rstu" >> $GITHUB_OUTPUT ;;
+            '0 17 * * *') echo "value=vwxyz" >> $GITHUB_OUTPUT ;;
+            *) echo "Unknown schedule" && exit 1 ;;
+          esac
 
-      - name: Commit dead.txt if changes detected
+      - name: Run DNS checker
+        run: python dns_checker.py ${{ steps.prefix.outputs.value }}
+
+      - name: Commit dead.txt
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add dead.txt
-          git commit -m "🕒 Cron update: ${{ matrix.prefix }}" || echo "No changes"
+          git commit -m "🕒 Cron update: ${{ steps.prefix.outputs.value }}" || echo "No changes"
           git push
