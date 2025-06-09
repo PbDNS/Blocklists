@@ -6,7 +6,7 @@ on:
       group:
         description: "Préfixes à tester (ex: abcde, fghi, etc.)"
         required: true
-        default: "abcde"
+        default: "ab"
 
 jobs:
   prepare:
@@ -40,4 +40,4 @@ jobs:
         run: pip install dnspython httpx
 
       - name: Run DNS checker for prefix "${{ matrix.prefix }}"
-        run: python dns_checker.py_
+        run: python dns_checker.py
