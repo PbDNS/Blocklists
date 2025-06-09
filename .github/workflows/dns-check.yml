@@ -48,6 +48,7 @@ jobs:
           *) echo "Unknown hour: $HOUR" && exit 1 ;;
           esac
 
+
       - name: Run DNS checker
         run: python dns_checker.py ${{ steps.prefix.outputs.value }}
 
