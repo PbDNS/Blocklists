@@ -6,15 +6,27 @@ on:
       group:
         description: "Préfixes à tester (ex: abcde, fghi, etc.)"
         required: true
-        default: "x"
+        default: "abcde"
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Generate matrix from input
+        id: set-matrix
+        run: |
+          PREFIXES="${{ github.event.inputs.group }}"
+          JSON_ARRAY=$(echo "$PREFIXES" | grep -o . | jq -R -s -c 'split("")')
+          echo "matrix=$JSON_ARRAY" >> "$GITHUB_OUTPUT"
+
   dns-check:
+    needs: prepare
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        prefix: ${{ fromJson('["' + inputs.group.replace('', '').replace(' ', '').split('').join('","') + '"]') }}
-
+        prefix: ${{ fromJson(needs.prepare.outputs.matrix) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,13 +40,4 @@ jobs:
         run: pip install dnspython httpx
 
       - name: Run DNS checker for prefix "${{ matrix.prefix }}"
-        run: python dns_checker.py ${{ matrix.prefix }}
-
-      - name: Commit dead.txt
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add dead.txt
-          git commit -m "🧪 Manual run: ${{ matrix.prefix }}" || echo "No changes"
-          git push
-
+        run: python dns_checker.py_
