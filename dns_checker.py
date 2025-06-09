@@ -15,8 +15,9 @@ MAX_CONCURRENT_DNS = 30
 MAX_CONCURRENT_HTTP = 30
 RETRY_COUNT = 2
 
+# Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
-    match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
+    match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
     if not match:
         return None
     domain = match.group(1)
@@ -26,8 +27,9 @@ def extract_domain(line):
     except ValueError:
         return domain
 
+# Lecture des domaines selon préfixes donnés (ex: a, b, c...)
 def read_domains(prefixes):
-    prefixes = tuple(prefixes.lower())
+    prefixes = tuple(prefixes.lower()) if isinstance(prefixes, str) else tuple()
     domains = set()
     with open(BLOCKLIST_FILE, "r", encoding="utf-8") as f:
         for line in f:
@@ -36,25 +38,30 @@ def read_domains(prefixes):
                 domains.add(domain.lower())
     return sorted(domains)
 
+# Chargement du fichier dead.txt existant
 def load_dead():
     if not os.path.exists(DEAD_FILE):
         return []
     with open(DEAD_FILE, 'r', encoding='utf-8') as f:
         return [line.strip() for line in f if line.strip()]
 
+# Sauvegarde du fichier dead.txt
 def save_dead(lines):
     with open(DEAD_FILE, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sorted(set(lines))) + '\n')
 
+# Mise à jour de dead.txt en conservant les anciens préfixes
 def update_dead_file(prefixes, new_dead):
     existing_dead = load_dead()
     filtered_dead = [d for d in existing_dead if d[0].lower() not in prefixes]
     updated = filtered_dead + new_dead
     save_dead(updated)
 
+# Configuration du résolveur DNS
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
 
+# Vérification DNS simple
 def dns_check(domain, record_type):
     for attempt in range(RETRY_COUNT):
         try:
@@ -67,6 +74,7 @@ def dns_check(domain, record_type):
                 continue
             return True  # considérer vivant si doute
 
+# Vérifie quels domaines ne répondent pas pour un type d'enregistrement DNS
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
 
@@ -81,6 +89,7 @@ def filter_dns_dead(domains, record_type):
     print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
 
+# Vérification HTTP/HTTPS HEAD/GET
 async def check_http(domain):
     VALID_STATUS_CODES = set(range(200, 400))
     urls = [f"http://{domain}", f"https://{domain}"]
@@ -111,6 +120,7 @@ async def check_http(domain):
 
     return False
 
+# Vérifie quels domaines ne répondent pas en HTTP/HTTPS
 async def filter_http_dead(domains):
     print("🌐 Vérification HTTP des domaines...")
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_HTTP)
@@ -126,6 +136,7 @@ async def filter_http_dead(domains):
     print(f"→ {dead_count} domaines morts détectés via HTTP.")
     return [d for d in filtered if d]
 
+# Point d’entrée principal
 async def main():
     if len(sys.argv) != 2:
         print("Usage: python dns_checker.py <prefixes>")
