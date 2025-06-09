@@ -82,7 +82,7 @@ def filter_dns_dead(domains, record_type):
     return dead
 
 async def check_http(domain):
-    VALID_STATUS_CODES = {200, 301, 302}
+    VALID_STATUS_CODES = set(range(200, 400))
     urls = [f"http://{domain}", f"https://{domain}"]
 
     for attempt in range(RETRY_COUNT):
