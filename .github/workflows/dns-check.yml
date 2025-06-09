@@ -23,38 +23,25 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
-
       - name: Install dependencies
         run: pip install dnspython httpx
-
-      - name: Log UTC hour
-        run: echo "Current UTC hour: $(date -u +'%H')"
 
       - name: Determine prefix
         id: prefix
         run: |
-          HOUR=$(date -u +'%H')
-          if [ "$HOUR" = "16" ]; then
-            echo "value=0123456789" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "17" ]; then
-            echo "value=abcd" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "18" ]; then
-            echo "value=efgh" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "19" ]; then
-            echo "value=ijkl" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "20" ]; then
-            echo "value=mnop" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "21" ]; then
-            echo "value=qrst" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "22" ]; then
-            echo "value=uvwx" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "23" ]; then
-            echo "value=yz" >> $GITHUB_OUTPUT
-          else
-            echo "Unknown hour: $HOUR" && exit 1
-          fi
+          HOUR=$(date -u +"%H")
+          case "$HOUR" in
+            16) echo "value=0123456789" >> $GITHUB_OUTPUT ;;
+            17) echo "value=abcd" >> $GITHUB_OUTPUT ;;
+            18) echo "value=efgh" >> $GITHUB_OUTPUT ;;
+            19) echo "value=ijkl" >> $GITHUB_OUTPUT ;;
+            20) echo "value=mnop" >> $GITHUB_OUTPUT ;;
+            21) echo "value=qrst" >> $GITHUB_OUTPUT ;;
+            22) echo "value=uvwx" >> $GITHUB_OUTPUT ;;
+            23) echo "value=yz" >> $GITHUB_OUTPUT ;;
+            *) echo "Unknown hour: $HOUR" && exit 1 ;;
+        esac
+
 
       - name: Run DNS checker
         run: python dns_checker.py ${{ steps.prefix.outputs.value }}
@@ -65,4 +52,4 @@ jobs:
           git config user.email github-actions@github.com
           git add dead.txt
           git commit -m "🕒 Cron update: ${{ steps.prefix.outputs.value }}" || echo "No changes"
-          git push || echo "Git push failed (network issue?)"
+          git push
