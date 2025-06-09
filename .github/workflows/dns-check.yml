@@ -14,9 +14,11 @@ jobs:
   prepare-matrix:
     runs-on: ubuntu-latest
     outputs:
+      # On expose les préfixes au format JSON dans un output
       matrix-prefixes: ${{ steps.set-matrix.outputs.matrix-prefixes }}
     steps:
       - id: set-matrix
+        name: Préparer la liste des préfixes selon le cron déclencheur
         run: |
           SCHEDULE="${{ github.event.schedule }}"
           case "$SCHEDULE" in
@@ -29,7 +31,7 @@ jobs:
             '0 22 * * *') PREFIXES='v w x y z' ;;
             *) echo "Unknown schedule" && exit 1 ;;
           esac
-          # Conversion en JSON array (ex: ["a","b","c"])
+          # Conversion en JSON array (ex: ["a","b","c"]) avec jq
           JSON_MATRIX=$(printf '%s' "$PREFIXES" | jq -R 'split(" ")')
           echo "matrix-prefixes=$JSON_MATRIX" >> $GITHUB_OUTPUT
 
@@ -38,24 +40,25 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        # Lecture du JSON array et création de la matrice sur les préfixes
         prefix: ${{ fromJson(needs.prepare-matrix.outputs.matrix-prefixes) }}
       max-parallel: 5  # Limite à 5 jobs simultanés
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Setup Python 3.x
         uses: actions/setup-python@v4
         with:
           python-version: 3.x
 
-      - name: Install dependencies
+      - name: Install dependencies (dnspython, httpx)
         run: pip install dnspython httpx
 
       - name: Run DNS checker for prefix "${{ matrix.prefix }}"
         run: python dns_checker.py ${{ matrix.prefix }}
 
-      - name: Commit dead.txt if changed
+      - name: Commit dead.txt if changes detected
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
