@@ -2,22 +2,14 @@ name: DNS Dead Check - Scheduled
 
 on:
   schedule:
-    - cron: '0 2 * * *'    # chiffres (0-9)
-    - cron: '0 3 * * *'    # a
-    - cron: '30 4 * * *'   # b
-    - cron: '20 5 * * *'   # c
-    - cron: '10 6 * * *'   # d
-    - cron: '0 7 * * *'    # e
-    - cron: '0 8 * * *'    # f
-    - cron: '0 9 * * *'    # g
-    - cron: '0 10 * * *'   # h
-    - cron: '0 11 * * *'   # i j
-    - cron: '0 12 * * *'   # k
-    - cron: '0 13 * * *'   # l
-    - cron: '0 14 * * *'   # m
-    - cron: '0 15 * * *'   # n o p q
-    - cron: '0 16 * * *'   # r s t u
-    - cron: '0 17 * * *'   # v w x y z
+    - cron: '0 16 * * *'   # chiffres (0-9)
+    - cron: '0 17 * * *'   # a b c d
+    - cron: '0 18 * * *'   # e f g h
+    - cron: '0 19 * * *'   # i j k l
+    - cron: '0 20 * * *'   # m n o p
+    - cron: '0 21 * * *'   # q r s t
+    - cron: '0 22 * * *'   # u v w x
+    - cron: '0 23 * * *'   # y z
 
 jobs:
   dns-check-scheduled:
@@ -31,30 +23,29 @@ jobs:
         with:
           python-version: 3.x
 
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
       - name: Install dependencies
         run: pip install dnspython httpx
+
+      - name: Log UTC hour
+        run: echo "Current UTC hour: $(date -u +"%H")"
 
       - name: Determine prefix
         id: prefix
         run: |
-          case "${{ github.event.schedule }}" in
-            '0 2 * * *') echo "value=0123456789" >> $GITHUB_OUTPUT ;;
-            '0 3 * * *') echo "value=a" >> $GITHUB_OUTPUT ;;
-            '30 4 * * *') echo "value=b" >> $GITHUB_OUTPUT ;;
-            '20 5 * * *') echo "value=c" >> $GITHUB_OUTPUT ;;
-            '10 6 * * *') echo "value=d" >> $GITHUB_OUTPUT ;;
-            '0 7 * * *') echo "value=e" >> $GITHUB_OUTPUT ;;
-            '0 8 * * *') echo "value=f" >> $GITHUB_OUTPUT ;;
-            '0 9 * * *') echo "value=g" >> $GITHUB_OUTPUT ;;
-            '0 10 * * *') echo "value=h" >> $GITHUB_OUTPUT ;;
-            '0 11 * * *') echo "value=ij" >> $GITHUB_OUTPUT ;;
-            '0 12 * * *') echo "value=k" >> $GITHUB_OUTPUT ;;
-            '0 13 * * *') echo "value=l" >> $GITHUB_OUTPUT ;;
-            '0 14 * * *') echo "value=m" >> $GITHUB_OUTPUT ;;
-            '0 15 * * *') echo "value=nopq" >> $GITHUB_OUTPUT ;;
-            '0 16 * * *') echo "value=rstu" >> $GITHUB_OUTPUT ;;
-            '0 17 * * *') echo "value=vwxyz" >> $GITHUB_OUTPUT ;;
-            *) echo "Unknown schedule" && exit 1 ;;
+          HOUR=$(date -u +"%H")
+          case "$HOUR" in
+            16) echo "value=0123456789" >> $GITHUB_OUTPUT ;;
+            17) echo "value=abcd" >> $GITHUB_OUTPUT ;;
+            18) echo "value=efgh" >> $GITHUB_OUTPUT ;;
+            19) echo "value=ijkl" >> $GITHUB_OUTPUT ;;
+            20) echo "value=mnop" >> $GITHUB_OUTPUT ;;
+            21) echo "value=qrst" >> $GITHUB_OUTPUT ;;
+            22) echo "value=uvwx" >> $GITHUB_OUTPUT ;;
+            23) echo "value=yz" >> $GITHUB_OUTPUT ;;
+            *) echo "Unknown hour: $HOUR" && exit 1 ;;
           esac
 
       - name: Run DNS checker
@@ -66,4 +57,4 @@ jobs:
           git config user.email github-actions@github.com
           git add dead.txt
           git commit -m "🕒 Cron update: ${{ steps.prefix.outputs.value }}" || echo "No changes"
-          git push
+          git push || echo "Git push failed (network issue?)"
