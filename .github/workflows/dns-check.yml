@@ -40,13 +40,13 @@ jobs:
         run: |
           # Mapping des heures aux préfixes
           case "$(date +'%H')" in
-            16) echo "prefix=0123456789" >> $GITHUB_ENV ;;  # chiffres
-            17) echo "prefix=abcd" >> $GITHUB_ENV ;;
-            18) echo "prefix=efgh" >> $GITHUB_ENV ;;
-            19) echo "prefix=ijkl" >> $GITHUB_ENV ;;
-            20) echo "prefix=mnop" >> $GITHUB_ENV ;;
-            21) echo "prefix=qrst" >> $GITHUB_ENV ;;
-            22) echo "prefix=uvwx" >> $GITHUB_ENV ;;
+            9) echo "prefix=0123456789" >> $GITHUB_ENV ;;  # chiffres
+            11) echo "prefix=abcd" >> $GITHUB_ENV ;;
+            13) echo "prefix=efgh" >> $GITHUB_ENV ;;
+            15) echo "prefix=ijkl" >> $GITHUB_ENV ;;
+            17) echo "prefix=mnop" >> $GITHUB_ENV ;;
+            19) echo "prefix=qrst" >> $GITHUB_ENV ;;
+            21) echo "prefix=uvwx" >> $GITHUB_ENV ;;
             23) echo "prefix=yz" >> $GITHUB_ENV ;;
             *) echo "prefix=x" >> $GITHUB_ENV ;;  # fallback
           esac
