@@ -20,8 +20,18 @@ jobs:
         with:
           python-version: 3.x
 
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
       - name: Install dependencies
         run: pip install dnspython httpx
+
+      - name: Validate prefix
+        run: |
+          if [[ ! "${{ github.event.inputs.prefix }}" =~ ^[a-z0-9]+$ ]]; then
+            echo "Préfixe invalide : seuls les caractères a-z et 0-9 sont autorisés."
+            exit 1
+          fi
 
       - name: Run DNS checker
         run: python dns_checker.py ${{ github.event.inputs.prefix }}
@@ -32,4 +42,4 @@ jobs:
           git config user.email github-actions@github.com
           git add dead.txt
           git commit -m "🧑‍💻 Manual update: ${{ github.event.inputs.prefix }}" || echo "No changes"
-          git push
+          git push || echo "Git push failed"
