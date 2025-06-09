@@ -6,6 +6,44 @@ from datetime import datetime, timedelta
 import re
 import ipaddress
 
+
+# Blocklistes incluses
+blocklist_urls = [
+    "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
+    "https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
+    "https://small.oisd.nl/",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_52.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
+    "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
+    "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"   
+]
+import urllib.request
+import concurrent.futures
+from datetime import datetime
+import re
+import ipaddress
+
 # HaGeZi's Normal DNS Blocklist
 # HaGeZi's Pop-Up Ads DNS Blocklist
 # HaGeZi's Amazon Tracker DNS Blocklist
@@ -34,7 +72,7 @@ import ipaddress
 # The Big List of Hacked Malware Web Sites
 # Stalkerware Indicators List
 
-# Blocklistes Incluses
+# Blocklistes incluses
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -66,14 +104,12 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"   
 ]
 
-# Vérification stricte des domaines
 def is_valid_domain(domain):
     return re.match(
         r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
         domain
     )
 
-# Vérification IP publique uniquement
 def is_valid_ip(ip):
     try:
         ip_obj = ipaddress.ip_address(ip)
@@ -87,7 +123,6 @@ def is_valid_ip(ip):
     except ValueError:
         return False
 
-# Téléchargement et extraction
 def download_and_extract(url):
     try:
         with urllib.request.urlopen(url, timeout=30) as response:
@@ -99,7 +134,6 @@ def download_and_extract(url):
                 if not line or line.startswith("!") or line.startswith("#"):
                     continue
 
-                # Format 0.0.0.0 <domaine ou IP>
                 if line.startswith("0.0.0.0") or line.startswith("127.0.0.1"):
                     parts = re.split(r"\s+", line)
                     if len(parts) >= 2:
@@ -109,7 +143,6 @@ def download_and_extract(url):
                         if is_valid_domain(target) or is_valid_ip(target):
                             rules.add(target)
 
-                # Format ||<entrée>^
                 elif line.startswith("||") and line.endswith("^"):
                     target = line[2:-1]
                     if "*" in target:
@@ -117,7 +150,6 @@ def download_and_extract(url):
                     if is_valid_domain(target) or is_valid_ip(target):
                         rules.add(target)
 
-                # Format simple : domaine ou IP nue
                 elif re.match(r"^[a-zA-Z0-9.-]+$", line):
                     if "*" in line:
                         continue
@@ -154,22 +186,31 @@ class DomainTrieNode:
 def domain_to_parts(domain):
     return domain.strip().split(".")[::-1]
 
+# 🔽 Lecture de dead.txt pour exclure domaines et IPs morts
+try:
+    with open("dead.txt", "r", encoding="utf-8") as df:
+        dead_entries = set(
+            line.strip() for line in df
+            if line.strip() and not line.startswith("#")
+        )
+except FileNotFoundError:
+    dead_entries = set()
+
+# 🔽 Application du filtrage et du tri
 trie_root = DomainTrieNode()
 final_entries = set()
 
 for entry in sorted(all_entries, key=lambda e: e.count(".")):
+    if entry in dead_entries:
+        continue
     if is_valid_domain(entry):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
     elif is_valid_ip(entry):
         final_entries.add(entry)
 
-from datetime import datetime
-
-# Timestamp UTC (GMT 0)
-timestamp = datetime.utcnow().strftime("%d-%m-%Y %H:%M")
-
 # Écriture du fichier sortie
+timestamp = datetime.utcnow().strftime("%d-%m-%Y %H:%M")
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {len(final_entries):06} entrées finales\n\n")
