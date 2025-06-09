@@ -9,10 +9,10 @@ from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
-DNS_TIMEOUT = 5
-HTTP_TIMEOUT = 6
-MAX_CONCURRENT_DNS = 30
-MAX_CONCURRENT_HTTP = 30
+DNS_TIMEOUT = 8
+HTTP_TIMEOUT = 10
+MAX_CONCURRENT_DNS = 15
+MAX_CONCURRENT_HTTP = 10
 RETRY_COUNT = 2
 
 # Extraction d’un domaine depuis le format ||domaine^
