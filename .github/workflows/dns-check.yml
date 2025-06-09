@@ -8,13 +8,13 @@ on:
         required: true
         default: 'x'
   schedule:
-    - cron: '0 16 * * *'   # chiffres (0-9)
-    - cron: '0 17 * * *'   # a b c d
-    - cron: '0 18 * * *'   # e f g h
-    - cron: '0 19 * * *'   # i j k l
-    - cron: '0 20 * * *'   # m n o p
-    - cron: '0 21 * * *'   # q r s t
-    - cron: '0 22 * * *'   # u v w x
+    - cron: '0 9 * * *'   # chiffres (0-9)
+    - cron: '0 11 * * *'   # a b c d
+    - cron: '0 13 * * *'   # e f g h
+    - cron: '0 15 * * *'   # i j k l
+    - cron: '0 17 * * *'   # m n o p
+    - cron: '0 19 * * *'   # q r s t
+    - cron: '0 21 * * *'   # u v w x
     - cron: '0 23 * * *'   # y z
 
 jobs:
