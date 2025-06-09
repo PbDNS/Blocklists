@@ -8,7 +8,7 @@ import ipaddress
 from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
-DEAD_FILE_TEMPLATE = "dead_{prefixes}.txt"
+DEAD_FILE = "dead.txt"
 DNS_TIMEOUT = 8
 HTTP_TIMEOUT = 10
 MAX_CONCURRENT_DNS = 15
@@ -38,26 +38,24 @@ def read_domains(prefixes):
                 domains.add(domain.lower())
     return sorted(domains)
 
-# Chargement du fichier dead_<prefixes>.txt existant
-def load_dead(prefixes):
-    dead_file = DEAD_FILE_TEMPLATE.format(prefixes=prefixes)
-    if not os.path.exists(dead_file):
+# Chargement du fichier dead.txt existant
+def load_dead():
+    if not os.path.exists(DEAD_FILE):
         return []
-    with open(dead_file, 'r', encoding='utf-8') as f:
+    with open(DEAD_FILE, 'r', encoding='utf-8') as f:
         return [line.strip() for line in f if line.strip()]
 
-# Sauvegarde du fichier dead_<prefixes>.txt
-def save_dead(prefixes, lines):
-    dead_file = DEAD_FILE_TEMPLATE.format(prefixes=prefixes)
-    with open(dead_file, 'w', encoding='utf-8') as f:
+# Sauvegarde du fichier dead.txt
+def save_dead(lines):
+    with open(DEAD_FILE, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sorted(set(lines))) + '\n')
 
-# Mise à jour de dead_<prefixes>.txt en conservant les anciens préfixes
+# Mise à jour de dead.txt en conservant les anciens préfixes
 def update_dead_file(prefixes, new_dead):
-    existing_dead = load_dead(prefixes)
+    existing_dead = load_dead()
     filtered_dead = [d for d in existing_dead if d[0].lower() not in prefixes]
     updated = filtered_dead + new_dead
-    save_dead(prefixes, updated)
+    save_dead(updated)
 
 # Configuration du résolveur DNS
 resolver = dns.resolver.Resolver()
