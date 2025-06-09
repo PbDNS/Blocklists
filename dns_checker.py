@@ -11,9 +11,9 @@ BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
 DNS_TIMEOUT = 5
 HTTP_TIMEOUT = 6
-MAX_CONCURRENT_DNS = 50
-MAX_CONCURRENT_HTTP = 50
-RETRY_COUNT = 2  # Nombre de tentatives en cas d’échec
+MAX_CONCURRENT_DNS = 30
+MAX_CONCURRENT_HTTP = 30
+RETRY_COUNT = 2
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
