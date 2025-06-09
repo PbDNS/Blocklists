@@ -2,14 +2,14 @@ name: DNS Dead Check - Scheduled
 
 on:
   schedule:
-    - cron: '0 16 * * *'   # chiffres (0-9)
-    - cron: '0 17 * * *'   # a b c d
-    - cron: '0 18 * * *'   # e f g h
-    - cron: '0 19 * * *'   # i j k l
-    - cron: '0 20 * * *'   # m n o p
-    - cron: '0 21 * * *'   # q r s t
-    - cron: '0 22 * * *'   # u v w x
-    - cron: '0 23 * * *'   # y z
+    - cron: '0 16 * * *'
+    - cron: '0 17 * * *'
+    - cron: '0 18 * * *'
+    - cron: '0 19 * * *'
+    - cron: '0 20 * * *'
+    - cron: '0 21 * * *'
+    - cron: '0 22 * * *'
+    - cron: '0 23 * * *'
 
 jobs:
   dns-check-scheduled:
@@ -30,12 +30,12 @@ jobs:
         run: pip install dnspython httpx
 
       - name: Log UTC hour
-        run: echo "Current UTC hour: $(date -u +"%H")"
+        run: echo "Current UTC hour: $(date -u +'%H')"
 
       - name: Determine prefix
         id: prefix
         run: |
-          HOUR=$(date -u +"%H")
+          HOUR=$(date -u +'%H')
           case "$HOUR" in
             16) echo "value=0123456789" >> $GITHUB_OUTPUT ;;
             17) echo "value=abcd" >> $GITHUB_OUTPUT ;;
