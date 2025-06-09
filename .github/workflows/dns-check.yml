@@ -1,6 +1,12 @@
-name: DNS Dead Check - Scheduled
+name: DNS Dead Check
 
 on:
+  workflow_dispatch:
+    inputs:
+      prefix:
+        description: 'Lettre(s) ou chiffres à traiter'
+        required: true
+        default: 'x'
   schedule:
     - cron: '0 16 * * *'   # chiffres (0-9)
     - cron: '0 17 * * *'   # a b c d
@@ -12,7 +18,7 @@ on:
     - cron: '0 23 * * *'   # y z
 
 jobs:
-  dns-check-scheduled:
+  dns-check-manual:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,33 +29,46 @@ jobs:
         with:
           python-version: 3.x
 
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
       - name: Install dependencies
         run: pip install dnspython httpx
 
-      - name: Determine prefix
-        id: prefix
+      - name: Determine prefix for scheduled runs
+        if: github.event_name == 'schedule'
         run: |
-          HOUR=$(date -u +"%H")
-          case "$HOUR" in
-            16) echo "value=0123456789" >> $GITHUB_OUTPUT ;;
-            17) echo "value=abcd" >> $GITHUB_OUTPUT ;;
-            18) echo "value=efgh" >> $GITHUB_OUTPUT ;;
-            19) echo "value=ijkl" >> $GITHUB_OUTPUT ;;
-            20) echo "value=mnop" >> $GITHUB_OUTPUT ;;
-            21) echo "value=qrst" >> $GITHUB_OUTPUT ;;
-            22) echo "value=uvwx" >> $GITHUB_OUTPUT ;;
-            23) echo "value=yz" >> $GITHUB_OUTPUT ;;
-            *) echo "Unknown hour: $HOUR" && exit 1 ;;
-        esac
+          # Mapping des heures aux préfixes
+          case "$(date +'%H')" in
+            16) echo "prefix=0123456789" >> $GITHUB_ENV ;;  # chiffres
+            17) echo "prefix=abcd" >> $GITHUB_ENV ;;
+            18) echo "prefix=efgh" >> $GITHUB_ENV ;;
+            19) echo "prefix=ijkl" >> $GITHUB_ENV ;;
+            20) echo "prefix=mnop" >> $GITHUB_ENV ;;
+            21) echo "prefix=qrst" >> $GITHUB_ENV ;;
+            22) echo "prefix=uvwx" >> $GITHUB_ENV ;;
+            23) echo "prefix=yz" >> $GITHUB_ENV ;;
+            *) echo "prefix=x" >> $GITHUB_ENV ;;  # fallback
+          esac
 
+      - name: Validate prefix
+        run: |
+          PREFIX="${{ github.event.inputs.prefix || env.prefix }}"
+          if [[ ! "$PREFIX" =~ ^[a-z0-9]+$ ]]; then
+            echo "Préfixe invalide : seuls les caractères a-z et 0-9 sont autorisés."
+            exit 1
+          fi
+          echo "Using prefix: $PREFIX"
+        env:
+          prefix: ${{ env.prefix }}
 
       - name: Run DNS checker
-        run: python dns_checker.py ${{ steps.prefix.outputs.value }}
+        run: python dns_checker.py "${{ github.event.inputs.prefix || env.prefix }}"
 
       - name: Commit dead.txt
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add dead.txt
-          git commit -m "🕒 Cron update: ${{ steps.prefix.outputs.value }}" || echo "No changes"
-          git push
+          git commit -m "🧑‍💻 Update: ${{ github.event.inputs.prefix || env.prefix }}" || echo "No changes"
+          git push || echo "Git push failed"
