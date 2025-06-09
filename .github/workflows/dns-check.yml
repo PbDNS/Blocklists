@@ -15,12 +15,9 @@ on:
     - cron: '0 12 * * *'   # k
     - cron: '0 13 * * *'   # l
     - cron: '0 14 * * *'   # m
-    - cron: '0 15 * * *'   # n
-    - cron: '0 16 * * *'   # o
-    - cron: '0 17 * * *'   # p q r s
-    - cron: '0 20 * * *'   # t
-    - cron: '0 21 * * *'   # u v
-    - cron: '0 22 * * *'   # w x y z
+    - cron: '0 15 * * *'   # n o p q
+    - cron: '0 16 * * *'   # r s t u
+    - cron: '0 17 * * *'   # v w x y z
 
 jobs:
   dns-check-scheduled:
@@ -54,12 +51,9 @@ jobs:
             '0 12 * * *') echo "value=k" >> $GITHUB_OUTPUT ;;
             '0 13 * * *') echo "value=l" >> $GITHUB_OUTPUT ;;
             '0 14 * * *') echo "value=m" >> $GITHUB_OUTPUT ;;
-            '0 15 * * *') echo "value=n" >> $GITHUB_OUTPUT ;;
-            '0 16 * * *') echo "value=o" >> $GITHUB_OUTPUT ;;
-            '0 17 * * *') echo "value=pqrs" >> $GITHUB_OUTPUT ;;
-            '0 20 * * *') echo "value=t" >> $GITHUB_OUTPUT ;;
-            '0 21 * * *') echo "value=uv" >> $GITHUB_OUTPUT ;;
-            '0 22 * * *') echo "value=wxyz" >> $GITHUB_OUTPUT ;;
+            '0 15 * * *') echo "value=nopq" >> $GITHUB_OUTPUT ;;
+            '0 16 * * *') echo "value=rstu" >> $GITHUB_OUTPUT ;;
+            '0 17 * * *') echo "value=vwxyz" >> $GITHUB_OUTPUT ;;
             *) echo "Unknown schedule" && exit 1 ;;
           esac
 
