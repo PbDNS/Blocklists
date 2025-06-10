@@ -17,7 +17,7 @@ RETRY_COUNT = 2
 
 # Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
-    match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
+    match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
     if not match:
         return None
     domain = match.group(1)
@@ -57,6 +57,19 @@ def update_dead_file(prefixes, new_dead):
     updated = filtered_dead + new_dead
     save_dead(updated)
 
+# Effacer les domaines correspondant au préfixe dans blocklist.txt
+def clear_blocklist_for_prefix(prefixes):
+    # Lire le fichier existant
+    with open(BLOCKLIST_FILE, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    # Filtrer les lignes qui ne correspondent pas au préfixe
+    new_lines = [line for line in lines if not line.strip().lower().startswith(tuple(prefixes))]
+
+    # Réécrire le fichier avec les lignes filtrées
+    with open(BLOCKLIST_FILE, "w", encoding="utf-8") as f:
+        f.writelines(new_lines)
+
 # Configuration du résolveur DNS
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
@@ -79,12 +92,22 @@ def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
 
     dead = []
+    domain_set = set(domains)  # Créer un set pour faciliter la vérification de la présence de domaines principaux
+
     with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
         results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
 
     for domain, alive in results:
         if not alive:
             dead.append(domain)
+
+        # Vérifie si c'est un sous-domaine, et seulement si le domaine principal n'est pas déjà testé
+        if "." in domain:
+            base_domain = domain.split('.', 1)[1]  # Récupère la partie après le premier point (par exemple 'example.com' à partir de 'ads.example.com')
+            if base_domain not in domain_set:  # Si le domaine principal n'est pas dans la liste
+                # Teste uniquement le sous-domaine
+                if not dns_check(domain, record_type):
+                    dead.append(domain)
 
     print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
@@ -144,6 +167,7 @@ async def main():
 
     prefixes = sys.argv[1].lower()
     print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
+    clear_blocklist_for_prefix(prefixes)  # Efface les domaines correspondant au préfixe avant de mettre à jour blocklist.txt
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
