@@ -173,4 +173,68 @@ def filter_dns_dead(domains, record_type):
 # Vérification HTTP/HTTPS HEAD/GET
 async def check_http(domain):
     VALID_STATUS_CODES = set(range(200, 400))
-    urls = [f"]()
+    urls = [f"http://{domain}", f"https://{domain}"]
+
+    for attempt in range(RETRY_COUNT):
+        async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
+            for url in urls:
+                try:
+                    resp = await client.head(url)
+                    if resp.status_code in VALID_STATUS_CODES:
+                        return True
+                except httpx.RequestError:
+                    pass
+                except Exception as e:
+                    if DEBUG:
+                        print(f"[HEAD] Erreur pour {url} : {e}")
+
+                try:
+                    resp = await client.get(url)
+                    if resp.status_code in VALID_STATUS_CODES:
+                        return True
+                except httpx.RequestError:
+                    pass
+                except Exception as e:
+                    if DEBUG:
+                        print(f"[GET] Erreur pour {url} : {e}")
+
+        if attempt < RETRY_COUNT - 1:
+            await asyncio.sleep(0.5)
+
+    return False
+
+# Vérifie quels domaines ne répondent pas en HTTP/HTTPS
+async def filter_http_dead(domains):
+    print("🌐 Vérification HTTP des domaines...")
+    semaphore = asyncio.Semaphore(MAX_CONCURRENT_HTTP)
+
+    async def task(domain):
+        async with semaphore:
+            alive = await check_http(domain)
+            return domain if not alive else None
+
+    tasks = [task(domain) for domain in domains]
+    filtered = await asyncio.gather(*tasks)
+    dead_count = len([d for d in filtered if d])
+    print(f"→ {dead_count} domaines morts détectés via HTTP.")
+    return [d for d in filtered if d]
+
+# Point d’entrée principal
+async def main():
+    global dns_server_list
+
+    if len(sys.argv) != 2:
+        print("Usage: python dns_checker.py <prefixes>")
+        sys.exit(1)
+
+    prefixes = sys.argv[1].lower()
+    print(f"📥 Nettoyage dans {BLOCKLIST_FILE} des domaines avec préfixes : {prefixes}")
+    clean_blocklist(prefixes)
+
+    print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
+    domains = read_domains(prefixes)
+    print(f"🔎 {len(domains)} domaines à tester.")
+
+    # Rank DNS servers avant la vérification
+    print("⏳
+
