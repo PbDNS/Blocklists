@@ -50,30 +50,27 @@ jobs:
             *) echo "prefix=x" >> $GITHUB_ENV ;;
           esac
 
-      - name: Determine effective prefix
-        id: determine-prefix
+      - name: Set prefix for manual or scheduled runs
         run: |
-          echo "prefix=${{ github.event.inputs.prefix || env.prefix }}" >> $GITHUB_ENV
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "prefix=${{ github.event.inputs.prefix }}" >> $GITHUB_ENV
+          fi
 
       - name: Validate prefix
         run: |
-          if [[ ! "$prefix" =~ ^[a-z0-9]+$ ]]; then
+          if [[ ! "${{ env.prefix }}" =~ ^[a-z0-9]+$ ]]; then
             echo "❌ Préfixe invalide : seuls les caractères a-z et 0-9 sont autorisés."
             exit 1
           fi
-          echo "✅ Préfixe utilisé : $prefix"
-        env:
-          prefix: ${{ env.prefix }}
+          echo "✅ Préfixe utilisé : ${{ env.prefix }}"
 
       - name: Run DNS checker
-        run: python dns_checker.py "$prefix"
-        env:
-          prefix: ${{ env.prefix }}
+        run: python dns_checker.py "${{ env.prefix }}"
 
       - name: Commit dead.txt if changed
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add dead.txt
-          git diff --cached --quiet && echo "🟢 Aucun changement à committer." || git commit -m "🔄 Update dead.txt for prefix '$prefix'"
-          git push |
+          git diff --cached --quiet && echo "🟢 Aucun changement à committer." || git commit -m "🔄 Update dead.txt for prefix '${{ env.prefix }}'"
+          git push || echo "⚠️ Git push échoué (probablement aucun changement)"
