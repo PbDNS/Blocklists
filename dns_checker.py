@@ -34,7 +34,8 @@ def read_domains(prefixes):
             domain = extract_domain(line)
             if domain and domain[0].lower() in prefixes:
                 domains.add(domain)
-    print(f"Domains found for prefixes {prefixes}: {sorted(domains)}")
+    # print(f"Domains found for prefixes {prefixes}: {sorted(domains)}")  # <-- commentaire ou suppression
+    print(f"Domains found for prefixes {prefixes}: {len(domains)} domains")
     return sorted(domains)
 
 def clean_blocklist(prefixes):
