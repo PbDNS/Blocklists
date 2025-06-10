@@ -16,12 +16,15 @@ jobs:
       - name: Télécharger le filtre AdGuard Base
         run: curl -sSL "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt" -o blocklist.txt
 
+      - name: Afficher début du fichier téléchargé
+        run: head -20 blocklist.txt
+
       - name: Nettoyer les lignes (!, ||..., vides)
         run: |
-          awk '!/^!/ && !/^\|\|/ && NF' blocklist.txt > AdguardBaseLight.txt
+          grep -Ev '^!|^\|\|' blocklist.txt | grep -v '^$' > AdguardBaseLight.txt
 
       - name: Afficher le contenu filtré
-        run: head -n 20 AdguardBaseLight.txt
+        run: head -20 AdguardBaseLight.txt
 
       - name: Commit et push si changements
         run: |
@@ -34,4 +37,3 @@ jobs:
           else
             echo "Le fichier filtré est vide — rien à committer."
           fi
-
