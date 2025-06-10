@@ -11,13 +11,14 @@ BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
 DNS_TIMEOUT = 8
 HTTP_TIMEOUT = 10
-MAX_CONCURRENT_DNS = 15
-MAX_CONCURRENT_HTTP = 10
+MAX_CONCURRENT_DNS = 5  # réduit pour GitHub Actions
+MAX_CONCURRENT_HTTP = 3  # réduit pour GitHub Actions
 RETRY_COUNT = 2
+BATCH_SIZE = 50  # taille des batches
 
-# Extraction d’un domaine depuis le format ||domaine^
+# Extraction d’un domaine (avec sous-domaines) depuis le format ||domaine^
 def extract_domain(line):
-    match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
+    match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
     if not match:
         return None
     domain = match.group(1)
@@ -25,7 +26,7 @@ def extract_domain(line):
         ipaddress.ip_address(domain)
         return None
     except ValueError:
-        return domain
+        return domain.lower()
 
 # Lecture des domaines selon préfixes donnés (ex: a, b, c...)
 def read_domains(prefixes):
@@ -35,7 +36,7 @@ def read_domains(prefixes):
         for line in f:
             domain = extract_domain(line)
             if domain and domain[0].lower() in prefixes:
-                domains.add(domain.lower())
+                domains.add(domain)
     return sorted(domains)
 
 # Chargement du fichier dead.txt existant
@@ -50,29 +51,48 @@ def save_dead(lines):
     with open(DEAD_FILE, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sorted(set(lines))) + '\n')
 
-# Mise à jour de dead.txt en conservant les anciens préfixes
+# Mise à jour de dead.txt en conservant les anciens préfixes exclus
 def update_dead_file(prefixes, new_dead):
     existing_dead = load_dead()
     filtered_dead = [d for d in existing_dead if d[0].lower() not in prefixes]
     updated = filtered_dead + new_dead
     save_dead(updated)
 
-# Effacer les domaines correspondant au préfixe dans blocklist.txt
-def clear_blocklist_for_prefix(prefixes):
-    # Lire le fichier existant
+# Suppression des domaines avec les préfixes donnés dans blocklist.txt avant traitement
+def clean_blocklist(prefixes):
+    if not os.path.exists(BLOCKLIST_FILE):
+        return
     with open(BLOCKLIST_FILE, "r", encoding="utf-8") as f:
         lines = f.readlines()
-
-    # Filtrer les lignes qui ne correspondent pas au préfixe
-    new_lines = [line for line in lines if not line.strip().lower().startswith(tuple(prefixes))]
-
-    # Réécrire le fichier avec les lignes filtrées
+    filtered = []
+    for line in lines:
+        domain = extract_domain(line)
+        if domain and domain[0].lower() in prefixes:
+            # on exclut cette ligne (supprime)
+            continue
+        filtered.append(line.strip())
     with open(BLOCKLIST_FILE, "w", encoding="utf-8") as f:
-        f.writelines(new_lines)
+        f.write('\n'.join(filtered) + ('\n' if filtered else ''))
+
+# Ajoute les domaines morts dans blocklist.txt (au format ||domaine^)
+def append_to_blocklist(domains):
+    if not domains:
+        return
+    existing = set()
+    if os.path.exists(BLOCKLIST_FILE):
+        with open(BLOCKLIST_FILE, "r", encoding="utf-8") as f:
+            existing = set(line.strip() for line in f if line.strip())
+    with open(BLOCKLIST_FILE, "a", encoding="utf-8") as f:
+        for d in domains:
+            entry = f"||{d}^"
+            if entry not in existing:
+                f.write(entry + "\n")
 
 # Configuration du résolveur DNS
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
+# Optionnel : Utiliser DNS public pour plus de fiabilité
+# resolver.nameservers = ['1.1.1.1', '8.8.8.8']
 
 # Vérification DNS simple
 def dns_check(domain, record_type):
@@ -89,25 +109,17 @@ def dns_check(domain, record_type):
 
 # Vérifie quels domaines ne répondent pas pour un type d'enregistrement DNS
 def filter_dns_dead(domains, record_type):
+    if not domains:
+        return []
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
 
     dead = []
-    domain_set = set(domains)  # Créer un set pour faciliter la vérification de la présence de domaines principaux
-
     with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
         results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
 
     for domain, alive in results:
         if not alive:
             dead.append(domain)
-
-        # Vérifie si c'est un sous-domaine, et seulement si le domaine principal n'est pas déjà testé
-        if "." in domain:
-            base_domain = domain.split('.', 1)[1]  # Récupère la partie après le premier point (par exemple 'example.com' à partir de 'ads.example.com')
-            if base_domain not in domain_set:  # Si le domaine principal n'est pas dans la liste
-                # Teste uniquement le sous-domaine
-                if not dns_check(domain, record_type):
-                    dead.append(domain)
 
     print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
@@ -145,6 +157,8 @@ async def check_http(domain):
 
 # Vérifie quels domaines ne répondent pas en HTTP/HTTPS
 async def filter_http_dead(domains):
+    if not domains:
+        return []
     print("🌐 Vérification HTTP des domaines...")
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_HTTP)
 
@@ -159,6 +173,11 @@ async def filter_http_dead(domains):
     print(f"→ {dead_count} domaines morts détectés via HTTP.")
     return [d for d in filtered if d]
 
+# Découpage des domaines en batches
+def chunk_domains(domains, chunk_size=BATCH_SIZE):
+    for i in range(0, len(domains), chunk_size):
+        yield domains[i:i+chunk_size]
+
 # Point d’entrée principal
 async def main():
     if len(sys.argv) != 2:
@@ -166,24 +185,37 @@ async def main():
         sys.exit(1)
 
     prefixes = sys.argv[1].lower()
+    print(f"📥 Nettoyage dans blocklist.txt des domaines avec préfixes : {prefixes}")
+    clean_blocklist(prefixes)
+
     print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
-    clear_blocklist_for_prefix(prefixes)  # Efface les domaines correspondant au préfixe avant de mettre à jour blocklist.txt
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
-    dead = filter_dns_dead(domains, "A")
-    update_dead_file(prefixes, dead)
+    all_dead = []
 
-    dead = filter_dns_dead(dead, "AAAA")
-    update_dead_file(prefixes, dead)
+    # Traitement par batchs pour limiter la charge réseau
+    for batch_num, batch in enumerate(chunk_domains(domains), start=1):
+        print(f"\n🔄 Batch {batch_num} - {len(batch)} domaines")
 
-    dead = filter_dns_dead(dead, "MX")
-    update_dead_file(prefixes, dead)
+        dead = filter_dns_dead(batch, "A")
+        update_dead_file(prefixes, dead)
 
-    dead = await filter_http_dead(dead)
-    update_dead_file(prefixes, dead)
+        dead = filter_dns_dead(dead, "AAAA")
+        update_dead_file(prefixes, dead)
 
-    print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
+        dead = filter_dns_dead(dead, "MX")
+        update_dead_file(prefixes, dead)
+
+        dead = await filter_http_dead(dead)
+        update_dead_file(prefixes, dead)
+
+        all_dead.extend(dead)
+
+    # Mise à jour finale du blocklist.txt avec tous les domaines morts
+    append_to_blocklist(all_dead)
+
+    print(f"\n✅ Final : {len(all_dead)} domaines morts détectés pour les préfixes '{prefixes}'.")
 
 if __name__ == "__main__":
     asyncio.run(main())
