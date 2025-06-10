@@ -6,6 +6,7 @@ import httpx
 import asyncio
 import ipaddress
 from concurrent.futures import ThreadPoolExecutor
+import time
 
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
@@ -14,6 +15,23 @@ HTTP_TIMEOUT = 10
 MAX_CONCURRENT_DNS = 15
 MAX_CONCURRENT_HTTP = 10
 RETRY_COUNT = 2
+
+# DNS publics IPv4 et IPv6
+PUBLIC_DNS_IPV4 = [
+    "1.1.1.1",       # Cloudflare
+    "8.8.8.8",       # Google
+    "9.9.9.9",       # Quad9
+    "208.67.222.222",  # OpenDNS
+    "94.140.14.14"   # AdGuard
+]
+
+PUBLIC_DNS_IPV6 = [
+    "2606:4700:4700::1111",  # Cloudflare
+    "2001:4860:4860::8888",  # Google
+    "2620:fe::fe",           # Quad9
+    "2620:119:35::35",       # OpenDNS
+    "2a10:50c0::ad1:ff"      # AdGuard
+]
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
@@ -36,7 +54,6 @@ def read_domains(prefixes):
                 domains.add(domain)
     print(f"Domains found for prefixes {prefixes}: {len(domains)} domains")
     return sorted(domains)
-
 
 def clean_blocklist(prefixes):
     if not os.path.exists(BLOCKLIST_FILE):
@@ -73,6 +90,57 @@ def save_dead(lines):
     with open(DEAD_FILE, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sorted(set(lines))) + '\n')
 
+def benchmark_dns_servers(servers, test_domain="google.com", timeout=DNS_TIMEOUT):
+    print("⏳ Benchmark DNS pour choisir les meilleurs serveurs...")
+    results = []
+    resolver_tmp = dns.resolver.Resolver()
+    resolver_tmp.lifetime = timeout
+
+    for server in servers:
+        resolver_tmp.nameservers = [server]
+        start = time.time()
+        try:
+            resolver_tmp.resolve(test_domain, 'A')
+            latency = time.time() - start
+            results.append((server, latency))
+            print(f"  {server} -> {latency:.3f}s")
+        except Exception:
+            results.append((server, float('inf')))
+            print(f"  {server} -> Timeout/Erreur")
+
+    results.sort(key=lambda x: x[1])
+    best_servers = [srv for srv, lat in results if lat != float('inf')]
+    return best_servers
+
+def configure_resolver_with_best_dns():
+    best_ipv4 = benchmark_dns_servers(PUBLIC_DNS_IPV4)
+    best_ipv6 = benchmark_dns_servers(PUBLIC_DNS_IPV6)
+
+    # Prendre 2 meilleurs IPv4 et 2 meilleurs IPv6
+    selected_ipv4 = best_ipv4[:2]
+    selected_ipv6 = best_ipv6[:2]
+
+    final_servers = selected_ipv4 + selected_ipv6
+
+    # Si pas assez d'IPv4 ou IPv6, compléter avec l'autre type
+    if len(selected_ipv4) < 2:
+        needed = 2 - len(selected_ipv4)
+        final_servers += best_ipv6[:needed]
+    if len(selected_ipv6) < 2:
+        needed = 2 - len(selected_ipv6)
+        final_servers += best_ipv4[:needed]
+
+    # Eviter doublons et limiter à max 4 serveurs
+    final_servers = list(dict.fromkeys(final_servers))[:4]
+
+    if not final_servers:
+        print("⚠️ Aucun serveur DNS performant trouvé, utilisation des serveurs par défaut.")
+        final_servers = PUBLIC_DNS_IPV4[:2] + PUBLIC_DNS_IPV6[:2]
+
+    resolver.nameservers = final_servers
+    print(f"✅ Serveurs DNS sélectionnés : {final_servers}")
+
+# Initialisation du resolver global
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
 
@@ -144,6 +212,8 @@ async def main():
         sys.exit(1)
 
     prefixes = sys.argv[1].lower()
+
+    configure_resolver_with_best_dns()
 
     print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
     domains = read_domains(prefixes)
