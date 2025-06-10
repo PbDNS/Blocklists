@@ -1,4 +1,4 @@
-name: Filter Blocklist
+name: AdGuardBaseLight
 
 on:
   workflow_dispatch:
