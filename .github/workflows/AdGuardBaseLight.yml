@@ -14,7 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Télécharger le filtre AdGuard Base
-        run: curl -sSL "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt" -o blocklist.txt
+        run: |
+          curl -sSL "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt" -o blocklist.txt
 
       - name: Installer Python
         uses: actions/setup-python@v4
@@ -23,14 +24,14 @@ jobs:
 
       - name: Ajouter script Python de filtrage
         run: |
-          cat <<EOF > filter_blocklist.py
+          cat << 'EOF' > filter_blocklist.py
 #!/usr/bin/env python3
 
 def main():
     input_file = "blocklist.txt"
     output_file = "AdguardBaseLight.txt"
 
-    with open(input_file, "r", encoding="utf-8") as fin, \\
+    with open(input_file, "r", encoding="utf-8") as fin, \
          open(output_file, "w", encoding="utf-8") as fout:
         for line in fin:
             content = line.lstrip()
@@ -62,4 +63,3 @@ EOF
             git push
           else
             echo "Le fichier filtré est vide — rien à committer."
-          fi
