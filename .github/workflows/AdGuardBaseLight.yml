@@ -3,7 +3,7 @@ name: AdGuardBaseLight
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 7 * * *' # Tous les jours à 7h UTC
+    - cron: '0 7 * * *'
 
 jobs:
   build:
@@ -16,9 +16,9 @@ jobs:
       - name: Télécharger le filtre AdGuard Base
         run: curl -sSL "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt" -o blocklist.txt
 
-      - name: Nettoyer les lignes inutiles (!, ||...^, vides)
+      - name: Nettoyer les lignes (!, ||...^, vides)
         run: |
-          grep -vE '^(!|\|\|.*\^$)' blocklist.txt | grep -v '^$' > AdguardBaseLight.txt || true
+          grep -Ev '^!|^\|\|.*\^$|^$' blocklist.txt > AdguardBaseLight.txt
 
       - name: Commit et push si changements
         run: |
@@ -31,4 +31,3 @@ jobs:
           else
             echo "Le fichier filtré est vide — rien à committer."
           fi
-
