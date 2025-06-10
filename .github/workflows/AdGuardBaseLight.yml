@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 7 * * *' # Tous les jours à minuit
+  workflow_dispatch:
 
 jobs:
   build:
