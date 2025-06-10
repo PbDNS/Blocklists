@@ -3,7 +3,7 @@ name: AdGuardBaseLight
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 7 * * *' # Tous les jours à minuit
+    - cron: '0 7 * * *' # Tous les jours à 7h UTC
 
 jobs:
   build:
@@ -13,17 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Download blocklist.txt
-        run: curl -sSL "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt" -o blocklist.txt
+      - name: Download AdGuard Base filter.txt
+        run: curl -sSL "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt" -o blocklist.txt
 
       - name: Filter lines
         run: |
-          grep -vE '^(!|(\|\|.*\^)$)' blocklist.txt | grep -v '^$' > AdguardBaseLight.txt
+          grep -vE '^(!|(\|\|.*\^)$)' blocklist.txt | grep -v '^$' > AdguardBaseLight.txt || true
 
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add AdguardBaseLight.txt
-          git commit -m "Update AdguardBaseLight.txt from blocklist.txt" || echo "No changes to commit"
+          git commit -m "Update AdguardBaseLight.txt from AdGuard Base filter" || echo "No changes to commit"
           git push
