@@ -9,16 +9,16 @@ on:
         default: 'x'
   schedule:
     - cron: '0 9 * * *'   # chiffres (0-9)
-    - cron: '0 11 * * *'  # a b c d
-    - cron: '0 13 * * *'  # e f g h
-    - cron: '0 15 * * *'  # i j k l
-    - cron: '0 17 * * *'  # m n o p
-    - cron: '0 19 * * *'  # q r s t
-    - cron: '0 21 * * *'  # u v w x
-    - cron: '0 23 * * *'  # y z
+    - cron: '0 11 * * *'   # a b c d
+    - cron: '0 13 * * *'   # e f g h
+    - cron: '0 15 * * *'   # i j k l
+    - cron: '0 17 * * *'   # m n o p
+    - cron: '0 19 * * *'   # q r s t
+    - cron: '0 21 * * *'   # u v w x
+    - cron: '0 23 * * *'   # y z
 
 jobs:
-  dns-check:
+  dns-check-manual:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,8 +38,9 @@ jobs:
       - name: Determine prefix for scheduled runs
         if: github.event_name == 'schedule'
         run: |
+          # Mapping des heures aux préfixes
           case "$(date +'%H')" in
-            9) echo "prefix=0123456789" >> $GITHUB_ENV ;;
+            9) echo "prefix=0123456789" >> $GITHUB_ENV ;;  # chiffres
             11) echo "prefix=abcd" >> $GITHUB_ENV ;;
             13) echo "prefix=efgh" >> $GITHUB_ENV ;;
             15) echo "prefix=ijkl" >> $GITHUB_ENV ;;
@@ -47,30 +48,27 @@ jobs:
             19) echo "prefix=qrst" >> $GITHUB_ENV ;;
             21) echo "prefix=uvwx" >> $GITHUB_ENV ;;
             23) echo "prefix=yz" >> $GITHUB_ENV ;;
-            *) echo "prefix=x" >> $GITHUB_ENV ;;
+            *) echo "prefix=x" >> $GITHUB_ENV ;;  # fallback
           esac
-
-      - name: Set prefix for manual or scheduled runs
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "prefix=${{ github.event.inputs.prefix }}" >> $GITHUB_ENV
-          fi
 
       - name: Validate prefix
         run: |
-          if [[ ! "${{ env.prefix }}" =~ ^[a-z0-9]+$ ]]; then
-            echo "❌ Préfixe invalide : seuls les caractères a-z et 0-9 sont autorisés."
+          PREFIX="${{ github.event.inputs.prefix || env.prefix }}"
+          if [[ ! "$PREFIX" =~ ^[a-z0-9]+$ ]]; then
+            echo "Préfixe invalide : seuls les caractères a-z et 0-9 sont autorisés."
             exit 1
           fi
-          echo "✅ Préfixe utilisé : ${{ env.prefix }}"
+          echo "Using prefix: $PREFIX"
+        env:
+          prefix: ${{ env.prefix }}
 
       - name: Run DNS checker
-        run: python dns_checker.py "${{ env.prefix }}"
+        run: python dns_checker.py "${{ github.event.inputs.prefix || env.prefix }}"
 
-      - name: Commit dead.txt if changed
+      - name: Commit dead.txt
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add dead.txt
-          git diff --cached --quiet && echo "🟢 Aucun changement à committer." || git commit -m "🔄 Update dead.txt for prefix '${{ env.prefix }}'"
-          git push || echo "⚠️ Git push échoué (probablement aucun changement)"
+          git commit -m "Update: ${{ github.event.inputs.prefix || env.prefix }}" || echo "No changes"
+          git push || echo "Git push failed"
