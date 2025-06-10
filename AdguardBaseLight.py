@@ -7,14 +7,14 @@ def main():
     with open(input_file, "r", encoding="utf-8") as fin, \
          open(output_file, "w", encoding="utf-8") as fout:
         for line in fin:
-            stripped = line.strip()
-            if not stripped:
-                continue  # Ignore lignes vides
-            if stripped.startswith("!"):
-                continue  # Ignore commentaires
-            if stripped.startswith("||"):
-                continue  # Ignore lignes commençant par ||
-            fout.write(line)
+            content = line.lstrip()  # conserve \n en fin de ligne
+            if not content.strip():
+                continue  # ligne vide
+            if content.startswith("!"):
+                continue  # commentaire
+            if content.startswith("||"):
+                continue  # ligne à filtrer
+            fout.write(line)  # on écrit la ligne originale avec \n intact
 
 if __name__ == "__main__":
     main()
