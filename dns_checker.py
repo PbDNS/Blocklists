@@ -5,7 +5,6 @@ import dns.resolver
 import httpx
 import asyncio
 import ipaddress
-import random
 import time
 from concurrent.futures import ThreadPoolExecutor
 
@@ -32,11 +31,9 @@ PUBLIC_DNS_SERVERS = [
     "64.6.65.6",      # Verisign secondary
 ]
 
-# Resolver global
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
 
-# Variable pour rotation DNS
 dns_server_list = []
 dns_server_index = 0
 
@@ -58,22 +55,18 @@ def test_dns_latency(dns_ip, test_domain="example.com", record_type="A"):
 
 def rank_dns_servers(dns_servers):
     latencies = []
-    # Limite à 5 serveurs max pour le benchmark (pour ne pas rallonger)
-    to_test = dns_servers[:5]
+    to_test = dns_servers[:5]  # limiter le benchmark à 5 serveurs max
     for dns_ip in to_test:
         latency = test_dns_latency(dns_ip)
         if latency is not None:
             latencies.append((dns_ip, latency))
-    # Trier par latence croissante
     latencies.sort(key=lambda x: x[1])
-    # Ajouter le reste des serveurs sans test à la fin
     rest = [ip for ip in dns_servers if ip not in [ip for ip, _ in latencies]]
     ranked = [ip for ip, _ in latencies] + rest
     if DEBUG:
         print("DNS servers ranked by latency:", ranked)
     return ranked
 
-# Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
     if not match:
@@ -85,7 +78,6 @@ def extract_domain(line):
     except ValueError:
         return domain
 
-# Lecture des domaines selon préfixes donnés (ex: a, b, c...)
 def read_domains(prefixes):
     prefixes = tuple(prefixes.lower()) if isinstance(prefixes, str) else tuple()
     domains = set()
@@ -98,19 +90,16 @@ def read_domains(prefixes):
         print(f"Domains found for prefixes {prefixes}: {len(domains)} domains")
     return sorted(domains)
 
-# Chargement du fichier dead.txt existant
 def load_dead():
     if not os.path.exists(DEAD_FILE):
         return []
     with open(DEAD_FILE, 'r', encoding='utf-8') as f:
         return [line.strip() for line in f if line.strip()]
 
-# Sauvegarde du fichier dead.txt
 def save_dead(lines):
     with open(DEAD_FILE, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sorted(set(lines))) + '\n')
 
-# Nettoyage du blocklist.txt pour supprimer les domaines avec les préfixes donnés
 def clean_blocklist(prefixes):
     prefixes = tuple(prefixes.lower()) if isinstance(prefixes, str) else tuple()
     if not os.path.exists(BLOCKLIST_FILE):
@@ -122,24 +111,20 @@ def clean_blocklist(prefixes):
         f.writelines(filtered_lines)
     print(f"📥 Nettoyage dans {BLOCKLIST_FILE} des domaines avec préfixes : {''.join(prefixes)}")
 
-# Mise à jour de dead.txt en conservant les anciens préfixes
 def update_dead_file(prefixes, new_dead):
     existing_dead = load_dead()
     filtered_dead = [d for d in existing_dead if d[0].lower() not in prefixes]
     updated = filtered_dead + new_dead
     save_dead(updated)
 
-# Fonction pour récupérer un serveur DNS en rotation
 def get_next_dns_server():
     global dns_server_index
     if not dns_server_list:
-        # Fallback au serveur local si jamais la liste est vide
         return None
     server = dns_server_list[dns_server_index]
     dns_server_index = (dns_server_index + 1) % len(dns_server_list)
     return server
 
-# Vérification DNS simple avec rotation des serveurs DNS
 def dns_check(domain, record_type):
     for attempt in range(RETRY_COUNT):
         try:
@@ -153,9 +138,8 @@ def dns_check(domain, record_type):
         except Exception:
             if attempt < RETRY_COUNT - 1:
                 continue
-            return True  # considérer vivant si doute
+            return True
 
-# Vérifie quels domaines ne répondent pas pour un type d'enregistrement DNS
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
 
@@ -170,7 +154,6 @@ def filter_dns_dead(domains, record_type):
     print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
 
-# Vérification HTTP/HTTPS HEAD/GET
 async def check_http(domain):
     VALID_STATUS_CODES = set(range(200, 400))
     urls = [f"http://{domain}", f"https://{domain}"]
@@ -203,7 +186,6 @@ async def check_http(domain):
 
     return False
 
-# Vérifie quels domaines ne répondent pas en HTTP/HTTPS
 async def filter_http_dead(domains):
     print("🌐 Vérification HTTP des domaines...")
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_HTTP)
@@ -219,7 +201,6 @@ async def filter_http_dead(domains):
     print(f"→ {dead_count} domaines morts détectés via HTTP.")
     return [d for d in filtered if d]
 
-# Point d’entrée principal
 async def main():
     global dns_server_list
 
@@ -228,6 +209,7 @@ async def main():
         sys.exit(1)
 
     prefixes = sys.argv[1].lower()
+
     print(f"📥 Nettoyage dans {BLOCKLIST_FILE} des domaines avec préfixes : {prefixes}")
     clean_blocklist(prefixes)
 
@@ -235,6 +217,23 @@ async def main():
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
-    # Rank DNS servers avant la vérification
-    print("⏳
+    # Trier et choisir les DNS avant les vérifications
+    print("⏳ Benchmark DNS pour choisir les meilleurs serveurs...")
+    dns_server_list = rank_dns_servers(PUBLIC_DNS_SERVERS)
 
+    dead = filter_dns_dead(domains, "A")
+    update_dead_file(prefixes, dead)
+
+    dead = filter_dns_dead(dead, "AAAA")
+    update_dead_file(prefixes, dead)
+
+    dead = filter_dns_dead(dead, "MX")
+    update_dead_file(prefixes, dead)
+
+    dead = await filter_http_dead(dead)
+    update_dead_file(prefixes, dead)
+
+    print(f"✅ Final : {len(dead)} domaines morts détectés pour les préfixes '{prefixes}'.")
+
+if __name__ == "__main__":
+    asyncio.run(main())
