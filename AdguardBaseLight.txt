@@ -46,8 +46,6 @@
 /^142\.91\.159\.(1[5-9]\d|2[0-4]\d|250):(80|443)$/$network
 188.72.219.36^$network
 @@||amgload.net/z|$domain=sinoptik.ua|gismeteo.ua
-
-
 #$#.pub_728x90.text-ad.textAd.text_ad.text_ads.text-ads.text-ad-links { display: block !important; }
 ://www3.doubleclick.net^|$xmlhttprequest,redirect=noopjson
 @@://www3.doubleclick.net^|$xmlhttprequest
@@ -6593,7 +6591,6 @@ dirtstyle.tv##.lightbox
 @@||ad.admitad.com/3rd-party/*/cookie/?f=CookieChecker.remoteTest
 bigbrothercanada.ca#%#//scriptlet('set-constant', 'video_player_config.players.0.adblock', 'false')
 @@||bigbrothercanada.ca^$generichide
-
 ##embed[width="100%"][height="100"]
 ##embed[width="120"][height="240"]
 ##embed[width="160"][height="600"]
@@ -6621,7 +6618,6 @@ bigbrothercanada.ca#%#//scriptlet('set-constant', 'video_player_config.players.0
 ##img[width="600"][height="90"]
 ##img[width="720"][height="90"]
 ##img[width="728"][height="90"]
-
 kokoshka.*#%#//scriptlet("remove-attr", "href", "a[href]#clickfakeplayer")
 rtklive.com##.text-center > a[target="_blank"] > img
 telegrafi.com##.code-block
@@ -14196,7 +14192,6 @@ nhaccuatui.com###eventBannerTop
 nhaccuatui.com##div[class^="adv_"]
 truyenqqhot.com##div[id^="ad_"]:not([id*="_poster"])
 truyenqqhot.com##div[id^="ads_"]
-
 ##.interstitial-ad
 ##.ads970
 ###top_google_ads
@@ -14456,7 +14451,6 @@ truyenqqhot.com##div[id^="ads_"]
 ##.top-r-ads
 ##.topbannerad
 ##.widget-sidebar-right-banner
-
 play.rtl.hr,rtlmost.hu#%#//scriptlet('json-prune', 'applaunch.data.player.features.ad.enabled applaunch.data.player.features.ad.dai.enabled', 'appName')
 crunchyroll.com#%#//scriptlet('json-prune', 'value.media.ad_breaks')
 letsporn.com,rat.xxx,hdtube.porn,hclips.com,anysex.com,maturefatporn.com,chyoa.com,nopeporn.com,mature-girls.com,iwantmature.com,amateurs-fuck.com,cumlouder.com,sexy-youtubers.com,smplace.com,losporn.org,sexytrunk.com,gaytiger.com,gaypornmasters.com,xxxbanjo.com,24video.in,bdsmstreak.com,pornozot.com,pornyfap.com,celebrity-leaks.net,perfectgirls.net,luscious.net,thisvid.com,txxx.*,hdzog.com,gotporn.com,upornia.com,pornhd.com,hotmovs.com,porndoe.com,4tube.com,porntube.com,sunporno.com,myreadingmanga.info,plusone8.com,pornerbros.com,hellporno.com,sexu.com,thefappening.pro,tubedupe.com,ah-me.com,pussyspace.com,alotporn.com,52av.tv,multporn.com,xbabe.com,vintage-erotica-forum.com,thegay.com,fux.com,ashemaletv.com,absoluporn.com,biguz.net,javbuz.com,frprn.com,8teenxxx.com,ftopx.com,realgfporn.com,pornomovies.com,thehentaiworld.com,see.xxx,fullhdxxx.com,pornobae.com,worldsex.com,imzog.com,tranny.one,pornwatchers.com,girlscanner.cc,kporno.com,xerotica.com,jizzhut.com,besteporn.com,pornl.com,submityourflicks.com,japan-whores.com,tuberel.com,pornult.com,unfaithfulxxx.com,bravoerotica.com,madchensex.com,xstory-fr.com,juicygif.com,newporn24.com,gotgayporn.com,favefreeporn.com,thatpervert.com,onlygayvideo.com,eegay.com,sensualgirls.org,whichav.com,fxporn69.com,pornoheit.com,pornj.com,thegay.porn,girlscv.com,redtub3xxx.com,pornoreino.com,9gag2.com,hentaipulse.com,nakedmodelsxxx.com,deutschsex.com,yeswegays.com,pornmaki.com,fuqer.com,needgayporn.com,mrsexe.com,nude-gals.com,mypornstarbook.net,nxgx.com,erowall.com,hentaifr.net,jizzonline.com,dump.xxx,twinkhouse.com,home-made-videos.com,xxxvideos247.com,18-teen-xxx.com,pornvideoq.com,gosexpod.com,xnxxporntube.net,pornfapr.com,blobopics.biz,teenagefucking.com,sexuhot.com,xnxxvideoporn.com,eroxia.com,xfilmen.com,gameofporn.com,freexvideossex.com,homemature.net,gutesex.com,sexrura.pl,al4a.com,thisav.video,fivestarpornsites.com,upskirtporn.de,japanesefuck.com,playpornfree.net,muschitube.com,jizzbo.com,erohentai.net,pornoversion.com,nakedbabes.club,thedoujin.com,fuckhardporn.com,boysnaweb.net,onlypron.com,hotsexlove.com,area51.porn,nudistube.com,porntubexxxl.com,pervertedmilfs.com,girlsfucking.net,cartoontube.xxx,japornhd.com,hdporn8.com,okporn.com,absolugirl.com,lonely-mature.com,gifsfor.com,drunkmoms.net,picfox.org,beste-sexgeschichten.com,freeimagefap.com,pornclipsxxx.com,xboyzzz.com,misterboys.com,pornbourn.com,jemontremasextape.com,imgtorrnt.in,auntmia.com,youwatchporn.com,brazzerzxxx.com,jemontremonminou.com,g6hentai.com,tubeflv.com,obitube.com,beegsexporn.com,momthumb.com,sassygays.com,ohhgays.com,4asianporn.com,desihoes.com,sassytube.com,gaybarebacks.com,sexybabesz.com,moviesguy.com,youngsexhd.com,club-flank.com,hdmoza.com,superbgays.com,newxxxvideos.net,xxxtubesex.net,bustmonkey.com,perfectgirlsboobs.com,pornstarsadvice.com,jav789.com,trans.firm.in,picshick.com,imghost.top,petrovixxxjav.info,imageshtorm.com,xxxwebdlxxx.org,imagerar.com,gelbooru.com,imgpeak.com,motherless.com,beeg.com,movierls.net,milffox.com,pixroute.com,newpornup.com,pictoa.com,naughtyblog.org,8muses.com,doolls.org,topboard.org,youjizz.com,imageweb.ws,planetsuzy.org,imagetwist.com,hitomi.la,torrentgalaxy.org,letmejerk7.com,letmejerk6.com,imx.to,sunporno.com,8boobs.com,eporner.com,pornofaps.com,eroprofile.com,imguur.pictures,webcamshows.org,xxxmoviestream.xyz,mangoporn.co,erome.com,imgmercy.com,playpornfree.xyz,letmejerk.com,letmejerk3.com,letmejerk4.com,letmejerk5.com,letmejerk6.com,letmejerk7.com,wantedbabes.com#%#//scriptlet("abort-on-property-read", "ExoLoader")
@@ -16872,7 +16866,6 @@ speedtest.net$$div[class="dfp-ab-leaderboard"]
 wiz1.net$$div[id="floatLayer1"]
 yycast.com,webcaston.com$$div[id="adsdiv"]
 tvtoss.com$$script[tag-content="ads-wrap"]
-
 /getjs?nadipdata$third-party,replace=/[\s\S]+openOriginalUrl[\s\S]+/openOriginalUrl()/
 /asset/angular.min.js?t=$xmlhttprequest,~third-party
 /asset/jquery/slim-3.2.min.js?*&t=$xmlhttprequest,~third-party
@@ -17238,7 +17231,6 @@ http://www.ads.$third-party
 ?tid=*&red=1&*&abt=
 /?&pid=*&subid=
 /?&subid=*&pid=
-
 euronews.com#$?##o-site-hr__leaderboard-wallpaper.u-show-for-xlarge { remove: true; }
 read.amazon.*#$##readerChromeOverlayBottom.readerChromeOverlayBottom-banner-desktop { bottom: 0 !important; }
 twitch.tv#$#.video-player--stream-display-ad_lower-third { height: 100% !important; }
@@ -33766,7 +33758,6 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_adblocking_ext
 adguard.info,adguard.com,adguard.app##.hello_from_adguard_apps
 adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
 adguard.info,adguard.com,adguard.app#$#.hello_from_adguard_advanced_protection_ios { display: none !important; }
-
 @@||twitch.tv^$websocket,permissions
 @@||pricematrix.nltg.com/*/markup/$xmlhttprequest,elemhide,jsinject,extension
 @@||facebook.com^$generichide,badfilter
@@ -36211,7 +36202,6 @@ implbits.com#@#.banner_container
 @@||static.mobile.eu^*/resources/images/ads/superteaser_$image,domain=automobile.fr|automobile.it|mobile.eu|mobile.ro
 @@||tous-sports.fr/js/advertisement-AdBlock.js
 @@||tous-sports.tv/js/advertisement-AdBlock.js
-
 @@||beinconnect.com.tr^$stealth
 @@||account.adobe.com^$document,domain=services.adobe.com,stealth=useragent
 @@||adguard.com^$stealth
@@ -37811,7 +37801,6 @@ implbits.com#@#.banner_container
 @@||beltelecom.by^$stealth=dpi
 @@||dienmayxanh.com^$stealth=dpi
 @@||thegioididong.com^$stealth=dpi
-
 $replace=/head>/head><meta charset="utf-8">/,document,domain=podhale24.pl|copycenter.online|nec-solutioninnovators.co.jp|e-map.ne.jp
 ://widgets.spklw.com/v1/data/?*&widget-id=$replace=/(?<=\[)(\{"image":\{"url":"[\s\S]*?"type":"ad"[\s\S]*?\,"service_version":"[\s\S]*?"\}(\,)?)+|(\,)?\{"image":\{"url":"[\s\S]*?"type":"ad"[\s\S]*?\,"service_version":"[\s\S]*?"\}//
 hentai-id.tv$replace=/http:\/\/[s\S]*s=http:\/\/www.hentai-id.tv\//http:\/\/www.hentai-id.tv\//,~third-party,~stylesheet,~script,~xmlhttprequest,important
@@ -37819,7 +37808,6 @@ hentai-id.tv$replace=/http:\/\/[s\S]*s=http:\/\/www.hentai-id.tv\//http:\/\/www.
 |http*://*.v.fwmrm.net/ad/p/1?$replace=/(<adResponse[\s\S]*?>)[\s\S]*<\/adResponse>/\$1<\/adResponse>/,domain=theplatform.com
 iview.abc.net.au/programs$replace=/("type"\:"preroll")[\s\S]*("type")/"type"/,important
 iview.abc.net.au/programs$replace=/("type"\:"preroll")[\s\S]*("type")/"type"/
-
 .n.2.1.js^$third-party
 .n.2.1.l60.js^$third-party
 .1.1.1.l80.js^$third-party
@@ -37837,7 +37825,6 @@ vkcdnservice.appspot.com^$third-party
 $websocket,domain=300mbfilms.io|lib.rus.ec
 /cdn-cgi/pe/bag2?r[]=*eth-pocket.de
 /wp-content/plugins/simple-monero-miner-coin-hive/*
-
 ankunding.biz^$third-party
 cdn.braun634.com^$third-party
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=9ketsuki.info|fizyka.org|dayzrp.com|pipocas.tv|cyberspace.world|classic-retro-games.com|nulledpremium.com|forum.release-apk.com|userupload.in
@@ -40319,7 +40306,6 @@ digital.bg##.banner-holder
 kliuki.bg##img[width="650"][height="80"]
 kliuki.bg##img[width="960"][height="90"]
 kliuki.bg###container > div[style="float:left;"] > div[style]
-
 &rb=&uuid=$third-party
 -ad-manager/$~stylesheet
 -ad-sidebar.$image
