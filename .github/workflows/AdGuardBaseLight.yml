@@ -13,17 +13,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Download AdGuard Base filter.txt
+      - name: Télécharger le filtre AdGuard Base
         run: curl -sSL "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt" -o blocklist.txt
 
-      - name: Filter lines
+      - name: Nettoyer les lignes inutiles (!, ||...^, vides)
         run: |
-          grep -vE '^(!|(\|\|.*\^)$)' blocklist.txt | grep -v '^$' > AdguardBaseLight.txt || true
+          grep -vE '^(!|\|\|.*\^$)' blocklist.txt | grep -v '^$' > AdguardBaseLight.txt || true
 
-      - name: Commit and push changes
+      - name: Commit et push si changements
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add AdguardBaseLight.txt
-          git commit -m "Update AdguardBaseLight.txt from AdGuard Base filter" || echo "No changes to commit"
-          git push
+          if [ -s AdguardBaseLight.txt ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add AdguardBaseLight.txt
+            git commit -m "Mise à jour AdguardBaseLight.txt depuis AdGuard Base" || echo "Aucun changement à committer"
+            git push
+          else
+            echo "Le fichier filtré est vide — rien à committer."
+          fi
+
