@@ -15,6 +15,18 @@ MAX_CONCURRENT_DNS = 15
 MAX_CONCURRENT_HTTP = 10
 RETRY_COUNT = 2
 
+# Liste personnelle de résolveurs DNS
+DNS_RESOLVERS = [
+    '8.8.8.8',        # Google DNS IPv4
+    '8.8.4.4',        # Google DNS IPv4
+    '2001:4860:4860::8888',  # Google DNS IPv6
+    '2001:4860:4860::8844',  # Google DNS IPv6
+    '1.1.1.1',        # Cloudflare DNS IPv4
+    '1.0.0.1',        # Cloudflare DNS IPv4
+    '2606:4700:4700::1111',  # Cloudflare DNS IPv6
+    '2606:4700:4700::1001',  # Cloudflare DNS IPv6
+]
+
 # Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
@@ -53,13 +65,13 @@ def save_dead(lines):
 # Mise à jour de dead.txt en conservant les anciens préfixes
 def update_dead_file(prefix, new_dead):
     existing_dead = load_dead()
-    # Filtrer les domaines existants pour exclure ceux qui commencent par le préfixe spécifié
     filtered_dead = [d for d in existing_dead if not d.startswith(prefix)]
     updated = filtered_dead + new_dead
     save_dead(updated)
 
-# Configuration du résolveur DNS
+# Configuration du résolveur DNS avec une liste personnelle de résolveurs
 resolver = dns.resolver.Resolver()
+resolver.nameservers = DNS_RESOLVERS
 resolver.lifetime = DNS_TIMEOUT
 
 # Vérification DNS simple
