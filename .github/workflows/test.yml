@@ -27,7 +27,7 @@ jobs:
 
       - name: Create and run Python script
         run: |
-          cat <<EOF > test.py
+          cat << 'EOF' > test.py
 import requests
 
 def nettoyer_fichier(url, output_file):
