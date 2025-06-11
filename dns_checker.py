@@ -6,6 +6,7 @@ import httpx
 import asyncio
 import ipaddress
 from concurrent.futures import ThreadPoolExecutor
+from aiofiles import open as aio_open  # Utilisation d'`aiofiles` pour l'écriture asynchrone
 
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
@@ -14,6 +15,18 @@ HTTP_TIMEOUT = 10
 MAX_CONCURRENT_DNS = 15
 MAX_CONCURRENT_HTTP = 10
 RETRY_COUNT = 2
+
+# Liste des résolveurs DNS publics (IPv4 et IPv6)
+DNS_RESOLVERS = [
+    '8.8.8.8',  # Google DNS IPv4
+    '8.8.4.4',  # Google DNS IPv4
+    '1.1.1.1',  # Cloudflare DNS IPv4
+    '1.0.0.1',  # Cloudflare DNS IPv4
+    '2001:4860:4860::8888',  # Google DNS IPv6
+    '2001:4860:4860::8844',  # Google DNS IPv6
+    '2606:4700:4700::1111',  # Cloudflare DNS IPv6
+    '2606:4700:4700::1001',  # Cloudflare DNS IPv6
+]
 
 # Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
@@ -38,17 +51,17 @@ def read_domains(prefixes):
                 domains.add(domain.lower())
     return sorted(domains)
 
-# Sauvegarde du fichier dead.txt
-def save_dead(lines):
-    with open(DEAD_FILE, 'w', encoding='utf-8') as f:
-        f.write('\n'.join(sorted(set(lines))) + '\n')
+# Sauvegarde du fichier dead.txt (asynchrone)
+async def save_dead(lines):
+    async with aio_open(DEAD_FILE, 'w', encoding='utf-8') as f:
+        await f.write('\n'.join(sorted(set(lines))) + '\n')
 
 # Mise à jour de dead.txt en supprimant les anciens domaines du préfixe et ajoutant les nouveaux
-def update_dead_file(prefix, new_dead):
-    # Lire les lignes actuelles de dead.txt
+async def update_dead_file(prefix, new_dead):
+    # Lire les lignes actuelles de dead.txt de manière asynchrone
     if os.path.exists(DEAD_FILE):
-        with open(DEAD_FILE, 'r', encoding='utf-8') as f:
-            existing_dead = [line.strip() for line in f if line.strip()]
+        async with aio_open(DEAD_FILE, 'r', encoding='utf-8') as f:
+            existing_dead = [line.strip() for line in await f.readlines() if line.strip()]
     else:
         existing_dead = []
 
@@ -58,12 +71,13 @@ def update_dead_file(prefix, new_dead):
     # Ajouter les nouveaux domaines morts (éviter les doublons)
     updated = remaining + [d for d in new_dead if d not in remaining]
 
-    # Sauvegarder la nouvelle liste dans dead.txt
-    save_dead(updated)
+    # Sauvegarder la nouvelle liste dans dead.txt de manière asynchrone
+    await save_dead(updated)
 
 # Configuration du résolveur DNS
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
+resolver.nameservers = DNS_RESOLVERS  # Utiliser les résolveurs DNS publics
 
 # Vérification DNS simple
 def dns_check(domain, record_type):
@@ -157,17 +171,17 @@ async def main():
 
     # Vérifications DNS pour les enregistrements A, AAAA et MX
     dead = filter_dns_dead(domains, "A")
-    update_dead_file(prefixes, dead)
+    await update_dead_file(prefixes, dead)
 
     dead = filter_dns_dead(dead, "AAAA")
-    update_dead_file(prefixes, dead)
+    await update_dead_file(prefixes, dead)
 
     dead = filter_dns_dead(dead, "MX")
-    update_dead_file(prefixes, dead)
+    await update_dead_file(prefixes, dead)
 
     # Vérification HTTP
     dead = await filter_http_dead(dead)
-    update_dead_file(prefixes, dead)
+    await update_dead_file(prefixes, dead)
 
     print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
 
