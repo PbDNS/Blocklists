@@ -17,7 +17,7 @@ RETRY_COUNT = 2
 
 # Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
-    match = re.match(r"\|\|([a-zA-Z0-9][a-zAZ0-9.-]*[a-zA-Z0-9])\^?", line.strip())
+    match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
     if not match:
         return None
     domain = match.group(1)
