@@ -10,7 +10,7 @@ def filter_rules(input_file, output_file):
         if line.startswith('!'):
             continue
         # Supprimer les lignes contenant des filtres spécifiques
-        if re.match(r'^\|\|www\.[a-zA-Z0-9.-]+\.com\^$', line):
+        if re.match(r'^\|\|.*\^$', line):
             continue
         filtered_lines.append(line)
 
