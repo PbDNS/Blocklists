@@ -1,0 +1,76 @@
+name: Filtrage du fichier
+
+on:
+  # Le workflow peut être déclenché manuellement via GitHub UI
+  workflow_dispatch:
+
+jobs:
+  nettoyage:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Étape 1 : Vérifier le code depuis le repository
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Étape 2 : Installer Python
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    # Étape 3 : Installer les dépendances nécessaires (requests)
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    # Étape 4 : Créer et exécuter le script Python pour filtrer les données
+    - name: Create and run Python script
+      run: |
+        # Créer dynamiquement le script Python dans le fichier 'test.py'
+        echo '
+import requests
+
+def nettoyer_fichier(url, output_file):
+    print("Téléchargement du fichier...")
+    response = requests.get(url)
+    if response.status_code != 200:
+        print(f"Erreur lors du téléchargement du fichier : {response.status_code}")
+        return
+
+    lignes_filtrées = []
+
+    for ligne in response.text.splitlines():
+        if ligne.startswith("!"):
+            continue
+        if ligne.startswith("||") and ligne.endswith("^"):
+            continue
+        lignes_filtrées.append(ligne)
+
+    print(f"Effacement du contenu actuel du fichier \'{output_file}\'...")
+
+    with open(output_file, "w") as f:
+        for ligne in lignes_filtrées:
+            f.write(f"{ligne}\\n")
+
+    print(f"Le fichier nettoyé a été sauvegardé dans \'{output_file}\'.")
+url = "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt"
+output_file = "test.txt"
+nettoyer_fichier(url, output_file)
+        ' > test.py
+
+        # Exécuter le script Python
+        python3 test.py
+
+    # Étape 5 : Ajouter le fichier filtré à Git et le pousser
+    - name: Commit and push filtered file
+      run: |
+        # Configurer les informations de l'utilisateur Git pour commettre les modifications
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+
+        # Ajouter le fichier filtré à Git et créer un commit
+        git add test.txt
+        git commit -m "Ajout du fichier filtré"
+        git push
