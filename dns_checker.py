@@ -1,6 +1,3 @@
-CECI EST LE VERSION ORIGINALE AVANT LES MODIFS DE MARDI SOIR 10
-
-
 import sys
 import os
 import re
