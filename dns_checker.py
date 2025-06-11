@@ -17,7 +17,7 @@ RETRY_COUNT = 2
 
 # Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
-    match = re.match(r"\|\|([a-zA-Z0-9][a-zA0-9.-]*[a-zA-Z0-9])\^?", line.strip())
+    match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
     if not match:
         return None
     domain = match.group(1)
@@ -45,14 +45,15 @@ def save_dead(lines):
 
 # Mise à jour de dead.txt en supprimant les anciens domaines du préfixe et ajoutant les nouveaux
 def update_dead_file(prefix, new_dead):
+    # Lire les lignes actuelles de dead.txt
     if os.path.exists(DEAD_FILE):
         with open(DEAD_FILE, 'r', encoding='utf-8') as f:
             existing_dead = [line.strip() for line in f if line.strip()]
     else:
         existing_dead = []
 
-    # Supprimer les anciens domaines qui commencent par un préfixe numérique
-    remaining = [d for d in existing_dead if not d[0].isdigit()]
+    # Supprimer les lignes commençant par les préfixes spécifiés (pas tous les chiffres)
+    remaining = [d for d in existing_dead if not d.startswith(tuple(prefix))]
 
     # Ajouter les nouveaux domaines morts (éviter les doublons)
     updated = sorted(set(remaining + list(new_dead)))
