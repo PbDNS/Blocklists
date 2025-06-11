@@ -38,13 +38,6 @@ def read_domains(prefixes):
                 domains.add(domain.lower())
     return sorted(domains)
 
-# Chargement du fichier dead.txt existant
-def load_dead():
-    if not os.path.exists(DEAD_FILE):
-        return []
-    with open(DEAD_FILE, 'r', encoding='utf-8') as f:
-        return [line.strip() for line in f if line.strip()]
-
 # Sauvegarde du fichier dead.txt
 def save_dead(lines):
     with open(DEAD_FILE, 'w', encoding='utf-8') as f:
@@ -52,14 +45,19 @@ def save_dead(lines):
 
 # Mise à jour de dead.txt en supprimant les anciens domaines du préfixe et ajoutant les nouveaux
 def update_dead_file(prefix, new_dead):
-    existing_dead = load_dead()
-    
+    # Lire les lignes actuelles de dead.txt
+    if os.path.exists(DEAD_FILE):
+        with open(DEAD_FILE, 'r', encoding='utf-8') as f:
+            existing_dead = [line.strip() for line in f if line.strip()]
+    else:
+        existing_dead = []
+
     # Supprimer les anciens domaines qui commencent par le préfixe
     remaining = [d for d in existing_dead if not d.startswith(prefix)]
     
-    # Ajouter les nouveaux domaines morts
-    updated = remaining + new_dead
-    
+    # Ajouter les nouveaux domaines morts (éviter les doublons)
+    updated = remaining + [d for d in new_dead if d not in remaining]
+
     # Sauvegarder la nouvelle liste dans dead.txt
     save_dead(updated)
 
@@ -157,6 +155,7 @@ async def main():
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
+    # Vérifications DNS pour les enregistrements A, AAAA et MX
     dead = filter_dns_dead(domains, "A")
     update_dead_file(prefixes, dead)
 
@@ -166,6 +165,7 @@ async def main():
     dead = filter_dns_dead(dead, "MX")
     update_dead_file(prefixes, dead)
 
+    # Vérification HTTP
     dead = await filter_http_dead(dead)
     update_dead_file(prefixes, dead)
 
