@@ -1,3 +1,4 @@
+import sys
 import dns.resolver
 import httpx
 import asyncio
