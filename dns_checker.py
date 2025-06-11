@@ -128,4 +128,48 @@ async def check_http(domain):
     return False
 
 # Vérifie quels domaines ne répondent pas en HTTP/HTTPS
-async def filter_http_dead(dom
+async def filter_http_dead(domains):
+    print("🌐 Vérification HTTP des domaines...")
+    semaphore = asyncio.Semaphore(MAX_CONCURRENT_HTTP)
+
+    async def task(domain):
+        async with semaphore:
+            alive = await check_http(domain)
+            return domain if not alive else None
+
+    tasks = [task(domain) for domain in domains]
+    filtered = await asyncio.gather(*tasks)
+    dead_count = len([d for d in filtered if d])
+    print(f"→ {dead_count} domaines morts détectés via HTTP.")
+    return [d for d in filtered if d]
+
+# Point d’entrée principal
+async def main():
+    # Si sys.argv est encore nécessaire pour des arguments
+    if len(sys.argv) != 2:
+        print("Usage: python dns_checker.py <prefixes>")
+        sys.exit(1)
+
+    prefixes = sys.argv[1].lower()
+    print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
+    domains = read_domains(prefixes)
+    print(f"🔎 {len(domains)} domaines à tester.")
+
+    # Vérifications DNS pour les enregistrements A, AAAA et MX
+    dead = filter_dns_dead(domains, "A")
+    await update_dead_file(prefixes, dead)
+
+    dead = filter_dns_dead(dead, "AAAA")
+    await update_dead_file(prefixes, dead)
+
+    dead = filter_dns_dead(dead, "MX")
+    await update_dead_file(prefixes, dead)
+
+    # Vérification HTTP
+    dead = await filter_http_dead(dead)
+    await update_dead_file(prefixes, dead)
+
+    print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
+
+if __name__ == "__main__":
+    asyncio.run(main())
