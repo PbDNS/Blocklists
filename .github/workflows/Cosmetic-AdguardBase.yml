@@ -15,13 +15,18 @@ jobs:
       with:
         fetch-depth: 0 # Assurez-vous de récupérer tout l'historique pour pouvoir pousser
 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11' # Spécifiez la version de Python que vous souhaitez utiliser
+
     - name: Download the filter file
       run: |
         curl -o filter.txt https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
 
-    - name: Filter the file
+    - name: Run Python script to filter the file
       run: |
-        grep -v '^!' filter.txt | grep -v -E '^\|\|www\.[a-zA-Z0-9.-]+\.com\^$' > Cosmetic-AdGuardBase.txt
+        python filter_rules.py
 
     - name: Commit and push changes
       run: |
