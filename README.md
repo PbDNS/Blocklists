@@ -6,7 +6,7 @@ cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 
 ---
 
-## Objectif
+## objectif
 
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
@@ -15,7 +15,7 @@ cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 
 ---
 
-## Blocklistes incluses
+## blocklistes incluses
 
 - **AdGuard DNS filter**
 - **AdGuard French adservers**
@@ -45,7 +45,7 @@ cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 
 ---
 
-## Format et utilisation
+## format et utilisation
 
 - format Adblock Plus
 - sous-domaines redondants supprimés
