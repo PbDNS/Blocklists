@@ -43,3 +43,4 @@ output_file = 'test.txt'
 
 # Exécuter la fonction pour nettoyer le fichier
 nettoyer_fichier(url, output_file)
+
