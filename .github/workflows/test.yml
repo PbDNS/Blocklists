@@ -35,15 +35,8 @@ jobs:
         curl -O https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
         python3 test.py
 
-    # Étape 5 : Vérifier si le fichier a été modifié
-    - name: Check if test.txt has changed
-      id: check_changes
-      run: |
-        git diff --exit-code test.txt || echo "File has changed" > $GITHUB_ENV
-
-    # Étape 6 : Ajouter le fichier filtré à Git et le pousser, seulement si modifié
+    # Étape 5 : Ajouter le fichier filtré à Git et le pousser
     - name: Commit and push filtered file
-      if: env.FILE_HAS_CHANGED == 'File has changed'
       run: |
         # Configurer les informations de l'utilisateur Git pour commettre les modifications
         git config --global user.name "GitHub Actions"
