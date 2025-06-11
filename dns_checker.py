@@ -1,7 +1,7 @@
 import sys
 import os
 import re
-import dns.resolver
+import dns.asyncresolver
 import httpx
 import asyncio
 import ipaddress
@@ -14,6 +14,18 @@ HTTP_TIMEOUT = 10
 MAX_CONCURRENT_DNS = 15
 MAX_CONCURRENT_HTTP = 10
 RETRY_COUNT = 2
+
+# Liste des résolveurs DNS publics (IPv4 et IPv6)
+DNS_RESOLVERS = [
+    '8.8.8.8',  # Google DNS IPv4
+    '8.8.4.4',  # Google DNS IPv4
+    '1.1.1.1',  # Cloudflare DNS IPv4
+    '1.0.0.1',  # Cloudflare DNS IPv4
+    '2001:4860:4860::8888',  # Google DNS IPv6
+    '2001:4860:4860::8844',  # Google DNS IPv6
+    '2606:4700:4700::1111',  # Cloudflare DNS IPv6
+    '2606:4700:4700::1001',  # Cloudflare DNS IPv6
+]
 
 # Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
@@ -61,15 +73,19 @@ def update_dead_file(prefix, new_dead):
     # Sauvegarder la nouvelle liste dans dead.txt
     save_dead(updated)
 
-# Configuration du résolveur DNS
-resolver = dns.resolver.Resolver()
-resolver.lifetime = DNS_TIMEOUT
+# Configuration du résolveur DNS asynchrone
+async def create_resolver():
+    resolvers = dns.asyncresolver.Resolver()
+    resolvers.lifetime = DNS_TIMEOUT
+    # Utiliser les résolveurs DNS publics
+    resolvers.nameservers = DNS_RESOLVERS
+    return resolvers
 
-# Vérification DNS simple
-def dns_check(domain, record_type):
+# Vérification DNS asynchrone
+async def dns_check(domain, record_type, resolver):
     for attempt in range(RETRY_COUNT):
         try:
-            resolver.resolve(domain, record_type)
+            await resolver.resolve(domain, record_type)
             return True
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
             return False
@@ -79,23 +95,26 @@ def dns_check(domain, record_type):
             return True  # considérer vivant si doute
 
 # Vérifie quels domaines ne répondent pas pour un type d'enregistrement DNS
-def filter_dns_dead(domains, record_type):
+async def filter_dns_dead(domains, record_type, resolver):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
 
     dead = []
-    with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
-        results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
+    semaphore = asyncio.Semaphore(MAX_CONCURRENT_DNS)
 
-    for domain, alive in results:
-        if not alive:
-            dead.append(domain)
+    async def task(domain):
+        async with semaphore:
+            alive = await dns_check(domain, record_type, resolver)
+            return domain if not alive else None
+
+    tasks = [task(domain) for domain in domains]
+    filtered = await asyncio.gather(*tasks)
+    dead = [d for d in filtered if d]
 
     print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
 
 # Vérification HTTP/HTTPS HEAD/GET
 async def check_http(domain):
-    # Limiter la plage aux codes de statut HTTP pertinents
     VALID_STATUS_CODES = {200, 301, 302, 403, 404, 500}
     urls = [f"http://{domain}", f"https://{domain}"]
 
@@ -103,7 +122,6 @@ async def check_http(domain):
         async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
             for url in urls:
                 try:
-                    # Vérification via la méthode HEAD
                     resp = await client.head(url)
                     if resp.status_code in VALID_STATUS_CODES:
                         return True
@@ -113,7 +131,6 @@ async def check_http(domain):
                     print(f"[HEAD] Erreur pour {url} : {e}")
 
                 try:
-                    # Vérification via la méthode GET
                     resp = await client.get(url)
                     if resp.status_code in VALID_STATUS_CODES:
                         return True
@@ -126,7 +143,6 @@ async def check_http(domain):
             await asyncio.sleep(0.5)
 
     return False
-
 
 # Vérifie quels domaines ne répondent pas en HTTP/HTTPS
 async def filter_http_dead(domains):
@@ -155,14 +171,17 @@ async def main():
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
+    # Créer un résolveur DNS
+    resolver = await create_resolver()
+
     # Vérifications DNS pour les enregistrements A, AAAA et MX
-    dead = filter_dns_dead(domains, "A")
+    dead = await filter_dns_dead(domains, "A", resolver)
     update_dead_file(prefixes, dead)
 
-    dead = filter_dns_dead(dead, "AAAA")
+    dead = await filter_dns_dead(dead, "AAAA", resolver)
     update_dead_file(prefixes, dead)
 
-    dead = filter_dns_dead(dead, "MX")
+    dead = await filter_dns_dead(dead, "MX", resolver)
     update_dead_file(prefixes, dead)
 
     # Vérification HTTP
