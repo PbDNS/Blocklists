@@ -5,7 +5,6 @@ import dns.resolver
 import httpx
 import asyncio
 import ipaddress
-import aiofiles
 from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
@@ -39,17 +38,17 @@ def read_domains(prefixes):
                 domains.add(domain.lower())
     return sorted(domains)
 
-# Sauvegarde du fichier dead.txt de manière asynchrone
-async def save_dead(lines):
-    async with aiofiles.open(DEAD_FILE, 'w', encoding='utf-8') as f:
-        await f.write('\n'.join(sorted(set(lines))) + '\n')
+# Sauvegarde du fichier dead.txt
+def save_dead(lines):
+    with open(DEAD_FILE, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(sorted(set(lines))) + '\n')
 
-# Mise à jour de dead.txt de manière asynchrone en supprimant les anciens domaines du préfixe et ajoutant les nouveaux
-async def update_dead_file(prefix, new_dead):
-    # Lire les lignes actuelles de dead.txt de manière asynchrone
+# Mise à jour de dead.txt en supprimant les anciens domaines du préfixe et ajoutant les nouveaux
+def update_dead_file(prefix, new_dead):
+    # Lire les lignes actuelles de dead.txt
     if os.path.exists(DEAD_FILE):
-        async with aiofiles.open(DEAD_FILE, 'r', encoding='utf-8') as f:
-            existing_dead = [line.strip() for line in await f.readlines() if line.strip()]
+        with open(DEAD_FILE, 'r', encoding='utf-8') as f:
+            existing_dead = [line.strip() for line in f if line.strip()]
     else:
         existing_dead = []
 
@@ -60,7 +59,7 @@ async def update_dead_file(prefix, new_dead):
     updated = remaining + [d for d in new_dead if d not in remaining]
 
     # Sauvegarder la nouvelle liste dans dead.txt
-    await save_dead(updated)
+    save_dead(updated)
 
 # Configuration du résolveur DNS
 resolver = dns.resolver.Resolver()
@@ -128,6 +127,7 @@ async def check_http(domain):
 
     return False
 
+
 # Vérifie quels domaines ne répondent pas en HTTP/HTTPS
 async def filter_http_dead(domains):
     print("🌐 Vérification HTTP des domaines...")
@@ -146,7 +146,6 @@ async def filter_http_dead(domains):
 
 # Point d’entrée principal
 async def main():
-    # Si sys.argv est encore nécessaire pour des arguments
     if len(sys.argv) != 2:
         print("Usage: python dns_checker.py <prefixes>")
         sys.exit(1)
@@ -157,20 +156,20 @@ async def main():
     print(f"🔎 {len(domains)} domaines à tester.")
 
     # Vérifications DNS pour les enregistrements A, AAAA et MX
-    dead_dns_a = filter_dns_dead(domains, "A")
-    dead_dns_aaaa = filter_dns_dead(domains, "AAAA")
-    dead_dns_mx = filter_dns_dead(domains, "MX")
+    dead = filter_dns_dead(domains, "A")
+    update_dead_file(prefixes, dead)
 
-    # Combiner tous les domaines morts DNS
-    dead_dns = set(dead_dns_a + dead_dns_aaaa + dead_dns_mx)
+    dead = filter_dns_dead(dead, "AAAA")
+    update_dead_file(prefixes, dead)
+
+    dead = filter_dns_dead(dead, "MX")
+    update_dead_file(prefixes, dead)
 
     # Vérification HTTP
-    dead_http = await filter_http_dead(dead_dns)
+    dead = await filter_http_dead(dead)
+    update_dead_file(prefixes, dead)
 
-    # Mettre à jour dead.txt après toutes les vérifications
-    await update_dead_file(prefixes, dead_http)
-
-    print(f"✅ Final : {len(dead_http)} domaines morts pour les préfixes {prefixes}.")
+    print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
 
 if __name__ == "__main__":
     asyncio.run(main())
