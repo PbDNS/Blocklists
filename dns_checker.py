@@ -97,13 +97,15 @@ def filter_dns_dead(domains, record_type):
 
 # Vérification HTTP/HTTPS HEAD/GET
 async def check_http(domain):
-    VALID_STATUS_CODES = set(range(200, 400))
+    # Limiter la plage aux codes de statut HTTP pertinents
+    VALID_STATUS_CODES = {200, 301, 302, 403, 404, 500}
     urls = [f"http://{domain}", f"https://{domain}"]
 
     for attempt in range(RETRY_COUNT):
         async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
             for url in urls:
                 try:
+                    # Vérification via la méthode HEAD
                     resp = await client.head(url)
                     if resp.status_code in VALID_STATUS_CODES:
                         return True
@@ -113,6 +115,7 @@ async def check_http(domain):
                     print(f"[HEAD] Erreur pour {url} : {e}")
 
                 try:
+                    # Vérification via la méthode GET
                     resp = await client.get(url)
                     if resp.status_code in VALID_STATUS_CODES:
                         return True
@@ -125,6 +128,7 @@ async def check_http(domain):
             await asyncio.sleep(0.5)
 
     return False
+
 
 # Vérifie quels domaines ne répondent pas en HTTP/HTTPS
 async def filter_http_dead(domains):
