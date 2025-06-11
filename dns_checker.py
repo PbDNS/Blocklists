@@ -161,17 +161,17 @@ async def main():
 
     # Vérifications DNS pour les enregistrements A
     dead_a = filter_dns_dead(remaining_domains, "A")
-    remaining_domains -= dead_a  # Ne tester que les domaines vivants pour la suite
+    remaining_domains = dead_a  # Seuls les domaines morts après A continuent
     dead.update(dead_a)
 
     # Vérifications DNS pour les enregistrements AAAA
     dead_aaaa = filter_dns_dead(remaining_domains, "AAAA")
-    remaining_domains -= dead_aaaa  # Ne tester que les domaines vivants pour la suite
+    remaining_domains = dead_aaaa  # Seuls les domaines morts après AAAA continuent
     dead.update(dead_aaaa)
 
     # Vérifications DNS pour les enregistrements MX
     dead_mx = filter_dns_dead(remaining_domains, "MX")
-    remaining_domains -= dead_mx  # Ne tester que les domaines vivants pour la suite
+    remaining_domains = dead_mx  # Seuls les domaines morts après MX continuent
     dead.update(dead_mx)
 
     # Vérification HTTP (uniquement pour les domaines morts après MX)
