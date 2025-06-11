@@ -48,7 +48,6 @@ jobs:
             17) echo "prefix=qrst" >> $GITHUB_ENV ;;
             19) echo "prefix=uvwx" >> $GITHUB_ENV ;;
             21) echo "prefix=yz" >> $GITHUB_ENV ;;
-            *) echo "prefix=x" >> $GITHUB_ENV ;;  # fallback
           esac
 
       - name: Validate prefix
