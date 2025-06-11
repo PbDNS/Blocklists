@@ -21982,7 +21982,6 @@ log-thanhnien.zadn.vn
 log-thuonggiaonline.epicdn.me
 log.aliyuncs.com
 log.avlyun.sec.intl.miui.com
-log.baobackan.com.vn
 log.baonghean.vn
 log.bizlive.vn
 log.cdd.net.sap
