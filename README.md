@@ -19,7 +19,6 @@ Cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 
 - **AdGuard DNS filter**
 - **AdGuard French adservers**
-- **AdGuard French adservers first party**
 - **AWAvenue Ads Rule**
 - **Dandelion Sprout's Anti-Malware List**
 - **Dan Pollock's List**
