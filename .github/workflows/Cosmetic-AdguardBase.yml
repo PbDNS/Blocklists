@@ -19,8 +19,10 @@ jobs:
 
     - name: Filter the file
       run: |
-        # Supprimer les lignes de commentaires et les lignes avec des filtres spécifiques
-        grep -v -E '^!|^\|\|[a-zA-Z0-9.-]+\.com\^$' filter.txt > Cosmetic-AdGuardBase.txt
+        # Supprimer les lignes de commentaires
+        grep -v '^!' filter.txt | \
+        # Supprimer les lignes contenant des filtres spécifiques
+        grep -v -E '^\|\|www\.[a-zA-Z0-9.-]+\.com\^$' > Cosmetic-AdGuardBase.txt
 
     - name: Commit and push changes
       run: |
