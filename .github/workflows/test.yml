@@ -1,7 +1,7 @@
 name: Filtrage du fichier
 
 on:
-  # Le workflow peut être déclenché manuellement via GitHub UI
+  # Ce workflow peut être lancé manuellement via l'interface GitHub
   workflow_dispatch:
 
 jobs:
