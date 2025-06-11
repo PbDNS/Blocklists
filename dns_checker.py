@@ -48,15 +48,15 @@ def update_dead_file(prefix, new_dead):
     # Lire les lignes actuelles de dead.txt
     if os.path.exists(DEAD_FILE):
         with open(DEAD_FILE, 'r', encoding='utf-8') as f:
-            existing_dead = [line.strip() for line in f if line.strip()]
+            existing_dead = [line.strip() for line in f if line.strip()]  # Pas de conversion en minuscule
     else:
         existing_dead = []
 
     # Supprimer les anciens domaines qui commencent par le préfixe
-    remaining = [d for d in existing_dead if not d.startswith(prefix)]
-    
+    remaining = [d for d in existing_dead if not d.startswith(prefix)]  # Comparaison directe sans modification de casse
+
     # Ajouter les nouveaux domaines morts (éviter les doublons)
-    updated = remaining + [d for d in new_dead if d not in remaining]
+    updated = list(set(remaining + new_dead))  # Utilisation de set pour éviter les doublons
 
     # Sauvegarder la nouvelle liste dans dead.txt
     save_dead(updated)
@@ -82,13 +82,13 @@ def dns_check(domain, record_type):
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
 
-    dead = []
+    dead = set()  # Utiliser un set pour éviter les doublons
     with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
         results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
 
     for domain, alive in results:
         if not alive:
-            dead.append(domain)
+            dead.add(domain.lower())  # Ajouter en minuscule pour éviter les doublons de casse
 
     print(f"→ {len(dead)} domaines morts détectés pour DNS {record_type}.")
     return dead
@@ -155,18 +155,18 @@ async def main():
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
+    # Accumuler les domaines morts
+    dead = set()  # Utiliser un set pour éviter les doublons
+
     # Vérifications DNS pour les enregistrements A, AAAA et MX
-    dead = filter_dns_dead(domains, "A")
-    update_dead_file(prefixes, dead)
-
-    dead = filter_dns_dead(dead, "AAAA")
-    update_dead_file(prefixes, dead)
-
-    dead = filter_dns_dead(dead, "MX")
-    update_dead_file(prefixes, dead)
+    dead.update(filter_dns_dead(domains, "A"))
+    dead.update(filter_dns_dead(dead, "AAAA"))
+    dead.update(filter_dns_dead(dead, "MX"))
 
     # Vérification HTTP
-    dead = await filter_http_dead(dead)
+    dead.update(await filter_http_dead(dead))
+
+    # Mise à jour de dead.txt avec tous les domaines morts accumulés
     update_dead_file(prefixes, dead)
 
     print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
