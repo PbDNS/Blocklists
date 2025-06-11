@@ -22,13 +22,12 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Download and run Python script
+      - name: Download the filter file
+        run: curl -O https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
+
+      - name: Create and run Python script
         run: |
-          # Télécharger le fichier à partir de l'URL et exécuter le script
-          curl -O https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
-          
-          # Créer le fichier Python
-          echo '
+          cat <<EOF > test.py
 import requests
 
 def nettoyer_fichier(url, output_file):
@@ -52,7 +51,7 @@ def nettoyer_fichier(url, output_file):
 url = "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt"
 output_file = "test.txt"
 nettoyer_fichier(url, output_file)
-          ' > test.py
+EOF
 
           # Exécuter le script Python
           python3 test.py
