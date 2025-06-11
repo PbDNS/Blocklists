@@ -17,7 +17,7 @@ RETRY_COUNT = 2
 
 # Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
-    match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
+    match = re.match(r"\|\|([a-zA-Z0-9][a-zA0-9.-]*[a-zA-Z0-9])\^?", line.strip())
     if not match:
         return None
     domain = match.group(1)
@@ -153,24 +153,29 @@ async def main():
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
+    # Commencer avec tous les domaines
+    remaining_domains = domains
+
     # Accumuler les domaines morts
     dead = set()  # Utiliser un set pour éviter les doublons
 
-    # Vérifications DNS pour les enregistrements A, AAAA et MX
-    dead_a = filter_dns_dead(domains, "A")
-    domains -= dead_a  # Filtrer les domaines morts de la liste
+    # Vérifications DNS pour les enregistrements A
+    dead_a = filter_dns_dead(remaining_domains, "A")
+    remaining_domains -= dead_a  # Ne tester que les domaines vivants pour la suite
     dead.update(dead_a)
 
-    dead_aaaa = filter_dns_dead(domains, "AAAA")
-    domains -= dead_aaaa  # Filtrer les domaines morts de la liste
+    # Vérifications DNS pour les enregistrements AAAA
+    dead_aaaa = filter_dns_dead(remaining_domains, "AAAA")
+    remaining_domains -= dead_aaaa  # Ne tester que les domaines vivants pour la suite
     dead.update(dead_aaaa)
 
-    dead_mx = filter_dns_dead(domains, "MX")
-    domains -= dead_mx  # Filtrer les domaines morts de la liste
+    # Vérifications DNS pour les enregistrements MX
+    dead_mx = filter_dns_dead(remaining_domains, "MX")
+    remaining_domains -= dead_mx  # Ne tester que les domaines vivants pour la suite
     dead.update(dead_mx)
 
     # Vérification HTTP (uniquement pour les domaines morts après MX)
-    dead_http = await filter_http_dead(domains)
+    dead_http = await filter_http_dead(remaining_domains)
     dead.update(dead_http)
 
     # Mise à jour de dead.txt avec tous les domaines morts accumulés
