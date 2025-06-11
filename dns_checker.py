@@ -48,12 +48,12 @@ def update_dead_file(prefix, new_dead):
     # Lire les lignes actuelles de dead.txt
     if os.path.exists(DEAD_FILE):
         with open(DEAD_FILE, 'r', encoding='utf-8') as f:
-            existing_dead = [line.strip() for line in f if line.strip()]  # Pas de conversion en minuscule
+            existing_dead = [line.strip() for line in f if line.strip()]
     else:
         existing_dead = []
 
-    # Supprimer les anciens domaines qui commencent par le préfixe
-    remaining = [d for d in existing_dead if not d.startswith(prefix)]  # Comparaison directe sans modification de casse
+    # Supprimer les anciens domaines qui commencent par n'importe quel chiffre
+    remaining = [d for d in existing_dead if not d[0].isdigit()]
 
     # Ajouter les nouveaux domaines morts (éviter les doublons)
     updated = list(set(remaining + list(new_dead)))  # Convertir new_dead en liste avant de concaténer
@@ -170,6 +170,7 @@ async def main():
     update_dead_file(prefixes, dead)
 
     print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
+    print(f"🔄 Nombre d'insertion dans le fichier : {len(dead)}")
 
 if __name__ == "__main__":
     asyncio.run(main())
