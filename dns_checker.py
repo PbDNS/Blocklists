@@ -1,3 +1,6 @@
+CECI EST LE VERSION ORIGINALE AVANT LES MODIFS DE MARDI SOIR 10
+
+
 import sys
 import os
 import re
@@ -14,18 +17,6 @@ HTTP_TIMEOUT = 10
 MAX_CONCURRENT_DNS = 15
 MAX_CONCURRENT_HTTP = 10
 RETRY_COUNT = 2
-
-# Liste personnelle de résolveurs DNS
-DNS_RESOLVERS = [
-    '8.8.8.8',        # Google DNS IPv4
-    '8.8.4.4',        # Google DNS IPv4
-    '2001:4860:4860::8888',  # Google DNS IPv6
-    '2001:4860:4860::8844',  # Google DNS IPv6
-    '1.1.1.1',        # Cloudflare DNS IPv4
-    '1.0.0.1',        # Cloudflare DNS IPv4
-    '2606:4700:4700::1111',  # Cloudflare DNS IPv6
-    '2606:4700:4700::1001',  # Cloudflare DNS IPv6
-]
 
 # Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
@@ -62,16 +53,21 @@ def save_dead(lines):
     with open(DEAD_FILE, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sorted(set(lines))) + '\n')
 
-# Mise à jour de dead.txt en conservant les anciens préfixes
+# Mise à jour de dead.txt en supprimant les anciens domaines du préfixe et ajoutant les nouveaux
 def update_dead_file(prefix, new_dead):
     existing_dead = load_dead()
-    filtered_dead = [d for d in existing_dead if not d.startswith(prefix)]
-    updated = filtered_dead + new_dead
+    
+    # Supprimer les anciens domaines qui commencent par le préfixe
+    remaining = [d for d in existing_dead if not d.startswith(prefix)]
+    
+    # Ajouter les nouveaux domaines morts
+    updated = remaining + new_dead
+    
+    # Sauvegarder la nouvelle liste dans dead.txt
     save_dead(updated)
 
-# Configuration du résolveur DNS avec une liste personnelle de résolveurs
+# Configuration du résolveur DNS
 resolver = dns.resolver.Resolver()
-resolver.nameservers = DNS_RESOLVERS
 resolver.lifetime = DNS_TIMEOUT
 
 # Vérification DNS simple
@@ -152,27 +148,27 @@ async def filter_http_dead(domains):
 # Point d’entrée principal
 async def main():
     if len(sys.argv) != 2:
-        print("Usage: python script.py <prefix>")
+        print("Usage: python dns_checker.py <prefixes>")
         sys.exit(1)
 
-    prefix = sys.argv[1].lower()
-    print(f"📥 Chargement des domaines pour le préfixe: {prefix}")
-    domains = read_domains(prefix)
+    prefixes = sys.argv[1].lower()
+    print(f"📥 Chargement des domaines pour les préfixes: {prefixes}")
+    domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
     dead = filter_dns_dead(domains, "A")
-    update_dead_file(prefix, dead)
+    update_dead_file(prefixes, dead)
 
     dead = filter_dns_dead(dead, "AAAA")
-    update_dead_file(prefix, dead)
+    update_dead_file(prefixes, dead)
 
     dead = filter_dns_dead(dead, "MX")
-    update_dead_file(prefix, dead)
+    update_dead_file(prefixes, dead)
 
     dead = await filter_http_dead(dead)
-    update_dead_file(prefix, dead)
+    update_dead_file(prefixes, dead)
 
-    print(f"✅ Final : {len(dead)} domaines morts pour le préfixe {prefix}.")
+    print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
 
 if __name__ == "__main__":
     asyncio.run(main())
