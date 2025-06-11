@@ -5,7 +5,7 @@ import dns.resolver
 import httpx
 import asyncio
 import ipaddress
-import aiofiles  # Ajout de la bibliothèque pour l'écriture asynchrone
+import aiofiles
 from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
