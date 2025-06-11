@@ -42,7 +42,6 @@ Cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 - **Stalkerware Indicators List**
 - **Steven Black's List**
 - **The Big List of Hacked Malware Web Sites**
-# Liste de Blocklists DNS
 
 
 ### 1. **Publicités (Ads)**
