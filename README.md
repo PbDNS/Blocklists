@@ -44,9 +44,6 @@ Cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 - **The Big List of Hacked Malware Web Sites**
 # Liste de Blocklists DNS
 
-Ce projet contient une collection de blocklists DNS pour améliorer la confidentialité, la sécurité et l'expérience en ligne en bloquant les publicités, trackers, malwares, hôtes malveillants et autres contenus indésirables.
-
-## Blocklists par Type
 
 ### 1. **Publicités (Ads)**
 - **AdGuard DNS filter** : Liste de filtres publicitaires.
