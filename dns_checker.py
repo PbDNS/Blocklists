@@ -36,27 +36,26 @@ def read_domains(prefixes):
             domain = extract_domain(line)
             if domain and domain[0].lower() in prefixes:
                 domains.add(domain.lower())
-    return sorted(domains)
+    return domains
 
 # Sauvegarde du fichier dead.txt
 def save_dead(lines):
     with open(DEAD_FILE, 'w', encoding='utf-8') as f:
-        f.write('\n'.join(sorted(set(lines))) + '\n')
+        f.write('\n'.join(sorted(lines)) + '\n')
 
 # Mise à jour de dead.txt en supprimant les anciens domaines du préfixe et ajoutant les nouveaux
 def update_dead_file(prefix, new_dead):
-    # Lire les lignes actuelles de dead.txt
     if os.path.exists(DEAD_FILE):
         with open(DEAD_FILE, 'r', encoding='utf-8') as f:
             existing_dead = [line.strip() for line in f if line.strip()]
     else:
         existing_dead = []
 
-    # Supprimer les anciens domaines qui commencent par n'importe quel chiffre
+    # Supprimer les anciens domaines qui commencent par un préfixe numérique
     remaining = [d for d in existing_dead if not d[0].isdigit()]
 
     # Ajouter les nouveaux domaines morts (éviter les doublons)
-    updated = list(set(remaining + list(new_dead)))  # Convertir new_dead en liste avant de concaténer
+    updated = sorted(set(remaining + list(new_dead)))
 
     # Sauvegarder la nouvelle liste dans dead.txt
     save_dead(updated)
@@ -127,7 +126,6 @@ async def check_http(domain):
 
     return False
 
-
 # Vérifie quels domaines ne répondent pas en HTTP/HTTPS
 async def filter_http_dead(domains):
     print("🌐 Vérification HTTP des domaines...")
@@ -160,15 +158,15 @@ async def main():
 
     # Vérifications DNS pour les enregistrements A, AAAA et MX
     dead_a = filter_dns_dead(domains, "A")
-    domains = [d for d in domains if d not in dead_a]  # Filtrer les domaines morts
+    domains -= dead_a  # Filtrer les domaines morts de la liste
     dead.update(dead_a)
 
     dead_aaaa = filter_dns_dead(domains, "AAAA")
-    domains = [d for d in domains if d not in dead_aaaa]  # Filtrer les domaines morts
+    domains -= dead_aaaa  # Filtrer les domaines morts de la liste
     dead.update(dead_aaaa)
 
     dead_mx = filter_dns_dead(domains, "MX")
-    domains = [d for d in domains if d not in dead_mx]  # Filtrer les domaines morts
+    domains -= dead_mx  # Filtrer les domaines morts de la liste
     dead.update(dead_mx)
 
     # Vérification HTTP (uniquement pour les domaines morts après MX)
@@ -183,4 +181,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
