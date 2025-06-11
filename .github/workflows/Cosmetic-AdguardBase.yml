@@ -1,0 +1,59 @@
+name: Filter AdGuard Rules
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Exécution tous les jours à 3h du matin
+  workflow_dispatch:     # Permet le déclenchement manuel
+
+jobs:
+  filter-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Download and filter AdGuard rules
+        run: |
+          # Télécharger le fichier de règles
+          curl -s https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt -o original_filter.txt
+          
+          # Filtrer les règles avec Python
+          python -c '
+import re
+
+with open("original_filter.txt", "r", encoding="utf-8") as f:
+    lines = f.readlines()
+
+filtered_lines = []
+for line in lines:
+    line = line.strip()
+    # Ignorer les lignes de commentaires commençant par !
+    if line.startswith("!"):
+        continue
+    # Ignorer les lignes au format ||domaine.com^
+    if re.match(r"^\|\|[^$]*\^$", line):
+        continue
+    # Garder les autres lignes
+    if line:
+        filtered_lines.append(line)
+
+with open("Cosmetic-AdGuardBase.txt", "w", encoding="utf-8") as f:
+    f.write("\n".join(filtered_lines))
+          '
+          
+          # Afficher quelques statistiques
+          echo "Nombre de lignes dans le fichier original: $(wc -l < original_filter.txt)"
+          echo "Nombre de lignes dans le fichier filtré: $(wc -l < Cosmetic-AdGuardBase.txt)"
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Cosmetic-AdGuardBase.txt
+          git diff --staged --quiet || git commit -m "Update Cosmetic-AdGuardBase.txt - $(date '+%Y-%m-%d')"
+          git push
