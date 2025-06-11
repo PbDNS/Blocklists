@@ -24,18 +24,13 @@ def nettoyer_fichier(url, output_file):
         # Ajouter la ligne à la liste si elle ne correspond à aucune condition de suppression
         lignes_filtrées.append(ligne)
 
-    # Effacer le contenu actuel du fichier avant d'écrire les nouvelles lignes
-    print(f"Effacement du contenu actuel du fichier '{output_file}'...")
-
     # Sauvegarder les lignes filtrées dans le fichier de sortie
     print(f"Enregistrement des lignes filtrées dans '{output_file}'...")
-    try:
-        with open(output_file, 'w', encoding='utf-8') as f:
-            for ligne in lignes_filtrées:
-                f.write(f"{ligne}\n")
-        print(f"Le fichier nettoyé a été sauvegardé dans '{output_file}'.")
-    except Exception as e:
-        print(f"Erreur lors de l'écriture dans le fichier : {e}")
+    with open(output_file, 'w') as f:
+        for ligne in lignes_filtrées:
+            f.write(f"{ligne}\n")
+    
+    print(f"Le fichier nettoyé a été sauvegardé dans '{output_file}'.")
 
 # URL du fichier à télécharger depuis GitHub
 url = 'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt'
