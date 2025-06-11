@@ -17,7 +17,7 @@ RETRY_COUNT = 2
 
 # Extraction d’un domaine depuis le format ||domaine^
 def extract_domain(line):
-    match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
+    match = re.match(r"\|\|([a-zA-Z0-9][a-zAZ0-9.-]*[a-zA-Z0-9])\^?", line.strip())
     if not match:
         return None
     domain = match.group(1)
@@ -56,7 +56,7 @@ def update_dead_file(prefix, new_dead):
     remaining = [d for d in existing_dead if not d.startswith(prefix)]  # Comparaison directe sans modification de casse
 
     # Ajouter les nouveaux domaines morts (éviter les doublons)
-    updated = list(set(remaining + new_dead))  # Utilisation de set pour éviter les doublons
+    updated = list(set(remaining + list(new_dead)))  # Convertir new_dead en liste avant de concaténer
 
     # Sauvegarder la nouvelle liste dans dead.txt
     save_dead(updated)
