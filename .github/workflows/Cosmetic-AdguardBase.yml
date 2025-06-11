@@ -2,53 +2,30 @@ name: Filter AdGuard Rules
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Tous les jours à 3h du matin (UTC)
-  workflow_dispatch:      # Déclenchement manuel possible
+    - cron: '0 3 * * *' # Exécute tous les jours à 3h du matin
+  workflow_dispatch: # Permet de lancer le workflow manuellement
 
 jobs:
   filter-rules:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Download AdGuard filter file
-        run: |
-          curl -sSL https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt -o original_filter.txt
+    - name: Download the filter file
+      run: |
+        curl -o filter.txt https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
 
-      - name: Filter rules (remove comments and simple domain rules)
-        run: |
-          python3 <<EOF
-import re
+    - name: Filter the file
+      run: |
+        # Supprimer les lignes de commentaires et les lignes avec des filtres spécifiques
+        grep -v -E '^!|^\|\|[a-zA-Z0-9.-]+\.com\^$' filter.txt > Cosmetic-AdGuardBase.txt
 
-with open("original_filter.txt", "r", encoding="utf-8") as infile:
-    lines = infile.readlines()
-
-filtered = []
-for line in lines:
-    line = line.rstrip('\n')
-    # Supprimer les commentaires
-    if line.startswith("!"):
-        continue
-    # Supprimer les filtres simples: ||domaine.com^
-    if re.match(r"^\|\|[^$]*\^$", line):
-        continue
-    # Garder tout le reste (y compris les lignes vides)
-    filtered.append(line)
-
-with open("Cosmetic-AdGuardBase.txt", "w", encoding="utf-8") as outfile:
-    outfile.write('\n'.join(filtered) + '\n')
-EOF
-
-      - name: Commit and push changes
-        run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          if git diff --exit-code Cosmetic-AdGuardBase.txt; then
-            echo "No changes to commit."
-          else
-            git add Cosmetic-AdGuardBase.txt
-            git commit -m "Update Cosmetic-AdGuardBase.txt ($(date +'%Y-%m-%d'))"
-            git push
-          fi
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add Cosmetic-AdGuardBase.txt
+        git commit -m "Mise à jour automatique des règles filtrées"
+        git push
