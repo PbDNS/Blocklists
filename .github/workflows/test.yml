@@ -1,4 +1,69 @@
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
+name: Filtrage du fichier
+
+on:
+  workflow_dispatch:
+
+jobs:
+  nettoyage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Assure-toi que tu utilises la bonne version de Python
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Download and run Python script
+        run: |
+          # Télécharger le fichier à partir de l'URL et exécuter le script
+          curl -O https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
+          echo '
+import requests
+
+def nettoyer_fichier(url, output_file):
+    print("Téléchargement du fichier...")
+    response = requests.get(url)
+    if response.status_code != 200:
+        print(f"Erreur lors du téléchargement du fichier : {response.status_code}")
+        return
+
+    lignes_filtrées = []
+
+    for ligne in response.text.splitlines():
+        if ligne.startswith("!"):
+            continue
+        if ligne.startswith("||") and ligne.endswith("^"):
+            continue
+        lignes_filtrées.append(ligne)
+
+    print(f"Effacement du contenu actuel du fichier \'{output_file}\'...")
+
+    with open(output_file, "w") as f:
+        for ligne in lignes_filtrées:
+            f.write(f"{ligne}\\n")
+
+    print(f"Le fichier nettoyé a été sauvegardé dans \'{output_file}\'.")
+url = "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt"
+output_file = "test.txt"
+nettoyer_fichier(url, output_file)
+          ' > test.py
+
+          python3 test.py
+
+      - name: Commit and push filtered file
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          git add test.txt
+          git commit -m "Ajout du fichier filtré"
+          git push
