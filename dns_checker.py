@@ -159,12 +159,21 @@ async def main():
     dead = set()  # Utiliser un set pour éviter les doublons
 
     # Vérifications DNS pour les enregistrements A, AAAA et MX
-    dead.update(filter_dns_dead(domains, "A"))
-    dead.update(filter_dns_dead(dead, "AAAA"))
-    dead.update(filter_dns_dead(dead, "MX"))
+    dead_a = filter_dns_dead(domains, "A")
+    domains = [d for d in domains if d not in dead_a]  # Filtrer les domaines morts
+    dead.update(dead_a)
 
-    # Vérification HTTP
-    dead.update(await filter_http_dead(dead))
+    dead_aaaa = filter_dns_dead(domains, "AAAA")
+    domains = [d for d in domains if d not in dead_aaaa]  # Filtrer les domaines morts
+    dead.update(dead_aaaa)
+
+    dead_mx = filter_dns_dead(domains, "MX")
+    domains = [d for d in domains if d not in dead_mx]  # Filtrer les domaines morts
+    dead.update(dead_mx)
+
+    # Vérification HTTP (uniquement pour les domaines morts après MX)
+    dead_http = await filter_http_dead(domains)
+    dead.update(dead_http)
 
     # Mise à jour de dead.txt avec tous les domaines morts accumulés
     update_dead_file(prefixes, dead)
@@ -174,3 +183,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
