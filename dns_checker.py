@@ -7,17 +7,12 @@ import os
 import ipaddress
 from concurrent.futures import ThreadPoolExecutor
 
-# Liste de résolveurs DNS publics
+# Liste de résolveurs DNS publics (on ne teste qu'un seul à la fois pour chaque domaine)
 DNS_SERVERS = [
     "8.8.8.8",    # Google DNS IPv4
     "8.8.4.4",    # Google DNS IPv4
     "1.1.1.1",    # Cloudflare DNS IPv4
-    "1.0.0.1",    # Cloudflare DNS IPv4
     "9.9.9.9",    # Quad9 DNS IPv4
-    "2001:4860:4860::8888",  # Google DNS IPv6
-    "2001:4860:4860::8844",  # Google DNS IPv6
-    "2606:4700:4700::1111",  # Cloudflare DNS IPv6
-    "2606:4700:4700::1001",  # Cloudflare DNS IPv6
 ]
 
 BLOCKLIST_FILE = "blocklist.txt"
@@ -28,7 +23,7 @@ MAX_CONCURRENT_DNS = 20  # Augmenter pour plus de parallélisation
 MAX_CONCURRENT_HTTP = 10
 RETRY_COUNT = 2
 
-# Fonction pour extraire les domaines
+# Extraction du domaine à partir du fichier
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])\^?", line.strip())
     if not match:
@@ -40,7 +35,7 @@ def extract_domain(line):
     except ValueError:
         return domain
 
-# Fonction pour lire les domaines à partir du fichier
+# Lecture des domaines depuis le fichier
 def read_domains(prefixes):
     prefixes = tuple(prefixes.lower()) if isinstance(prefixes, str) else tuple()
     domains = set()
@@ -69,22 +64,21 @@ def update_dead_file(prefix, new_dead):
 
     save_dead(updated)
 
-# Fonction de vérification DNS avec plusieurs résolveurs
-async def dns_check_with_resolvers(domain, record_type):
-    for attempt in range(RETRY_COUNT):
-        for server in DNS_SERVERS:
-            resolver = dns.resolver.Resolver()
-            resolver.nameservers = [server]
-            resolver.lifetime = DNS_TIMEOUT
-            try:
-                resolver.resolve(domain, record_type)
-                return True
-            except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
-                continue
-            except Exception:
-                if attempt < RETRY_COUNT - 1:
-                    continue
-                return False  # considérer comme mort si échec
+# Fonction DNS asynchrone
+async def dns_check(domain, record_type):
+    resolver = dns.resolver.Resolver()
+    resolver.lifetime = DNS_TIMEOUT
+
+    # Test avec un seul résolveur à la fois
+    for server in DNS_SERVERS:
+        resolver.nameservers = [server]
+        try:
+            resolver.resolve(domain, record_type)
+            return True
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+            continue
+        except Exception:
+            continue
 
     return False
 
@@ -96,14 +90,14 @@ async def filter_dns_dead(domains, record_type):
 
     async def task(domain):
         async with semaphore:
-            alive = await dns_check_with_resolvers(domain, record_type)
+            alive = await dns_check(domain, record_type)
             return domain if not alive else None
 
     tasks = [task(domain) for domain in domains]
     filtered = await asyncio.gather(*tasks)
     return [d for d in filtered if d]
 
-# Vérification HTTP (reste inchangé)
+# Vérification HTTP des domaines
 async def check_http(domain):
     VALID_STATUS_CODES = {200, 301, 302, 403, 404, 500}
     urls = [f"http://{domain}", f"https://{domain}"]
@@ -156,7 +150,7 @@ async def main():
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
-    # Vérifications DNS
+    # Vérifications DNS pour A, AAAA et MX
     dead = await filter_dns_dead(domains, "A")
     update_dead_file(prefixes, dead)
 
