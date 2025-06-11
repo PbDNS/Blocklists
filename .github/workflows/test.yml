@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  nettoyage:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,9 +12,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v2  # Version stable de setup-python
         with:
-          python-version: '3.x' 
+          python-version: '3.x'  # Essaye avec une version générique
 
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
@@ -26,6 +26,8 @@ jobs:
         run: |
           # Télécharger le fichier à partir de l'URL et exécuter le script
           curl -O https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
+          
+          # Créer le fichier Python
           echo '
 import requests
 
@@ -52,6 +54,7 @@ output_file = "test.txt"
 nettoyer_fichier(url, output_file)
           ' > test.py
 
+          # Exécuter le script Python
           python3 test.py
 
       - name: Commit and push filtered file
