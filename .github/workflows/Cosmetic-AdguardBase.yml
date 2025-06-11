@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # Assurez-vous de récupérer tout l'historique pour pouvoir pousser
 
     - name: Download the filter file
       run: |
@@ -19,10 +21,7 @@ jobs:
 
     - name: Filter the file
       run: |
-        # Supprimer les lignes de commentaires
-        grep -v '^!' filter.txt | \
-        # Supprimer les lignes contenant des filtres spécifiques
-        grep -v -E '^\|\|www\.[a-zA-Z0-9.-]+\.com\^$' > Cosmetic-AdGuardBase.txt
+        grep -v '^!' filter.txt | grep -v -E '^\|\|www\.[a-zA-Z0-9.-]+\.com\^$' > Cosmetic-AdGuardBase.txt
 
     - name: Commit and push changes
       run: |
