@@ -29,11 +29,13 @@ def nettoyer_fichier(url, output_file):
 
     # Sauvegarder les lignes filtrées dans le fichier de sortie
     print(f"Enregistrement des lignes filtrées dans '{output_file}'...")
-    with open(output_file, 'w') as f:
-        for ligne in lignes_filtrées:
-            f.write(f"{ligne}\n")
-
-    print(f"Le fichier nettoyé a été sauvegardé dans '{output_file}'.")
+    try:
+        with open(output_file, 'w') as f:
+            for ligne in lignes_filtrées:
+                f.write(f"{ligne}\n")
+        print(f"Le fichier nettoyé a été sauvegardé dans '{output_file}'.")
+    except Exception as e:
+        print(f"Erreur lors de l'écriture dans le fichier : {e}")
 
 # URL du fichier à télécharger depuis GitHub
 url = 'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt'
