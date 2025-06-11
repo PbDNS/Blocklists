@@ -12,9 +12,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v2  # Version stable de setup-python
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Essaye avec une version générique
+          python-version: '3.x'
 
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
@@ -25,42 +25,16 @@ jobs:
       - name: Download the filter file
         run: curl -O https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
 
-      - name: Create and run Python script
-        run: |
-          cat << 'EOF' > test.py
-import requests
+      - name: Download the Python script (test.py)
+        run: curl -O https://example.com/path/to/test.py  # Remplace par l'URL correcte du fichier test.py
 
-def nettoyer_fichier(url, output_file):
-    response = requests.get(url)
-    if response.status_code != 200:
-        return
-
-    lignes_filtrées = []
-
-    for ligne in response.text.splitlines():
-        if ligne.startswith("!"):
-            continue
-        if ligne.startswith("||") and ligne.endswith("^"):
-            continue
-        lignes_filtrées.append(ligne)
-
-    with open(output_file, "w") as f:
-        for ligne in lignes_filtrées:
-            f.write(f"{ligne}\\n")
-
-url = "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt"
-output_file = "test.txt"
-nettoyer_fichier(url, output_file)
-EOF
-
-          # Exécuter le script Python
-          python3 test.py
+      - name: Run Python script
+        run: python3 test.py
 
       - name: Commit and push filtered file
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-
           git add test.txt
           git commit -m "Ajout du fichier filtré"
           git push
