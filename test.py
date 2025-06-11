@@ -24,9 +24,6 @@ def nettoyer_fichier(url, output_file):
         # Ajouter la ligne à la liste si elle ne correspond à aucune condition de suppression
         lignes_filtrées.append(ligne)
 
-    # Effacer le contenu actuel du fichier avant d'écrire les nouvelles lignes
-    print(f"Effacement du contenu actuel du fichier '{output_file}'...")
-
     # Sauvegarder les lignes filtrées dans le fichier de sortie
     print(f"Enregistrement des lignes filtrées dans '{output_file}'...")
     with open(output_file, 'w') as f:
