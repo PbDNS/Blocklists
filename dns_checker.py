@@ -157,20 +157,20 @@ async def main():
     print(f"🔎 {len(domains)} domaines à tester.")
 
     # Vérifications DNS pour les enregistrements A, AAAA et MX
-    dead = filter_dns_dead(domains, "A")
-    await update_dead_file(prefixes, dead)
+    dead_dns_a = filter_dns_dead(domains, "A")
+    dead_dns_aaaa = filter_dns_dead(domains, "AAAA")
+    dead_dns_mx = filter_dns_dead(domains, "MX")
 
-    dead = filter_dns_dead(dead, "AAAA")
-    await update_dead_file(prefixes, dead)
-
-    dead = filter_dns_dead(dead, "MX")
-    await update_dead_file(prefixes, dead)
+    # Combiner tous les domaines morts DNS
+    dead_dns = set(dead_dns_a + dead_dns_aaaa + dead_dns_mx)
 
     # Vérification HTTP
-    dead = await filter_http_dead(dead)
-    await update_dead_file(prefixes, dead)
+    dead_http = await filter_http_dead(dead_dns)
 
-    print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
+    # Mettre à jour dead.txt après toutes les vérifications
+    await update_dead_file(prefixes, dead_http)
+
+    print(f"✅ Final : {len(dead_http)} domaines morts pour les préfixes {prefixes}.")
 
 if __name__ == "__main__":
     asyncio.run(main())
