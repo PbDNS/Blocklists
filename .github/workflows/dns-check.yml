@@ -8,14 +8,14 @@ on:
         required: true
         default: 'x'
   schedule:
-    - cron: '0 9 * * *'   # chiffres (0-9)
-    - cron: '0 11 * * *'   # a b c d
-    - cron: '0 13 * * *'   # e f g h
-    - cron: '0 15 * * *'   # i j k l
-    - cron: '0 17 * * *'   # m n o p
-    - cron: '0 19 * * *'   # q r s t
-    - cron: '0 21 * * *'   # u v w x
-    - cron: '0 23 * * *'   # y z
+    - cron: '0 5 * * *'   # chiffres (0-9)
+    - cron: '0 7 * * *'   # a b c d
+    - cron: '0 9 * * *'   # e f g h
+    - cron: '0 13 * * *'   # i j k l
+    - cron: '0 15 * * *'   # m n o p
+    - cron: '0 17 * * *'   # q r s t
+    - cron: '0 19 * * *'   # u v w x
+    - cron: '0 21 * * *'   # y z
 
 jobs:
   dns-check-manual:
@@ -40,14 +40,14 @@ jobs:
         run: |
           # Mapping des heures aux préfixes
           case "$(date +'%H')" in
-            9) echo "prefix=0123456789" >> $GITHUB_ENV ;;  # chiffres
-            11) echo "prefix=abcd" >> $GITHUB_ENV ;;
-            13) echo "prefix=efgh" >> $GITHUB_ENV ;;
-            15) echo "prefix=ijkl" >> $GITHUB_ENV ;;
-            17) echo "prefix=mnop" >> $GITHUB_ENV ;;
-            19) echo "prefix=qrst" >> $GITHUB_ENV ;;
-            21) echo "prefix=uvwx" >> $GITHUB_ENV ;;
-            23) echo "prefix=yz" >> $GITHUB_ENV ;;
+            5) echo "prefix=0123456789" >> $GITHUB_ENV ;;  # chiffres
+            7) echo "prefix=abcd" >> $GITHUB_ENV ;;
+            9) echo "prefix=efgh" >> $GITHUB_ENV ;;
+            13) echo "prefix=ijkl" >> $GITHUB_ENV ;;
+            15) echo "prefix=mnop" >> $GITHUB_ENV ;;
+            17) echo "prefix=qrst" >> $GITHUB_ENV ;;
+            19) echo "prefix=uvwx" >> $GITHUB_ENV ;;
+            21) echo "prefix=yz" >> $GITHUB_ENV ;;
             *) echo "prefix=x" >> $GITHUB_ENV ;;  # fallback
           esac
 
