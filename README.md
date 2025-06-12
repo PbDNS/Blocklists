@@ -4,6 +4,7 @@
 
 cette compilation mise à jour quotidiennement vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés
 
+
 ---
 
 ## Objectif
@@ -12,6 +13,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - limiter la collecte de données personnelles (trackers, fingerprinting)
 - bloquer les logiciels malveillants, scams, phishing
 - améliorer la sécurité
+
 
 ---
 
@@ -43,6 +45,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - **Stalkerware Indicators List**
 - **Steven Black's List**
 - **The Big List of Hacked Malware Web Sites**
+
 
 ---
 
