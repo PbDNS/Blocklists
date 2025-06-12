@@ -77,7 +77,6 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt"
 ]
 
-
 def is_valid_domain(domain):
     return re.match(
         r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
@@ -177,8 +176,9 @@ timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
 # Écriture du fichier de sortie
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(final_entries):06} entrées finales\n\n")
+    f.write(f"! {len(final_entries):06} entrées\n\n")
     for entry in sorted(final_entries):
-        f.write(f"||{entry}^\n")
+        f.write(f"||{entry.lower()}^\n")
+
 
 print(f"✅ Fichier blocklist.txt généré avec {len(final_entries)} entrées.")
