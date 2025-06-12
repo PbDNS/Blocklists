@@ -46,7 +46,7 @@ except locale.Error as e:
 
 # Blocklistes incluses
 blocklist_urls = [
-    "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
+    #"https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
