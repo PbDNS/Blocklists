@@ -3,7 +3,7 @@ name: Génération de blocklist.txt
 on:
   schedule:
     - cron: '0 */12 * * *'  # Tous les jours à 00:00 et 12:00 UTC
-  workflow_dispatch:        # Permet aussi un lancement manuel
+  workflow_dispatch:
 
 jobs:
   build:
