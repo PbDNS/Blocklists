@@ -14,7 +14,8 @@ import ipaddress
 # HaGeZi's Windows/Office Tracker DNS Blocklist
 # ShadowWhisperer's Malware List
 # OISD Small
-# Dandelion Sprout's Anti-Malware List
+# Dandelion Sprout's Anti Malware List
+# Dandelion Sprout's Anti Push Notifications
 # HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
 # AWAvenue Ads Rule
 # HaGeZi's Apple Tracker DNS Blocklist
@@ -40,6 +41,7 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt",
     "https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
