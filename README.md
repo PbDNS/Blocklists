@@ -16,7 +16,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 
 ---
 
-## Blocklistes incluses
+## Listes incluses
 
 - **AdGuard DNS filter**
 - **AdGuard French adservers**
