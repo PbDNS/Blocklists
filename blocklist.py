@@ -31,6 +31,7 @@ except locale.Error as e:
 # HaGeZi's Apple Tracker DNS Blocklist
 # d3Host
 # AdGuard DNS filter
+# Phishing Army
 # Phishing URL Blocklist (PhishTank and OpenPhish)
 # Malicious URL Blocklist (URLHaus)
 # Scam Blocklist by DurableNapkin
@@ -63,6 +64,7 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
     "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_18.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
