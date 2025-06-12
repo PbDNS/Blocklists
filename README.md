@@ -6,6 +6,14 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 
 ---
 
+- améliorer la sécurité
+
+---
+
+&nbsp;
+
+## Blocklistes incluses
+
 ## Objectif
 
 - bloquer les publicités
