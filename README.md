@@ -38,6 +38,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - **Malicious URL Blocklist (URLHaus)**
 - **OISD Small**
 - **Peter Lowe's Blocklist**
+- **Phishing Army**
 - **Phishing URL Blocklist (PhishTank and OpenPhish)**
 - **Scam Blocklist by DurableNapkin**
 - **ShadowWhisperer's Malware List**
