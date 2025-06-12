@@ -39,7 +39,7 @@ def nettoyer_fichier(url, output_file):
 url = 'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt'
 
 # Fichier de sortie
-output_file = 'test.txt'
+output_file = 'local-adguarddns.txt'
 
 # Exécuter la fonction pour nettoyer le fichier
 nettoyer_fichier(url, output_file)
