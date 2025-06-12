@@ -33,7 +33,7 @@ jobs:
       run: |
         # Télécharger le fichier à partir de l'URL et exécuter le script
         curl -O https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
-        python3 test.py
+        python3 local-adguarddns.py
 
     # Étape 5 : Ajouter et pousser les modifications, même si aucun changement
     - name: Commit and push filtered file
