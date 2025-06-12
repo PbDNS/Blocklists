@@ -3,6 +3,16 @@ import concurrent.futures
 from datetime import datetime
 import re
 import ipaddress
+import locale
+import os
+
+# Définir la locale française (assumée installée via GitHub Actions)
+try:
+    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
+except locale.Error as e:
+    print(f"⚠️ Impossible de définir la locale fr_FR.UTF-8 : {e}")
+    # fallback sans crash
+    pass
 
 # HaGeZi's Normal DNS Blocklist
 # HaGeZi's Pop-Up Ads DNS Blocklist
@@ -67,6 +77,7 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt"
 ]
 
+
 def is_valid_domain(domain):
     return re.match(
         r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
@@ -121,7 +132,8 @@ def download_and_extract(url):
 
             return rules
 
-    except Exception:
+    except Exception as e:
+        print(f"Erreur lors du téléchargement de {url} : {e}")
         return set()
 
 # Téléchargement parallèle
@@ -149,7 +161,6 @@ class DomainTrieNode:
 def domain_to_parts(domain):
     return domain.strip().split(".")[::-1]
 
-# Application du filtrage et du tri
 trie_root = DomainTrieNode()
 final_entries = set()
 
@@ -160,10 +171,14 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
     elif is_valid_ip(entry):
         final_entries.add(entry)
 
-# Écriture du fichier sortie
-timestamp = datetime.utcnow().strftime("%d-%m-%Y %H:%M")
+# Format de la date locale française
+timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
+
+# Écriture du fichier de sortie
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {len(final_entries):06} entrées finales\n\n")
     for entry in sorted(final_entries):
         f.write(f"||{entry}^\n")
+
+print(f"✅ Fichier blocklist.txt généré avec {len(final_entries)} entrées.")
