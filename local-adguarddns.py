@@ -2,7 +2,7 @@ import requests
 
 def nettoyer_fichier(url, output_file):
     # Télécharger le fichier depuis l'URL
-    print("Téléchargement du fichier...")
+    print(f"Téléchargement du fichier depuis {url}...")
     response = requests.get(url)
     if response.status_code != 200:
         print(f"Erreur lors du téléchargement du fichier : {response.status_code}")
@@ -35,11 +35,12 @@ def nettoyer_fichier(url, output_file):
     
     print(f"Le fichier nettoyé a été sauvegardé dans '{output_file}'.")
 
-# URL du fichier à télécharger depuis GitHub
-url = 'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt'
+# URL des fichiers à télécharger depuis GitHub
+urls = [
+    ('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt', 'local-adguarddns.txt'),
+    ('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt', 'local-adguardspy.txt')
+]
 
-# Fichier de sortie
-output_file = 'local-adguarddns.txt'
-
-# Exécuter la fonction pour nettoyer le fichier
-nettoyer_fichier(url, output_file)
+# Exécuter la fonction pour chaque fichier
+for url, output_file in urls:
+    nettoyer_fichier(url, output_file)
