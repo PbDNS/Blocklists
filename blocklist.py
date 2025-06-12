@@ -61,7 +61,7 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"   
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
 ]
 
 def is_valid_domain(domain):
@@ -146,23 +146,11 @@ class DomainTrieNode:
 def domain_to_parts(domain):
     return domain.strip().split(".")[::-1]
 
-# 🔽 Lecture de dead.txt pour exclure domaines et IPs morts
-try:
-    with open("dead.txt", "r", encoding="utf-8") as df:
-        dead_entries = set(
-            line.strip() for line in df
-            if line.strip() and not line.startswith("#")
-        )
-except FileNotFoundError:
-    dead_entries = set()
-
-# 🔽 Application du filtrage et du tri
+# Application du filtrage et du tri
 trie_root = DomainTrieNode()
 final_entries = set()
 
 for entry in sorted(all_entries, key=lambda e: e.count(".")):
-    if entry in dead_entries:
-        continue
     if is_valid_domain(entry):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
