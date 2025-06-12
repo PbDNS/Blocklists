@@ -9,7 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
 DNS_TIMEOUT = 3
-HTTP_TIMEOUT = 3
+HTTP_TIMEOUT = 2
 MAX_CONCURRENT_DNS = 15
 MAX_CONCURRENT_HTTP = 10
 
@@ -72,11 +72,13 @@ def filter_dns_dead(domains, record_type):
 
 async def check_http(domain):
     urls = [f"http://{domain}", f"https://{domain}"]
+    valid_codes = {200, 301, 302, 401}
+
     async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
         for url in urls:
             try:
-                resp = await client.head(url)
-                if resp.status_code < 500:
+                resp = await client.get(url)
+                if resp.status_code in valid_codes:
                     return True
             except:
                 continue
