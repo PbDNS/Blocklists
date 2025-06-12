@@ -1,4 +1,4 @@
-name: Filtrage du fichier
+name: Local Adguard DNS List
 
 on:
   schedule:
