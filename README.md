@@ -1,12 +1,12 @@
 🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
-# agrégation de listes de blocage internationales et francophones
+# Agrégation de listes de blocage internationales et francophones
 
-cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés
+cette compilation mise à jour quotidiennement vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés
 
 ---
 
-## objectif
+## Objectif
 
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
@@ -15,7 +15,7 @@ cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 
 ---
 
-## blocklistes incluses
+## Blocklistes incluses
 
 - **AdGuard DNS filter**
 - **AdGuard French adservers**
@@ -46,7 +46,7 @@ cette compilation mise à jour 2/j vise à combiner les forces de nombreuses blo
 
 ---
 
-## format et utilisation
+## Format et utilisation
 
 - format Adblock Plus
 - sous-domaines redondants supprimés
