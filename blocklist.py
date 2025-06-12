@@ -6,11 +6,11 @@ import ipaddress
 import locale
 import os
 
-# Définir la locale française (assumée installée via GitHub Actions)
+# Définir local france
 try:
     locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
 except locale.Error as e:
-    print(f"⚠️ Impossible de définir la locale fr_FR.UTF-8 : {e}")
+    print(f"⚠️ Impossible de définir local fr_FR.UTF-8 : {e}")
     # fallback sans crash
     pass
 
