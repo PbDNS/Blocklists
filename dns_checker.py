@@ -12,6 +12,8 @@ DNS_TIMEOUT = 5
 HTTP_TIMEOUT = 5
 MAX_CONCURRENT_DNS = 15
 MAX_CONCURRENT_HTTP = 10
+DNS_RETRIES = 2
+HTTP_RETRIES = 2
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
@@ -43,18 +45,22 @@ def update_dead_file(prefixes, new_dead):
     updated = filtered_dead + new_dead
     save_dead(updated)
 
-# Global resolver reused for better performance
 resolver = dns.resolver.Resolver()
 resolver.lifetime = DNS_TIMEOUT
 
 def dns_check(domain, record_type):
-    try:
-        resolver.resolve(domain, record_type)
-        return True
-    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
-        return False
-    except:
-        return True  # considérer vivant si doute
+    for attempt in range(1, DNS_RETRIES + 1):
+        try:
+            resolver.resolve(domain, record_type)
+            return True
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+            return False
+        except Exception as e:
+            if attempt == DNS_RETRIES:
+                # En cas d’erreur persistante, considérer vivant par prudence
+                return True
+            # Sinon, retry
+    return True  # Par défaut, considérer vivant
 
 def filter_dns_dead(domains, record_type):
     print(f"📡 Vérification DNS {record_type} sur {len(domains)} domaines...")
@@ -72,16 +78,23 @@ def filter_dns_dead(domains, record_type):
 
 async def check_http(domain):
     urls = [f"http://{domain}", f"https://{domain}"]
-    valid_codes = {200, 301, 302, 401}
+    valid_codes = {200, 301, 302, 401, 403}
 
     async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
         for url in urls:
-            try:
-                resp = await client.get(url)
-                if resp.status_code in valid_codes:
-                    return True
-            except:
-                continue
+            for attempt in range(1, HTTP_RETRIES + 1):
+                try:
+                    resp = await client.get(url)
+                    if resp.status_code in valid_codes:
+                        return True
+                    else:
+                        # Code non valide => ne continue pas avec ce url, essaie le suivant
+                        break
+                except Exception:
+                    if attempt == HTTP_RETRIES:
+                        # Dernier essai raté, on continue avec url suivant ou retourne False si tous échouent
+                        continue
+                    # Retry sur la même url
     return False
 
 async def filter_http_dead(domains):
