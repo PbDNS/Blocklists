@@ -13,7 +13,6 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - bloquer les logiciels malveillants, scams, phishing
 - améliorer la sécurité
 
-&nbsp;
 ---
 
 ## Blocklistes incluses
