@@ -23,7 +23,6 @@
 ||metrics.cybertek.fr^
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net^
 ||s.pemsrv.com^
-||s0.2mdn.net^
 ||saleclosersemail.com^
 ||scdns.link^
 ||sntf.femmeactuelle.fr^
