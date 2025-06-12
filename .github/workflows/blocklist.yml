@@ -5,15 +5,6 @@ on:
     - cron: '0 */12 * * *'  # Tous les jours à 00:00 et 12:00 UTC
   workflow_dispatch:        # Permet aussi un lancement manuel
 
-- name: Installer et activer la locale française
-  run: |
-    sudo apt-get update
-    sudo apt-get install -y locales
-    sudo locale-gen fr_FR.UTF-8
-    sudo update-locale LANG=fr_FR.UTF-8
-    echo "LANG=fr_FR.UTF-8" >> $GITHUB_ENV
-    echo "LC_ALL=fr_FR.UTF-8" >> $GITHUB_ENV
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,7 +18,19 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Installer la locale française
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y locales
+          sudo locale-gen fr_FR.UTF-8
+          sudo update-locale LANG=fr_FR.UTF-8
+          echo "LANG=fr_FR.UTF-8" >> $GITHUB_ENV
+          echo "LC_ALL=fr_FR.UTF-8" >> $GITHUB_ENV
+
       - name: Exécuter blocklist.py
+        env:
+          LANG: fr_FR.UTF-8
+          LC_ALL: fr_FR.UTF-8
         run: python blocklist.py
 
       - name: Commit et push de blocklist.txt
@@ -35,5 +38,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add blocklist.txt
-          git commit -m "AutoUpdate [$(date -u)]" || echo "Rien à committer"
+          git commit -m "🛡️ Mise à jour automatique [$(date '+%d/%m/%Y %H:%M')]" || echo "Rien à committer"
           git push
