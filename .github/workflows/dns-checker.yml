@@ -9,7 +9,7 @@ on:
         default: "a"
 
 permissions:
-  contents: write  # 🔐 nécessaire pour permettre le git push
+  contents: write  # 🔐 Autorise les pushs vers le dépôt
 
 jobs:
   run-check:
@@ -19,7 +19,7 @@ jobs:
       - name: 📥 Cloner le dépôt
         uses: actions/checkout@v4
         with:
-          persist-credentials: true  # ✅ nécessaire pour git push
+          persist-credentials: true  # ✅ essentiel pour les pushs
 
       - name: 🐍 Installer Python et les dépendances
         uses: actions/setup-python@v5
@@ -41,15 +41,18 @@ jobs:
           if [ -f dead.txt ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-
-            if git diff --quiet && git diff --cached --quiet; then
-              echo "✅ Aucun changement à commiter."
+            
+            # Ajout du fichier modifié
+            git add dead.txt
+            
+            # Vérifie s'il y a vraiment une modification
+            if git diff --cached --quiet; then
+              echo "✅ Aucun changement dans dead.txt à commiter."
             else
-              git add dead.txt
               git commit -m "🔄 Mise à jour de dead.txt (préfixes: ${{ github.event.inputs.prefixes }})"
               git push
+              echo "✅ dead.txt mis à jour et poussé."
             fi
           else
             echo "❌ Fichier dead.txt non trouvé. Rien à commiter."
           fi
-
