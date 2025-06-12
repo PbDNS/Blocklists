@@ -6,13 +6,12 @@ import ipaddress
 import locale
 import os
 
-# Définir local france
+# Définir local France
 try:
     locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
 except locale.Error as e:
     print(f"⚠️ Impossible de définir local fr_FR.UTF-8 : {e}")
-    # fallback sans crash
-    pass
+    pass 
 
 # HaGeZi's Normal DNS Blocklist
 # HaGeZi's Pop-Up Ads DNS Blocklist
@@ -79,23 +78,17 @@ blocklist_urls = [
 ]
 
 def is_valid_domain(domain):
+    # Exclure explicitement les IP
+    try:
+        ipaddress.ip_address(domain)
+        return False
+    except ValueError:
+        pass  # Ce n’est pas une IP, on continue
+
     return re.match(
         r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
         domain
-    )
-
-def is_valid_ip(ip):
-    try:
-        ip_obj = ipaddress.ip_address(ip)
-        return ip_obj.version == 4 and not (
-            ip_obj.is_loopback or
-            ip_obj.is_private or
-            ip_obj.is_link_local or
-            ip_obj.is_reserved or
-            ip_obj.is_multicast
-        )
-    except ValueError:
-        return False
+    ) is not None
 
 def download_and_extract(url):
     try:
@@ -114,20 +107,20 @@ def download_and_extract(url):
                         target = parts[1].strip()
                         if "*" in target:
                             continue
-                        if is_valid_domain(target) or is_valid_ip(target):
+                        if is_valid_domain(target):
                             rules.add(target)
 
                 elif line.startswith("||") and line.endswith("^"):
                     target = line[2:-1]
                     if "*" in target:
                         continue
-                    if is_valid_domain(target) or is_valid_ip(target):
+                    if is_valid_domain(target):
                         rules.add(target)
 
                 elif re.match(r"^[a-zA-Z0-9.-]+$", line):
                     if "*" in line:
                         continue
-                    if is_valid_domain(line) or is_valid_ip(line):
+                    if is_valid_domain(line):
                         rules.add(line)
 
             return rules
@@ -168,8 +161,6 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
     if is_valid_domain(entry):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
-    elif is_valid_ip(entry):
-        final_entries.add(entry)
 
 # Format de la date locale française
 timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
@@ -181,5 +172,5 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
     for entry in sorted(final_entries):
         f.write(f"||{entry.lower()}^\n")
 
-
 print(f"✅ Fichier blocklist.txt généré avec {len(final_entries)} entrées.")
+
