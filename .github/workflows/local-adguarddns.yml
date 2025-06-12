@@ -1,4 +1,4 @@
-name: Local Adguard DNS List
+name: Local Adguard Filter Lists
 
 on:
   schedule:
@@ -31,18 +31,19 @@ jobs:
     # Étape 4 : Télécharger et exécuter le script Python
     - name: Download and run Python script
       run: |
-        # Télécharger le fichier à partir de l'URL et exécuter le script
+        # Télécharger le fichier à partir des URLs et exécuter le script
         curl -O https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
+        curl -O https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt
         python3 local-adguarddns.py
 
     # Étape 5 : Ajouter et pousser les modifications, même si aucun changement
-    - name: Commit and push filtered file
+    - name: Commit and push filtered files
       run: |
         # Configurer les informations de l'utilisateur Git pour commettre les modifications
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
 
-        # Forcer l'ajout du fichier test.txt, même si aucune modification n'est détectée
-        git add -f local-adguarddns.txt
-        git commit -m "Ajout du fichier filtré" || echo "No changes to commit"
+        # Ajouter les fichiers filtrés et les pousser
+        git add -f local-adguarddns.txt local-adguardspy.txt
+        git commit -m "Ajout des fichiers filtrés" || echo "No changes to commit"
         git push
