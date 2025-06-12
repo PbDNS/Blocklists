@@ -8,8 +8,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
-DNS_TIMEOUT = 3
-HTTP_TIMEOUT = 2
+DNS_TIMEOUT = 5
+HTTP_TIMEOUT = 5
 MAX_CONCURRENT_DNS = 15
 MAX_CONCURRENT_HTTP = 10
 
