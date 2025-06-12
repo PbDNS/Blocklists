@@ -38,7 +38,8 @@ def nettoyer_fichier(url, output_file):
 # URL des fichiers à télécharger depuis GitHub
 urls = [
     ('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt', 'local-adguarddns.txt'),
-    ('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt', 'local-adguardspy.txt')
+    ('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt', 'local-adguardspy.txt'),
+    ('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_16_French/filter.txt', 'local-adguardfr.txt')
 ]
 
 # Exécuter la fonction pour chaque fichier
