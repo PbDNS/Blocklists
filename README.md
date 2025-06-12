@@ -13,7 +13,6 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - bloquer les logiciels malveillants, scams, phishing
 - améliorer la sécurité
 
-&nbsp;
 ---
 
 ## Blocklistes incluses
@@ -53,3 +52,5 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - sous-domaines redondants supprimés
 - compatible avec des solutions comme dnsmasq, AdGuard Home, Pi-hole ou Unbound
 - optimisé pour un usage DNS/adblock au niveau réseau
+
+&nbsp;
