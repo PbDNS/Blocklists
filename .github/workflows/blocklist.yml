@@ -5,6 +5,15 @@ on:
     - cron: '0 */12 * * *'  # Tous les jours à 00:00 et 12:00 UTC
   workflow_dispatch:        # Permet aussi un lancement manuel
 
+- name: Installer et activer la locale française
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y locales
+    sudo locale-gen fr_FR.UTF-8
+    sudo update-locale LANG=fr_FR.UTF-8
+    echo "LANG=fr_FR.UTF-8" >> $GITHUB_ENV
+    echo "LC_ALL=fr_FR.UTF-8" >> $GITHUB_ENV
+
 jobs:
   build:
     runs-on: ubuntu-latest
