@@ -29,7 +29,7 @@ def nettoyer_fichier(url, output_file):
 
     # Sauvegarder les lignes filtrées dans le fichier de sortie
     print(f"Enregistrement des lignes filtrées dans '{output_file}'...")
-    with open(output_file, 'w') as f:  # Le mode 'w' efface tout contenu précédent
+    with open(output_file, 'w') as f:
         for ligne in lignes_filtrées:
             f.write(f"{ligne}\n")
     
