@@ -1,8 +1,6 @@
 ! Filtres additionnels inclus à blockist.txt
-||21mastery.uk^
-||a.magsrv.com^
-||adserv-fra1.snigelweb.com^
-||analytics-api.tolk.ai^
+
+
 ||analytics.korben.info^
 ||api-user-message.programme-tv.net^
 ||api.ipinfo.be^
