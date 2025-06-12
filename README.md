@@ -12,6 +12,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - limiter la collecte de données personnelles (trackers, fingerprinting)
 - bloquer les logiciels malveillants, scams, phishing
 - améliorer la sécurité
+- réduire la consommation de données
 
 ---
 
