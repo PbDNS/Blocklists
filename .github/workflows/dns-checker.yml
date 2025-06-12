@@ -1,0 +1,38 @@
+name: Vérification DNS & HTTP des domaines
+
+on:
+  workflow_dispatch:
+    inputs:
+      prefixes:
+        description: "Préfixes des domaines à tester (ex: a, abc, mn)"
+        required: true
+        default: "a"
+
+jobs:
+  run-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Cloner le dépôt
+        uses: actions/checkout@v4
+
+      - name: 🐍 Installer Python et les dépendances
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Installer les modules requis
+        run: |
+          python -m pip install --upgrade pip
+          pip install dnspython httpx
+
+      - name: 🚀 Lancer le script de vérification
+        run: |
+          echo "Préfixes fournis : ${{ github.event.inputs.prefixes }}"
+          python dns_checker.py "${{ github.event.inputs.prefixes }}"
+
+      - name: 💾 Sauvegarder dead.txt comme artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dead-domains
+          path: dead.txt
