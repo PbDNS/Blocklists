@@ -5,7 +5,6 @@ import dns.resolver
 import httpx
 import asyncio
 import whois
-import logging
 from concurrent.futures import ThreadPoolExecutor
 
 # Fichiers
@@ -21,13 +20,9 @@ DNS_RETRIES = 2
 HTTP_RETRIES = 2
 WHOIS_WORKERS = 8
 
-# Réduction du bruit de logs de python-whois
-logging.getLogger("whois").setLevel(logging.CRITICAL)
+# WHOIS : TLDs non fiables
+SKIP_WHOIS_TLDS = [".dev", ".app", ".page", ".ai", ".xyz", ".cloud", ".online", ".store"]
 
-# TLDs connus comme peu fiables pour WHOIS
-SKIP_WHOIS_TLDS = {'.dev', '.app', '.ai', '.gg', '.tv', '.ml', '.cf', '.gq', '.tk'}
-
-# Extraction
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
     return match.group(1) if match else None
@@ -79,9 +74,11 @@ def filter_dns_dead(domains, record_type):
     dead = []
     with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
         results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
+
     for domain, alive in results:
         if not alive:
             dead.append(domain)
+
     print(f"→ {len(dead)} domaines morts pour {record_type}.")
     return dead
 
@@ -89,6 +86,7 @@ def filter_dns_dead(domains, record_type):
 async def check_http(domain):
     urls = [f"http://{domain}", f"https://{domain}"]
     valid_codes = {200, 301, 302, 401, 403}
+
     async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
         for url in urls:
             for attempt in range(HTTP_RETRIES):
@@ -118,10 +116,14 @@ async def filter_http_dead(domains):
     return dead
 
 # WHOIS
+def is_tld_ignored(domain):
+    return any(domain.endswith(tld) for tld in SKIP_WHOIS_TLDS)
+
 def whois_check(domain):
-    if any(domain.endswith(tld) for tld in SKIP_WHOIS_TLDS):
-        print(f"⚠️ WHOIS ignoré pour {domain} (TLD non fiable)")
-        return None
+    if is_tld_ignored(domain):
+        print(f"⏭️ TLD ignoré pour WHOIS : {domain}")
+        return None  # Ne pas inclure dans les morts
+
     try:
         info = whois.whois(domain)
         if not info or not info.domain_name:
@@ -135,16 +137,18 @@ def filter_whois_dead(domains):
     dead = []
     with ThreadPoolExecutor(max_workers=WHOIS_WORKERS) as executor:
         results = list(executor.map(whois_check, domains))
+
     for result in results:
         if result:
             dead.append(result)
-    print(f"→ {len(dead)} domaines morts via WHOIS.")
+
+    print(f"→ {len(dead)} domaines morts via WHOIS (TLD ignorés exclus).")
     return dead
 
 # MAIN
 async def main():
     if len(sys.argv) != 2:
-        print("Usage: python dns_checker.py <prefixes>")
+        print("Usage: python dns_checker_plus.py <prefixes>")
         sys.exit(1)
 
     prefixes = sys.argv[1].lower()
@@ -152,18 +156,14 @@ async def main():
     domains = read_domains(prefixes)
     print(f"🔎 {len(domains)} domaines à tester.")
 
-    # DNS phase
     dead = filter_dns_dead(domains, "A")
     dead = filter_dns_dead(dead, "AAAA")
     dead = filter_dns_dead(dead, "MX")
 
-    # HTTP phase
     dead = await filter_http_dead(dead)
 
-    # WHOIS phase
     dead = filter_whois_dead(dead)
 
-    # Final
     update_dead_file(prefixes, dead)
     print(f"✅ Final : {len(dead)} domaines morts pour les préfixes {prefixes}.")
 
