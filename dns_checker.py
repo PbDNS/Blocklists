@@ -54,7 +54,7 @@ def update_dead_file(prefixes, new_dead):
     """
     existing_dead = load_dead()
     filtered_dead = [d for d in existing_dead if not any(d.startswith(p) for p in prefixes)]
-    updated = filtered_dead + new_dead
+    updated = filtered_dead + list(new_dead)  # <-- conversion ici
     save_dead(updated)
 
 # DNS
