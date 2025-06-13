@@ -141,8 +141,10 @@ def filter_whois_dead(domains):
                 ignored_count += 1
             elif result:
                 dead.append(result)
-    print(f"🧹 Supprimés (WHOIS) : {len(dead)} — Restants : {len(domains) - len(dead) - ignored_count}")
-    print(f"⏭️ TLD ignorés : {ignored_count}")
+    print(f"🧹 Domaines morts confirmés (WHOIS) : {len(dead)}")
+    print(f"⏭️ Domaines ignorés (TLD) : {ignored_count}")
+    print(f"✅ Domaines vivants retirés : {len(domains) - len(dead) - ignored_count}")
+
     return dead
 
 # MAIN
