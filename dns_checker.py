@@ -152,7 +152,6 @@ def filter_whois_dead(domains):
 
     return alive, dead
 
-# MAIN
 async def main():
     if len(sys.argv) != 2:
         print("Usage: python dns_checker.py <prefixes>")
@@ -179,10 +178,9 @@ async def main():
 
     # 6. WHOIS
     alive, dead = filter_whois_dead(domains)
-    domains = dead  # on garde les morts
 
-    print(f"\n✅ Analyse terminée : {len(domains)} domaines morts détectés.")
-    update_dead_file(prefixes, domains)
+    print(f"\n✅ Analyse terminée : {len(dead)} domaines morts détectés.")
+    update_dead_file(prefixes, dead)
     print("💾 Mise à jour dans dead.txt")
 
 if __name__ == "__main__":
