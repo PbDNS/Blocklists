@@ -73,7 +73,7 @@ jobs:
           PREFIXES="${{ steps.set-prefixes.outputs.value }}"
           echo "Préfixes utilisés : $PREFIXES"
           if [ -n "$PREFIXES" ]; then
-            python dns_checker_plus.py "$PREFIXES"
+            python dns_checker.py "$PREFIXES"
           else
             echo "⏭️ Aucun préfixe à exécuter pour cette heure."
           fi
