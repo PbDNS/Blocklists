@@ -18,7 +18,7 @@ MAX_CONCURRENT_DNS = 8
 MAX_CONCURRENT_HTTP = 5
 DNS_RETRIES = 2
 HTTP_RETRIES = 2
-WHOIS_WORKERS = 8
+WHOIS_WORKERS = 2
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
