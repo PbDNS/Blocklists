@@ -6,7 +6,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 
 ---
 
-## Objectif
+## Objectifs
 
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
