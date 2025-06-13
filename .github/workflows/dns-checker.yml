@@ -8,6 +8,14 @@ on:
         required: true
         default: "a"
 
+  schedule:
+    # Tous les jours à 01h00 → préfixes 012345
+    - cron: '0 1 * * *'
+    # Tous les jours à 02h00 → préfixes 6789
+    - cron: '0 2 * * *'
+    # Tous les jours à 03h00 → préfixes a
+    - cron: '0 3 * * *'
+
 permissions:
   contents: write  # 🔐 Autorise les pushs vers le dépôt
 
@@ -19,7 +27,7 @@ jobs:
       - name: 📥 Cloner le dépôt
         uses: actions/checkout@v4
         with:
-          persist-credentials: true  # ✅ essentiel pour les pushs
+          persist-credentials: true
 
       - name: 🐍 Installer Python et les dépendances
         uses: actions/setup-python@v5
@@ -31,25 +39,41 @@ jobs:
           python -m pip install --upgrade pip
           pip install dnspython httpx
 
+      - name: 🧮 Déterminer les préfixes
+        id: set-prefixes
+        run: |
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            hour=$(date -u +"%H")
+            case "$hour" in
+              "01") echo "value=012345" >> $GITHUB_OUTPUT ;;
+              "02") echo "value=6789" >> $GITHUB_OUTPUT ;;
+              "03") echo "value=a" >> $GITHUB_OUTPUT ;;
+            esac
+          else
+            echo "value=${{ github.event.inputs.prefixes }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: 🚀 Lancer le script de vérification
         run: |
-          echo "Préfixes fournis : ${{ github.event.inputs.prefixes }}"
-          python dns_checker.py "${{ github.event.inputs.prefixes }}"
+          PREFIXES="${{ steps.set-prefixes.outputs.value }}"
+          echo "Préfixes utilisés : $PREFIXES"
+          if [ -n "$PREFIXES" ]; then
+            python dns_checker.py "$PREFIXES"
+          else
+            echo "⏭️ Aucun préfixe à exécuter pour cette heure."
+          fi
 
       - name: 📌 Commit et push de dead.txt
+        if: success()
         run: |
           if [ -f dead.txt ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            
-            # Ajout du fichier modifié
             git add dead.txt
-            
-            # Vérifie s'il y a vraiment une modification
             if git diff --cached --quiet; then
               echo "✅ Aucun changement dans dead.txt à commiter."
             else
-              git commit -m "🔄 Mise à jour de dead.txt (préfixes: ${{ github.event.inputs.prefixes }})"
+              git commit -m "🔄 Mise à jour de dead.txt (préfixes: ${{ steps.set-prefixes.outputs.value }})"
               git push
               echo "✅ dead.txt mis à jour et poussé."
             fi
