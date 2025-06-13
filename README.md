@@ -13,6 +13,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - bloquer les logiciels malveillants, scams, phishing
 - améliorer la sécurité
 - réduire la consommation de données
+  
 &nbsp;
 ---
 
@@ -45,6 +46,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - **Stalkerware Indicators List**
 - **Steven Black's List**
 - **The Big List of Hacked Malware Web Sites**
+  
 &nbsp;
 ---
 
