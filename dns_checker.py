@@ -1,3 +1,4 @@
+import time
 import sys
 import os
 import re
@@ -18,7 +19,7 @@ MAX_CONCURRENT_DNS = 8
 MAX_CONCURRENT_HTTP = 5
 DNS_RETRIES = 2
 HTTP_RETRIES = 2
-WHOIS_WORKERS = 2
+WHOIS_WORKERS = 1
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
@@ -112,7 +113,7 @@ async def filter_http_dead(domains):
 import time
 
 def whois_check(domain):
-    time.sleep(0.5)  # Pause de 500ms pour éviter d'être bloqué
+    time.sleep(1.0)  # délai de 1 seconde pour ne pas surcharger les serveurs
     try:
         info = whois.whois(domain)
         if not info or not info.domain_name:
@@ -120,6 +121,7 @@ def whois_check(domain):
     except Exception:
         return domain, False  # mort
     return None, False  # vivant
+
 
 
 def filter_whois_dead(domains):
