@@ -109,15 +109,18 @@ async def filter_http_dead(domains):
     print(f"🧹 Domaines morts (HTTP) : {len(dead)}")
     return sorted(dead)
 
-# WHOIS
+import time
+
 def whois_check(domain):
+    time.sleep(0.5)  # Pause de 500ms pour éviter d'être bloqué
     try:
         info = whois.whois(domain)
         if not info or not info.domain_name:
-            return domain  # mort
+            return domain, False  # mort
     except Exception:
-        return domain  # mort
-    return None  # vivant
+        return domain, False  # mort
+    return None, False  # vivant
+
 
 def filter_whois_dead(domains):
     print(f"\n🔍 Étape WHOIS — Début avec {len(domains)} domaines...")
