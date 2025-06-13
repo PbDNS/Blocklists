@@ -9,15 +9,21 @@ on:
         default: "a"
 
   schedule:
-    # Tous les jours à 01h00 → préfixes 012345
     - cron: '0 1 * * *'
-    # Tous les jours à 02h00 → préfixes 6789
     - cron: '0 2 * * *'
-    # Tous les jours à 03h00 → préfixes a
     - cron: '0 3 * * *'
-
-permissions:
-  contents: write  # 🔐 Autorise les pushs vers le dépôt
+    - cron: '0 4 * * *'
+    - cron: '0 5 * * *'
+    - cron: '0 6 * * *'
+    - cron: '0 7 * * *'
+    - cron: '0 8 * * *'
+    - cron: '0 9 * * *'
+    - cron: '0 10 * * *'
+    - cron: '0 11 * * *'
+    - cron: '0 12 * * *'
+    
+ permissions:
+  contents: write
 
 jobs:
   run-check:
@@ -45,9 +51,18 @@ jobs:
           if [[ "${{ github.event_name }}" == "schedule" ]]; then
             hour=$(date -u +"%H")
             case "$hour" in
-              "01") echo "value=012345" >> $GITHUB_OUTPUT ;;
-              "02") echo "value=6789" >> $GITHUB_OUTPUT ;;
-              "03") echo "value=a" >> $GITHUB_OUTPUT ;;
+              "01") echo "value=0123456789" >> $GITHUB_OUTPUT ;;
+              "02") echo "value=a" >> $GITHUB_OUTPUT ;;
+              "03") echo "value=b" >> $GITHUB_OUTPUT ;;
+              "04") echo "value=c" >> $GITHUB_OUTPUT ;;
+              "05") echo "value=d" >> $GITHUB_OUTPUT ;;
+              "06") echo "value=e" >> $GITHUB_OUTPUT ;;
+              "07") echo "value=f" >> $GITHUB_OUTPUT ;;
+              "08") echo "value=g" >> $GITHUB_OUTPUT ;;
+              "09") echo "value=h" >> $GITHUB_OUTPUT ;;
+              "10") echo "value=i" >> $GITHUB_OUTPUT ;;
+              "11") echo "value=j" >> $GITHUB_OUTPUT ;;
+              "12") echo "value=k" >> $GITHUB_OUTPUT ;;
             esac
           else
             echo "value=${{ github.event.inputs.prefixes }}" >> $GITHUB_OUTPUT
