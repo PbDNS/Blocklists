@@ -146,10 +146,9 @@ def filter_whois_dead(domains):
     print(f"🧹 Supprimés (WHOIS) : {len(dead)} — Restants : {len(kept)}")
     return kept, dead
 
-# MAIN
 async def main():
     if len(sys.argv) != 2:
-        print("Usage: python dns_checker.py <prefixes>")
+        print("Usage: python dns_checker_plus.py <prefixes>")
         sys.exit(1)
 
     prefixes = sys.argv[1].lower()
@@ -157,25 +156,31 @@ async def main():
     domains = read_domains(prefixes)
     print(f"🔎 Total initial : {len(domains)} domaines à tester.")
 
-    all_dead = []
+    alive = domains
+    dead_set = set()
 
-    domains, dead = filter_dns_dead(domains, "A")
-    all_dead += dead
+    # DNS A
+    alive, dead = filter_dns_dead(alive, "A")
+    dead_set.update(dead)
 
-    domains, dead = filter_dns_dead(domains, "AAAA")
-    all_dead += dead
+    # DNS AAAA
+    alive, dead = filter_dns_dead(alive, "AAAA")
+    dead_set.update(dead)
 
-    domains, dead = filter_dns_dead(domains, "MX")
-    all_dead += dead
+    # DNS MX
+    alive, dead = filter_dns_dead(alive, "MX")
+    dead_set.update(dead)
 
-    domains, dead = await filter_http_dead(domains)
-    all_dead += dead
+    # HTTP
+    alive, dead = await filter_http_dead(alive)
+    dead_set.update(dead)
 
-    domains, dead = filter_whois_dead(domains)
-    all_dead += dead
+    # WHOIS
+    alive, dead = filter_whois_dead(alive)
+    dead_set.update(dead)
 
-    update_dead_file(prefixes, all_dead)
-    print(f"\n✅ Analyse terminée : {len(all_dead)} domaines morts détectés.")
+    update_dead_file(prefixes, list(dead_set))
+    print(f"\n✅ Analyse terminée : {len(dead_set)} domaines morts détectés.")
     print(f"💾 Mis à jour dans {DEAD_FILE}")
 
 if __name__ == "__main__":
