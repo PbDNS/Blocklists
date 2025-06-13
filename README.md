@@ -14,7 +14,6 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - améliorer la sécurité
 - réduire la consommation de données
   
-&nbsp;
 ---
 
 ## Listes incluses
@@ -47,7 +46,6 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - **Steven Black's List**
 - **The Big List of Hacked Malware Web Sites**
   
-&nbsp;
 ---
 
 ## Format et utilisation
