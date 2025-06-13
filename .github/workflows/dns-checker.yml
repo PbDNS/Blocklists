@@ -51,15 +51,15 @@ jobs:
           if [[ "${{ github.event_name }}" == "schedule" ]]; then
             hour=$(date -u +"%H")
             case "$hour" in
-              "01") echo "value=0123456789" >> $GITHUB_OUTPUT ;;
-              "02") echo "value=a" >> $GITHUB_OUTPUT ;;
-              "03") echo "value=b" >> $GITHUB_OUTPUT ;;
-              "04") echo "value=c" >> $GITHUB_OUTPUT ;;
-              "05") echo "value=d" >> $GITHUB_OUTPUT ;;
-              "06") echo "value=e" >> $GITHUB_OUTPUT ;;
-              "07") echo "value=f" >> $GITHUB_OUTPUT ;;
-              "08") echo "value=g" >> $GITHUB_OUTPUT ;;
-              "09") echo "value=h" >> $GITHUB_OUTPUT ;;
+              "1") echo "value=0123456789" >> $GITHUB_OUTPUT ;;
+              "2") echo "value=a" >> $GITHUB_OUTPUT ;;
+              "3") echo "value=b" >> $GITHUB_OUTPUT ;;
+              "4") echo "value=c" >> $GITHUB_OUTPUT ;;
+              "5") echo "value=d" >> $GITHUB_OUTPUT ;;
+              "6") echo "value=e" >> $GITHUB_OUTPUT ;;
+              "7") echo "value=f" >> $GITHUB_OUTPUT ;;
+              "8") echo "value=g" >> $GITHUB_OUTPUT ;;
+              "9") echo "value=h" >> $GITHUB_OUTPUT ;;
               "10") echo "value=i" >> $GITHUB_OUTPUT ;;
               "11") echo "value=j" >> $GITHUB_OUTPUT ;;
               "12") echo "value=k" >> $GITHUB_OUTPUT ;;
