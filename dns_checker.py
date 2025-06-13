@@ -134,15 +134,20 @@ def filter_whois_dead(domains):
     print(f"\n🔍 Étape WHOIS — Début avec {len(domains)} domaines...")
     dead = []
     ignored_count = 0
-    for result, was_ignored in map(whois_check, domains):
-        if was_ignored:
-            print(f"⏭️ TLD ignoré pour WHOIS : {result}")
-            ignored_count += 1
-        elif result:
-            dead.append(result)
-    print(f"🧹 Domaines morts (WHOIS) : {len(dead)}")
-    print(f"⏭️ TLD ignorés (exclus des morts) : {ignored_count}")
-    return sorted(dead)
+    with ThreadPoolExecutor(max_workers=WHOIS_WORKERS) as executor:
+        results = executor.map(whois_check, domains)
+        for result, was_ignored in results:
+            if was_ignored:
+                # On incrémente juste le compteur, sans afficher
+                ignored_count += 1
+            elif result:
+                dead.append(result)
+    alive = [d for d in domains if d not in dead and not is_tld_ignored(d)]
+
+    print(f"🧹 Supprimés (WHOIS) : {len(dead)} — Restants : {len(alive)}")
+    print(f"⏭️ TLD ignorés : {ignored_count}")
+
+    return alive, dead
 
 # MAIN
 async def main():
