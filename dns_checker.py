@@ -177,11 +177,12 @@ async def main():
     domains = await filter_http_dead(domains)
 
     # 6. WHOIS
-    alive, dead = filter_whois_dead(domains)
+    alive_domains, dead_domains = filter_whois_dead(domains)
 
-    print(f"\n✅ Analyse terminée : {len(dead)} domaines morts détectés.")
-    update_dead_file(prefixes, dead)
+    print(f"\n✅ Analyse terminée : {len(dead_domains)} domaines morts détectés.")
+    update_dead_file(prefixes, dead_domains)
     print("💾 Mise à jour dans dead.txt")
+
 
 if __name__ == "__main__":
     asyncio.run(main())
