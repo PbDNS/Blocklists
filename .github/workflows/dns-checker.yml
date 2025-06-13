@@ -21,7 +21,6 @@ on:
     - cron: '0 10 * * *'
     - cron: '0 11 * * *'
     - cron: '0 12 * * *'
-    
 
 permissions:
   contents: write  # 🔐 Autorise les pushs vers le dépôt
@@ -44,7 +43,7 @@ jobs:
       - name: 📦 Installer les modules requis
         run: |
           python -m pip install --upgrade pip
-          pip install dnspython httpx
+          pip install dnspython httpx python-whois
 
       - name: 🧮 Déterminer les préfixes
         id: set-prefixes
@@ -56,7 +55,7 @@ jobs:
               "02") echo "value=a" >> $GITHUB_OUTPUT ;;
               "03") echo "value=b" >> $GITHUB_OUTPUT ;;
               "04") echo "value=c" >> $GITHUB_OUTPUT ;;
-              "05") echo "value=b" >> $GITHUB_OUTPUT ;;
+              "05") echo "value=d" >> $GITHUB_OUTPUT ;;
               "06") echo "value=e" >> $GITHUB_OUTPUT ;;
               "07") echo "value=f" >> $GITHUB_OUTPUT ;;
               "08") echo "value=g" >> $GITHUB_OUTPUT ;;
@@ -74,7 +73,7 @@ jobs:
           PREFIXES="${{ steps.set-prefixes.outputs.value }}"
           echo "Préfixes utilisés : $PREFIXES"
           if [ -n "$PREFIXES" ]; then
-            python dns_checker.py "$PREFIXES"
+            python dns_checker_plus.py "$PREFIXES"
           else
             echo "⏭️ Aucun préfixe à exécuter pour cette heure."
           fi
