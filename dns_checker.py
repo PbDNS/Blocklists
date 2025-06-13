@@ -50,8 +50,8 @@ def save_dead(lines):
 def update_dead_file(prefixes, new_dead):
     prefixes = tuple(prefixes.lower())
     existing_dead = load_dead()
-    # Exclure du fichier dead.txt toutes les lignes avec le même préfixe
-    filtered_dead = [d for d in existing_dead if not d.startswith(prefixes)]
+    # On supprime les lignes qui commencent par un des préfixes
+    filtered_dead = [d for d in existing_dead if not any(d.startswith(p) for p in prefixes)]
     updated = filtered_dead + list(new_dead)
     save_dead(updated)
 
