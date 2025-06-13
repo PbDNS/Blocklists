@@ -1,3 +1,4 @@
+import sys
 import os
 import re
 import dns.resolver
@@ -66,9 +67,13 @@ def dns_check(domain, record_type):
             return True  # vivant
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
             return False  # mort
+        except (dns.resolver.Timeout, dns.exception.Timeout):
+            # Erreur temporaire, on réessaye sauf dernière tentative
+            if attempt == DNS_RETRIES - 1:
+                return True  # on suppose vivant si timeout persistant
         except Exception:
             if attempt == DNS_RETRIES - 1:
-                return True  # on suppose vivant si erreur persistante
+                return True
     return True
 
 def filter_dns_dead(domains, record_type):
@@ -85,7 +90,7 @@ def filter_dns_dead(domains, record_type):
 # HTTP
 async def check_http(domain):
     urls = [f"http://{domain}", f"https://{domain}"]
-    valid_codes = {200, 301, 302, 401, 403}
+    valid_codes = {200, 301, 302, 401, 403}  # 404 exclu
     async with httpx.AsyncClient(timeout=HTTP_TIMEOUT, follow_redirects=True) as client:
         for url in urls:
             for _ in range(HTTP_RETRIES):
@@ -137,7 +142,6 @@ def filter_whois_dead(domains):
         results = executor.map(whois_check, domains)
         for result, was_ignored in results:
             if was_ignored:
-                # On incrémente juste le compteur, sans afficher
                 ignored_count += 1
             elif result:
                 dead.append(result)
@@ -174,7 +178,8 @@ async def main():
     domains = await filter_http_dead(domains)
 
     # 6. WHOIS
-    domains = filter_whois_dead(domains)
+    alive, dead = filter_whois_dead(domains)
+    domains = dead  # on garde les morts
 
     print(f"\n✅ Analyse terminée : {len(domains)} domaines morts détectés.")
     update_dead_file(prefixes, domains)
