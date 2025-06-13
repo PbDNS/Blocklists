@@ -188,10 +188,8 @@
 000token.com
 000tristanprod.free.fr
 000webapp.com
-000webhost.com
 000webhost.info
 000webhostapp.com
-000webhotapp.com
 000worldwide.com
 000x000.com
 000xnxx.com
@@ -280,6 +278,7 @@
 002677.com
 002708.com
 002718.com
+00272.com
 002777.xyz
 00280.com
 0028510.com
@@ -431,6 +430,7 @@
 00852110.com
 00857731.xyz
 00859.com
+0086.tel
 0086av.com
 0086jxw.com
 0086ok.com
@@ -1183,7 +1183,6 @@
 03j.org
 03m6.uteativa.ru
 03o.org
-03p.info
 03pic.com
 03qh.com
 03s30.com
@@ -1349,7 +1348,6 @@
 0531home.com
 053249.cc
 0532job.com
-053311c.com
 0537t.com
 054.rip
 05412.com
@@ -1626,7 +1624,6 @@
 07kde7ue.lat
 07ming.com
 07sketches.com
-08.sk
 08000.info
 0800photos.com
 08031fef00.com
@@ -1690,7 +1687,6 @@
 08916fb8f8.com
 089777888.com
 0898fang.cn
-089poli.com
 08a62d358c.com
 08adc.com
 08bueno.com
@@ -1943,7 +1939,6 @@
 0fmm.com
 0forum.biz
 0fucks.xyz
-0fucksgiving.com
 0fwcbrw533rs.com
 0g3wn9mr3cab.top
 0gamestop.com
@@ -2142,7 +2137,6 @@
 0me.com
 0minute.com
 0mjz.com
-0mmo.net
 0mn4zpq2dkvitl3.ntfx921.pl
 0mr.net
 0mron.com
@@ -2279,7 +2273,6 @@
 0x-93-0v-a9-10-33.icu
 0x.day
 0x.lfyabbhdluzu.es
-0x.no
 0x.run
 0x0.st
 0x0.wiki
@@ -2292,6 +2285,7 @@
 0x1f4b0.com
 0x2501.org
 0x2beace.com
+0x3d.lu
 0x3f34.dev
 0x420inushop.com
 0x503.3738.org
