@@ -12,13 +12,13 @@ BLOCKLIST_FILE = "blocklist.txt"
 DEAD_FILE = "dead.txt"
 
 # Réglages
-DNS_TIMEOUT = 7
-HTTP_TIMEOUT = 7
-MAX_CONCURRENT_DNS = 10
-MAX_CONCURRENT_HTTP = 7
+DNS_TIMEOUT = 10
+HTTP_TIMEOUT = 10
+MAX_CONCURRENT_DNS = 8
+MAX_CONCURRENT_HTTP = 5
 DNS_RETRIES = 2
 HTTP_RETRIES = 2
-WHOIS_WORKERS = 10
+WHOIS_WORKERS = 8
 
 def extract_domain(line):
     match = re.match(r"\|\|([a-zA-Z0-9.-]+)\^?", line.strip())
