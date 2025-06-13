@@ -9,12 +9,13 @@ on:
         default: "a"
 
   schedule:
-    # Tous les jours à 01h00 → préfixes 012345
     - cron: '0 1 * * *'
-    # Tous les jours à 02h00 → préfixes 6789
     - cron: '0 2 * * *'
-    # Tous les jours à 03h00 → préfixes a
     - cron: '0 3 * * *'
+    - cron: '0 4 * * *'
+    - cron: '0 5 * * *'
+    - cron: '0 6 * * *'
+    
 
 permissions:
   contents: write  # 🔐 Autorise les pushs vers le dépôt
@@ -45,10 +46,12 @@ jobs:
           if [[ "${{ github.event_name }}" == "schedule" ]]; then
             hour=$(date -u +"%H")
             case "$hour" in
-              "01") echo "value=012345" >> $GITHUB_OUTPUT ;;
-              "02") echo "value=6789" >> $GITHUB_OUTPUT ;;
-              "03") echo "value=a" >> $GITHUB_OUTPUT ;;
-              *) echo "value=" >> $GITHUB_OUTPUT ;;
+              "01") echo "value=0123456789" >> $GITHUB_OUTPUT ;;
+              "02") echo "value=a" >> $GITHUB_OUTPUT ;;
+              "03") echo "value=b" >> $GITHUB_OUTPUT ;;
+              "04") echo "value=c" >> $GITHUB_OUTPUT ;;
+              "05") echo "value=b" >> $GITHUB_OUTPUT ;;
+              "06") echo "value=e" >> $GITHUB_OUTPUT ;;             
             esac
           else
             echo "value=${{ github.event.inputs.prefixes }}" >> $GITHUB_OUTPUT
