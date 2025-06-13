@@ -74,13 +74,14 @@ def filter_dns_dead(domains, record_type):
     dead = []
     with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_DNS) as executor:
         results = list(executor.map(lambda d: (d, dns_check(d, record_type)), domains))
+
     for domain, alive in results:
         if not alive:
             dead.append(domain)
 
-    kept = [d for d in domains if d not in dead]
-    print(f"🧹 Supprimés (DNS {record_type}) : {len(dead)} — Restants : {len(kept)}")
-    return kept, dead
+    print(f"🧹 Supprimés (DNS {record_type}) : {len(dead)} — Restants : {len(domains) - len(dead)}")
+    # On garde uniquement les domaines restants (vivants)
+    return [d for d in domains if d not in dead]
 
 # HTTP
 async def check_http(domain):
@@ -104,17 +105,18 @@ async def filter_http_dead(domains):
     print(f"\n🌐 Étape HTTP — Début avec {len(domains)} domaines...")
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_HTTP)
 
+    dead = []
     async def task(domain):
         async with semaphore:
             alive = await check_http(domain)
-            return domain if not alive else None
+            if not alive:
+                dead.append(domain)
 
-    tasks = [task(domain) for domain in domains]
-    results = await asyncio.gather(*tasks)
-    dead = [d for d in results if d]
-    kept = [d for d in domains if d not in dead]
-    print(f"🧹 Supprimés (HTTP) : {len(dead)} — Restants : {len(kept)}")
-    return kept, dead
+    await asyncio.gather(*(task(domain) for domain in domains))
+
+    print(f"🧹 Supprimés (HTTP) : {len(dead)} — Restants : {len(domains) - len(dead)}")
+    # On garde uniquement les domaines restants (vivants)
+    return [d for d in domains if d not in dead]
 
 # WHOIS
 def is_tld_ignored(domain):
@@ -123,12 +125,12 @@ def is_tld_ignored(domain):
 def whois_check(domain):
     if is_tld_ignored(domain):
         print(f"⏭️ TLD ignoré pour WHOIS : {domain}")
-        return None  # Ne pas inclure dans les morts
+        return None  # Ignoré, pas dans morts ni vivants
 
     try:
         info = whois.whois(domain)
         if not info or not info.domain_name:
-            return domain
+            return domain  # domaine mort selon WHOIS
     except Exception:
         return domain
     return None
@@ -136,52 +138,55 @@ def whois_check(domain):
 def filter_whois_dead(domains):
     print(f"\n🔍 Étape WHOIS — Début avec {len(domains)} domaines...")
     dead = []
+    ignored = []
+
     with ThreadPoolExecutor(max_workers=WHOIS_WORKERS) as executor:
         results = list(executor.map(whois_check, domains))
-    for result in results:
-        if result:
-            dead.append(result)
 
-    kept = [d for d in domains if d not in dead and not is_tld_ignored(d)]
-    print(f"🧹 Supprimés (WHOIS) : {len(dead)} — Restants : {len(kept)}")
-    return kept, dead
+    for i, domain in enumerate(domains):
+        res = results[i]
+        if is_tld_ignored(domain):
+            ignored.append(domain)
+        elif res:
+            dead.append(domain)
 
+    restants = [d for d in domains if d not in dead and d not in ignored]
+
+    print(f"🧹 Supprimés (WHOIS) : {len(dead)} — Restants : {len(restants)}")
+    print(f"⏭️ TLD ignorés : {len(ignored)}")
+    return restants, dead  # on renvoie restants ET morts WHOIS
+
+# MAIN
 async def main():
     if len(sys.argv) != 2:
         print("Usage: python dns_checker_plus.py <prefixes>")
         sys.exit(1)
 
     prefixes = sys.argv[1].lower()
-    print(f"📥 Chargement des domaines pour les préfixes : {prefixes}")
+    print(f"Préfixes utilisés : {prefixes}")
     domains = read_domains(prefixes)
     print(f"🔎 Total initial : {len(domains)} domaines à tester.")
 
-    alive = domains
-    dead_set = set()
+    # Étapes DNS A, AAAA, MX
+    domains = filter_dns_dead(domains, "A")
+    domains = filter_dns_dead(domains, "AAAA")
+    domains = filter_dns_dead(domains, "MX")
 
-    # DNS A
-    alive, dead = filter_dns_dead(alive, "A")
-    dead_set.update(dead)
+    # Étape HTTP
+    domains = await filter_http_dead(domains)
 
-    # DNS AAAA
-    alive, dead = filter_dns_dead(alive, "AAAA")
-    dead_set.update(dead)
+    # Étape WHOIS
+    domains_restants, whois_morts = filter_whois_dead(domains)
 
-    # DNS MX
-    alive, dead = filter_dns_dead(alive, "MX")
-    dead_set.update(dead)
+    # La liste finale des domaines morts = (domaines exclus après DNS+HTTP) + whois morts (hors ignorés)
+    morts_dns_http = set(read_domains(prefixes)) - set(domains)  # ceux supprimés avant WHOIS
+    morts_total = morts_dns_http.union(whois_morts)
 
-    # HTTP
-    alive, dead = await filter_http_dead(alive)
-    dead_set.update(dead)
+    print(f"\n✅ Analyse terminée : {len(morts_total)} domaines morts détectés.")
+    print(f"💾 Mise à jour dans {DEAD_FILE}")
 
-    # WHOIS
-    alive, dead = filter_whois_dead(alive)
-    dead_set.update(dead)
-
-    update_dead_file(prefixes, list(dead_set))
-    print(f"\n✅ Analyse terminée : {len(dead_set)} domaines morts détectés.")
-    print(f"💾 Mis à jour dans {DEAD_FILE}")
+    # Sauvegarde
+    save_dead(list(morts_total))
 
 if __name__ == "__main__":
     asyncio.run(main())
