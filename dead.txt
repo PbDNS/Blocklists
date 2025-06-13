@@ -188,6 +188,7 @@
 000token.com
 000tristanprod.free.fr
 000webapp.com
+000webhost.com
 000webhost.info
 000webhostapp.com
 000worldwide.com
@@ -278,7 +279,6 @@
 002677.com
 002708.com
 002718.com
-00272.com
 002777.xyz
 00280.com
 0028510.com
@@ -286,6 +286,7 @@
 002bet.com
 002game.com
 002hh.com
+002kkkk.com
 002mh.com
 002r.com
 002t.com
@@ -430,7 +431,6 @@
 00852110.com
 00857731.xyz
 00859.com
-0086.tel
 0086av.com
 0086jxw.com
 0086ok.com
@@ -2254,7 +2254,6 @@
 0va0.top
 0vc.com
 0vc.fun
-0video.info
 0vkzne1.com
 0vmyb63gn2ptp.life
 0vwdh086y6617.life
@@ -2274,7 +2273,6 @@
 0x.day
 0x.lfyabbhdluzu.es
 0x.run
-0x0.st
 0x0.wiki
 0x00000000000.substack.com
 0x01n2ptpuz3.com
@@ -2285,7 +2283,6 @@
 0x1f4b0.com
 0x2501.org
 0x2beace.com
-0x3d.lu
 0x3f34.dev
 0x420inushop.com
 0x503.3738.org
@@ -2298,10 +2295,10 @@
 0xadhinuwriteups.com
 0xbitoo.com
 0xbud.com
+0xclaims.shop
 0xcoin.com
 0xcoins.xyz
 0xd38.xyz
-0xda34.top
 0xevent.xyz
 0xfree.xyz
 0xgive.xyz
@@ -2312,6 +2309,7 @@
 0xnxx.com
 0xon2uo9s.com
 0xp9yc4eho.icu
+0xrocket.xyz
 0xround.xyz
 0xround1.xyz
 0xswap.asia
