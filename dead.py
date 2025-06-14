@@ -68,12 +68,24 @@ def _try_resolve(domain):
             except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer,
                     dns.resolver.Timeout, dns.resolver.NoNameservers):
                 continue
-            except Exception:
+            except dns.resolver.Timeout as e:
+                print(f"❌ Problème de connexion au résolveur DNS {resolver_ip} pour {domain}: {e}")
+                continue
+            except dns.resolver.NoNameservers as e:
+                print(f"❌ Aucun serveur de noms disponible pour {domain} avec le résolveur {resolver_ip}: {e}")
+                continue
+            except Exception as e:
+                print(f"❌ Erreur inconnue avec le résolveur {resolver_ip} pour {domain}: {e}")
                 continue
 
+    # Si les résolveurs DNS classiques échouent, essayez la méthode DNS-over-HTTPS
     for rdtype in rdtypes:
-        if resolve_doh(domain, rdtype):
-            return True
+        try:
+            if resolve_doh(domain, rdtype):
+                return True
+        except Exception as e:
+            print(f"❌ Erreur de connexion DNS-over-HTTPS pour {domain}: {e}")
+            continue
 
     return False
 
@@ -115,7 +127,7 @@ def update_dead_txt(existing_lines, dead_domains, prefixes):
     with open("dead.txt", "w") as f:
         f.writelines(updated_lines)
 
-    print("dead.txt a été mis à jour avec les nouveaux domaines morts.")
+    print(f"dead.txt a été mis à jour avec {len(dead_domains)} nouveaux domaines morts.")
 
 def main(args):
     print('📥 Téléchargement de la liste des domaines...')
@@ -133,12 +145,11 @@ def main(args):
     dead_domains = []
     total = len(domains)
 
-    # Test des domaines avec chaque type d'enregistrement DNS (A, AAAA, CNAME, etc.)
+    # Test des domaines avec les différents types de records
     for rdtype in rdtypes:
-        print(f'\n🔍 Test des enregistrements {rdtype}...')
-        
-        # Tester les domaines avec le type d'enregistrement actuel
-        remaining_domains = []
+        print(f'\n🔄 Test des domaines avec le type de record {rdtype}...')
+
+        # Tester les domaines avec ce type de record
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {executor.submit(check_domain, domain): domain for domain in sorted(domains)}
             for i, future in enumerate(as_completed(futures), 1):
@@ -147,13 +158,14 @@ def main(args):
                     dead_domains.append(domain)
                     print(f'[{i}/{total}] ❌ Domaine mort : {domain}')
                 else:
-                    remaining_domains.append(domain)
-        
-        # Afficher le nombre de domaines morts après ce test
-        print(f'\nDomaines morts après test {rdtype}: {len(dead_domains)}')
+                    print(f'[{i}/{total}] ✅ Domaine actif : {domain}')
 
-        # Mise à jour des domaines à tester dans le prochain test
-        domains = remaining_domains
+        # Affichage du nombre de domaines morts après chaque test
+        remaining_dead_domains = [domain for domain in dead_domains if domain not in domains]
+        print(f"\nAprès le test {rdtype}, {len(remaining_dead_domains)} domaines sont morts.")
+        
+        # Ne garder que les morts pour le test suivant
+        domains = remaining_dead_domains
 
     print('\n📋 Domaines morts détectés :')
     for dead in dead_domains:
