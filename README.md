@@ -52,7 +52,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 
 - format Adblock Plus
 - sous-domaines redondants supprimés
-- compatible avec des solutions comme AdGuard Home ou Pi-hole
 - optimisé pour un usage DNS/adblock au niveau réseau
+- compatible avec des solutions comme AdGuard Home ou Pi-hole
 
 &nbsp;
