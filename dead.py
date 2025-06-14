@@ -19,7 +19,7 @@ dns_resolvers = [
 
 adblock_url = 'https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt'
 
-rdtypes = ('A', 'AAAA', 'CNAME', 'MX', 'TXT')
+rdtypes = ['A', 'AAAA', 'CNAME', 'MX', 'TXT']  # Types d'enregistrements à tester
 
 max_workers = 10
 tries_per_domain = 3
@@ -34,16 +34,11 @@ def download_content(url):
         with urllib.request.urlopen(url, context=ssl_context) as response:
             return response.read().decode('utf-8')
     except Exception as e:
-        print(f"❌ Erreur lors du téléchargement du contenu depuis {url}: {e}")
         raise SystemExit(f'Erreur lors du téléchargement : {e}')
 
 def extract_domains(content):
-    try:
-        pattern = re.compile(r'^\|\|([^\^\/]+)\^', re.MULTILINE)
-        return set(re.findall(pattern, content))
-    except Exception as e:
-        print(f"❌ Erreur lors de l'extraction des domaines : {e}")
-        raise SystemExit(f'Erreur lors de l\'extraction des domaines : {e}')
+    pattern = re.compile(r'^\|\|([^\^\/]+)\^', re.MULTILINE)
+    return set(re.findall(pattern, content))
 
 def resolve_doh(domain, record_type='A'):
     base_url = 'https://cloudflare-dns.com/dns-query'
@@ -59,105 +54,104 @@ def resolve_doh(domain, record_type='A'):
     except Exception:
         return False
 
-def _try_resolve(domain):
+def _try_resolve(domain, record_type):
     for resolver_ip in dns_resolvers:
         resolver = dns.resolver.Resolver()
         resolver.timeout = 2
         resolver.lifetime = 3
         resolver.nameservers = [resolver_ip]
-        for rdtype in rdtypes:
-            try:
-                answers = resolver.resolve(domain, rdtype)
-                if answers.rrset:
-                    return True
-            except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer,
-                    dns.resolver.Timeout, dns.resolver.NoNameservers) as e:
-                # On ne loggue les timeouts que s'ils sont répétitifs après plusieurs tentatives
-                pass
-            except Exception as e:
-                print(f"❌ Erreur inattendue pour {domain} avec le résolveur {resolver_ip}: {e}")
-                return False
+        try:
+            answers = resolver.resolve(domain, record_type)
+            if answers.rrset:
+                return True
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer,
+                dns.resolver.Timeout, dns.resolver.NoNameservers):
+            continue
+        except Exception:
+            continue
 
-    for rdtype in rdtypes:
-        if resolve_doh(domain, rdtype):
-            return True
+    # Test via DoH if UDP resolution fails
+    if resolve_doh(domain, record_type):
+        return True
 
     return False
 
-def is_domain_resolvable(domain, tries=tries_per_domain):
+def is_domain_resolvable(domain, record_type, tries=tries_per_domain):
     retry_delay = retry_delay_base
     for attempt in range(tries):
-        if _try_resolve(domain):
+        if _try_resolve(domain, record_type):
             return True
         time.sleep(retry_delay)
         retry_delay = min(retry_delay * 2, max_retry_delay)
     return False
 
-def check_domain(domain):
-    try:
-        if not is_domain_resolvable(domain):
-            return domain, False
-        return domain, True
-    except Exception as e:
-        print(f"❌ Erreur lors de la vérification du domaine {domain}: {e}")
+def check_domain(domain, record_type):
+    if not is_domain_resolvable(domain, record_type):
         return domain, False
+    return domain, True
 
 def read_dead_txt():
     try:
         with open('dead.txt', 'r') as file:
             return file.readlines()
     except FileNotFoundError:
-        print("❌ Le fichier 'dead.txt' n'a pas été trouvé.")
         return []
 
 def update_dead_txt(existing_lines, dead_domains, prefixes):
-    try:
-        # Conserver les lignes existantes qui ne correspondent pas aux préfixes
-        updated_lines = []
-        for line in existing_lines:
-            if not any(line.startswith(prefix) for prefix in prefixes):
-                updated_lines.append(line)
+    updated_lines = []
+    for line in existing_lines:
+        if not any(line.startswith(prefix) for prefix in prefixes):
+            updated_lines.append(line)
 
-        # Ajouter les nouveaux domaines morts filtrés par préfixes
-        for domain in dead_domains:
-            if any(domain.startswith(prefix) for prefix in prefixes):
-                updated_lines.append(f"{domain}\n")
+    for domain in dead_domains:
+        if any(domain.startswith(prefix) for prefix in prefixes):
+            updated_lines.append(f"{domain}\n")
+    
+    with open("dead.txt", "w") as f:
+        f.writelines(updated_lines)
 
-        # Écrire dans dead.txt
-        with open("dead.txt", "w") as f:
-            f.writelines(updated_lines)
-        print("dead.txt a été mis à jour avec les nouveaux domaines morts.")
-    except Exception as e:
-        print(f"❌ Erreur lors de la mise à jour de 'dead.txt' : {e}")
-        raise SystemExit(f'Erreur lors de la mise à jour de "dead.txt" : {e}')
+    print("dead.txt a été mis à jour avec les nouveaux domaines morts.")
+
+def test_domains_with_record_type(domains, record_type):
+    dead_domains = []
+    total = len(domains)
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(check_domain, domain, record_type): domain for domain in sorted(domains)}
+        for i, future in enumerate(as_completed(futures), 1):
+            domain, is_alive = future.result()
+            if not is_alive:
+                dead_domains.append(domain)
+                print(f'[{i}/{total}] ❌ Domaine mort : {domain}')
+            else:
+                print(f'[{i}/{total}] ✅ Domaine actif : {domain}')
+    return dead_domains
 
 def main(args):
-    try:
-        content = download_content(adblock_url)
-        domains = extract_domains(content)
+    print('📥 Téléchargement de la liste des domaines...')
+    content = download_content(adblock_url)
 
-        if args.prefixes:
-            domains = {domain for domain in domains if any(domain.startswith(prefix) for prefix in args.prefixes)}
+    print('🔍 Extraction des domaines...')
+    domains = extract_domains(content)
 
-        dead_domains = []
-        total = len(domains)
+    if args.prefixes:
+        print(f'Filtrage des domaines avec les préfixes : {", ".join(args.prefixes)}')
+        domains = {domain for domain in domains if any(domain.startswith(prefix) for prefix in args.prefixes)}
 
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            futures = {executor.submit(check_domain, domain): domain for domain in sorted(domains)}
-            for i, future in enumerate(as_completed(futures), 1):
-                domain, is_alive = future.result()
-                if not is_alive:
-                    dead_domains.append(domain)
+    existing_lines = read_dead_txt()
 
-        # Lire les lignes existantes de dead.txt
-        existing_lines = read_dead_txt()
+    # Tester les domaines avec chaque type d'enregistrement DNS séquentiellement
+    remaining_domains = domains
+    for record_type in rdtypes:
+        print(f"\n🚀 Test des domaines avec l'enregistrement {record_type}...")
+        remaining_domains = test_domains_with_record_type(remaining_domains, record_type)
 
-        # Mettre à jour dead.txt avec les nouveaux domaines morts
-        update_dead_txt(existing_lines, dead_domains, args.prefixes)
+        # Si aucun domaine ne reste, on peut arrêter
+        if not remaining_domains:
+            break
 
-    except Exception as e:
-        print(f"❌ Une erreur s'est produite pendant l'exécution du script : {e}")
-        raise SystemExit(f"Erreur générale : {e}")
+    # Mettre à jour dead.txt avec les domaines morts restants
+    update_dead_txt(existing_lines, remaining_domains, args.prefixes)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Vérifie la disponibilité des domaines avec possibilité de filtrage par préfixe.")
@@ -168,7 +162,6 @@ if __name__ == "__main__":
     )
 
     import sys
-    # Si aucun préfixe n'est donné, utilisez '0' par défaut
     if len(sys.argv) == 1:
         sys.argv.append("0")
     
