@@ -56,8 +56,7 @@ def resolve_doh(domain, record_type='A'):
         with urllib.request.urlopen(req, timeout=3) as response:
             data = json.load(response)
             return 'Answer' in data and len(data['Answer']) > 0
-    except Exception as e:
-        print(f"❌ Erreur lors de la résolution DNS pour {domain} en DoH : {e}")
+    except Exception:
         return False
 
 def _try_resolve(domain):
@@ -73,11 +72,11 @@ def _try_resolve(domain):
                     return True
             except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer,
                     dns.resolver.Timeout, dns.resolver.NoNameservers) as e:
-                print(f"❌ Erreur DNS pour {domain} avec le résolveur {resolver_ip}: {e}")
-                continue
+                # On ne loggue les timeouts que s'ils sont répétitifs après plusieurs tentatives
+                pass
             except Exception as e:
                 print(f"❌ Erreur inattendue pour {domain} avec le résolveur {resolver_ip}: {e}")
-                continue
+                return False
 
     for rdtype in rdtypes:
         if resolve_doh(domain, rdtype):
