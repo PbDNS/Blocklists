@@ -17,7 +17,7 @@ dns_resolvers = [
     '208.67.222.222',  # OpenDNS
 ]
 
-adblock_url = 'https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt'
+adblock_url = 'https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt'
 
 rdtypes = ('A', 'AAAA', 'CNAME', 'MX', 'TXT')
 
