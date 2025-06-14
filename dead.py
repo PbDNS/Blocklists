@@ -166,6 +166,10 @@ def main(args):
     print('🔍 Extraction des domaines...')
     domains = extract_domains(content)
 
+    # Si aucun préfixe n'est donné, on utilise "0" par défaut
+    if not args.prefixes:
+        args.prefixes = ['0']
+
     if args.prefixes:
         print(f'Filtrage des domaines avec les préfixes : {", ".join(args.prefixes)}')
         domains = {domain for domain in domains if any(domain.startswith(prefix) for prefix in args.prefixes)}
@@ -206,6 +210,12 @@ def main(args):
     print('\n📋 Domaines morts détectés :')
     for dead in dead_domains:
         print(f"- {dead}")
+
+    # Lire les lignes existantes de dead.txt
+    existing_lines = read_dead_txt()
+
+    # Mettre à jour dead.txt avec les nouveaux domaines morts
+    update_dead_txt(existing_lines, dead_domains, args.prefixes)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Vérifier les domaines morts dans une blocklist.')
