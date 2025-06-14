@@ -19,7 +19,7 @@ dns_resolvers = [
 
 adblock_url = 'https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt'
 
-rdtypes = ['A', 'AAAA', 'CNAME', 'MX', 'TXT']  # Types d'enregistrements à tester
+rdtypes = ('A', 'AAAA', 'CNAME', 'MX', 'TXT')
 
 max_workers = 10
 tries_per_domain = 3
@@ -54,39 +54,40 @@ def resolve_doh(domain, record_type='A'):
     except Exception:
         return False
 
-def _try_resolve(domain, record_type):
+def _try_resolve(domain):
     for resolver_ip in dns_resolvers:
         resolver = dns.resolver.Resolver()
         resolver.timeout = 2
         resolver.lifetime = 3
         resolver.nameservers = [resolver_ip]
-        try:
-            answers = resolver.resolve(domain, record_type)
-            if answers.rrset:
-                return True
-        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer,
-                dns.resolver.Timeout, dns.resolver.NoNameservers):
-            continue
-        except Exception:
-            continue
+        for rdtype in rdtypes:
+            try:
+                answers = resolver.resolve(domain, rdtype)
+                if answers.rrset:
+                    return True
+            except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer,
+                    dns.resolver.Timeout, dns.resolver.NoNameservers):
+                continue
+            except Exception:
+                continue
 
-    # Test via DoH if UDP resolution fails
-    if resolve_doh(domain, record_type):
-        return True
+    for rdtype in rdtypes:
+        if resolve_doh(domain, rdtype):
+            return True
 
     return False
 
-def is_domain_resolvable(domain, record_type, tries=tries_per_domain):
+def is_domain_resolvable(domain, tries=tries_per_domain):
     retry_delay = retry_delay_base
     for attempt in range(tries):
-        if _try_resolve(domain, record_type):
+        if _try_resolve(domain):
             return True
         time.sleep(retry_delay)
         retry_delay = min(retry_delay * 2, max_retry_delay)
     return False
 
-def check_domain(domain, record_type):
-    if not is_domain_resolvable(domain, record_type):
+def check_domain(domain):
+    if not is_domain_resolvable(domain):
         return domain, False
     return domain, True
 
@@ -98,34 +99,23 @@ def read_dead_txt():
         return []
 
 def update_dead_txt(existing_lines, dead_domains, prefixes):
+    # Conserver les lignes existantes qui ne correspondent pas aux préfixes
     updated_lines = []
     for line in existing_lines:
+        # Ne conserver que les lignes qui ne commencent pas par les préfixes donnés
         if not any(line.startswith(prefix) for prefix in prefixes):
             updated_lines.append(line)
-
+    
+    # Ajouter les nouveaux domaines morts filtrés par préfixes
     for domain in dead_domains:
         if any(domain.startswith(prefix) for prefix in prefixes):
             updated_lines.append(f"{domain}\n")
     
+    # Écrire dans dead.txt
     with open("dead.txt", "w") as f:
         f.writelines(updated_lines)
 
     print("dead.txt a été mis à jour avec les nouveaux domaines morts.")
-
-def test_domains_with_record_type(domains, record_type):
-    dead_domains = []
-    total = len(domains)
-
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = {executor.submit(check_domain, domain, record_type): domain for domain in sorted(domains)}
-        for i, future in enumerate(as_completed(futures), 1):
-            domain, is_alive = future.result()
-            if not is_alive:
-                dead_domains.append(domain)
-                print(f'[{i}/{total}] ❌ Domaine mort : {domain}')
-            else:
-                print(f'[{i}/{total}] ✅ Domaine actif : {domain}')
-    return dead_domains
 
 def main(args):
     print('📥 Téléchargement de la liste des domaines...')
@@ -138,20 +128,45 @@ def main(args):
         print(f'Filtrage des domaines avec les préfixes : {", ".join(args.prefixes)}')
         domains = {domain for domain in domains if any(domain.startswith(prefix) for prefix in args.prefixes)}
 
+    print(f'⏳ Vérification des {len(domains)} domaines en parallèle...')
+
+    dead_domains = []
+    total = len(domains)
+
+    # Test des domaines avec chaque type d'enregistrement DNS (A, AAAA, CNAME, etc.)
+    for rdtype in rdtypes:
+        print(f'\n🔍 Test des enregistrements {rdtype}...')
+        
+        # Tester les domaines avec le type d'enregistrement actuel
+        remaining_domains = []
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = {executor.submit(check_domain, domain): domain for domain in sorted(domains)}
+            for i, future in enumerate(as_completed(futures), 1):
+                domain, is_alive = future.result()
+                if not is_alive:
+                    dead_domains.append(domain)
+                    print(f'[{i}/{total}] ❌ Domaine mort : {domain}')
+                else:
+                    remaining_domains.append(domain)
+        
+        # Afficher le nombre de domaines morts après ce test
+        print(f'\nDomaines morts après test {rdtype}: {len(dead_domains)}')
+
+        # Mise à jour des domaines à tester dans le prochain test
+        domains = remaining_domains
+
+    print('\n📋 Domaines morts détectés :')
+    for dead in dead_domains:
+        print(f' - {dead}')
+
+    print(f'\nTotal domaines analysés : {total}')
+    print(f'Liens morts : {len(dead_domains)}')
+
+    # Lire les lignes existantes de dead.txt
     existing_lines = read_dead_txt()
 
-    # Tester les domaines avec chaque type d'enregistrement DNS séquentiellement
-    remaining_domains = domains
-    for record_type in rdtypes:
-        print(f"\n🚀 Test des domaines avec l'enregistrement {record_type}...")
-        remaining_domains = test_domains_with_record_type(remaining_domains, record_type)
-
-        # Si aucun domaine ne reste, on peut arrêter
-        if not remaining_domains:
-            break
-
-    # Mettre à jour dead.txt avec les domaines morts restants
-    update_dead_txt(existing_lines, remaining_domains, args.prefixes)
+    # Mettre à jour dead.txt avec les nouveaux domaines morts
+    update_dead_txt(existing_lines, dead_domains, args.prefixes)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Vérifie la disponibilité des domaines avec possibilité de filtrage par préfixe.")
@@ -160,8 +175,9 @@ if __name__ == "__main__":
         nargs='*', 
         help="Liste des préfixes pour filtrer les domaines (par exemple, 'abc', 'xyz'). Par défaut, filtre '0'."
     )
-
+    
     import sys
+    # Si aucun préfixe n'est donné, utilisez '0' par défaut
     if len(sys.argv) == 1:
         sys.argv.append("0")
     
