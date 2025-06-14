@@ -1,4 +1,4 @@
-name: Génération de blocklist.txt
+name: test
 
 on:
   schedule:
