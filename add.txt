@@ -36,3 +36,11 @@
 ||tracking.lafourchette.com^
 ||trustedvpn.site^
 ||web-tracking.splio.com^
+
+! Meta pixel tracking
+
+||connect.facebook.net^
+||www.facebook.com^
+||staticxx.facebook.com^
+||graph.facebook.com^
+
