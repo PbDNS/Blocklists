@@ -38,3 +38,4 @@ jobs:
         git add dead.txt
         git commit -m "Mise à jour de dead.txt"
         git push
+        
