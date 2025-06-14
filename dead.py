@@ -202,24 +202,4 @@ def main(args):
 
         # Affichage du nombre de domaines morts après chaque test
         remaining_dead_domains = [domain for domain in dead_domains if domain not in domains]
-        print(f"\nAprès le test {rdtype}, {len(remaining_dead_domains)} domaines sont morts.")
-        
-        # Ne garder que les morts pour le test suivant
-        domains = remaining_dead_domains
-
-    print('\n📋 Domaines morts détectés :')
-    for dead in dead_domains:
-        print(f"- {dead}")
-
-    # Lire les lignes existantes de dead.txt
-    existing_lines = read_dead_txt()
-
-    # Mettre à jour dead.txt avec les nouveaux domaines morts
-    update_dead_txt(existing_lines, dead_domains, args.prefixes)
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Vérifier les domaines morts dans une blocklist.')
-    parser.add_argument('--prefixes', nargs='*', help='Préfixes de domaine à filtrer')
-    args = parser.parse_args()
-    
-    main(args)
+        print
