@@ -28,10 +28,7 @@ jobs:
 
     - name: Exécuter le script Python
       run: |
-        echo "
-<code du script python ici>
-        " > check_domains.py
-        python check_domains.py ${GITHUB_EVENT_INPUTS_PREFIXES}
+        python dead.py ${GITHUB_EVENT_INPUTS_PREFIXES}
 
     - name: Ajouter dead.txt au git et commettre
       run: |
