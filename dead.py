@@ -115,20 +115,12 @@ def update_dead_txt(existing_lines, dead_domains, prefixes):
     with open("dead.txt", "w") as f:
         f.writelines(updated_lines)
 
-    print("dead.txt a été mis à jour avec les nouveaux domaines morts.")
-
 def main(args):
-    print('📥 Téléchargement de la liste des domaines...')
     content = download_content(adblock_url)
-
-    print('🔍 Extraction des domaines...')
     domains = extract_domains(content)
 
     if args.prefixes:
-        print(f'Filtrage des domaines avec les préfixes : {", ".join(args.prefixes)}')
         domains = {domain for domain in domains if any(domain.startswith(prefix) for prefix in args.prefixes)}
-
-    print(f'⏳ Vérification des {len(domains)} domaines en parallèle...')
 
     dead_domains = []
     total = len(domains)
@@ -139,16 +131,6 @@ def main(args):
             domain, is_alive = future.result()
             if not is_alive:
                 dead_domains.append(domain)
-                print(f'[{i}/{total}] ❌ Domaine mort : {domain}')
-            else:
-                print(f'[{i}/{total}] ✅ Domaine actif : {domain}')
-
-    print('\n📋 Domaines morts détectés :')
-    for dead in dead_domains:
-        print(f' - {dead}')
-
-    print(f'\nTotal domaines analysés : {total}')
-    print(f'Liens morts : {len(dead_domains)}')
 
     # Lire les lignes existantes de dead.txt
     existing_lines = read_dead_txt()
