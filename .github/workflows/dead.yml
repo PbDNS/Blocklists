@@ -1,41 +1,39 @@
-name: Vérification des domaines
+name: Test DNS Domaines
 
 on:
   workflow_dispatch:
     inputs:
       prefixes:
-        description: "Liste des préfixes à filtrer (séparés par des espaces). Par défaut, filtre '0'."
+        description: 'Liste des préfixes (facultatif)'
         required: false
-        default: "0"
+        default: '0'
 
 jobs:
-  check_domains:
+  dns_test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout du code
-      uses: actions/checkout@v3
-
-    - name: Installer Python 3.10
-      uses: actions/setup-python@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        python-version: '3.10'
-
-    - name: Installer les dépendances
+        python-version: '3.9'  # Utiliser la version de Python souhaitée
+    
+    - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install dnspython requests
 
-    - name: Exécuter le script Python
+    - name: Exécuter le script de test DNS
       run: |
-        python dead.py ${GITHUB_EVENT_INPUTS_PREFIXES}
-
-    - name: Ajouter dead.txt au git et commettre
+        python dead.py ${{ github.event.inputs.prefixes }}
+    
+    - name: Commit and push changes to dead.txt
+      if: success() && github.repository == 'your-username/your-repo'  # Remplacer par votre propre nom de repo
       run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@github.com"
-        
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
         git add dead.txt
-        git commit -m "Mise à jour de dead.txt"
+        git commit -m "Mise à jour de dead.txt avec les nouveaux domaines morts"
         git push
-        
