@@ -43,4 +43,4 @@
 ||www.facebook.com^
 ||staticxx.facebook.com^
 ||graph.facebook.com^
-
+||graph.instagram.com^
