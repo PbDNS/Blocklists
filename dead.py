@@ -34,11 +34,16 @@ def download_content(url):
         with urllib.request.urlopen(url, context=ssl_context) as response:
             return response.read().decode('utf-8')
     except Exception as e:
+        print(f"❌ Erreur lors du téléchargement du contenu depuis {url}: {e}")
         raise SystemExit(f'Erreur lors du téléchargement : {e}')
 
 def extract_domains(content):
-    pattern = re.compile(r'^\|\|([^\^\/]+)\^', re.MULTILINE)
-    return set(re.findall(pattern, content))
+    try:
+        pattern = re.compile(r'^\|\|([^\^\/]+)\^', re.MULTILINE)
+        return set(re.findall(pattern, content))
+    except Exception as e:
+        print(f"❌ Erreur lors de l'extraction des domaines : {e}")
+        raise SystemExit(f'Erreur lors de l\'extraction des domaines : {e}')
 
 def resolve_doh(domain, record_type='A'):
     base_url = 'https://cloudflare-dns.com/dns-query'
@@ -51,7 +56,8 @@ def resolve_doh(domain, record_type='A'):
         with urllib.request.urlopen(req, timeout=3) as response:
             data = json.load(response)
             return 'Answer' in data and len(data['Answer']) > 0
-    except Exception:
+    except Exception as e:
+        print(f"❌ Erreur lors de la résolution DNS pour {domain} en DoH : {e}")
         return False
 
 def _try_resolve(domain):
@@ -66,9 +72,11 @@ def _try_resolve(domain):
                 if answers.rrset:
                     return True
             except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer,
-                    dns.resolver.Timeout, dns.resolver.NoNameservers):
+                    dns.resolver.Timeout, dns.resolver.NoNameservers) as e:
+                print(f"❌ Erreur DNS pour {domain} avec le résolveur {resolver_ip}: {e}")
                 continue
-            except Exception:
+            except Exception as e:
+                print(f"❌ Erreur inattendue pour {domain} avec le résolveur {resolver_ip}: {e}")
                 continue
 
     for rdtype in rdtypes:
@@ -87,56 +95,70 @@ def is_domain_resolvable(domain, tries=tries_per_domain):
     return False
 
 def check_domain(domain):
-    if not is_domain_resolvable(domain):
+    try:
+        if not is_domain_resolvable(domain):
+            return domain, False
+        return domain, True
+    except Exception as e:
+        print(f"❌ Erreur lors de la vérification du domaine {domain}: {e}")
         return domain, False
-    return domain, True
 
 def read_dead_txt():
     try:
         with open('dead.txt', 'r') as file:
             return file.readlines()
     except FileNotFoundError:
+        print("❌ Le fichier 'dead.txt' n'a pas été trouvé.")
         return []
 
 def update_dead_txt(existing_lines, dead_domains, prefixes):
-    # Conserver les lignes existantes qui ne correspondent pas aux préfixes
-    updated_lines = []
-    for line in existing_lines:
-        # Ne conserver que les lignes qui ne commencent pas par les préfixes donnés
-        if not any(line.startswith(prefix) for prefix in prefixes):
-            updated_lines.append(line)
-    
-    # Ajouter les nouveaux domaines morts filtrés par préfixes
-    for domain in dead_domains:
-        if any(domain.startswith(prefix) for prefix in prefixes):
-            updated_lines.append(f"{domain}\n")
-    
-    # Écrire dans dead.txt
-    with open("dead.txt", "w") as f:
-        f.writelines(updated_lines)
+    try:
+        # Conserver les lignes existantes qui ne correspondent pas aux préfixes
+        updated_lines = []
+        for line in existing_lines:
+            if not any(line.startswith(prefix) for prefix in prefixes):
+                updated_lines.append(line)
+
+        # Ajouter les nouveaux domaines morts filtrés par préfixes
+        for domain in dead_domains:
+            if any(domain.startswith(prefix) for prefix in prefixes):
+                updated_lines.append(f"{domain}\n")
+
+        # Écrire dans dead.txt
+        with open("dead.txt", "w") as f:
+            f.writelines(updated_lines)
+        print("dead.txt a été mis à jour avec les nouveaux domaines morts.")
+    except Exception as e:
+        print(f"❌ Erreur lors de la mise à jour de 'dead.txt' : {e}")
+        raise SystemExit(f'Erreur lors de la mise à jour de "dead.txt" : {e}')
 
 def main(args):
-    content = download_content(adblock_url)
-    domains = extract_domains(content)
+    try:
+        content = download_content(adblock_url)
+        domains = extract_domains(content)
 
-    if args.prefixes:
-        domains = {domain for domain in domains if any(domain.startswith(prefix) for prefix in args.prefixes)}
+        if args.prefixes:
+            domains = {domain for domain in domains if any(domain.startswith(prefix) for prefix in args.prefixes)}
 
-    dead_domains = []
-    total = len(domains)
+        dead_domains = []
+        total = len(domains)
 
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = {executor.submit(check_domain, domain): domain for domain in sorted(domains)}
-        for i, future in enumerate(as_completed(futures), 1):
-            domain, is_alive = future.result()
-            if not is_alive:
-                dead_domains.append(domain)
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = {executor.submit(check_domain, domain): domain for domain in sorted(domains)}
+            for i, future in enumerate(as_completed(futures), 1):
+                domain, is_alive = future.result()
+                if not is_alive:
+                    dead_domains.append(domain)
 
-    # Lire les lignes existantes de dead.txt
-    existing_lines = read_dead_txt()
+        # Lire les lignes existantes de dead.txt
+        existing_lines = read_dead_txt()
 
-    # Mettre à jour dead.txt avec les nouveaux domaines morts
-    update_dead_txt(existing_lines, dead_domains, args.prefixes)
+        # Mettre à jour dead.txt avec les nouveaux domaines morts
+        update_dead_txt(existing_lines, dead_domains, args.prefixes)
+
+    except Exception as e:
+        print(f"❌ Une erreur s'est produite pendant l'exécution du script : {e}")
+        raise SystemExit(f"Erreur générale : {e}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Vérifie la disponibilité des domaines avec possibilité de filtrage par préfixe.")
@@ -145,7 +167,7 @@ if __name__ == "__main__":
         nargs='*', 
         help="Liste des préfixes pour filtrer les domaines (par exemple, 'abc', 'xyz'). Par défaut, filtre '0'."
     )
-    
+
     import sys
     # Si aucun préfixe n'est donné, utilisez '0' par défaut
     if len(sys.argv) == 1:
