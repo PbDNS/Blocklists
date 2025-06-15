@@ -41,6 +41,21 @@ tlds_to_add = [
     'uz',  # Ouzbékistan
     'vn',  # Vietnam
     'zm',  # Zambie
+    'sy',  # Syrie
+    'ye',  # Yémen
+    'iq',  # Irak
+    'sd',  # Soudan
+    'ss',  # Soudan du Sud
+    'ly',  # Libye
+    'om',  # Oman
+    'sa',  # Arabie Saoudite
+    'kw',  # Koweït
+    'ae',  # Émirats Arabes Unis
+    'qa',  # Qatar
+    'ps',  # Palestine
+    'mv',  # Maldives
+]
+
 ]
 
 # Fonction pour vérifier si un domaine est valide
