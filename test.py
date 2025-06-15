@@ -13,8 +13,35 @@ except locale.Error as e:
     print(f"⚠️ Impossible de définir local fr_FR.UTF-8 : {e}")
     pass 
 
-# Liste des TLDs à traiter
-tlds_to_add = ['cn', 'cv', 'jp', 'in', 'bw', 'uz', 'vn', 'kh', 'la', 'by']  # Ajoutez ici les TLDs souhaités
+tlds_to_add = [
+    'af',  # Afghanistan
+    'am',  # Arménie
+    'az',  # Azerbaïdjan
+    'bd',  # Bangladesh
+    'bt',  # Bhoutan
+    'by',  # Biélorussie
+    'cn',  # Chine
+    'cv',  # Cap-Vert
+    'ge',  # Géorgie
+    'gz',  # Gaza (Palestine)
+    'id',  # Indonésie
+    'in',  # Inde
+    'ir',  # Iran
+    'jp',  # Japon
+    'kh',  # Cambodge
+    'kg',  # Kirghizistan
+    'ke',  # Kenya
+    'la',  # Laos
+    'mn',  # Mongolie
+    'my',  # Malaisie
+    'np',  # Népal
+    'pk',  # Pakistan
+    'tj',  # Tadjikistan
+    'tz',  # Tanzanie
+    'uz',  # Ouzbékistan
+    'vn',  # Vietnam
+    'zm',  # Zambie
+]
 
 # Fonction pour vérifier si un domaine est valide
 def is_valid_domain(domain):
