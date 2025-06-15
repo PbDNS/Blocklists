@@ -1,17 +1,9 @@
 import urllib.request
 import concurrent.futures
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import re
 import ipaddress
-import locale
 import os
-
-# Définir local France
-try:
-    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
-except locale.Error as e:
-    print(f"⚠️ Impossible de définir local fr_FR.UTF-8 : {e}")
-    pass 
 
 ############################################################
 ################### Blocklistes incluses ###################
@@ -164,8 +156,9 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
 
-# Formatatage FR
-timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
+# Utiliser l'heure GMT+2 pour la France (heure d'été)
+france_timezone = timezone(timedelta(hours=2))  # UTC+2 pour l'heure d'été
+timestamp = datetime.now(france_timezone).strftime("%A %d %B %Y, %H:%M")
 
 # Écriture du fichier de sortie
 with open("blocklist.txt", "w", encoding="utf-8") as f:
@@ -175,4 +168,3 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
         f.write(f"||{entry.lower()}^\n")
 
 print(f"✅ Fichier blocklist.txt généré: {len(final_entries)} entrées")
-
