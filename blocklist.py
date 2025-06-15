@@ -150,8 +150,8 @@ def update_readme(stats):
     with open(readme_path, 'r') as file:
         content = file.read()
 
-# Créer le nouveau contenu pour le tableau des statistiques
-new_table_content = f"""
+    # Créer le nouveau contenu pour le tableau des statistiques
+    new_table_content = f"""
 | Statistique | Valeur |
 |-------------|--------|
 | **Filtres uniques avant agrégation** | {stats['before']} |
@@ -159,17 +159,16 @@ new_table_content = f"""
 
 """
 
-# Supprimer l'ancien tableau de statistiques s'il existe
-table_pattern = re.compile(r'\n\n\|.*?\|\n\|.*?\|\n\|.*?\|.*?\|.*?\|[\s\S]*?(?=\n##|\Z)', re.DOTALL)
-content = table_pattern.sub('', content)
+    # Supprimer l'ancien tableau de statistiques s'il existe
+    table_pattern = re.compile(r'\n\n\|.*?\|\n\|.*?\|\n\|.*?\|.*?\|.*?\|[\s\S]*?(?=\n##|\Z)', re.DOTALL)
+    content = table_pattern.sub('', content)
 
-# Insérer le tableau des statistiques au début du README.md
-content = new_table_content + content
+    # Insérer le tableau des statistiques au début du README.md
+    content = new_table_content + content
 
-# Réécrire le contenu modifié dans le fichier README.md
-with open(readme_path, 'w') as file:
-    file.write(content)
-
+    # Réécrire le contenu modifié dans le fichier README.md
+    with open(readme_path, 'w') as file:
+        file.write(content)
 
 # Préparer les statistiques
 stats = {
