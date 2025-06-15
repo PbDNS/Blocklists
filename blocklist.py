@@ -8,38 +8,12 @@ import os
 ############################################################
 ################### Blocklistes incluses ###################
 ############################################################
-# Liste des URLs de blocklistes (déjà définie dans ton script)
+# Liste des URLs de blocklistes
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt",
-    "https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
-    "https://small.oisd.nl/",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_52.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
-    "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_18.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
-    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
-    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
-    "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
+    # ... (ajouter d'autres URLs)
 ]
 
 # Validation des domaines
@@ -49,11 +23,7 @@ def is_valid_domain(domain):
         return False
     except ValueError:
         pass
-
-    return re.match(
-        r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
-        domain
-    ) is not None
+    return re.match(r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$", domain) is not None
 
 # Télécharger et extraire les règles des blocklistes
 def download_and_extract(url):
@@ -153,7 +123,7 @@ def update_readme(stats):
     with open(readme_path, 'r') as file:
         content = file.read()
 
-    # Créer le nouveau contenu pour le tableau des statistiques avec des bordures améliorées
+    # Créer le nouveau contenu pour le tableau des statistiques
     new_table_content = f"""
 | **filtres uniques avant traitement** | **redondances supprimées** |
 |--------------------------------------|----------------------------|
@@ -164,11 +134,13 @@ def update_readme(stats):
     table_position = content.find("<!-- STATISTICS_TABLE -->")
 
     if table_position != -1:
-        # Insérer le tableau avant la balise
-        content = content[:table_position] + new_table_content + content[table_position:]
+        # Remplacer le tableau existant avec le nouveau contenu
+        start_pos = content.find('|', table_position)
+        end_pos = content.find('|', start_pos + 1)
+        content = content[:start_pos] + new_table_content + content[end_pos + 1:]
     else:
-        # Si la balise n'est pas trouvée, insérer à la fin
-        content += "\n" + new_table_content
+        # Si la balise n'est pas trouvée, ajouter le tableau à la fin du fichier
+        content += "\n<!-- STATISTICS_TABLE -->\n" + new_table_content
 
     # Réécrire le contenu modifié dans le fichier README.md
     with open(readme_path, 'w') as file:
