@@ -188,7 +188,7 @@ def update_readme(stats):
 |--------------------------------------------------|------------|
 | **Filtres uniques avant agrégation**            | {stats['before']} |
 | **Filtres uniques après suppression des sous-domaines** | {stats['after']} |
-| **Mis à jour le**                                | {timestamp} |
+# | **Mis à jour le**                                | {timestamp} |
     """
 
     # Insérer le tableau après le lien vers blocklist.txt
