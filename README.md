@@ -1,8 +1,5 @@
 
-| **filtres uniques avant traitement** | **redondances supprimées** |
-|--------------------------------------|----------------------------|
-| 543225                    | 413752           |
-
+<!-- STATISTICS_TABLE -->
 
 ### Objectifs
 - bloquer les publicités
