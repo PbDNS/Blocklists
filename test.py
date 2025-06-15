@@ -57,6 +57,8 @@ tlds_to_add = [
     'ru',  # Russie
     'pl',  # Pologne
     'il',  # Israel
+    'se',  # Suède
+    'dk',  # Danemark
 ]
 
 # Fonction pour vérifier si un domaine est valide
