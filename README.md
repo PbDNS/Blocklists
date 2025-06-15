@@ -3,7 +3,7 @@
 
 | **filtres uniques avant traitement** | **redondances supprimées** |
 |--------------------------------------|----------------------------|
-| 111125                    | 111752           |
+| 543225                    | 413752           |
 
 <!-- STATISTICS_TABLE_END -->
 
