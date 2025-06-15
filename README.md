@@ -2,7 +2,8 @@
 
 # Agrégation de listes de blocage internationales et francophones
 
-cette compilation mise à jour quotidiennement vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés<br><br>
+<p>cette compilation mise à jour quotidiennement vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés</p>
+<br><br>
 ---
 
 ## Objectifs
@@ -12,7 +13,7 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - bloquer les logiciels malveillants, scams, phishing
 - améliorer la sécurité
 - réduire la consommation de données
-  <br><br>
+<br><br>
 ---
 
 ## Listes incluses
