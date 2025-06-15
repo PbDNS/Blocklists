@@ -1,4 +1,4 @@
-
+|-------------|--------|
 | **Filtres uniques avant agrégation** | 543225 |
 | **Filtres uniques après suppression des sous-domaines** | 413752 |
 
