@@ -1,7 +1,7 @@
 🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
-<div align="center">
-Agrégation de listes de blocage internationales et francophones
+<div style="text-align: center; font-size: 2em; font-weight: bold; margin: 20px 0;">
+  Agrégation de listes de blocage internationales et francophones
 </div>
 - mise à jour quotidienne, combine les forces de nombreuses blocklistes réputées en une source unique adaptée aux environnements d’analyse réseau ou de filtrage DNS
 
