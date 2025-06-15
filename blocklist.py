@@ -160,6 +160,10 @@ def update_readme(stats):
 
 """
 
+    # Supprimer l'ancien tableau de statistiques s'il existe
+    table_pattern = re.compile(r'## Statistiques de l\'Agrégation des Blocklistes\n\n\|.*?\|\n\|.*?\|.*?\|.*?\|', re.DOTALL)
+    content = table_pattern.sub('', content)
+
     # Insérer le tableau des statistiques au début du README.md
     content = new_table_content + content
 
