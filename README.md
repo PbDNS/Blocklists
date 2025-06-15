@@ -7,6 +7,16 @@
 |--------------------------------------------------|------------|
 | **Filtres uniques avant agrégation**            | 543150 |
 | **Filtres uniques après suppression des sous-domaines** | 413691 |
+# | **Mis à jour le**                                | Sunday 15 June 2025, 20:07 |
+    
+
+
+## Statistiques de l'Agrégation des Blocklistes
+
+| Statistique                                      | Valeur     |
+|--------------------------------------------------|------------|
+| **Filtres uniques avant agrégation**            | 543150 |
+| **Filtres uniques après suppression des sous-domaines** | 413691 |
 | **Mis à jour le**                                | Sunday 15 June 2025, 20:00 |
     
 
