@@ -54,6 +54,9 @@ tlds_to_add = [
     'qa',  # Qatar
     'ps',  # Palestine
     'mv',  # Maldives
+    'ru',  # Russie
+    'pl',  # Pologne
+    'il',  # Israel
 ]
 
 # Fonction pour vérifier si un domaine est valide
