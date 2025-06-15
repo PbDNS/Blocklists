@@ -51,20 +51,58 @@ tlds_to_add = [
     'zm',  # Zambie
 
 # Europe
+    'al',  # Albanie
+    'am',  # Arménie
+    'az',  # Azerbaïdjan
+    'ba',  # Bosnie-Herzégovine
+    'bg',  # Bulgarie
     'by',  # Biélorussie
+    'cz',  # République tchèque
     'dk',  # Danemark
+    'ee',  # Estonie
+    'fi',  # Finlande
+    'ge',  # Géorgie
+    'hr',  # Croatie
+    'hu',  # Hongrie
+    'is',  # Islande
+    'kz',  # Kazakhstan
+    'kg',  # Kirghizistan
+    'li',  # Liechtenstein
+    'lt',  # Lituanie
+    'lv',  # Lettonie
+    'md',  # Moldavie
+    'me',  # Monténégro
+    'mk',  # Macédoine du Nord
+    'no',  # Norvège
     'pl',  # Pologne
+    'pt',  # Portugal
+    'ro',  # Roumanie
+    'rs',  # Serbie
     'ru',  # Russie
     'se',  # Suède
-
+    'sk',  # Slovaquie
+    'si',  # Slovénie
+    'sj',  # Svalbard et Jan Mayen (territoire norvégien)
+    'tr',  # Turquie
+    'ua',  # Ukraine
+    'va',  # Vatican
+   
 # Moyen-Orient
     'ae',  # Émirats Arabes Unis
-    'gz',  # Gaza (Palestine)
-    'ps',  # Palestine
     'il',  # Israël
     'iq',  # Irak
+    'jo',  # Jordanie
     'kw',  # Koweït
+    'lb',  # Liban
+    'ly',  # Libye
+    'om',  # Oman
+    'ps',  # Palestine
+    'qa',  # Qatar
+    'sa',  # Arabie Saoudite
     'sy',  # Syrie
+    'tc',  # Chypre
+    'ye',  # Yémen
+
 ]
 
 # Fonction pour vérifier si un domaine est valide
