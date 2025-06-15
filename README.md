@@ -4,7 +4,6 @@
 
 - mise à jour quotidienne, combine les forces de nombreuses blocklistes réputées en une source unique adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés</span>
 
-&nbsp;
 ---
 ## Objectifs
 
@@ -13,7 +12,7 @@
 - bloquer les logiciels malveillants, scams, phishing
 - améliorer la sécurité
 - réduire la consommation de données
-&nbsp;
+
 ---
 ## Listes incluses
 
@@ -44,7 +43,7 @@
 - **Stalkerware Indicators List**
 - **Steven Black's List**
 - **The Big List of Hacked Malware Web Sites**
-&nbsp;
+
 ---
 ## Format et utilisation
 
