@@ -13,6 +13,12 @@
 - améliorer la sécurité
 - réduire la consommation de données
 
+### Format et utilisation
+
+- format Adblock Plus, compatible avec Adguard Home, Pihole...
+- sous-domaines redondants supprimés
+- optimisé pour un usage DNS/adblock au niveau réseau
+
 ### Listes incluses
 
 - AdGuard DNS filter
@@ -42,10 +48,4 @@
 - Stalkerware Indicators List
 - Steven Black's List
 - The Big List of Hacked Malware Web Sites
-
-### Format et utilisation
-
-- format Adblock Plus, compatible avec Adguard Home, Pihole...
-- sous-domaines redondants supprimés
-- optimisé pour un usage DNS/adblock au niveau réseau
 &nbsp;
