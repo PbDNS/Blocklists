@@ -8,36 +8,7 @@ import os
 ############################################################
 ################### Blocklistes incluses ###################
 ############################################################
-# HaGeZi's Normal DNS Blocklist
-# HaGeZi's Pop-Up Ads DNS Blocklist
-# HaGeZi's Amazon Tracker DNS Blocklist
-# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
-# HaGeZi's Badware Hoster Blocklist
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
-# HaGeZi's DynDNS Blocklist
-# HaGeZi's Windows/Office Tracker DNS Blocklist
-# ShadowWhisperer's Malware List
-# OISD Small
-# Dandelion Sprout's Anti Malware List
-# Dandelion Sprout's Anti Push Notifications
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-# AWAvenue Ads Rule
-# HaGeZi's Apple Tracker DNS Blocklist
-# d3Host
-# AdGuard DNS filter
-# Phishing Army
-# Phishing URL Blocklist (PhishTank and OpenPhish)
-# Malicious URL Blocklist (URLHaus)
-# Scam Blocklist by DurableNapkin
-# AdGuard French adservers
-# AdGuard French adservers first party
-# Steven Black's List
-# Peter Lowe's Blocklist
-# Dan Pollock's List
-# Easylist FR
-# The Big List of Hacked Malware Web Sites
-# Stalkerware Indicators List
-
+# Liste des URLs de blocklistes (déjà définie dans ton script)
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -72,7 +43,6 @@ blocklist_urls = [
 ]
 
 def is_valid_domain(domain):
-    # Exclusion des IPs
     try:
         ipaddress.ip_address(domain)
         return False
@@ -157,8 +127,8 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
             final_entries.add(entry)
 
 # Calcul des statistiques
-total_unique_before = len(all_entries)  # Nombre d'entrées avant suppression des sous-domaines redondants
-total_unique_after = len(final_entries)  # Nombre d'entrées après suppression des sous-domaines redondants
+total_unique_before = len(all_entries)
+total_unique_after = len(final_entries)
 
 # Utiliser l'heure GMT+2 pour la France (heure d'été)
 france_timezone = timezone(timedelta(hours=2))  # UTC+2 pour l'heure d'été
@@ -177,11 +147,27 @@ print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
 def update_readme(stats):
     readme_path = 'README.md'
 
+    # Lire le contenu du README.md
     with open(readme_path, 'r') as file:
         content = file.read()
 
-    # Tableau des statistiques à insérer au début
-    table = f"""
+    # Vérifier si un tableau existe déjà pour les statistiques
+    if "## Statistiques de l'Agrégation des Blocklistes" in content:
+        # Si le tableau existe déjà, on remplace uniquement les statistiques
+        table_start = content.find("## Statistiques de l'Agrégation des Blocklistes")
+        table_end = content.find("|", table_start)  # Trouver la fin de la ligne du tableau
+        table_content = f"""
+| Statistique                                      | Valeur     |
+|--------------------------------------------------|------------|
+| **Filtres uniques avant agrégation**            | {stats['before']} |
+| **Filtres uniques après suppression des sous-domaines** | {stats['after']} |
+"""
+        # Remplacer la section du tableau par la nouvelle version
+        content = content[:table_start] + "## Statistiques de l'Agrégation des Blocklistes\n" + table_content + content[table_end:]
+
+    else:
+        # Si le tableau n'existe pas, on l'ajoute à l'endroit approprié
+        table = f"""
 ## Statistiques de l'Agrégation des Blocklistes
 
 | Statistique                                      | Valeur     |
@@ -189,12 +175,11 @@ def update_readme(stats):
 | **Filtres uniques avant agrégation**            | {stats['before']} |
 | **Filtres uniques après suppression des sous-domaines** | {stats['after']} |
 """
+        # Insérer le tableau après le lien vers blocklist.txt
+        content = content.replace('🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)', 
+                                  f'🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)\n\n{table}')
 
-
-    # Insérer le tableau après le lien vers blocklist.txt
-    content = content.replace('🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)', 
-                              f'🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)\n\n{table}')
-
+    # Réécrire le contenu modifié dans le fichier README.md
     with open(readme_path, 'w') as file:
         file.write(content)
 
@@ -206,3 +191,4 @@ stats = {
 
 # Mise à jour du README avec les statistiques
 update_readme(stats)
+
