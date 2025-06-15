@@ -3,7 +3,7 @@
 # Agrégation de listes de blocage internationales et francophones
 - mise à jour quotidienne, combine les forces de nombreuses blocklistes réputées en une source unique adaptée aux environnements d’analyse réseau ou de filtrage DNS
 ---
-## Objectifs
+### Objectifs
 
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
@@ -11,7 +11,7 @@
 - améliorer la sécurité
 - réduire la consommation de données
 
-## Listes incluses
+### Listes incluses
 
 - **AdGuard DNS filter**
 - **AdGuard French adservers**
@@ -41,7 +41,7 @@
 - **Steven Black's List**
 - **The Big List of Hacked Malware Web Sites**
 
-## Format et utilisation
+### Format et utilisation
 
 - format Adblock Plus
 - sous-domaines redondants supprimés
