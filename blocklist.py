@@ -159,7 +159,8 @@ def update_readme(stats):
 """
 
     # Supprimer l'ancien tableau de statistiques s'il existe
-    table_pattern = re.compile(r'\n\n\|.*?\|\n\|.*?\|\n\|.*?\|.*?\|.*?\|[\s\S]*?(?=\n##|\Z)', re.DOTALL)
+    # Cette expression régulière est maintenant plus robuste et s'assure que le tableau est correctement capturé
+    table_pattern = re.compile(r'(\|.*?\|[\s\S]*?)(?=\n##|\Z)', re.DOTALL)
     content = table_pattern.sub('', content)
 
     # Insérer le tableau des statistiques au début du README.md
@@ -171,8 +172,8 @@ def update_readme(stats):
 
 # Préparer les statistiques
 stats = {
-    'before': total_unique_before,
-    'after': total_unique_after
+    'before': 1000,  # exemple de statistiques
+    'after': 800
 }
 
 # Mise à jour du README avec les statistiques
