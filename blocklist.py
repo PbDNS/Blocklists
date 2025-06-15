@@ -13,6 +13,9 @@ except locale.Error as e:
     print(f"⚠️ Impossible de définir local fr_FR.UTF-8 : {e}")
     pass 
 
+##################################################
+############## Blocklistes incluses ##############
+##################################################
 # HaGeZi's Normal DNS Blocklist
 # HaGeZi's Pop-Up Ads DNS Blocklist
 # HaGeZi's Amazon Tracker DNS Blocklist
@@ -43,7 +46,6 @@ except locale.Error as e:
 # The Big List of Hacked Malware Web Sites
 # Stalkerware Indicators List
 
-# Blocklistes incluses
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
