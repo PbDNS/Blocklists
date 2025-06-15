@@ -54,5 +54,5 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - sous-domaines redondants supprimés
 - optimisé pour un usage DNS/adblock au niveau réseau
 - compatible avec des solutions comme AdGuard Home ou Pi-hole
+<br><br>
 
-&nbsp;
