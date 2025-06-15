@@ -2,7 +2,9 @@
 
 # Agrégation de listes de blocage internationales et francophones
 - mise à jour quotidienne, combine les forces de nombreuses blocklistes réputées en une source unique adaptée aux environnements d’analyse réseau ou de filtrage DNS
+
 ---
+
 ### Objectifs
 
 - bloquer les publicités
@@ -43,8 +45,7 @@
 
 ### Format et utilisation
 
-- format Adblock Plus
+- format Adblock Plus, compatible avec Adguard Home, Pihole...
 - sous-domaines redondants supprimés
 - optimisé pour un usage DNS/adblock au niveau réseau
-- compatible avec des solutions comme AdGuard Home ou Pi-hole
 &nbsp;
