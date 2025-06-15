@@ -8,36 +8,6 @@ import os
 ############################################################
 ################### Blocklistes incluses ###################
 ############################################################
-# HaGeZi's Normal DNS Blocklist
-# HaGeZi's Pop-Up Ads DNS Blocklist
-# HaGeZi's Amazon Tracker DNS Blocklist
-# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
-# HaGeZi's Badware Hoster Blocklist
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
-# HaGeZi's DynDNS Blocklist
-# HaGeZi's Windows/Office Tracker DNS Blocklist
-# ShadowWhisperer's Malware List
-# OISD Small
-# Dandelion Sprout's Anti Malware List
-# Dandelion Sprout's Anti Push Notifications
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-# AWAvenue Ads Rule
-# HaGeZi's Apple Tracker DNS Blocklist
-# d3Host
-# AdGuard DNS filter
-# Phishing Army
-# Phishing URL Blocklist (PhishTank and OpenPhish)
-# Malicious URL Blocklist (URLHaus)
-# Scam Blocklist by DurableNapkin
-# AdGuard French adservers
-# AdGuard French adservers first party
-# Steven Black's List
-# Peter Lowe's Blocklist
-# Dan Pollock's List
-# Easylist FR
-# The Big List of Hacked Malware Web Sites
-# Stalkerware Indicators List
-
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -156,6 +126,10 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
 
+# Calcul des statistiques
+total_unique_before = len(all_entries)  # Nombre d'entrées avant suppression des sous-domaines redondants
+total_unique_after = len(final_entries)  # Nombre d'entrées après suppression des sous-domaines redondants
+
 # Utiliser l'heure GMT+2 pour la France (heure d'été)
 france_timezone = timezone(timedelta(hours=2))  # UTC+2 pour l'heure d'été
 timestamp = datetime.now(france_timezone).strftime("%A %d %B %Y, %H:%M")
@@ -163,8 +137,41 @@ timestamp = datetime.now(france_timezone).strftime("%A %d %B %Y, %H:%M")
 # Écriture du fichier de sortie
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {len(final_entries):06} entrées\n\n")
+    f.write(f"! {total_unique_after:06} entrées\n\n")
     for entry in sorted(final_entries):
         f.write(f"||{entry.lower()}^\n")
 
-print(f"✅ Fichier blocklist.txt généré: {len(final_entries)} entrées")
+print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
+
+# Mise à jour du README.md avec les statistiques
+def update_readme(stats):
+    readme_path = 'README.md'
+
+    with open(readme_path, 'r') as file:
+        content = file.read()
+
+    # Section d'ajout ou de mise à jour dans le README
+    table = f"""
+## Statistiques de l'Agrégation des Blocklistes
+
+| Statistique                                      | Valeur     |
+|--------------------------------------------------|------------|
+| **Filtres uniques avant agrégation**            | {stats['before']} |
+| **Filtres uniques après suppression des sous-domaines** | {stats['after']} |
+| **Mis à jour le**                                | {timestamp} |
+    """
+
+    # Recherche de la section et remplacement ou ajout
+    content = content.replace('<!-- STATISTICS -->', table)  # On remplace ou ajoute la section
+
+    with open(readme_path, 'w') as file:
+        file.write(content)
+
+# Préparer les statistiques
+stats = {
+    'before': total_unique_before,
+    'after': total_unique_after
+}
+
+# Mise à jour du README avec les statistiques
+update_readme(stats)
