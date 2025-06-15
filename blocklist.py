@@ -152,7 +152,7 @@ def update_readme(stats):
 
     # Créer le nouveau contenu pour le tableau des statistiques avec des bordures améliorées
     new_table_content = f"""
-| **Filtres uniques avant agrégation** | **Filtres uniques après suppression des sous-domaines** |
+| **filtres uniques avant traitement** | **redondances supprimées** |
 |--------------------------------------|--------------------------------------------------------|
 | {stats['before']}                    | {stats['after']}                                       |
 
