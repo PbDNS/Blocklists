@@ -130,17 +130,23 @@ def update_readme(stats):
 | {stats['before']}                    | {stats['after']}           |
 """
 
-    # Rechercher la balise <!-- STATISTICS_TABLE -->
-    table_position = content.find("<!-- STATISTICS_TABLE -->")
+    # Rechercher la balise <!-- STATISTICS_TABLE_START --> et <!-- STATISTICS_TABLE_END -->
+    start_tag = "<!-- STATISTICS_TABLE_START -->"
+    end_tag = "<!-- STATISTICS_TABLE_END -->"
 
-    if table_position != -1:
-        # Remplacer le tableau existant avec le nouveau contenu
-        start_pos = content.find('|', table_position)
-        end_pos = content.find('|', start_pos + 1)
-        content = content[:start_pos] + new_table_content + content[end_pos + 1:]
+    start_position = content.find(start_tag)
+    end_position = content.find(end_tag)
+
+    if start_position != -1 and end_position != -1:
+        # Remplacer le tableau entre les deux balises
+        content = content[:start_position + len(start_tag)] + "\n" + new_table_content + "\n" + content[end_position:]
     else:
-        # Si la balise n'est pas trouvée, ajouter le tableau à la fin du fichier
-        content += "\n<!-- STATISTICS_TABLE -->\n" + new_table_content
+        # Si les balises ne sont pas trouvées, ajouter les balises et le tableau
+        if start_position == -1:
+            content += f"\n{start_tag}\n"
+        if end_position == -1:
+            content += f"\n{end_tag}\n"
+        content = content.replace(end_tag, f"\n{new_table_content}\n{end_tag}")
 
     # Réécrire le contenu modifié dans le fichier README.md
     with open(readme_path, 'w') as file:
