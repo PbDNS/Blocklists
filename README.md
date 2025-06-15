@@ -3,7 +3,7 @@
 # Agrégation de listes de blocage internationales et francophones
 
 cette compilation mise à jour quotidiennement vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés
-
+<br><br>
 ---
 
 ## Objectifs
