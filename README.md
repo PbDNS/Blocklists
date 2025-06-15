@@ -1,9 +1,4 @@
 
-| **filtres uniques avant traitement** | **redondances supprimées** |
-|--------------------------------------|--------------------------------------------------------|
-| 1000                    | 800                                       |
-
-
 ### Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
