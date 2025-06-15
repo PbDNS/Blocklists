@@ -47,7 +47,7 @@ def is_valid_domain(domain):
         ipaddress.ip_address(domain)
         return False
     except ValueError:
-        pass  
+        pass
 
     return re.match(
         r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
@@ -150,30 +150,18 @@ def update_readme(stats):
     with open(readme_path, 'r') as file:
         content = file.read()
 
-    # Chercher si un tableau des statistiques existe déjà
-    table_start = content.find("## Statistiques de l'Agrégation des Blocklistes")
-
+    # Créer le nouveau contenu pour le tableau des statistiques
     new_table_content = f"""## Statistiques de l'Agrégation des Blocklistes
 
 | Statistique | Valeur |
 |-------------|--------|
 | **Filtres uniques avant agrégation** | {stats['before']} |
-| **Filtres uniques après suppression des sous-domaines** | {stats['after']} |"""
+| **Filtres uniques après suppression des sous-domaines** | {stats['after']} |
 
-    if table_start != -1:
-        # Si le tableau existe, trouver la fin du tableau
-        table_end = content.find("##", table_start + 1)
-        if table_end == -1:
-            table_end = len(content)
-        # Remplacer le tableau existant par les nouvelles statistiques
-        content = content[:table_start] + new_table_content + content[table_end:]
-    else:
-        # Si le tableau n'existe pas, l'ajouter après le lien vers blocklist.txt
-        blocklist_link = '🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)'
-        if blocklist_link in content:
-            content = content.replace(blocklist_link, blocklist_link + '\n\n' + new_table_content)
-        else:
-            content += '\n\n' + new_table_content
+"""
+
+    # Insérer le tableau des statistiques au début du README.md
+    content = new_table_content + content
 
     # Réécrire le contenu modifié dans le fichier README.md
     with open(readme_path, 'w') as file:
