@@ -5,14 +5,7 @@
 | Statistique | Valeur |
 |-------------|--------|
 | **Filtres uniques avant agrégation** | 543225 |
-| **Filtres uniques après suppression des sous-domaines** | 413752 |
-
-# Agrégation de listes de blocage internationales et francophones
-- mise à jour quotidienne, combine les forces de nombreuses blocklistes réputées en une source unique adaptée aux environnements d’analyse réseau ou de filtrage DNS
-
----
-
-### Objectifs
+| **Filtres uniques après suppression des sous-domaines** | 413752 |### Objectifs
 
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
