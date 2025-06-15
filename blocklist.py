@@ -172,5 +172,5 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
     for entry in sorted(final_entries):
         f.write(f"||{entry.lower()}^\n")
 
-print(f"✅ Fichier blocklist.txt généré: {len(final_entries)} entrées.")
+print(f"✅ Fichier blocklist.txt généré: {len(final_entries)} entrées")
 
