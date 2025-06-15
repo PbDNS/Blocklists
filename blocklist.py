@@ -13,9 +13,9 @@ except locale.Error as e:
     print(f"⚠️ Impossible de définir local fr_FR.UTF-8 : {e}")
     pass 
 
-##################################################
-############## Blocklistes incluses ##############
-##################################################
+############################################################
+################### Blocklistes incluses ###################
+############################################################
 # HaGeZi's Normal DNS Blocklist
 # HaGeZi's Pop-Up Ads DNS Blocklist
 # HaGeZi's Amazon Tracker DNS Blocklist
