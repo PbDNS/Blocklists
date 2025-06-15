@@ -39,7 +39,6 @@ tlds_to_add = [
     'ye',  # Yémen
 
 # Afrique
-    'cv',  # Cap-Vert
     'ke',  # Kenya
     'mv',  # Maldives
     'sa',  # Arabie Saoudite
