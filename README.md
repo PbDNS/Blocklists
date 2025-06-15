@@ -3,6 +3,10 @@
 | **filtres uniques avant traitement** | **redondances supprimées** |
 |--------------------------------------|----------------------------|
 | 543225                    | 413752           |
+
+| **filtres uniques avant traitement** | **redondances supprimées** |
+|--------------------------------------|----------------------------|
+| 543225                    | 413752           |
 <!-- STATISTICS_TABLE -->
 
 ### Objectifs
