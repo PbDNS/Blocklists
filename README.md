@@ -2,9 +2,8 @@
 
 # Agrégation de listes de blocage internationales et francophones
 
-<span> compilation mise à jour quotidiennement vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés</span>
-
-<br><br>
+- compilation mise à jour quotidiennement vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés</span>
+&nbsp;
 ---
 ## Objectifs
 
@@ -13,7 +12,7 @@
 - bloquer les logiciels malveillants, scams, phishing
 - améliorer la sécurité
 - réduire la consommation de données
-<br><br>
+&nbsp;
 ---
 ## Listes incluses
 
@@ -44,7 +43,7 @@
 - **Stalkerware Indicators List**
 - **Steven Black's List**
 - **The Big List of Hacked Malware Web Sites**
-<br><br>
+&nbsp;
 ---
 ## Format et utilisation
 
@@ -52,5 +51,4 @@
 - sous-domaines redondants supprimés
 - optimisé pour un usage DNS/adblock au niveau réseau
 - compatible avec des solutions comme AdGuard Home ou Pi-hole
-<br><br>
-
+&nbsp;
