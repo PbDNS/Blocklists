@@ -42,6 +42,7 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
 ]
 
+# Validation des domaines
 def is_valid_domain(domain):
     try:
         ipaddress.ip_address(domain)
@@ -54,6 +55,7 @@ def is_valid_domain(domain):
         domain
     ) is not None
 
+# Télécharger et extraire les règles des blocklistes
 def download_and_extract(url):
     try:
         with urllib.request.urlopen(url, timeout=30) as response:
@@ -143,6 +145,7 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
 
 print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
 
+# Mise à jour du README.md
 def update_readme(stats):
     readme_path = 'README.md'
 
@@ -153,13 +156,11 @@ def update_readme(stats):
     # Créer le nouveau contenu pour le tableau des statistiques avec des bordures améliorées
     new_table_content = f"""
 | **filtres uniques avant traitement** | **redondances supprimées** |
-|--------------------------------------|--------------------------------------------------------|
-| {stats['before']}                    | {stats['after']}                                       |
-
+|--------------------------------------|----------------------------|
+| {stats['before']}                    | {stats['after']}           |
 """
 
     # Supprimer l'ancien tableau de statistiques s'il existe
-    # Cette expression régulière est maintenant plus robuste et s'assure que le tableau est correctement capturé
     table_pattern = re.compile(r'(\|.*?\|[\s\S]*?)(?=\n##|\Z)', re.DOTALL)
     content = table_pattern.sub('', content)
 
@@ -170,10 +171,10 @@ def update_readme(stats):
     with open(readme_path, 'w') as file:
         file.write(content)
 
-# Préparer les statistiques
+# Mise à jour du README avec les statistiques réelles
 stats = {
-    'before': 1000,  # exemple de statistiques
-    'after': 800
+    'before': total_unique_before,
+    'after': total_unique_after
 }
 
 # Mise à jour du README avec les statistiques
