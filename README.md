@@ -1,5 +1,14 @@
 🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
+
+## Statistiques de l'Agrégation des Blocklistes
+
+| Statistique                                      | Valeur     |
+|--------------------------------------------------|------------|
+| **Filtres uniques avant agrégation**            | 543225 |
+| **Filtres uniques après suppression des sous-domaines** | 413752 |
+
+
 # Agrégation de listes de blocage internationales et francophones
 - mise à jour quotidienne, combine les forces de nombreuses blocklistes réputées en une source unique adaptée aux environnements d’analyse réseau ou de filtrage DNS
 
