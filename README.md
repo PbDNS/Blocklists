@@ -2,10 +2,10 @@
 
 # Agrégation de listes de blocage internationales et francophones
 
-cette compilation mise à jour quotidiennement vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés
+<span> compilation mise à jour quotidiennement vise à combiner les forces de nombreuses blocklistes réputées, en une source unique, adaptée aux environnements d’analyse réseau ou de filtrage DNS personnalisés</span>
 
+<br><br>
 ---
-
 ## Objectifs
 
 - bloquer les publicités
@@ -15,7 +15,6 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - réduire la consommation de données
 <br><br>
 ---
-
 ## Listes incluses
 
 - **AdGuard DNS filter**
@@ -47,7 +46,6 @@ cette compilation mise à jour quotidiennement vise à combiner les forces de no
 - **The Big List of Hacked Malware Web Sites**
 <br><br>
 ---
-
 ## Format et utilisation
 
 - format Adblock Plus
