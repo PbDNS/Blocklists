@@ -1,7 +1,6 @@
 
-
-
-<!-- STATISTICS_TABLE -->
+<!-- STATISTICS_TABLE_START -->
+<!-- STATISTICS_TABLE_END -->
 
 ### Objectifs
 - bloquer les publicités
