@@ -85,7 +85,7 @@ def is_valid_domain(domain):
         ipaddress.ip_address(domain)
         return False
     except ValueError:
-        pass  # Ce n’est pas une IP, on continue
+        pass  
 
     return re.match(
         r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$",
