@@ -31,12 +31,14 @@ jobs:
         env:
           LANG: fr_FR.UTF-8
           LC_ALL: fr_FR.UTF-8
-        run: python blocklist.py
+        run: |
+          # Exécuter le script Python pour générer blocklist.txt et mettre à jour README.md
+          python blocklist.py
 
-      - name: Commit et push de blocklist.txt
+      - name: Commit et push de blocklist.txt et README.md
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add blocklist.txt
+          git add blocklist.txt README.md
           git commit -m "🛡️ Mise à jour automatique [$(date '+%d/%m/%Y %H:%M')]" || echo "Rien à committer"
           git push
