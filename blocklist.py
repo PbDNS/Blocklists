@@ -78,7 +78,7 @@ blocklist_urls = [
 ]
 
 def is_valid_domain(domain):
-    # Exclure explicitement les IP
+    # Exclusion des IPs
     try:
         ipaddress.ip_address(domain)
         return False
@@ -162,7 +162,7 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
 
-# Format de la date locale française
+# Formatatage FR
 timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
 
 # Écriture du fichier de sortie
@@ -172,5 +172,5 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
     for entry in sorted(final_entries):
         f.write(f"||{entry.lower()}^\n")
 
-print(f"✅ Fichier blocklist.txt généré avec {len(final_entries)} entrées.")
+print(f"✅ Fichier blocklist.txt généré: {len(final_entries)} entrées.")
 
