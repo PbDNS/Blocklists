@@ -14,7 +14,7 @@ except locale.Error as e:
     pass 
 
 # Liste des TLDs à traiter
-tlds_to_add = ['cn', 'ru', 'jp', 'in']  # Ajoutez ici les TLDs souhaités
+tlds_to_add = ['cn', 'cv', 'jp', 'in', 'bw', 'uz', 'vn', 'kh', 'la', 'by']  # Ajoutez ici les TLDs souhaités
 
 # Fonction pour vérifier si un domaine est valide
 def is_valid_domain(domain):
