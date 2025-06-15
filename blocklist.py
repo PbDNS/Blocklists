@@ -160,18 +160,21 @@ def update_readme(stats):
 | {stats['before']}                    | {stats['after']}           |
 """
 
-    # Supprimer l'ancien tableau de statistiques s'il existe
-    table_pattern = re.compile(r'(\|.*?\|[\s\S]*?)(?=\n##|\Z)', re.DOTALL)
-    content = table_pattern.sub('', content)
+    # Rechercher la balise <!-- STATISTICS_TABLE -->
+    table_position = content.find("<!-- STATISTICS_TABLE -->")
 
-    # Insérer le tableau des statistiques au début du README.md
-    content = new_table_content + content
+    if table_position != -1:
+        # Insérer le tableau avant la balise
+        content = content[:table_position] + new_table_content + content[table_position:]
+    else:
+        # Si la balise n'est pas trouvée, insérer à la fin
+        content += "\n" + new_table_content
 
     # Réécrire le contenu modifié dans le fichier README.md
     with open(readme_path, 'w') as file:
         file.write(content)
 
-# Mise à jour du README avec les statistiques réelles
+# Mise à jour des statistiques
 stats = {
     'before': total_unique_before,
     'after': total_unique_after
