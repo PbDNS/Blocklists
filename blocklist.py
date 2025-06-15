@@ -150,10 +150,8 @@ def update_readme(stats):
     with open(readme_path, 'r') as file:
         content = file.read()
 
-    # Créer le nouveau contenu pour le tableau des statistiques
+    # Créer le nouveau contenu pour le tableau des statistiques sans l'en-tête
     new_table_content = f"""
-| Statistique | Valeur |
-|-------------|--------|
 | **Filtres uniques avant agrégation** | {stats['before']} |
 | **Filtres uniques après suppression des sous-domaines** | {stats['after']} |
 
