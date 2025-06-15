@@ -8,6 +8,36 @@ import os
 ############################################################
 ################### Blocklistes incluses ###################
 ############################################################
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's Amazon Tracker DNS Blocklist
+# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# HaGeZi's Badware Hoster Blocklist
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
+# HaGeZi's DynDNS Blocklist
+# HaGeZi's Windows/Office Tracker DNS Blocklist
+# ShadowWhisperer's Malware List
+# OISD Small
+# Dandelion Sprout's Anti Malware List
+# Dandelion Sprout's Anti Push Notifications
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# AWAvenue Ads Rule
+# HaGeZi's Apple Tracker DNS Blocklist
+# d3Host
+# AdGuard DNS filter
+# Phishing Army
+# Phishing URL Blocklist (PhishTank and OpenPhish)
+# Malicious URL Blocklist (URLHaus)
+# Scam Blocklist by DurableNapkin
+# AdGuard French adservers
+# AdGuard French adservers first party
+# Steven Black's List
+# Peter Lowe's Blocklist
+# Dan Pollock's List
+# Easylist FR
+# The Big List of Hacked Malware Web Sites
+# Stalkerware Indicators List
+
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -150,7 +180,7 @@ def update_readme(stats):
     with open(readme_path, 'r') as file:
         content = file.read()
 
-    # Section d'ajout ou de mise à jour dans le README
+    # Tableau des statistiques à insérer au début
     table = f"""
 ## Statistiques de l'Agrégation des Blocklistes
 
@@ -161,8 +191,9 @@ def update_readme(stats):
 | **Mis à jour le**                                | {timestamp} |
     """
 
-    # Recherche de la section et remplacement ou ajout
-    content = content.replace('<!-- STATISTICS -->', table)  # On remplace ou ajoute la section
+    # Insérer le tableau après le lien vers blocklist.txt
+    content = content.replace('🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)', 
+                              f'🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)\n\n{table}')
 
     with open(readme_path, 'w') as file:
         file.write(content)
