@@ -4,11 +4,6 @@
 | **Filtres uniques avant agrégation** | 543225 |
 | **Filtres uniques après suppression des sous-domaines** | 413752 |
 
-
-| **Filtres uniques avant agrégation** | 543225 |
-| **Filtres uniques après suppression des sous-domaines** | 413752 |
-
-
 ### Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
