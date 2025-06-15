@@ -1,4 +1,9 @@
 
+| **Filtres uniques avant agrégation** | **Filtres uniques après suppression des sous-domaines** |
+|--------------------------------------|--------------------------------------------------------|
+| 543225                    | 413752                                       |
+
+
 
 ### Objectifs
 - bloquer les publicités
