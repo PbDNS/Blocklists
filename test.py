@@ -56,8 +56,6 @@ tlds_to_add = [
     'mv',  # Maldives
 ]
 
-]
-
 # Fonction pour vérifier si un domaine est valide
 def is_valid_domain(domain):
     try:
