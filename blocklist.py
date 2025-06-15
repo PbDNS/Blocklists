@@ -143,7 +143,6 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
 
 print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
 
-# Mise à jour du README.md avec les statistiques
 def update_readme(stats):
     readme_path = 'README.md'
 
@@ -153,31 +152,28 @@ def update_readme(stats):
 
     # Chercher si un tableau des statistiques existe déjà
     table_start = content.find("## Statistiques de l'Agrégation des Blocklistes")
-    
+
+    new_table_content = f"""## Statistiques de l'Agrégation des Blocklistes
+
+| Statistique | Valeur |
+|-------------|--------|
+| **Filtres uniques avant agrégation** | {stats['before']} |
+| **Filtres uniques après suppression des sous-domaines** | {stats['after']} |"""
+
     if table_start != -1:
-        # Si le tableau existe, remplacer la section existante
-        table_end = content.find("|", table_start)  # Trouver la fin de la ligne du tableau
-        table_content = f"""
-| Statistique                                      | Valeur     |
-|--------------------------------------------------|------------|
-| **Filtres uniques avant agrégation**            | {stats['before']} |
-| **Filtres uniques après suppression des sous-domaines** | {stats['after']} |
-"""
+        # Si le tableau existe, trouver la fin du tableau
+        table_end = content.find("##", table_start + 1)
+        if table_end == -1:
+            table_end = len(content)
         # Remplacer le tableau existant par les nouvelles statistiques
-        content = content[:table_start] + "## Statistiques de l'Agrégation des Blocklistes\n" + table_content + content[table_end:]
+        content = content[:table_start] + new_table_content + content[table_end:]
     else:
         # Si le tableau n'existe pas, l'ajouter après le lien vers blocklist.txt
-        table = f"""
-## Statistiques de l'Agrégation des Blocklistes
-
-| Statistique                                      | Valeur     |
-|--------------------------------------------------|------------|
-| **Filtres uniques avant agrégation**            | {stats['before']} |
-| **Filtres uniques après suppression des sous-domaines** | {stats['after']} |
-"""
-        # Insérer le tableau après le lien vers blocklist.txt
-        content = content.replace('🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)', 
-                                  f'🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)\n\n{table}')
+        blocklist_link = '🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)'
+        if blocklist_link in content:
+            content = content.replace(blocklist_link, blocklist_link + '\n\n' + new_table_content)
+        else:
+            content += '\n\n' + new_table_content
 
     # Réécrire le contenu modifié dans le fichier README.md
     with open(readme_path, 'w') as file:
