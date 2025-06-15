@@ -1,5 +1,10 @@
 
 <!-- STATISTICS_TABLE_START -->
+
+| **filtres uniques avant traitement** | **redondances supprimées** |
+|--------------------------------------|----------------------------|
+| 198284                    | 197501           |
+
 <!-- STATISTICS_TABLE_END -->
 
 ### Objectifs
