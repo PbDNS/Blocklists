@@ -44,6 +44,3 @@
 ||staticxx.facebook.com^
 ||graph.facebook.com^
 ||graph.instagram.com^
-
-
-||.cn^
