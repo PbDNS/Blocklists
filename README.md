@@ -3,6 +3,7 @@
 |--------------------------------------|----------------------------|
 | 543225                    | 413752           |
 
+
 ### Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
