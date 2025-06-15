@@ -1,12 +1,7 @@
 🔗 [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
-## Statistiques de l'Agrégation des Blocklistes
-
-| Statistique | Valeur |
-|-------------|--------|
-| **Filtres uniques avant agrégation** | 543225 |
-| **Filtres uniques après suppression des sous-domaines** | 413752 |### Objectifs
-
+- - -
+### Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
 - bloquer les logiciels malveillants, scams, phishing
