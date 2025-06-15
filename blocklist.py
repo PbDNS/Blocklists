@@ -151,10 +151,11 @@ def update_readme(stats):
     with open(readme_path, 'r') as file:
         content = file.read()
 
-    # Vérifier si un tableau existe déjà pour les statistiques
-    if "## Statistiques de l'Agrégation des Blocklistes" in content:
-        # Si le tableau existe déjà, on remplace uniquement les statistiques
-        table_start = content.find("## Statistiques de l'Agrégation des Blocklistes")
+    # Chercher si un tableau des statistiques existe déjà
+    table_start = content.find("## Statistiques de l'Agrégation des Blocklistes")
+    
+    if table_start != -1:
+        # Si le tableau existe, remplacer la section existante
         table_end = content.find("|", table_start)  # Trouver la fin de la ligne du tableau
         table_content = f"""
 | Statistique                                      | Valeur     |
@@ -162,11 +163,10 @@ def update_readme(stats):
 | **Filtres uniques avant agrégation**            | {stats['before']} |
 | **Filtres uniques après suppression des sous-domaines** | {stats['after']} |
 """
-        # Remplacer la section du tableau par la nouvelle version
+        # Remplacer le tableau existant par les nouvelles statistiques
         content = content[:table_start] + "## Statistiques de l'Agrégation des Blocklistes\n" + table_content + content[table_end:]
-
     else:
-        # Si le tableau n'existe pas, on l'ajoute à l'endroit approprié
+        # Si le tableau n'existe pas, l'ajouter après le lien vers blocklist.txt
         table = f"""
 ## Statistiques de l'Agrégation des Blocklistes
 
@@ -191,4 +191,3 @@ stats = {
 
 # Mise à jour du README avec les statistiques
 update_readme(stats)
-
