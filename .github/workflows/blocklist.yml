@@ -10,14 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Étape 1 : Cloner le dépôt
       - name: Cloner le dépôt
         uses: actions/checkout@v3
 
+      # Étape 2 : Installer Python
       - name: Installer Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
+      # Étape 3 : Configurer le fuseau horaire à Europe/Paris (GMT+2)
+      - name: Mettre à jour le fuseau horaire à Europe/Paris (GMT+2)
+        run: |
+          sudo timedatectl set-timezone Europe/Paris
+          sudo timedatectl status  # Vérification de la mise à jour
+
+      # Étape 4 : Installer la locale française
       - name: Installer local france
         run: |
           sudo apt-get update
@@ -27,6 +36,7 @@ jobs:
           echo "LANG=fr_FR.UTF-8" >> $GITHUB_ENV
           echo "LC_ALL=fr_FR.UTF-8" >> $GITHUB_ENV
 
+      # Étape 5 : Exécuter blocklist.py
       - name: Exécuter blocklist.py
         env:
           LANG: fr_FR.UTF-8
@@ -35,6 +45,7 @@ jobs:
           # Exécuter le script Python pour générer blocklist.txt et mettre à jour README.md
           python blocklist.py
 
+      # Étape 6 : Commit et push de blocklist.txt et README.md
       - name: Commit et push de blocklist.txt et README.md
         run: |
           git config --global user.name "github-actions[bot]"
