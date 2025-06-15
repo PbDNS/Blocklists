@@ -14,51 +14,58 @@ except locale.Error as e:
     pass 
 
 tlds_to_add = [
+# Asie
     'af',  # Afghanistan
     'am',  # Arménie
     'az',  # Azerbaïdjan
     'bd',  # Bangladesh
     'bt',  # Bhoutan
-    'by',  # Biélorussie
     'cn',  # Chine
-    'cv',  # Cap-Vert
     'ge',  # Géorgie
-    'gz',  # Gaza (Palestine)
     'id',  # Indonésie
     'in',  # Inde
     'ir',  # Iran
     'jp',  # Japon
     'kh',  # Cambodge
     'kg',  # Kirghizistan
-    'ke',  # Kenya
     'la',  # Laos
     'mn',  # Mongolie
     'my',  # Malaisie
     'np',  # Népal
     'pk',  # Pakistan
     'tj',  # Tadjikistan
-    'tz',  # Tanzanie
     'uz',  # Ouzbékistan
     'vn',  # Vietnam
-    'zm',  # Zambie
-    'sy',  # Syrie
     'ye',  # Yémen
-    'iq',  # Irak
+
+# Afrique
+    'cv',  # Cap-Vert
+    'ke',  # Kenya
+    'mv',  # Maldives
+    'sa',  # Arabie Saoudite
     'sd',  # Soudan
     'ss',  # Soudan du Sud
-    'ly',  # Libye
+    'tz',  # Tanzanie
     'om',  # Oman
-    'sa',  # Arabie Saoudite
-    'kw',  # Koweït
-    'ae',  # Émirats Arabes Unis
     'qa',  # Qatar
-    'ps',  # Palestine
-    'mv',  # Maldives
-    'ru',  # Russie
-    'pl',  # Pologne
-    'il',  # Israel
-    'se',  # Suède
+    'ly',  # Libye
+    'zm',  # Zambie
+
+# Europe
+    'by',  # Biélorussie
     'dk',  # Danemark
+    'pl',  # Pologne
+    'ru',  # Russie
+    'se',  # Suède
+
+# Moyen-Orient
+    'ae',  # Émirats Arabes Unis
+    'gz',  # Gaza (Palestine)
+    'ps',  # Palestine
+    'il',  # Israël
+    'iq',  # Irak
+    'kw',  # Koweït
+    'sy',  # Syrie
 ]
 
 # Fonction pour vérifier si un domaine est valide
