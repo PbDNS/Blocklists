@@ -148,20 +148,9 @@ def domain_to_parts(domain):
 trie_root = DomainTrieNode()
 final_entries = set()
 
-for entry in sorted(all_entries, key=lambda e: -e.count(".")):  # Trier du plus spécifique au plus général
+for entry in sorted(all_entries, key=lambda e: e.count(".")):
     if is_valid_domain(entry):
-        parts = domain_to_parts(entry)
-        node = trie_root
-        redundant = False
-        for part in parts:
-            if node.is_terminal:
-                redundant = True
-                break
-            node = node.children.get(part)
-            if node is None:
-                break
-        if not redundant:
-            trie_root.insert(parts)
+        if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
 
 # Calcul des statistiques
@@ -172,16 +161,12 @@ total_unique_after = len(final_entries)
 france_timezone = timezone(timedelta(hours=2))  # UTC+2 pour l'heure d'été
 timestamp = datetime.now(france_timezone).strftime("%A %d %B %Y, %H:%M")
 
-# Écriture du fichier de sortie avec tri DNS arborescent
-def sort_by_dns_hierarchy(domains):
-    return sorted(domains, key=lambda d: domain_to_parts(d))
-
+# Écriture du fichier de sortie
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {total_unique_after:06} entrées\n\n")
-    for entry in sort_by_dns_hierarchy(final_entries):
-        if is_valid_domain(entry):
-            f.write(f"||{entry.lower()}^\n")
+    for entry in sorted(final_entries, key=lambda x: x[::-1]):
+    f.write(f"||{entry.lower()}^\n")
 
 print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
 
