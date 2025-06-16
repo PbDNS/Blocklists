@@ -1,4 +1,24 @@
 
+<div align="center">
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>filtres uniques avant traitement</strong></th>
+      <th><strong>filtres uniques sans redondance</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>545950</strong></td>
+      <td><strong>415464</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
 <!-- STATISTICS_TABLE_START -->
 
 | **filtres uniques avant traitement** | **filtres uniques sans redondance** |
