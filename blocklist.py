@@ -149,36 +149,36 @@ print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
 def update_readme(stats):
     readme_path = 'README.md'
 
-    try:
-        with open(readme_path, 'r') as file:
-            content = file.read()
+    # Lire le contenu du README.md
+    with open(readme_path, 'r', encoding='utf-8') as file:
+        content = file.read()
 
-        new_table_content = f"""
-| **filtres uniques avant traitement** | **filtres uniques sans redondances** |
+    # Créer le nouveau contenu pour le tableau des statistiques
+    new_table_content = f"""| **filtres uniques avant traitement** | **filtres uniques sans redondances** |
 |:------------------------------------:|:------------------------------------:|
-| **{stats['before']}**                | **{stats['after']}**                 |
-"""
+| **{stats['before']}**                | **{stats['after']}**                 |"""
 
-        start_tag = "<!-- STATISTICS_TABLE_START -->"
-        end_tag = "<!-- STATISTICS_TABLE_END -->"
+    # Rechercher la balise <!-- STATISTICS_TABLE_START --> et <!-- STATISTICS_TABLE_END -->
+    start_tag = "<!-- STATISTICS_TABLE_START -->"
+    end_tag = "<!-- STATISTICS_TABLE_END -->"
 
-        start_position = content.find(start_tag)
-        end_position = content.find(end_tag)
+    start_position = content.find(start_tag)
+    end_position = content.find(end_tag)
 
-        if start_position != -1 and end_position != -1:
-            content = content[:start_position + len(start_tag)] + "\n" + new_table_content + "\n" + content[end_position:]
-        else:
-            if start_position == -1:
-                content += f"\n{start_tag}\n"
-            if end_position == -1:
-                content += f"\n{end_tag}\n"
-            content = content.replace(end_tag, f"\n{new_table_content}\n{end_tag}")
+    if start_position != -1 and end_position != -1 and start_position < end_position:
+        # Remplacer uniquement ce qui est entre les balises
+        updated_content = (
+            content[:start_position + len(start_tag)] +
+            "\n" + new_table_content + "\n" +
+            content[end_position:]
+        )
+    else:
+        # Balises manquantes ou mal placées, on ajoute le bloc complet à la fin
+        updated_content = content.strip() + "\n\n" + start_tag + "\n" + new_table_content + "\n" + end_tag + "\n"
 
-        with open(readme_path, 'w') as file:
-            file.write(content)
-
-    except Exception as e:
-        print(f"Erreur lors de la mise à jour du README.md : {e}")
+    # Réécrire le contenu modifié dans le fichier README.md
+    with open(readme_path, 'w', encoding='utf-8') as file:
+        file.write(updated_content)
 
 # Mise à jour des stats
 stats = {
