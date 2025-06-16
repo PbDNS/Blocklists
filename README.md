@@ -17,12 +17,12 @@ Agrégation de blocklistes issues de sources réputées, entrées invalides et r
 - améliorer la sécurité
 - réduire la consommation de données
 
-### Format et utilisation
+## Format et utilisation
 
 - format Adblock Plus, compatible avec Adguard Home, Pihole...
 - sous-domaines redondants supprimés
 
-### Listes incluses
+## Listes incluses
 
 - AdGuard DNS filter
 - AdGuard French adservers
