@@ -2,8 +2,7 @@
 
 🔗 [blocklist](./blocklist.txt)
 
-## Agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale
-&nbsp;
+Agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale
 
 <!-- STATISTICS_TABLE_START -->
 
