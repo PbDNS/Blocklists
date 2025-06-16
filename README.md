@@ -1,6 +1,6 @@
-🛡️ Générateur de Blocklist DNS
+🛡️ Générateur de blockliste 
 
-Ce script Python agrège automatiquement des dizaines de listes de blocage DNS issues de sources réputées (HaGeZi, AdGuard, OISD, Phishing Army, Steven Black, etc.), filtre les entrées invalides ou redondantes, et génère un fichier blocklist.txt optimisé prêt à l’emploi pour les systèmes de filtrage DNS.
+Agrégation de blocklistes issues de sources réputées, entrées invalides et redondances supprimées, optimisé pour un usage DNS/adblock au niveau réseau
 
 <!-- STATISTICS_TABLE_START -->
 
@@ -21,7 +21,6 @@ Ce script Python agrège automatiquement des dizaines de listes de blocage DNS i
 
 - format Adblock Plus, compatible avec Adguard Home, Pihole...
 - sous-domaines redondants supprimés
-- optimisé pour un usage DNS/adblock au niveau réseau
 
 ### Listes incluses
 
