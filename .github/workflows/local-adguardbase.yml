@@ -1,0 +1,43 @@
+name: Nettoyage AdGuard Base
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean-filter:
+    name: Exécuter le script de nettoyage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cloner le dépôt
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+
+      - name: Configurer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Lancer le script de nettoyage
+        run: python local-adguardbase.py
+
+      - name: Configurer Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit et push si modification
+        run: |
+          if git diff --quiet; then
+            echo "Aucune modification à pousser."
+          else
+            git add local-adguardbase.txt
+            git commit -m "Mise à jour automatique de local-adguardbase.txt"
+            git push
+          fi
