@@ -180,7 +180,7 @@ def update_readme(stats):
 
     # Créer le nouveau contenu pour le tableau des statistiques
     new_table_content = f"""
-| **filtres uniques avant traitement** | **filtres uniques sans redondances** |
+| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
 |:------------------------------------:|:------------------------------------:|
 | **{stats['before']}**                | **{stats['after']}**                 |
 """
