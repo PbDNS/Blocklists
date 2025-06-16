@@ -1,7 +1,7 @@
 
 <!-- STATISTICS_TABLE_START -->
 
-| **filtres uniques avant traitement** | **filtres uniques sans redondances** |
+| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
 |:------------------------------------:|:------------------------------------:|
 | **545950**                | **415464**                 |
 
