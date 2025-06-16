@@ -1,8 +1,10 @@
 
 <!-- STATISTICS_TABLE_START -->
+
 | **filtres uniques avant traitement** | **filtres uniques sans redondances** |
 |:------------------------------------:|:------------------------------------:|
 | **545624**                | **0**                 |
+
 <!-- STATISTICS_TABLE_END -->
 
 ### Objectifs
