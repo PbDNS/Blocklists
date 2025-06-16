@@ -119,7 +119,7 @@ def domain_to_parts(domain):
 trie_root = DomainTrieNode()
 final_entries = set()
 
-for entry in sorted(all_entries, key=lambda e: e.count(".")):
+for entry in sorted(final_entries, key=lambda d: tuple(d.lower().split(".")[::-1])):
     if is_valid_domain(entry):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
