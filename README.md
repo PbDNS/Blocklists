@@ -4,7 +4,7 @@
 
 | **filtres uniques avant traitement** | **filtres uniques sans redondance** |
 |:------------------------------------:|:------------------------------------:|
-| **545950**                | **415464**                 |
+| **545976**                | **410881**                 |
 
 <!-- STATISTICS_TABLE_END -->
 
