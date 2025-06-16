@@ -181,8 +181,8 @@ def update_readme(stats):
     # Créer le nouveau contenu pour le tableau des statistiques
     new_table_content = f"""
 | **filtres uniques avant traitement** | **filtres uniques sans redondances** |
-|--------------------------------------|--------------------------------------|
-| {stats['before']}                    | {stats['after']}                     |
+|:------------------------------------:|:------------------------------------:|
+| **{stats['before']}**                | **{stats['after']}**                 |
 """
 
     # Rechercher la balise <!-- STATISTICS_TABLE_START --> et <!-- STATISTICS_TABLE_END -->
