@@ -148,9 +148,20 @@ def domain_to_parts(domain):
 trie_root = DomainTrieNode()
 final_entries = set()
 
-for entry in sorted(all_entries, key=lambda e: e.count(".")):
+for entry in sorted(all_entries, key=lambda e: -e.count(".")):  # Trier du plus spécifique au plus général
     if is_valid_domain(entry):
-        if trie_root.insert(domain_to_parts(entry)):
+        parts = domain_to_parts(entry)
+        node = trie_root
+        redundant = False
+        for part in parts:
+            if node.is_terminal:
+                redundant = True
+                break
+            node = node.children.get(part)
+            if node is None:
+                break
+        if not redundant:
+            trie_root.insert(parts)
             final_entries.add(entry)
 
 # Calcul des statistiques
