@@ -2,7 +2,7 @@
 
 🔗 [blocklist](./blocklist.txt)
 
-- Agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances. Adapté à une utilisation francophone et internationale
+##Agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances. Adapté à une utilisation francophone et internationale
 
 <!-- STATISTICS_TABLE_START -->
 
