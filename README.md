@@ -1,7 +1,8 @@
 # 🛡️ Générateur de blockliste ###
 
-- agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances
+agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances
 - optimisé pour un usage DNS ou adblock au niveau réseau
+- adapté à une utilisation francophone et internationale
 
 <!-- STATISTICS_TABLE_START -->
 
