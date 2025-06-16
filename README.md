@@ -1,4 +1,4 @@
-# 🛡️ Générateur de blockliste ###
+# 🛡️ Générateur de blocklist FR/INT ###
 
 🔗 [blocklist](./blocklist.txt)
 
