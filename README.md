@@ -2,7 +2,7 @@
 
 🔗 [blocklist](./blocklist.txt)
 
-## Agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances. Adapté à une utilisation francophone et internationale
+## Agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale
 
 <!-- STATISTICS_TABLE_START -->
 
@@ -20,7 +20,6 @@
 - réduire la consommation de données
 
 ### Format et utilisation
-- optimisé pour un usage DNS ou adblock au niveau réseau
 - format Adblock Plus
 - compatible avec Adguard Home, Pihole...
 
