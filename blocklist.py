@@ -1,43 +1,15 @@
 import urllib.request
 import concurrent.futures
-from datetime import datetime, timezone, timedelta
+from datetime import datetime
+import locale
 import re
 import ipaddress
 import os
 
-############################################################
-################### Blocklistes incluses ###################
-############################################################
-# HaGeZi's Normal DNS Blocklist
-# HaGeZi's Pop-Up Ads DNS Blocklist
-# HaGeZi's Amazon Tracker DNS Blocklist
-# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
-# HaGeZi's Badware Hoster Blocklist
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
-# HaGeZi's DynDNS Blocklist
-# HaGeZi's Windows/Office Tracker DNS Blocklist
-# ShadowWhisperer's Malware List
-# OISD Small
-# Dandelion Sprout's Anti Malware List
-# Dandelion Sprout's Anti Push Notifications
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-# AWAvenue Ads Rule
-# HaGeZi's Apple Tracker DNS Blocklist
-# d3Host
-# AdGuard DNS filter
-# Phishing Army
-# Phishing URL Blocklist (PhishTank and OpenPhish)
-# Malicious URL Blocklist (URLHaus)
-# Scam Blocklist by DurableNapkin
-# AdGuard French adservers
-# AdGuard French adservers first party
-# Steven Black's List
-# Peter Lowe's Blocklist
-# Dan Pollock's List
-# Easylist FR
-# The Big List of Hacked Malware Web Sites
-# Stalkerware Indicators List
+# === Localisation française pour les dates ===
+locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
+# === Blocklistes incluses ===
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -71,7 +43,6 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
 ]
 
-# Validation des domaines
 def is_valid_domain(domain):
     try:
         ipaddress.ip_address(domain)
@@ -80,7 +51,6 @@ def is_valid_domain(domain):
         pass
     return re.match(r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$", domain) is not None
 
-# Télécharger et extraire les règles des blocklistes
 def download_and_extract(url):
     try:
         with urllib.request.urlopen(url, timeout=30) as response:
@@ -88,10 +58,8 @@ def download_and_extract(url):
             rules = set()
             for line in content.splitlines():
                 line = line.strip()
-
                 if not line or line.startswith("!") or line.startswith("#"):
                     continue
-
                 if line.startswith("0.0.0.0") or line.startswith("127.0.0.1"):
                     parts = re.split(r"\s+", line)
                     if len(parts) >= 2:
@@ -100,34 +68,28 @@ def download_and_extract(url):
                             continue
                         if is_valid_domain(target):
                             rules.add(target)
-
                 elif line.startswith("||") and line.endswith("^"):
                     target = line[2:-1]
                     if "*" in target:
                         continue
                     if is_valid_domain(target):
                         rules.add(target)
-
                 elif re.match(r"^[a-zA-Z0-9.-]+$", line):
                     if "*" in line:
                         continue
                     if is_valid_domain(line):
                         rules.add(line)
-
             return rules
-
     except Exception as e:
         print(f"Erreur lors du téléchargement de {url} : {e}")
         return set()
 
-# Téléchargement parallèle
 all_entries = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
     for entry_set in results:
         all_entries.update(entry_set)
 
-# Suppression des sous-domaines redondants
 class DomainTrieNode:
     def __init__(self):
         self.children = {}
@@ -153,13 +115,11 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
 
-# Calcul des statistiques
 total_unique_before = len(all_entries)
 total_unique_after = len(final_entries)
 
-# Utiliser l'heure GMT+2 pour la France (heure d'été)
-france_timezone = timezone(timedelta(hours=2))  # UTC+2 pour l'heure d'été
-timestamp = datetime.now(france_timezone).strftime("%A %d %B %Y, %H:%M")
+# Date en français avec heure locale
+timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
 
 # Écriture du fichier de sortie
 with open("blocklist.txt", "w", encoding="utf-8") as f:
@@ -170,22 +130,17 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
 
 print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
 
-# Mise à jour du README.md
 def update_readme(stats):
     readme_path = 'README.md'
-
-    # Lire le contenu du README.md
     with open(readme_path, 'r') as file:
         content = file.read()
 
-    # Créer le nouveau contenu pour le tableau des statistiques
     new_table_content = f"""
 | **filtres uniques avant traitement** | **filtres uniques sans redondance** |
 |:------------------------------------:|:------------------------------------:|
 | {stats['before']}                    | **{stats['after']}**                 |
 """
 
-    # Rechercher la balise <!-- STATISTICS_TABLE_START --> et <!-- STATISTICS_TABLE_END -->
     start_tag = "<!-- STATISTICS_TABLE_START -->"
     end_tag = "<!-- STATISTICS_TABLE_END -->"
 
@@ -193,25 +148,20 @@ def update_readme(stats):
     end_position = content.find(end_tag)
 
     if start_position != -1 and end_position != -1:
-        # Remplacer le tableau entre les deux balises
         content = content[:start_position + len(start_tag)] + "\n" + new_table_content + "\n" + content[end_position:]
     else:
-        # Si les balises ne sont pas trouvées, ajouter les balises et le tableau
         if start_position == -1:
             content += f"\n{start_tag}\n"
         if end_position == -1:
             content += f"\n{end_tag}\n"
         content = content.replace(end_tag, f"\n{new_table_content}\n{end_tag}")
 
-    # Réécrire le contenu modifié dans le fichier README.md
     with open(readme_path, 'w') as file:
         file.write(content)
 
-# Mise à jour des statistiques
 stats = {
     'before': total_unique_before,
     'after': total_unique_after
 }
 
-# Mise à jour du README avec les statistiques
 update_readme(stats)
