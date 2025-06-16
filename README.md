@@ -8,7 +8,7 @@ Agrégation de listes de blocage issues de sources réputées avec suppression d
 
 | **filtres uniques avant traitement** | **filtres uniques sans redondance** |
 |:------------------------------------:|:------------------------------------:|
-| 546098                    | **415499**                 |
+| 541198                    | **422222**                 |
 
 <!-- STATISTICS_TABLE_END -->
 
