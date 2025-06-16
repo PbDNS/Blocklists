@@ -1,12 +1,3 @@
-
-![CI](https://github.com/ton-utilisateur/ton-depot/actions/workflows/blocklist.yml/badge.svg)
-![Entrées](https://img.shields.io/endpoint?url=https://ton-site.io/meta.json)
-![Dernière mise à jour](https://img.shields.io/date/1718608800?label=Dernière%20mise%20à%20jour)
-[![Télécharger](https://img.shields.io/badge/Télécharger-blocklist.txt-success)](https://ton-utilisateur.github.io/ton-depot/blocklist.txt)
-
-
-
-
 # 🛡️ Générateur de blocklist FR/INT ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
