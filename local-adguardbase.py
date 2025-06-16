@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
 import requests
-import os
 import subprocess
 
 BASE_URL = "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt"
@@ -14,13 +12,21 @@ def download_file(url):
     return response.text.splitlines()
 
 def clean_filter(base_lines, blocklist_lines):
-    blocklist_set = {line.strip() for line in blocklist_lines if not line.strip().startswith("!")}
+    # Créer un ensemble des lignes à filtrer (sans les commentaires)
+    blocklist_set = {
+        line.strip() for line in blocklist_lines
+        if line.strip() and not line.strip().startswith("!")
+    }
+
+    print(f"📦 Règles à exclure (hors commentaires) : {len(blocklist_set)}")
+
+    # Ne conserver que les lignes non commentées et non présentes dans la blocklist
     result = [
         line for line in base_lines
-        if line.strip().startswith("!") or line.strip() not in blocklist_set
+        if line.strip() and not line.strip().startswith("!") and line.strip() not in blocklist_set
     ]
-    print(f"✅ Lignes originales : {len(base_lines)}")
-    print(f"✅ Lignes filtrées : {len(result)}")
+
+    print(f"✅ Lignes conservées dans la sortie : {len(result)}")
     return result
 
 def write_output_file(lines):
@@ -33,7 +39,6 @@ def git_commit_and_push():
     print("🔁 Vérification des modifications Git...")
     subprocess.run(["git", "add", OUTPUT_FILE], check=True)
 
-    # Vérifie si un commit est nécessaire
     diff_check = subprocess.run(["git", "diff", "--cached", "--quiet"])
     if diff_check.returncode == 0:
         print("📭 Aucun changement détecté. Pas de commit.")
