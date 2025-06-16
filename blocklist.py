@@ -8,6 +8,35 @@ import os
 ############################################################
 ################### Blocklistes incluses ###################
 ############################################################
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's Amazon Tracker DNS Blocklist
+# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# HaGeZi's Badware Hoster Blocklist
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
+# HaGeZi's DynDNS Blocklist
+# HaGeZi's Windows/Office Tracker DNS Blocklist
+# ShadowWhisperer's Malware List
+# OISD Small
+# Dandelion Sprout's Anti Malware List
+# Dandelion Sprout's Anti Push Notifications
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# AWAvenue Ads Rule
+# HaGeZi's Apple Tracker DNS Blocklist
+# d3Host
+# AdGuard DNS filter
+# Phishing Army
+# Phishing URL Blocklist (PhishTank and OpenPhish)
+# Malicious URL Blocklist (URLHaus)
+# Scam Blocklist by DurableNapkin
+# AdGuard French adservers
+# AdGuard French adservers first party
+# Steven Black's List
+# Peter Lowe's Blocklist
+# Dan Pollock's List
+# Easylist FR
+# The Big List of Hacked Malware Web Sites
+# Stalkerware Indicators List
 
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
@@ -119,7 +148,7 @@ def domain_to_parts(domain):
 trie_root = DomainTrieNode()
 final_entries = set()
 
-for entry in sorted(final_entries, key=lambda d: tuple(d.lower().split(".")[::-1])):
+for entry in sorted(all_entries, key=lambda e: e.count(".")):
     if is_valid_domain(entry):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
@@ -128,20 +157,20 @@ for entry in sorted(final_entries, key=lambda d: tuple(d.lower().split(".")[::-1
 total_unique_before = len(all_entries)
 total_unique_after = len(final_entries)
 
-# Heure locale (France, UTC+2 en été)
-france_timezone = timezone(timedelta(hours=2))
+# Utiliser l'heure GMT+2 pour la France (heure d'été)
+france_timezone = timezone(timedelta(hours=2))  # UTC+2 pour l'heure d'été
 timestamp = datetime.now(france_timezone).strftime("%A %d %B %Y, %H:%M")
 
-# Fonction de tri arborescent
-def domain_key(domain):
-    return domain.strip().lower().split(".")[::-1]
+# Écriture du fichier de sortie avec tri DNS arborescent
+def sort_by_dns_hierarchy(domains):
+    return sorted(domains, key=lambda d: domain_to_parts(d))
 
-# Écriture du fichier de sortie avec tri arborescent
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {total_unique_after:06} entrées\n\n")
-    for entry in sorted(final_entries, key=domain_key):
-        f.write(f"||{entry.lower()}^\n")
+    for entry in sort_by_dns_hierarchy(final_entries):
+        if is_valid_domain(entry):
+            f.write(f"||{entry.lower()}^\n")
 
 print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
 
@@ -150,38 +179,43 @@ def update_readme(stats):
     readme_path = 'README.md'
 
     # Lire le contenu du README.md
-    with open(readme_path, 'r', encoding='utf-8') as file:
+    with open(readme_path, 'r') as file:
         content = file.read()
 
+    # Créer le nouveau contenu pour le tableau des statistiques
     new_table_content = f"""
 | **filtres uniques avant traitement** | **filtres uniques sans redondances** |
 |:------------------------------------:|:------------------------------------:|
 | **{stats['before']}**                | **{stats['after']}**                 |
 """
 
+    # Rechercher la balise <!-- STATISTICS_TABLE_START --> et <!-- STATISTICS_TABLE_END -->
     start_tag = "<!-- STATISTICS_TABLE_START -->"
     end_tag = "<!-- STATISTICS_TABLE_END -->"
 
-    start_index = content.find(start_tag)
-    end_index = content.find(end_tag)
+    start_position = content.find(start_tag)
+    end_position = content.find(end_tag)
 
-    if start_index != -1 and end_index != -1 and start_index < end_index:
-        content = (
-            content[:start_index + len(start_tag)] +
-            "\n" + new_table_content + "\n" +
-            content[end_index:]
-        )
+    if start_position != -1 and end_position != -1:
+        # Remplacer le tableau entre les deux balises
+        content = content[:start_position + len(start_tag)] + "\n" + new_table_content + "\n" + content[end_position:]
     else:
-        # Si balises manquantes, ajouter à la fin
-        content += f"\n{start_tag}\n{new_table_content}\n{end_tag}\n"
+        # Si les balises ne sont pas trouvées, ajouter les balises et le tableau
+        if start_position == -1:
+            content += f"\n{start_tag}\n"
+        if end_position == -1:
+            content += f"\n{end_tag}\n"
+        content = content.replace(end_tag, f"\n{new_table_content}\n{end_tag}")
 
-    with open(readme_path, 'w', encoding='utf-8') as file:
+    # Réécrire le contenu modifié dans le fichier README.md
+    with open(readme_path, 'w') as file:
         file.write(content)
 
-
-# Mise à jour des stats
+# Mise à jour des statistiques
 stats = {
     'before': total_unique_before,
     'after': total_unique_after
 }
+
+# Mise à jour du README avec les statistiques
 update_readme(stats)
