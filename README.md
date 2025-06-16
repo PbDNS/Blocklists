@@ -1,4 +1,4 @@
-### 🛡️ Générateur de blockliste ###
+# 🛡️ Générateur de blockliste ###
 
 Agrégation de blocklistes issues de sources réputées, entrées invalides et redondances supprimées, optimisé pour un usage DNS/adblock au niveau réseau
 
@@ -10,7 +10,7 @@ Agrégation de blocklistes issues de sources réputées, entrées invalides et r
 
 <!-- STATISTICS_TABLE_END -->
 
-### Objectifs
+## Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
 - bloquer les logiciels malveillants, scams, phishing
