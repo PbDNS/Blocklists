@@ -1,4 +1,4 @@
-###🛡️ Générateur de blockliste ###
+###🛡️ Générateur de blockliste
 
 Agrégation de blocklistes issues de sources réputées, entrées invalides et redondances supprimées, optimisé pour un usage DNS/adblock au niveau réseau
 
