@@ -1,6 +1,6 @@
 # 🛡️ Générateur de blocklist FR/INT ###
 
-🔗 [./blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
+🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
 Agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale
 
