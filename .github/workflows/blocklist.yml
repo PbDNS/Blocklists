@@ -2,7 +2,7 @@ name: Génération de blocklist.txt
 
 on:
   schedule:
-    -   cron: '0 0,8,16 * * *'
+    - cron: '0 0,8,16 * * *'  # Exécution à 00h, 08h, 16h UTC
   workflow_dispatch:
 
 jobs:
@@ -20,36 +20,35 @@ jobs:
         with:
           python-version: '3.10'
 
-      # Étape 3 : Configurer le fuseau horaire à Europe/Paris (GMT+2)
-      - name: Mettre à jour le fuseau horaire à Europe/Paris (GMT+2)
-        run: |
-          sudo timedatectl set-timezone Europe/Paris
-          sudo timedatectl status  # Vérification de la mise à jour
-
-      # Étape 4 : Installer la locale française
-      - name: Installer local france
+      # Étape 3 : Configurer le fuseau horaire et la locale
+      - name: Configurer fuseau horaire Europe/Paris et locale fr_FR.UTF-8
         run: |
           sudo apt-get update
-          sudo apt-get install -y locales
+          sudo apt-get install -y locales tzdata
+          sudo timedatectl set-timezone Europe/Paris
           sudo locale-gen fr_FR.UTF-8
           sudo update-locale LANG=fr_FR.UTF-8
+        env:
+          DEBIAN_FRONTEND: noninteractive
+
+      # Étape 4 : Définir les variables d’environnement pour Python
+      - name: Définir LANG et LC_ALL pour l'environnement
+        run: |
           echo "LANG=fr_FR.UTF-8" >> $GITHUB_ENV
           echo "LC_ALL=fr_FR.UTF-8" >> $GITHUB_ENV
 
-      # Étape 5 : Exécuter blocklist.py
+      # Étape 5 : Exécuter le script Python
       - name: Exécuter blocklist.py
+        run: python blocklist.py
         env:
           LANG: fr_FR.UTF-8
           LC_ALL: fr_FR.UTF-8
-        run: |
-          # Exécuter le script Python pour générer blocklist.txt et mettre à jour README.md
-          python blocklist.py
 
-      # Étape 6 : Commit et push de blocklist.txt et README.md
+      # Étape 6 : Commit et push des fichiers modifiés
       - name: Commit et push de blocklist.txt et README.md
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add blocklist.txt README.md
-          git commit -m "Mise à jour automatique [$(date '+%d/%m/%Y %H:%M')]" || echo "Rien à committer"
+          git commit -m "🤖 Mise à jour automatique — $(date '+%d/%m/%Y %H:%M')" || echo "Aucun changement à committer"
           git push
