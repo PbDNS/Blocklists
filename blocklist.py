@@ -165,9 +165,8 @@ timestamp = datetime.now(france_timezone).strftime("%A %d %B %Y, %H:%M")
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {total_unique_after:06} entrées\n\n")
-    for entry in sorted(final_entries, key=lambda x: x[::-1]):
+    for entry in sorted(final_entries):
         f.write(f"||{entry.lower()}^\n")
-
 
 print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
 
