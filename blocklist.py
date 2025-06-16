@@ -153,32 +153,31 @@ def update_readme(stats):
     with open(readme_path, 'r', encoding='utf-8') as file:
         content = file.read()
 
-    # Créer le nouveau contenu pour le tableau des statistiques
-    new_table_content = f"""| **filtres uniques avant traitement** | **filtres uniques sans redondances** |
+    new_table_content = f"""
+| **filtres uniques avant traitement** | **filtres uniques sans redondances** |
 |:------------------------------------:|:------------------------------------:|
-| **{stats['before']}**                | **{stats['after']}**                 |"""
+| **{stats['before']}**                | **{stats['after']}**                 |
+"""
 
-    # Rechercher la balise <!-- STATISTICS_TABLE_START --> et <!-- STATISTICS_TABLE_END -->
     start_tag = "<!-- STATISTICS_TABLE_START -->"
     end_tag = "<!-- STATISTICS_TABLE_END -->"
 
-    start_position = content.find(start_tag)
-    end_position = content.find(end_tag)
+    start_index = content.find(start_tag)
+    end_index = content.find(end_tag)
 
-    if start_position != -1 and end_position != -1 and start_position < end_position:
-        # Remplacer uniquement ce qui est entre les balises
-        updated_content = (
-            content[:start_position + len(start_tag)] +
+    if start_index != -1 and end_index != -1 and start_index < end_index:
+        content = (
+            content[:start_index + len(start_tag)] +
             "\n" + new_table_content + "\n" +
-            content[end_position:]
+            content[end_index:]
         )
     else:
-        # Balises manquantes ou mal placées, on ajoute le bloc complet à la fin
-        updated_content = content.strip() + "\n\n" + start_tag + "\n" + new_table_content + "\n" + end_tag + "\n"
+        # Si balises manquantes, ajouter à la fin
+        content += f"\n{start_tag}\n{new_table_content}\n{end_tag}\n"
 
-    # Réécrire le contenu modifié dans le fichier README.md
     with open(readme_path, 'w', encoding='utf-8') as file:
-        file.write(updated_content)
+        file.write(content)
+
 
 # Mise à jour des stats
 stats = {
