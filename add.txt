@@ -1,6 +1,5 @@
 ! Filtres additionnels inclus à blockist.txt
 
-
 ||analytics.korben.info^
 ||api-user-message.programme-tv.net^
 ||api.ipinfo.be^
@@ -45,4 +44,20 @@
 ||graph.facebook.com^
 ||graph.instagram.com^
 
+# Allègement blocklist.txt par blocage TLDs
 ||cn^
+||com.cn^
+||co.jp^
+||co.kr^
+||com.br^
+||co.za^
+||com.zr^
+||co.nz^
+||com.pl^
+||com.mx^
+||com.vn^
+||co.il^
+||com.ua^
+||com.ar^
+
+
