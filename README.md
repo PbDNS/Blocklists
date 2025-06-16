@@ -1,4 +1,3 @@
-# 🛡️ Générateur de blocklist DNS
 
 ![CI](https://github.com/ton-utilisateur/ton-depot/actions/workflows/blocklist.yml/badge.svg)
 ![Entrées](https://img.shields.io/endpoint?url=https://ton-site.io/meta.json)
