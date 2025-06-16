@@ -19,12 +19,12 @@ Agrégation de listes de blocage issues de sources réputées avec suppression d
 - améliorer la sécurité
 - réduire la consommation de données
 
-## Format et utilisation
+### Format et utilisation
 - optimisé pour un usage DNS ou adblock au niveau réseau
 - format Adblock Plus
 - compatible avec Adguard Home, Pihole...
 
-## Listes incluses
+### Listes incluses
 - AdGuard DNS filter
 - AdGuard French adservers
 - AWAvenue Ads Rule
