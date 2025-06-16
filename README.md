@@ -1,6 +1,7 @@
 # 🛡️ Générateur de blockliste ###
 
-Agrégation de blocklists issues de sources réputées avec suppression des entrées invalides et des redondances optimisé pour un usage DNS ou adblock au niveau réseau
+agrégation de listes de blocage issues de sources réputées avec suppression des entrées invalides et des redondances
+optimisé pour un usage DNS ou adblock au niveau réseau
 
 <!-- STATISTICS_TABLE_START -->
 
@@ -19,8 +20,8 @@ Agrégation de blocklists issues de sources réputées avec suppression des entr
 
 ## Format et utilisation
 
-- format Adblock Plus, compatible avec Adguard Home, Pihole...
-- sous-domaines redondants supprimés
+- format Adblock Plus
+- compatible avec Adguard Home, Pihole...
 
 ## Listes incluses
 
