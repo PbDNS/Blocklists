@@ -35,6 +35,7 @@
 ||tracking.lafourchette.com^
 ||trustedvpn.site^
 ||web-tracking.splio.com^
+||dnscry.pt^
 
 ! Meta pixel tracking
 
@@ -44,20 +45,5 @@
 ||graph.facebook.com^
 ||graph.instagram.com^
 
-# Allègement blocklist.txt par blocage TLDs
-||cn^
-||com.cn^
-||co.jp^
-||co.kr^
-||com.br^
-||co.za^
-||com.zr^
-||co.nz^
-||com.pl^
-||com.mx^
-||com.vn^
-||co.il^
-||com.ua^
-||com.ar^
 
 
