@@ -12,7 +12,7 @@ Agrégation de listes de blocage issues de sources réputées avec suppression d
 
 <!-- STATISTICS_TABLE_END -->
 
-## Objectifs
+### Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
 - bloquer les logiciels malveillants, scams, phishing
