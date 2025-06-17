@@ -13,6 +13,8 @@ Adapté à une utilisation francophone et internationale
 
 <!-- STATISTICS_TABLE_END -->
 
+---
+
 ### Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
