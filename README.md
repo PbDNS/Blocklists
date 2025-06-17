@@ -20,6 +20,8 @@ Adapté à une utilisation francophone et internationale
 - améliorer la sécurité
 - réduire la consommation de données
 
+---
+
 ### Format et utilisation
 - format Adblock Plus
 - sous-domaines redondants supprimés
