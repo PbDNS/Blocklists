@@ -22,6 +22,7 @@ Adapté à une utilisation francophone et internationale
 
 ### Format et utilisation
 - format Adblock Plus
+- sous-domaines redondants supprimés
 - compatible avec Adguard Home, Pihole...
 
 ### Listes incluses
