@@ -1,4 +1,4 @@
-# 🛡️ Liste de blocage FR/INT ###
+# 🛡️ Liste de blocage ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
