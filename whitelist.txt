@@ -1,0 +1,68 @@
+! déblocages google divers
+@@||www.googletagmanager.com^
+@@||region1.google-analytics.com^
+@@||yt3.ggpht.com^
+@@||www.gstatic.com^
+@@||yt3.googleusercontent.com^
+
+! video bfmtv
+@@||nextms.profiles.tagger.opecloud.com^
+
+! gestion cookies programme-tv.net
+@@||gate.first-id.fr^
+
+! commentaires lecteurs presse-citron.net
+@@||api-2-0.spot.im^
+
+! photos lesnumeriques.com
+@@||cdn.affilizz.com^
+
+! photos darty.fr
+@@||uc-info.eu.abtasty.com^
+
+! création compte bouygues telecom
+@@||logws1361.ati-host.net^
+@@||try.abtasty.com^
+
+! divers
+@@||dns.quad9.net^
+@@||dns.notjakob.com^
+@@||dealabs.digidip.net^
+@@||static.hotjar.com^
+@@||cdnjs.cloudflare.com^
+@@||tags.tiqcdn.com^
+
+! certificats let's encrypt
+@@||e5.o.lencr.org^
+
+! chatgpt 17-06-2025
+! ✅ Whitelist CMP (Consent Management Platforms)
+! 📌 Autorise les domaines nécessaires à l'affichage des bandeaux cookies (RGPD/TCF)
+! 🛡️ N'autorise pas les trackers, uniquement l'interface utilisateur de consentement
+@@||quantcast.mgr.consensu.org^
+@@||cmp.quantcast.com^
+@@||privacyportal-de.onetrust.com^
+@@||cdn.cookielaw.org^
+@@||cookielaw.org^
+@@||consent.cookiebot.com^
+@@||consentcdn.cookiebot.com^
+@@||static.cookiebot.com^
+@@||tcf2-api.cookiebot.com^
+@@||cdn.privacy-mgmt.com^
+@@||privacy-mgmt.com^
+@@||consentmanager.net^
+@@||cdn.consentmanager.net^
+@@||usercentrics.eu^
+@@||app.usercentrics.eu^
+@@||cdn.usercentrics.eu^
+@@||trustarc.com^
+@@||choices.trustarc.com^
+@@||sdk.privacy-center.org^
+@@||scripts.privacy-center.org^
+@@||consent.google.com^
+@@||cdn.eu.cookieyes.com^
+@@||cookieyes.com^
+@@||cookie-script.com^
+@@||cdn.cookie-script.com^
+@@||klaro.kiprotect.com^
+@@||fundingchoicesmessages.google.com^
