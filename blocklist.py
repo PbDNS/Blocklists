@@ -10,6 +10,36 @@ import os
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
 # === Blocklistes incluses ===
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's Amazon Tracker DNS Blocklist
+# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# HaGeZi's Badware Hoster Blocklist
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
+# HaGeZi's DynDNS Blocklist
+# HaGeZi's Windows/Office Tracker DNS Blocklist
+# ShadowWhisperer's Malware List
+# OISD Small
+# Dandelion Sprout's Anti Malware List
+# Dandelion Sprout's Anti Push Notifications
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# AWAvenue Ads Rule
+# HaGeZi's Apple Tracker DNS Blocklist
+# d3Host
+# AdGuard DNS filter
+# Phishing Army
+# Phishing URL Blocklist (PhishTank and OpenPhish)
+# Malicious URL Blocklist (URLHaus)
+# Scam Blocklist by DurableNapkin
+# AdGuard French adservers
+# AdGuard French adservers first party
+# Steven Black's List
+# Peter Lowe's Blocklist
+# Dan Pollock's List
+# Easylist FR
+# The Big List of Hacked Malware Web Sites
+# Stalkerware Indicators List
+
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
