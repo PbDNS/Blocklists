@@ -1,5 +1,4 @@
 ! Filtres additionnels inclus à blockist.txt
-
 ||analytics.korben.info^
 ||api-user-message.programme-tv.net^
 ||api.ipinfo.be^
@@ -41,7 +40,6 @@
 ||tpx.tesseradigital.com^
 
 ! Meta pixel tracking
-
 ||connect.facebook.net^
 ||www.facebook.com^
 ||staticxx.facebook.com^
