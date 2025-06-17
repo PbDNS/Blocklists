@@ -32,12 +32,9 @@
 ||tracking-europe.ad360.media^
 ||tracking.groupe-ldlc.com^
 ||tracking.lafourchette.com^
-||trustedvpn.site^
 ||web-tracking.splio.com^
 ||dnscry.pt^
-||ad.lomadee.com^
-||ad.foxnetworks.com^
-||tpx.tesseradigital.com^
+
 
 ! Meta pixel tracking
 ||connect.facebook.net^
