@@ -1,8 +1,8 @@
-# 🛡️ Générateur de blocklist FR/INT ###
+# 🛡️ Liste de blocage FR/INT ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
-Agrégation pluriquotidienne de listes de blocage réputées avec suppression des entrées invalides et des redondances pour un usage DNS ou adblock au niveau réseau.
+Agrégation quotidienne de listes de blocage réputées avec suppression des entrées invalides et des redondances pour un usage DNS ou adblock au niveau réseau.
 Adapté à une utilisation francophone et internationale
 
 <!-- STATISTICS_TABLE_START -->
