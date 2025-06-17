@@ -50,5 +50,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add blocklist.txt README.md
-          git commit -m "🤖 Mise à jour automatique — $(date '+%d/%m/%Y %H:%M')" || echo "Aucun changement à committer"
+          git commit -m "🤖 Mise à jour automatique - $(date '+%d/%m/%Y %H:%M')" || echo "Aucun changement à committer"
           git push
