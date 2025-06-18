@@ -44,12 +44,6 @@
 ||app.storyblok.com^$important
 ||dotefour.com^$important
 
-! Meta pixel tracking
-||connect.facebook.net^
-||www.facebook.com^
-||staticxx.facebook.com^
-||graph.facebook.com^
-||graph.instagram.com^
 
 
 
