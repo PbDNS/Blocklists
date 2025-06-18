@@ -1,8 +1,8 @@
 ! déblocages google divers
-@@||www.googletagmanager.com^
 @@||region1.google-analytics.com^
-@@||yt3.ggpht.com^
+@@||www.googletagmanager.com^
 @@||www.gstatic.com^
+@@||yt3.ggpht.com^
 @@||yt3.googleusercontent.com^
 
 ! video bfmtv
@@ -25,11 +25,11 @@
 @@||try.abtasty.com^
 
 ! divers
-@@||dns.quad9.net^
-@@||dns.notjakob.com^
-@@||dealabs.digidip.net^
-@@||static.hotjar.com^
 @@||cdnjs.cloudflare.com^
+@@||dealabs.digidip.net^
+@@||dns.notjakob.com^
+@@||dns.quad9.net^
+@@||static.hotjar.com^
 @@||tags.tiqcdn.com^
 
 ! certificats let's encrypt
