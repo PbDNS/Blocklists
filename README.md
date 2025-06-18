@@ -15,7 +15,7 @@ Adapté à une utilisation francophone et internationale
 
 ---
 
-### Objectifs
+## Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
 - bloquer les logiciels malveillants, scams, phishing
