@@ -6,10 +6,9 @@ import re
 import ipaddress
 import os
 
-# === Localisation française pour les dates ===
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
-# === Blocklistes incluses ===
+########### blocklists incluses ###########
 # HaGeZi's Normal DNS Blocklist
 # HaGeZi's Pop-Up Ads DNS Blocklist
 # HaGeZi's Amazon Tracker DNS Blocklist
@@ -148,17 +147,15 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
 total_unique_before = len(all_entries)
 total_unique_after = len(final_entries)
 
-# Date en français avec heure locale
 timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
 
-# Écriture du fichier de sortie
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {total_unique_after:06} entrées\n\n")
     for entry in sorted(final_entries):
         f.write(f"||{entry.lower()}^\n")
 
-print(f"✅ Fichier blocklist.txt généré: {total_unique_after} entrées")
+print(f"✅ fichier blocklist.txt généré: {total_unique_after} entrées")
 
 def update_readme(stats):
     readme_path = 'README.md'
