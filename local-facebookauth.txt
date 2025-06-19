@@ -1,7 +1,7 @@
-! ChatGPT - 17_06_2025
-! Liste de filtres pour bloquer l'authentification Facebook et objets associés
-! Bloque les connexions via Facebook (OAuth), les objets de suivi, les scripts 
-! et les boutons d'authentification Facebook, les widgets et iframes associés
+! ChatGPT – 19_06_2025
+! Liste de filtres destinée à bloquer les connexions, scripts, iframes, widgets et boutons d’authentification Facebook.
+! Empêche le chargement de l’OAuth Facebook, les ressources de suivi, les API JavaScript, les cookies tiers
+! ainsi que toute intégration sociale provenant des domaines liés à Meta (Facebook, Messenger, Workplace, etc.).
 
 ! === Authentification Facebook ===
 ||facebook.com^$third-party
@@ -52,3 +52,15 @@
 ||facebook.com^$cookie
 ||m.facebook.com^$cookie
 ||graph.facebook.com^$cookie
+
+! === Domaines supplémentaires liés à Meta/Facebook ===
+||fbcdn.net^
+||fbsbx.com^
+||messenger.com^
+||meta.com^
+||workplace.com^
+||fb.com^
+||fb.me^
+||fb.watch^
+||facebookcorewwwi.onion^
+||facebook.net^
