@@ -1,7 +1,7 @@
-# ChatGPT
-# Liste de filtres pour bloquer l'authentification Facebook et objets associés
-# Bloque les connexions via Facebook (OAuth), les objets de suivi, les scripts 
-# et les boutons d'authentification Facebook, les widgets et iframes associés
+! ChatGPT
+! Liste de filtres pour bloquer l'authentification Facebook et objets associés
+! Bloque les connexions via Facebook (OAuth), les objets de suivi, les scripts 
+! et les boutons d'authentification Facebook, les widgets et iframes associés
 
 ! === Authentification Facebook ===
 ||facebook.com^$third-party
