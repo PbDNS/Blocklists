@@ -1,4 +1,4 @@
-! ChatGPT – 19_06_2025
+! facebook - 23-06-2025
 ! Liste de filtres destinée à bloquer les connexions, scripts, iframes, widgets et boutons d’authentification Facebook.
 ! Empêche le chargement de l’OAuth Facebook, les ressources de suivi, les API JavaScript, les cookies tiers
 ! ainsi que toute intégration sociale provenant des domaines liés à Meta (Facebook, Messenger, Workplace, etc.).
