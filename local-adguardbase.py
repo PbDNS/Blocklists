@@ -8,7 +8,7 @@ local_file = "local-adguardbase.txt"
 def fetch_filter_data():
     """Télécharge les données du fichier source"""
     response = requests.get(url)
-    response.raise_for_status()
+    response.raise_for_status()  # Vérifie que la requête a bien réussi
     return response.text.splitlines()
 
 def filter_lines(lines):
@@ -25,7 +25,7 @@ def read_local_file():
         with open(local_file, "r") as file:
             return set(file.read().splitlines())
     except FileNotFoundError:
-        return set()
+        return set()  # Si le fichier n'existe pas, on retourne un ensemble vide
 
 def write_local_file(new_lines):
     """Écrit les lignes filtrées dans le fichier local"""
@@ -37,19 +37,11 @@ def update_local_file():
     new_lines = filter_lines(fetch_filter_data())
     local_lines = read_local_file()
 
-    # Trouver les lignes à ajouter et à supprimer
-    lines_to_add = set(new_lines) - local_lines
-    lines_to_remove = local_lines - set(new_lines)
-
     # Ajouter les nouvelles lignes et supprimer les anciennes
-    updated_lines = list(set(new_lines))
+    updated_lines = list(set(new_lines))  # On utilise un set pour éviter les doublons
 
     # Écrire les résultats dans le fichier local
     write_local_file(updated_lines)
-
-    # Afficher les modifications
-    print(f"Lignes ajoutées: {lines_to_add}")
-    print(f"Lignes supprimées: {lines_to_remove}")
 
 if __name__ == "__main__":
     update_local_file()
