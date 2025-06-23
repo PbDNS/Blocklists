@@ -36,3 +36,4 @@ jobs:
         git add local-adguardbase.txt
         git diff --quiet || git commit -m "Mise à jour des filtres AdGuard"
         git push
+
