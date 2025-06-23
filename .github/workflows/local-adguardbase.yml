@@ -1,0 +1,38 @@
+name: local-adguardbase
+
+on:
+  schedule:
+    - cron: "0 2 * * *"  # Exécution tous les jours à 2h du matin UTC
+  push:
+    branches:
+      - main  # Exécution lors des commits sur la branche principale
+
+jobs:
+  update-filters:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Vérification du code
+      uses: actions/checkout@v2
+
+    - name: Installer Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    
+    - name: Installer les dépendances
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Exécuter le script Python
+      run: |
+        python local-adguardbase.py
+
+    - name: Commit et push des changements
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add local-adguardbase.txt
+        git diff --quiet || git commit -m "mise à jour des filtres AdGuard"
+        git push
