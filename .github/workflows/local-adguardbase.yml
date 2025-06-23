@@ -3,9 +3,7 @@ name: local-adguardbase
 on:
   schedule:
     - cron: "0 2 * * *"  # Exécution tous les jours à 2h du matin UTC
-  push:
-    branches:
-      - main  # Exécution lors des commits sur la branche principale
+   workflow_dispatch
 
 jobs:
   update-filters:
