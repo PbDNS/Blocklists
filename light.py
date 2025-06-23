@@ -6,9 +6,7 @@ SOURCE_URL = "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main
 LIGHT_PATH = Path("light.txt")
 
 VALID_TLDS = {
-    "com", "net", "org", "fr", "de", "uk", "us", "ca", "eu", "ch", "es", "it", "nl",
-    "be", "pl", "se", "no", "fi", "cz", "at", "dk", "au", "nz", "ru", "in",
-    "co", "io", "tv", "app", "dev", "info", "me", "name", "biz", "shop", "store",
+    "com", "net", "org", "fr", "ru", "co", "io", "tv", "app", "dev", "info", "me", "name", "biz", "shop", "store",
     "edu", "gov", "mil", "int", "xyz", "top", "icu", "online", "site", "club", "buzz", "live", "click", "link",
     "fit", "review", "work", "win", "bid", "gq", "cf", "ml", "tk", "ga", "cam", "rest",
     "men", "mom", "stream", "cyou", "space", "today", "monster", "lol", "pics",
