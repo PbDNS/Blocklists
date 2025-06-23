@@ -1,4 +1,4 @@
-! ChatGPT - 17_06_2025
+! Google - 23-06-2025
 ! Blocage de l'authentification Google et objets associés
 ! Filtres cosmétiques Youtube
 
@@ -88,4 +88,7 @@ www.youtube.com##.ytd-masthead-signin
 ! === badge "Inclut une promotion rémunérée" ===
 youtube.com##.ytd-promoted-video-renderer
 youtube.com##.ytp-paid-content-overlay
+
+! Youtube messages infos
+youtube.com##yt-notification-action-renderer
 
