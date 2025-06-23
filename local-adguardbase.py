@@ -1,3 +1,4 @@
+import os
 import requests
 
 # URL du fichier source
@@ -29,19 +30,28 @@ def read_local_file():
 
 def write_local_file(new_lines):
     """Écrit les lignes filtrées dans le fichier local"""
+    print(f"Écriture du fichier {local_file}...")  # Débogage pour confirmer l'écriture
     with open(local_file, "w") as file:
         file.write("\n".join(new_lines) + "\n")
+    print(f"{local_file} écrit avec succès.")  # Confirmer que l'écriture a eu lieu
 
 def update_local_file():
     """Met à jour le fichier local en comparant avec les nouvelles données"""
-    new_lines = filter_lines(fetch_filter_data())
-    local_lines = read_local_file()
+    try:
+        new_lines = filter_lines(fetch_filter_data())
+        print(f"Lignes filtrées obtenues : {len(new_lines)}")  # Affichage du nombre de lignes filtrées
 
-    # Ajouter les nouvelles lignes et supprimer les anciennes
-    updated_lines = list(set(new_lines))  # On utilise un set pour éviter les doublons
+        local_lines = read_local_file()
 
-    # Écrire les résultats dans le fichier local
-    write_local_file(updated_lines)
+        # Ajouter les nouvelles lignes et supprimer les anciennes
+        updated_lines = list(set(new_lines))  # On utilise un set pour éviter les doublons
+
+        if new_lines != local_lines:  # Si les lignes sont différentes, on met à jour le fichier
+            write_local_file(updated_lines)
+        else:
+            print("Le fichier est déjà à jour, aucune modification nécessaire.")
+    except Exception as e:
+        print(f"Erreur lors de la mise à jour du fichier : {e}")
 
 if __name__ == "__main__":
     update_local_file()
