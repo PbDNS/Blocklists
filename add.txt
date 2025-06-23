@@ -1,4 +1,4 @@
-! Filtres additionnels inclus à blockist.txt
+! Filtres additionnels inclus à blockist.txt, testés régulièrement
 ||aenadjlofcqzj.space^
 ||analytics.korben.info^
 ||api-user-message.programme-tv.net^
@@ -23,7 +23,6 @@
 ||icu.newsroom.bi^
 ||imbfsidnchope.site^
 ||ipcigieikmfhw.website^
-||ivhxwcoyqokqso.com^
 ||l.marmiton.org^
 ||lihshailmyjzb.space^
 ||logs1412.xiti.com^
