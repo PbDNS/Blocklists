@@ -31,7 +31,6 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # Malicious URL Blocklist (URLHaus)
 # Scam Blocklist by DurableNapkin
 # AdGuard French adservers
-# AdGuard French adservers first party
 # Steven Black's List
 # Peter Lowe's Blocklist
 # Dan Pollock's List
