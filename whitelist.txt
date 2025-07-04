@@ -35,34 +35,80 @@
 ! certificats let's encrypt
 @@||e5.o.lencr.org^
 
-! chatgpt 17-06-2025
+! chatgpt 04-07-2025
 ! ✅ Whitelist CMP (Consent Management Platforms)
 ! 📌 Autorise les domaines nécessaires à l'affichage des bandeaux cookies (RGPD/TCF)
 ! 🛡️ N'autorise pas les trackers, uniquement l'interface utilisateur de consentement
+
+! Quantcast (CMP utilisée par de nombreux sites)
 @@||quantcast.mgr.consensu.org^
 @@||cmp.quantcast.com^
+
+! OneTrust (CMP populaire, en particulier en Europe)
 @@||privacyportal-de.onetrust.com^
-@@||cdn.cookielaw.org^
-@@||cookielaw.org^
+@@||privacyportal.onetrust.com^  ! (nouveau domaine, vérifier selon la version de OneTrust utilisée)
+
+! Cookiebot (Solution flexible et populaire)
 @@||consent.cookiebot.com^
-@@||consentcdn.cookiebot.com^
 @@||static.cookiebot.com^
 @@||tcf2-api.cookiebot.com^
-@@||cdn.privacy-mgmt.com^
-@@||privacy-mgmt.com^
-@@||consentmanager.net^
-@@||cdn.consentmanager.net^
+@@||cdn.cookiebot.com^
+
+! Usercentrics (Solution de consentement très utilisée)
 @@||usercentrics.eu^
 @@||app.usercentrics.eu^
 @@||cdn.usercentrics.eu^
+
+! TrustArc (Leader dans la gestion de la conformité RGPD)
 @@||trustarc.com^
 @@||choices.trustarc.com^
-@@||sdk.privacy-center.org^
-@@||scripts.privacy-center.org^
-@@||consent.google.com^
+
+! Privacy Management (Outil CMP pour la conformité à la protection des données)
+@@||cdn.privacy-mgmt.com^
+@@||privacy-mgmt.com^
+
+! CookieYes (Solution CMP montante dans le domaine)
 @@||cdn.eu.cookieyes.com^
 @@||cookieyes.com^
+
+! ConsentManager (Solution avec interface utilisateur simple et efficace)
+@@||consentmanager.net^
+@@||cdn.consentmanager.net^
+
+! Klaro! (Solution open-source utilisée pour la gestion de consentement)
+@@||klaro.kiprotect.com^
+
+! Google Consent Mode (CMP de Google pour RGPD)
+@@||consent.google.com^
+
+! Cookie-Script (Outil de gestion des cookies souvent intégré sur les sites)
 @@||cookie-script.com^
 @@||cdn.cookie-script.com^
-@@||klaro.kiprotect.com^
+
+! Funding Choices (Outil Google pour la gestion des consentements publicitaires)
 @@||fundingchoicesmessages.google.com^
+
+! Cookie Law (Bandeaux de consentement pour RGPD)
+@@||cdn.cookielaw.org^
+@@||cookielaw.org^
+
+! Consent Manager (plateforme de gestion de consentement)
+@@||consentmanager.net^
+@@||cdn.consentmanager.net^
+
+! Privacy Portal (Autre CMP RGPD utilisé par plusieurs sites)
+@@||privacyportal.de^
+@@||cdn.privacyportal.com^
+
+! Iubenda (Gestion de la conformité RGPD)
+@@||iubenda.com^
+@@||cdn.iubenda.com^
+
+! TrustArc (gestion des cookies et de la conformité RGPD)
+@@||trustarc.com^
+@@||choices.trustarc.com^
+
+! Klaro! (Solution open-source utilisée pour la gestion de consentement)
+@@||klaro.kiprotect.com^
+
+
