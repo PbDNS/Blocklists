@@ -78,6 +78,9 @@ www.youtube.com##.ytp-cards-teaser
 www.youtube.com##.ytp-button[aria-label*="Sign in"]
 www.youtube.com##.ytd-button-renderer[is-paper-button]
 www.youtube.com##.ytd-masthead-signin
+www.youtube.com##.ytp-suggested-action
+www.youtube.com##.ytp-cards-button-icon
+www.youtube.com##.ytd-in-feed-ad-layout-renderer
 
 ! === Images shopping Youtube ===
 ||encrypted-tbn0.gstatic.com/shopping*
