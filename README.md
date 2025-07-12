@@ -9,7 +9,7 @@ Adapté à une utilisation francophone et internationale
 
 | **filtres uniques avant traitement** | **filtres uniques sans redondance** |
 |:------------------------------------:|:------------------------------------:|
-| 596614                    | **441301**                 |
+| 600164                    | **441872**                 |
 
 <!-- STATISTICS_TABLE_END -->
 
