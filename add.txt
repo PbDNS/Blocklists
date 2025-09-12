@@ -1,8 +1,6 @@
 ! Filtres additionnels inclus à blockist.txt, testés régulièrement
 ||ads.vk.com^$
 ||aenadjlofcqzj.space^
-||aezvrrtyjovwt.online^
-||aikxmqvcqzejc.space^
 ||analytics.amiunique.org^$
 ||analytics.korben.info^
 ||api.ipinfo.be^
@@ -23,7 +21,6 @@
 ||dunya.fraarhun.com^
 ||ekjyguvzxzlrb.online^$
 ||eminbjuc.com^$
-||epbtgmsbvtmqg.site^
 ||eswfsinghtywb.website^
 ||event.trk-maiorum.com^
 ||everlusting-games.com^
@@ -43,7 +40,6 @@
 ||kodbafryxemdz.website^
 ||kugnzygm.com^$
 ||l.marmiton.org^
-||lafxbbzashvrq.online^
 ||lfeguyfswpjli.com^$
 ||lihshailmyjzb.space^
 ||logs1412.xiti.com^
@@ -58,7 +54,6 @@
 ||nuxaunjucpepp.website^
 ||odntaztu.com^
 ||ogscumkte.com^$
-||ovhtuompscqaq.website^
 ||pdgknglzhohbi.online^
 ||pmmxeavnflhkl.website^
 ||pndvhjgixorbq.online^
@@ -100,4 +95,3 @@
 ||xoojebxoyzves.online^
 ||yocbiylltzzaj.website^$
 ||zeestairaicoque.com^$
-||zlqgrxuoxqpbd.website^
