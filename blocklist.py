@@ -8,36 +8,6 @@ import os
 
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
-########### blocklists incluses ###########
-# HaGeZi's Normal DNS Blocklist
-# HaGeZi's Pop-Up Ads DNS Blocklist
-# HaGeZi's Amazon Tracker DNS Blocklist
-# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
-# HaGeZi's Badware Hoster Blocklist
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
-# HaGeZi's DynDNS Blocklist
-# HaGeZi's Windows/Office Tracker DNS Blocklist
-# ShadowWhisperer's Malware List
-# OISD Small
-# Dandelion Sprout's Anti Malware List
-# Dandelion Sprout's Anti Push Notifications
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-# AWAvenue Ads Rule
-# HaGeZi's Apple Tracker DNS Blocklist
-# d3Host
-# AdGuard DNS filter
-# Phishing Army
-# Phishing URL Blocklist (PhishTank and OpenPhish)
-# Malicious URL Blocklist (URLHaus)
-# Scam Blocklist by DurableNapkin
-# AdGuard French adservers
-# Steven Black's List
-# Peter Lowe's Blocklist
-# Dan Pollock's List
-# Easylist FR
-# The Big List of Hacked Malware Web Sites
-# Stalkerware Indicators List
-
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -46,7 +16,7 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt",
-    "https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
@@ -68,7 +38,8 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
+    "https://raw.githubusercontent.com/cbuijs/hagezi/refs/heads/main/lists/abuse-tlds/domains.adblock"
 ]
 
 def is_valid_domain(domain):
@@ -138,16 +109,26 @@ def domain_to_parts(domain):
 trie_root = DomainTrieNode()
 final_entries = set()
 
+# Supprimer les redondances dans les TLDs
 for entry in sorted(all_entries, key=lambda e: e.count(".")):
     if is_valid_domain(entry):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
+
+# Ajout des TLDs (bloclist spécifique)
+tlds_url = "https://raw.githubusercontent.com/cbuijs/hagezi/refs/heads/main/lists/abuse-tlds/domains.adblock"
+tlds_entries = download_and_extract(tlds_url)
+for tld in tlds_entries:
+    if is_valid_domain(tld):
+        if trie_root.insert(domain_to_parts(tld)):
+            final_entries.add(tld)
 
 total_unique_before = len(all_entries)
 total_unique_after = len(final_entries)
 
 timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
 
+# Sauvegarde de la blocklist finale dans un fichier
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {total_unique_after:06} entrées\n\n")
