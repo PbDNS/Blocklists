@@ -8,6 +8,36 @@ import os
 
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
+########### blocklists incluses ###########
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's Amazon Tracker DNS Blocklist
+# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# HaGeZi's Badware Hoster Blocklist
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
+# HaGeZi's DynDNS Blocklist
+# HaGeZi's Windows/Office Tracker DNS Blocklist
+# ShadowWhisperer's Malware List
+# OISD Small
+# Dandelion Sprout's Anti Malware List
+# Dandelion Sprout's Anti Push Notifications
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# AWAvenue Ads Rule
+# HaGeZi's Apple Tracker DNS Blocklist
+# d3Host
+# AdGuard DNS filter
+# Phishing Army
+# Phishing URL Blocklist (PhishTank and OpenPhish)
+# Malicious URL Blocklist (URLHaus)
+# Scam Blocklist by DurableNapkin
+# AdGuard French adservers
+# Steven Black's List
+# Peter Lowe's Blocklist
+# Dan Pollock's List
+# Easylist FR
+# The Big List of Hacked Malware Web Sites
+# Stalkerware Indicators List
+
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
@@ -16,7 +46,7 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
+    "https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
@@ -38,8 +68,7 @@ blocklist_urls = [
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
-    "https://raw.githubusercontent.com/cbuijs/hagezi/refs/heads/main/lists/abuse-tlds/domains.adblock"  # Ajout de la blocklist des TLDs
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
 ]
 
 def is_valid_domain(domain):
@@ -83,33 +112,11 @@ def download_and_extract(url):
         print(f"Erreur lors du téléchargement de {url} : {e}")
         return set()
 
-def extract_tlds(url):
-    """ Extraire les TLDs de la blocklist des TLDs (format Adblock Plus) """
-    tlds = set()
-    try:
-        with urllib.request.urlopen(url, timeout=30) as response:
-            content = response.read().decode("utf-8", errors="ignore")
-            for line in content.splitlines():
-                line = line.strip()
-                if line.startswith("||") and line.endswith("^"):
-                    tld = line[2:-1]  # Extraire le domaine avant le ^
-                    if is_valid_domain(tld):
-                        tlds.add(tld)
-    except Exception as e:
-        print(f"Erreur lors de l'extraction des TLDs depuis {url} : {e}")
-    return tlds
-
-# Télécharger et extraire les blocklists
 all_entries = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
     for entry_set in results:
         all_entries.update(entry_set)
-
-# Extraire les TLDs depuis la blocklist
-tlds_url = "https://raw.githubusercontent.com/cbuijs/hagezi/refs/heads/main/lists/abuse-tlds/domains.adblock"
-tlds_entries = extract_tlds(tlds_url)
-all_entries.update(tlds_entries)
 
 class DomainTrieNode:
     def __init__(self):
@@ -128,7 +135,6 @@ class DomainTrieNode:
 def domain_to_parts(domain):
     return domain.strip().split(".")[::-1]
 
-# Trie pour gérer les domaines et supprimer les redondances
 trie_root = DomainTrieNode()
 final_entries = set()
 
@@ -137,7 +143,6 @@ for entry in sorted(all_entries, key=lambda e: e.count(".")):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
 
-# Sauvegarde de la blocklist finale dans un fichier
 total_unique_before = len(all_entries)
 total_unique_after = len(final_entries)
 
@@ -151,7 +156,6 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
 
 print(f"✅ fichier blocklist.txt généré: {total_unique_after} entrées")
 
-# Mise à jour du fichier README
 def update_readme(stats):
     readme_path = 'README.md'
     with open(readme_path, 'r') as file:
