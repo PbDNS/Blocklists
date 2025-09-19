@@ -39,7 +39,7 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
-    "https://raw.githubusercontent.com/cbuijs/hagezi/refs/heads/main/lists/abuse-tlds/domains.adblock"
+    "https://raw.githubusercontent.com/cbuijs/hagezi/refs/heads/main/lists/abuse-tlds/domains.adblock"  # Ajout de la blocklist des TLDs
 ]
 
 def is_valid_domain(domain):
@@ -83,11 +83,33 @@ def download_and_extract(url):
         print(f"Erreur lors du téléchargement de {url} : {e}")
         return set()
 
+def extract_tlds(url):
+    """ Extraire les TLDs de la blocklist des TLDs (format Adblock Plus) """
+    tlds = set()
+    try:
+        with urllib.request.urlopen(url, timeout=30) as response:
+            content = response.read().decode("utf-8", errors="ignore")
+            for line in content.splitlines():
+                line = line.strip()
+                if line.startswith("||") and line.endswith("^"):
+                    tld = line[2:-1]  # Extraire le domaine avant le ^
+                    if is_valid_domain(tld):
+                        tlds.add(tld)
+    except Exception as e:
+        print(f"Erreur lors de l'extraction des TLDs depuis {url} : {e}")
+    return tlds
+
+# Télécharger et extraire les blocklists
 all_entries = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
     for entry_set in results:
         all_entries.update(entry_set)
+
+# Extraire les TLDs depuis la blocklist
+tlds_url = "https://raw.githubusercontent.com/cbuijs/hagezi/refs/heads/main/lists/abuse-tlds/domains.adblock"
+tlds_entries = extract_tlds(tlds_url)
+all_entries.update(tlds_entries)
 
 class DomainTrieNode:
     def __init__(self):
@@ -106,29 +128,21 @@ class DomainTrieNode:
 def domain_to_parts(domain):
     return domain.strip().split(".")[::-1]
 
+# Trie pour gérer les domaines et supprimer les redondances
 trie_root = DomainTrieNode()
 final_entries = set()
 
-# Supprimer les redondances dans les TLDs
 for entry in sorted(all_entries, key=lambda e: e.count(".")):
     if is_valid_domain(entry):
         if trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
 
-# Ajout des TLDs (bloclist spécifique)
-tlds_url = "https://raw.githubusercontent.com/cbuijs/hagezi/refs/heads/main/lists/abuse-tlds/domains.adblock"
-tlds_entries = download_and_extract(tlds_url)
-for tld in tlds_entries:
-    if is_valid_domain(tld):
-        if trie_root.insert(domain_to_parts(tld)):
-            final_entries.add(tld)
-
+# Sauvegarde de la blocklist finale dans un fichier
 total_unique_before = len(all_entries)
 total_unique_after = len(final_entries)
 
 timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
 
-# Sauvegarde de la blocklist finale dans un fichier
 with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {total_unique_after:06} entrées\n\n")
@@ -137,6 +151,7 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
 
 print(f"✅ fichier blocklist.txt généré: {total_unique_after} entrées")
 
+# Mise à jour du fichier README
 def update_readme(stats):
     readme_path = 'README.md'
     with open(readme_path, 'r') as file:
