@@ -69,7 +69,6 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt"
-    "https://raw.githubusercontent.com/cbuijs/hagezi/refs/heads/main/lists/abuse-tlds/domains.adblock"
 ]
 
 def is_valid_domain(domain):
