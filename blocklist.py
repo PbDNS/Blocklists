@@ -44,13 +44,18 @@ blocklist_urls = [
     "https://dl.red.flag.domains/red.flag.domains_fr.txt"
 ]
 
+
 def is_valid_domain(domain):
     try:
         ipaddress.ip_address(domain)
         return False
     except ValueError:
         pass
+    # ✅ On autorise aussi les TLD simples (ex: ".agency")
+    if re.match(r"^\.[a-zA-Z]{2,63}$", domain):
+        return True
     return re.match(r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$", domain) is not None
+
 
 def download_and_extract(url):
     rules = set()
@@ -58,17 +63,18 @@ def download_and_extract(url):
         with urllib.request.urlopen(url, timeout=30) as response:
             content = response.read().decode("utf-8", errors="ignore")
 
-            # ✅ Si c’est le fichier TLD, on l’extrait différemment
+            # ✅ Fichier TLD spécial
             if "red.flag.domains_fr.txt" in url:
                 for line in content.splitlines():
                     line = line.strip()
                     if line.startswith("||*.") and "^" in line:
-                        tld = re.search(r"\|\|\*\.(.*?)\^", line)
-                        if tld:
-                            rules.add(tld.group(1).lower())
+                        tld_match = re.search(r"\|\|\*\.(.*?)\^", line)
+                        if tld_match:
+                            tld = "." + tld_match.group(1).lower()  # ex: ".agency"
+                            rules.add(tld)
                 return rules
 
-            # ✅ Sinon, traitement normal
+            # ✅ Bloclists normales
             for line in content.splitlines():
                 line = line.strip()
                 if not line or line.startswith("!") or line.startswith("#"):
@@ -96,6 +102,7 @@ def download_and_extract(url):
         print(f"Erreur lors du téléchargement de {url} : {e}")
     return rules
 
+
 # Téléchargement parallèle
 all_entries = set()
 tld_entries = set()
@@ -108,15 +115,16 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         else:
             all_entries.update(entry_set)
 
-# ✅ On ajoute les TLD au format DNS utilisable
-for tld in tld_entries:
-    all_entries.add(f".{tld}")
+# ✅ On ajoute les TLDs au set global
+all_entries.update(tld_entries)
 
-# Suppression des redondances via Trie
+
+# --- Gestion du Trie pour suppression des redondances ---
 class DomainTrieNode:
     def __init__(self):
         self.children = {}
         self.is_terminal = False
+
     def insert(self, parts):
         node = self
         for part in parts:
@@ -126,12 +134,17 @@ class DomainTrieNode:
         node.is_terminal = True
         return True
 
+
 def domain_to_parts(domain):
-    return domain.strip().split(".")[::-1]
+    # .agency → ["agency"]
+    clean = domain.lstrip(".")
+    return clean.strip().split(".")[::-1]
+
 
 trie_root = DomainTrieNode()
 final_entries = set()
 
+# ✅ Tri : les TLD d’abord, ensuite les domaines
 for entry in sorted(all_entries, key=lambda e: e.count(".")):
     if is_valid_domain(entry):
         if trie_root.insert(domain_to_parts(entry)):
@@ -146,6 +159,9 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
     f.write(f"! Agrégation - {timestamp}\n")
     f.write(f"! {total_unique_after:06} entrées\n\n")
     for entry in sorted(final_entries):
-        f.write(f"||{entry.lower()}^\n")
+        if entry.startswith("."):
+            f.write(f"||{entry}^\n")  # ex: ||.agency^
+        else:
+            f.write(f"||{entry.lower()}^\n")
 
-print(f"✅ fichier blocklist.txt généré: {total_unique_after} entrées (dont TLDs ajoutés)")
+print(f"✅ Fichier blocklist.txt généré ({total_unique_after} entrées, TLDs inclus et redondances nettoyées)")
