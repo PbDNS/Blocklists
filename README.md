@@ -54,6 +54,7 @@ Adapté à une utilisation francophone et internationale
 - Peter Lowe's Blocklist
 - Phishing Army
 - Phishing URL Blocklist (PhishTank and OpenPhish)
+- Red Flag Domains
 - Scam Blocklist by DurableNapkin
 - ShadowWhisperer's Malware List
 - Stalkerware Indicators List
