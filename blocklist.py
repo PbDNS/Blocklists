@@ -37,6 +37,7 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # Easylist FR
 # The Big List of Hacked Malware Web Sites
 # Stalkerware Indicators List
+# Red Flags Domains
 
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
