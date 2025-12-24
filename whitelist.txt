@@ -1,15 +1,19 @@
-! déblocages google divers
+! google divers
+@@||region1.analytics.google.com
 @@||region1.google-analytics.com^
 @@||www.googletagmanager.com^
 @@||www.gstatic.com^
 @@||yt3.ggpht.com^
 @@||yt3.googleusercontent.com^
 
-! video bfmtv
-@@||nextms.profiles.tagger.opecloud.com^
-
 ! gestion cookies programme-tv.net
 @@||gate.first-id.fr^
+
+! vignettes dailymotion.com
+@@||graphql.api.dailymotion.com^$important
+
+! video bfmtv
+@@||nextms.profiles.tagger.opecloud.com^
 
 ! commentaires lecteurs presse-citron.net
 @@||api-2-0.spot.im^
@@ -24,91 +28,136 @@
 @@||logws1361.ati-host.net^
 @@||try.abtasty.com^
 
-! divers
-@@||cdnjs.cloudflare.com^
-@@||dealabs.digidip.net^
-@@||dns.notjakob.com^
-@@||dns.quad9.net^
-@@||static.hotjar.com^
-@@||tags.tiqcdn.com^
+! SquidWTF
+@@||squid.wtf
+@@||tidal.kinoplus.online
+@@||hund.qqdl.site
+@@||katze.qqdl.site
+@@||maus.qqdl.site
+@@||vogel.qqdl.site
+@@||wolf.qqdl.site
 
 ! certificats let's encrypt
 @@||e5.o.lencr.org^
 
-! chatgpt 04-07-2025
+! divers
+@@||1jour1film-officiel.site
+@@||1jour1film1.mom
+@@||brew.sh
+@@||cdnjs.cloudflare.com^
+@@||configurator.porsche.com
+@@||dealabs.digidip.net^
+@@||dl-protect.cc
+@@||dl-protect.link
+@@||dns.notjakob.com^
+@@||dns.quad9.net^
+@@||dynamicwallpaper.club
+@@||filmoflix.cash
+@@||flemmix.bond
+@@||fluxradios.blogspot.com
+@@||hdstream.cool
+@@||hola.org
+@@||icc.xcc.porsche.digital
+@@||images.tgtg.ninja
+@@||iod.prs.porsche.com
+@@||ippacket.stream
+@@||jazzmusic.cool
+@@||k2s.cc
+@@||korben.info
+@@||lx1.dyncdn.cc
+@@||next.ink
+@@||numero.vip
+@@||papadustream.golf
+@@||partiality.itunes.apple.com
+@@||pixibay.cc
+@@||portail.lol
+@@||simpledns.plus
+@@||static.hotjar.com^
+@@||tags.tiqcdn.com^
+@@||tipfly.xyz
+@@||tirexo.day
+@@||up4fun.top
+@@||ups2up.fun
+@@||vudeo.ws
+@@||waaw.to
+@@||wander.science
+@@||wawacity.yachts
+@@||ww1-zone-torrent.town
+@@||www.cpasbien.diy
+@@||www.limetorrents.lol
+@@||www.neufneuf.space
+@@||www.server-world.info
+@@||www.titanium-software.fr
+@@||www.tribunejuive.info
+@@||www.zone-telechargement.irish
+@@||www.zone-torrent.town
+@@||x2x.fun
+@@||xp.apple.com
+@@||xp.v.aaplimg.com
+@@||zimage.cc
+
+! --------------------------------------------------
+
 ! ✅ Whitelist CMP (Consent Management Platforms)
 ! 📌 Autorise les domaines nécessaires à l'affichage des bandeaux cookies (RGPD/TCF)
 ! 🛡️ N'autorise pas les trackers, uniquement l'interface utilisateur de consentement
 
-! Quantcast (CMP utilisée par de nombreux sites)
+! Quantcast
 @@||quantcast.mgr.consensu.org^
 @@||cmp.quantcast.com^
 
-! OneTrust (CMP populaire, en particulier en Europe)
+! OneTrust
 @@||privacyportal-de.onetrust.com^
-@@||privacyportal.onetrust.com^  ! (nouveau domaine, vérifier selon la version de OneTrust utilisée)
+@@||privacyportal.onetrust.com^
 
-! Cookiebot (Solution flexible et populaire)
+! Cookiebot
 @@||consent.cookiebot.com^
 @@||static.cookiebot.com^
 @@||tcf2-api.cookiebot.com^
 @@||cdn.cookiebot.com^
 
-! Usercentrics (Solution de consentement très utilisée)
+! Usercentrics
 @@||usercentrics.eu^
 @@||app.usercentrics.eu^
 @@||cdn.usercentrics.eu^
 
-! TrustArc (Leader dans la gestion de la conformité RGPD)
+! TrustArc
 @@||trustarc.com^
 @@||choices.trustarc.com^
 
-! Privacy Management (Outil CMP pour la conformité à la protection des données)
+! Privacy Management
 @@||cdn.privacy-mgmt.com^
 @@||privacy-mgmt.com^
 
-! CookieYes (Solution CMP montante dans le domaine)
+! CookieYes
 @@||cdn.eu.cookieyes.com^
 @@||cookieyes.com^
 
-! ConsentManager (Solution avec interface utilisateur simple et efficace)
+! ConsentManager
 @@||consentmanager.net^
 @@||cdn.consentmanager.net^
 
-! Klaro! (Solution open-source utilisée pour la gestion de consentement)
+! Klaro
 @@||klaro.kiprotect.com^
 
-! Google Consent Mode (CMP de Google pour RGPD)
+! Google Consent Mode
 @@||consent.google.com^
 
-! Cookie-Script (Outil de gestion des cookies souvent intégré sur les sites)
+! Cookie-Script
 @@||cookie-script.com^
 @@||cdn.cookie-script.com^
 
-! Funding Choices (Outil Google pour la gestion des consentements publicitaires)
+! Funding Choices
 @@||fundingchoicesmessages.google.com^
 
-! Cookie Law (Bandeaux de consentement pour RGPD)
+! Cookie Law
 @@||cdn.cookielaw.org^
 @@||cookielaw.org^
 
-! Consent Manager (plateforme de gestion de consentement)
-@@||consentmanager.net^
-@@||cdn.consentmanager.net^
-
-! Privacy Portal (Autre CMP RGPD utilisé par plusieurs sites)
+! Privacy Portal
 @@||privacyportal.de^
 @@||cdn.privacyportal.com^
 
-! Iubenda (Gestion de la conformité RGPD)
+! Iubenda
 @@||iubenda.com^
 @@||cdn.iubenda.com^
-
-! TrustArc (gestion des cookies et de la conformité RGPD)
-@@||trustarc.com^
-@@||choices.trustarc.com^
-
-! Klaro! (Solution open-source utilisée pour la gestion de consentement)
-@@||klaro.kiprotect.com^
-
-
