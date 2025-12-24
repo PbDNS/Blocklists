@@ -1,0 +1,23 @@
+! sous-domaine interne Google (DNS/authentification)
+||apis.google.com^
+
+! fonts
+||site-assets.fontawesome.com^
+||fonts.shopifycdn.com^
+||fonts.zohowebstatic.com^
+||use.fontawesome.com^
+||fonts.google.com^
+||fonts.googleapis.com^
+||fonts.gstatic.com^
+||fonts.cdnfonts.com^
+
+! divers
+||radio-activity.itunes.apple.com^
+||client-api.itunes.apple.com^
+||web-chat-e2ee.instagram.com^
+||edge-chat.instagram.com^
+||reg-e2ee.instagram.com^
+||accounts.google.com^
+||witv.soccer^
+||smarttv.zeasn.tv^
+||connect.facebook.net^
