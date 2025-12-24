@@ -17,6 +17,7 @@
 ||cdn.raygun.io^
 ||cdn.rollbar.com^
 ||check.analytics.rlcdn.com^
+||cza2.crazygames.com^
 ||dai.google.com^
 ||dgw.c10r.facebook.com^
 ||diagonaladdresslead.com^
@@ -53,6 +54,7 @@
 ||npaw1.rtl.fr^
 ||onetrack.carrefour.fr^
 ||pangleglobal.com^
+||plus.l.google.com^
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net^
 ||redirector.googlevideo.com^
 ||relaytrie2025.com^
@@ -67,6 +69,7 @@
 ||sntf.programme-tv.net^
 ||ssl.p.jwpcdn.com^
 ||stats.sirdata.eu^
+||stw.dl-protect.link^
 ||t.news.mediacloseremail.com^
 ||thetradedesk.com^
 ||track-eu1.hubspot.com^
@@ -86,4 +89,6 @@
 ||youtubei.googleapis.com^
 ||zeestairaicoque.com^
 ||zenaps.com^
+
+
 
