@@ -14,11 +14,10 @@
 ||web-chat-e2ee.instagram.com^
 ||reg-e2ee.instagram.com^
 
-! divers
-||client-api.itunes.apple.com^
-||radio-activity.itunes.apple.com^
-||smarttv.zeasn.tv^
-||witv.soccer^
+! --- programme-tv.net light ---
+! accès compte
+||api-connect.programme-tv.net^
+||connect.programme-tv.net^
 
 ! fonts
 ||fonts.cdnfonts.com^
@@ -26,3 +25,10 @@
 ||fonts.zohowebstatic.com^
 ||site-assets.fontawesome.com^
 ||use.fontawesome.com^
+
+! divers
+||client-api.itunes.apple.com^
+||radio-activity.itunes.apple.com^
+||smarttv.zeasn.tv^
+||witv.soccer^
+
