@@ -3,21 +3,26 @@
 ||accounts.google.com^
 ! sous-domaine interne Google (DNS/authentification)
 ||apis.google.com^
+! fonts
+||fonts.google.com^
+||fonts.googleapis.com^
+
+! --- instagram light ---
+! chat
+||edge-chat.instagram.com^
+! end-to-end encryption messages
+||web-chat-e2ee.instagram.com^
+||reg-e2ee.instagram.com^
+
+! divers
+||client-api.itunes.apple.com^
+||radio-activity.itunes.apple.com^
+||smarttv.zeasn.tv^
+||witv.soccer^
 
 ! fonts
 ||fonts.cdnfonts.com^
-||fonts.google.com^
-||fonts.googleapis.com^
 ||fonts.shopifycdn.com^
 ||fonts.zohowebstatic.com^
 ||site-assets.fontawesome.com^
 ||use.fontawesome.com^
-
-! divers
-||client-api.itunes.apple.com^
-||edge-chat.instagram.com^
-||radio-activity.itunes.apple.com^
-||reg-e2ee.instagram.com^
-||smarttv.zeasn.tv^
-||web-chat-e2ee.instagram.com^
-||witv.soccer^
