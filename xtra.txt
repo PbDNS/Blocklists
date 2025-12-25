@@ -19,4 +19,3 @@
 ||accounts.google.com^
 ||witv.soccer^
 ||smarttv.zeasn.tv^
-||connect.facebook.net^
