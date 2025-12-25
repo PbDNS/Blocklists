@@ -1,21 +1,23 @@
+! --- google light ---
+! accès compte
+||accounts.google.com^
 ! sous-domaine interne Google (DNS/authentification)
 ||apis.google.com^
 
 ! fonts
-||site-assets.fontawesome.com^
-||fonts.shopifycdn.com^
-||fonts.zohowebstatic.com^
-||use.fontawesome.com^
+||fonts.cdnfonts.com^
 ||fonts.google.com^
 ||fonts.googleapis.com^
-||fonts.cdnfonts.com^
+||fonts.shopifycdn.com^
+||fonts.zohowebstatic.com^
+||site-assets.fontawesome.com^
+||use.fontawesome.com^
 
 ! divers
-||radio-activity.itunes.apple.com^
 ||client-api.itunes.apple.com^
-||web-chat-e2ee.instagram.com^
 ||edge-chat.instagram.com^
+||radio-activity.itunes.apple.com^
 ||reg-e2ee.instagram.com^
-||accounts.google.com^
-||witv.soccer^
 ||smarttv.zeasn.tv^
+||web-chat-e2ee.instagram.com^
+||witv.soccer^
