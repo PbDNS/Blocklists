@@ -41,8 +41,6 @@
 @@||e5.o.lencr.org^
 
 ! divers
-@@||1jour1film-officiel.site
-@@||1jour1film1.mom
 @@||brew.sh
 @@||cdnjs.cloudflare.com^
 @@||configurator.porsche.com
@@ -50,10 +48,7 @@
 @@||dl-protect.cc
 @@||dl-protect.link
 @@||dns.notjakob.com^
-@@||dns.quad9.net^
 @@||dynamicwallpaper.club
-@@||filmoflix.cash
-@@||flemmix.bond
 @@||fluxradios.blogspot.com
 @@||hdstream.cool
 @@||hola.org
@@ -75,22 +70,13 @@
 @@||static.hotjar.com^
 @@||tags.tiqcdn.com^
 @@||tipfly.xyz
-@@||tirexo.day
 @@||up4fun.top
 @@||ups2up.fun
 @@||vudeo.ws
 @@||waaw.to
 @@||wander.science
-@@||wawacity.yachts
-@@||ww1-zone-torrent.town
-@@||www.cpasbien.diy
-@@||www.limetorrents.lol
-@@||www.neufneuf.space
 @@||www.server-world.info
 @@||www.titanium-software.fr
-@@||www.tribunejuive.info
-@@||www.zone-telechargement.irish
-@@||www.zone-torrent.town
 @@||x2x.fun
 @@||xp.apple.com
 @@||xp.v.aaplimg.com
