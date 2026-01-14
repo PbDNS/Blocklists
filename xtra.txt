@@ -30,5 +30,5 @@
 ||client-api.itunes.apple.com^
 ||radio-activity.itunes.apple.com^
 ||smarttv.zeasn.tv^
-||witv.soccer^
+
 
