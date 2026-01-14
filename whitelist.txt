@@ -93,6 +93,7 @@
 @@||cmp.quantcast.com^
 
 ! OneTrust
+@@||geolocation.onetrust.com^
 @@||privacyportal-de.onetrust.com^
 @@||privacyportal.onetrust.com^
 
