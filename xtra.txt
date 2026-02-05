@@ -1,3 +1,4 @@
+! Filtres additionnels non inclus à blocklist.txt
 ! --- google light ---
 ! accès compte
 ||accounts.google.com^
