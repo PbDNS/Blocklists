@@ -1,5 +1,5 @@
 ! google divers
-@@||region1.analytics.google.com
+@@||region1.analytics.google.com^
 @@||region1.google-analytics.com^
 @@||www.googletagmanager.com^
 @@||www.gstatic.com^
@@ -10,7 +10,7 @@
 @@||gate.first-id.fr^
 
 ! vignettes dailymotion.com
-@@||graphql.api.dailymotion.com^$important
+@@||graphql.api.dailymotion.com^
 
 ! video bfmtv
 @@||nextms.profiles.tagger.opecloud.com^
@@ -29,61 +29,62 @@
 @@||try.abtasty.com^
 
 ! SquidWTF
+@@||amazon.spotbye.qzz.io^
 @@||amzn.afkarxyz.qzz.io^
 @@||dab.yeet.su^
 @@||hund.qqdl.site
 @@||katze.qqdl.site
 @@||maus.qqdl.site
 @@||qbz.afkarxyz.fun^
-@@||squid.wtf
-@@||tidal.kinoplus.online
-@@||vogel.qqdl.site
-@@||wolf.qqdl.site
+@@||squid.wtf^
+@@||tidal.kinoplus.online^
+@@||vogel.qqdl.site^
+@@||wolf.qqdl.site^
 
 ! certificats let's encrypt
 @@||e5.o.lencr.org^
 
 ! divers
-@@||brew.sh
+@@||brew.sh^
 @@||cdnjs.cloudflare.com^
 @@||configurator.porsche.com
 @@||dealabs.digidip.net^
-@@||dl-protect.cc
-@@||dl-protect.link
+@@||dl-protect.cc^
+@@||dl-protect.link^
 @@||dns.notjakob.com^
-@@||dynamicwallpaper.club
-@@||fluxradios.blogspot.com
-@@||hdstream.cool
-@@||hola.org
-@@||icc.xcc.porsche.digital
-@@||images.tgtg.ninja
-@@||iod.prs.porsche.com
-@@||ippacket.stream
-@@||jazzmusic.cool
-@@||k2s.cc
-@@||korben.info
-@@||lx1.dyncdn.cc
-@@||next.ink
-@@||numero.vip
-@@||papadustream.golf
-@@||partiality.itunes.apple.com
-@@||pixibay.cc
-@@||portail.lol
-@@||simpledns.plus
+@@||dynamicwallpaper.club^
+@@||fluxradios.blogspot.com^
+@@||hdstream.cool^
+@@||hola.org^
+@@||icc.xcc.porsche.digital^
+@@||images.tgtg.ninja^
+@@||iod.prs.porsche.com^
+@@||ippacket.stream^
+@@||jazzmusic.cool^
+@@||k2s.cc^
+@@||korben.info^
+@@||lx1.dyncdn.cc^
+@@||next.ink^
+@@||numero.vip^
+@@||papadustream.golf^
+@@||partiality.itunes.apple.com^
+@@||pixibay.cc^
+@@||portail.lol^
+@@||simpledns.plus^
 @@||static.hotjar.com^
 @@||tags.tiqcdn.com^
-@@||tipfly.xyz
-@@||up4fun.top
-@@||ups2up.fun
-@@||vudeo.ws
-@@||waaw.to
-@@||wander.science
-@@||www.server-world.info
-@@||www.titanium-software.fr
-@@||x2x.fun
-@@||xp.apple.com
-@@||xp.v.aaplimg.com
-@@||zimage.cc
+@@||tipfly.xyz^
+@@||up4fun.top^
+@@||ups2up.fun^
+@@||vudeo.ws^
+@@||waaw.to^
+@@||wander.science^
+@@||www.server-world.info^
+@@||www.titanium-software.fr^
+@@||x2x.fun^
+@@||xp.apple.com^
+@@||xp.v.aaplimg.com^
+@@||zimage.cc^
 
 ! --------------------------------------------------
 
@@ -92,8 +93,8 @@
 ! 🛡️ N'autorise pas les trackers, uniquement l'interface utilisateur de consentement
 
 ! Quantcast
-@@||quantcast.mgr.consensu.org^
 @@||cmp.quantcast.com^
+@@||quantcast.mgr.consensu.org^
 
 ! OneTrust
 @@||geolocation.onetrust.com^
