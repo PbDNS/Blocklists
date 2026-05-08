@@ -1,4 +1,5 @@
 ! Filtres additionnels non inclus à blocklist.txt
+
 ! --- google light ---
 ! accès compte
 ||accounts.google.com^
@@ -21,14 +22,14 @@
 ||connect.programme-tv.net^
 
 ! fonts
+||fonts-api.wp.com^
 ||fonts.cdnfonts.com^
 ||fonts.shopifycdn.com^
 ||fonts.zohowebstatic.com^
+||ka-f.fontawesome.com^
 ||site-assets.fontawesome.com^
 ||use.fontawesome.com^
 
 ! divers
 ||client-api.itunes.apple.com^
 ||radio-activity.itunes.apple.com^
-
-
