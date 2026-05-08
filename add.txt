@@ -1,4 +1,5 @@
-! Filtres additionnels inclus à blockist.txt
+! Filtres additionnels, inclus à blockist.txt
+
 ||2giga.link^
 ||admob.googleapis.com^
 ||ads.deezer.com^
@@ -9,8 +10,10 @@
 ||adsserver.megaphone.fm^
 ||amazonaax.com^
 ||amazonclix.com^
+||analytics.ameli.fr^
 ||analytics.amiunique.org^
 ||analytics.oneplus.cn^
+||api-wrapper-tracking.imaginereplay.com^
 ||api.honeybadger.io^
 ||api.impact.com^
 ||api.ipinfo.be^
@@ -24,6 +27,11 @@
 ||cdn.raygun.io^
 ||cdn.rollbar.com^
 ||check.analytics.rlcdn.com^
+||click.mailchimp.com^
+||click.revolut.com^
+||clicks.malwarebytes.com^
+||clientstream.launchdarkly.com^
+||customer.io^
 ||cza2.crazygames.com^
 ||dai.google.com^
 ||dgw.c10r.facebook.com^
@@ -44,8 +52,8 @@
 ||graphql.api.dailymotion.com^
 ||greatis.com^
 ||hawk-tracker.360yield.com^
+||heavy-handeddemagnetisepicture.com^
 ||hotjar-analytics.com^
-||i.instagram.com^
 ||icu.newsroom.bi^
 ||impact.com^
 ||ipapi.co^
@@ -53,6 +61,7 @@
 ||is.com^
 ||js.sentry-cdn.com^
 ||jwplayer-dualstack.map.fastly.net^
+||klaviyo.com^
 ||l.20minutes.fr^
 ||l.marmiton.org^
 ||logging.googleapis.com^
@@ -62,12 +71,17 @@
 ||ngfts.lge.com^
 ||northeasternobstinatedevelop.com^
 ||npaw1.rtl.fr^
+||o0.ingest.sentry.io^
 ||onetrack.carrefour.fr^
+||oraldatefromindicate.com^
 ||pangleglobal.com^
 ||plus.l.google.com^
+||posthog.com^
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net^
+||qevents.quora.com^
 ||redirector.googlevideo.com^
 ||relaytrie2025.com^
+||rudderstack.com^
 ||s.pemsrv.com^
 ||s.youtube.com^
 ||saleclosersemail.com^
@@ -75,18 +89,25 @@
 ||scdns.link^
 ||settings-win.data.microsoft.com^
 ||shareasale-analytics.com^
+||snowplowanalytics.com^
 ||sntf.femmeactuelle.fr^
 ||sntf.programme-tv.net^
 ||ssl.p.jwpcdn.com^
 ||starsallowyear.com^
+||stats.it-connect.fr^
 ||stats.sirdata.eu^
 ||stw.dl-protect.link^
 ||t.news.mediacloseremail.com^
+||t2.news.intersport.fr^
 ||thetradedesk.com^
 ||trace.googleapis.com^
 ||track-eu1.hubspot.com^
+||tracker.iperson.xyz^
+||tracker.snowplowanalytics.com^
 ||tracking-api.production.g2.com^
+||tracking.cdn.vpsvc.com^
 ||tracking.groupe-ldlc.com^
+||tracking.ibm.uber.com^
 ||tracking.lafourchette.com^
 ||tracking.watch4.com^
 ||unarmedlickpattern.com^
@@ -98,11 +119,9 @@
 ||welcomingwaterfall.com^
 ||widget.intercom.io^
 ||wst.lefigaro.fr^
+||www.rudderstack.com^
 ||www.xivhuwmzobzo.com^
 ||xh.yallowafridi.com^
 ||xyzbmojn.net^
-||youtubei.googleapis.com^
 ||zeestairaicoque.com^
 ||zenaps.com^
-
-
