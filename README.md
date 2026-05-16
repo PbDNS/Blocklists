@@ -15,6 +15,10 @@ Adapté à une utilisation francophone et internationale
 
 <!--IP_STATS_START-->
 
+| **entrées uniques avant traitement** | **entrées uniques sans redondance** |
+|:------------------------------------:|:-----------------------------------:|
+| 127361 | **127361** |
+
 <!--IP_STATS_END-->
 ---
 
