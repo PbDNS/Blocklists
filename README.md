@@ -17,7 +17,7 @@ Adapté à une utilisation francophone et internationale
 
 | **entrées uniques avant traitement** | **entrées uniques sans redondance** |
 |:------------------------------------:|:-----------------------------------:|
-| 127361 | **127361** |
+| 131745 | **124127** |
 
 <!--IP_STATS_END-->
 ---
