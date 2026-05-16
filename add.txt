@@ -2,14 +2,8 @@
 
 ||2giga.link^
 ||admob.googleapis.com^
-||ads.deezer.com^
 ||ads.huawei.com^
-||ads.soundcloud.com^
-||adsserver.megaphone.fm^
-||amazonaax.com^
-||amazonclix.com^
 ||analytics.ameli.fr^
-||analytics.oneplus.cn^
 ||api-wrapper-tracking.imaginereplay.com^
 ||api.honeybadger.io^
 ||api.impact.com^
@@ -32,8 +26,6 @@
 ||dai.google.com^
 ||dgw.c10r.facebook.com^
 ||diagonaladdresslead.com^
-||dramiyos-cdn.com^
-||dunya.fraarhun.com^
 ||emailtracking-us3.email-messaging.com^
 ||entitlements-cf.jwplayer.com^
 ||errorreporting.googleapis.com^
@@ -45,7 +37,6 @@
 ||greatis.com^
 ||hawk-tracker.360yield.com^
 ||heavy-handeddemagnetisepicture.com^
-||hotjar-analytics.com^
 ||icu.newsroom.bi^
 ||impact.com^
 ||ipapi.co^
@@ -57,7 +48,6 @@
 ||l.marmiton.org^
 ||logging.googleapis.com^
 ||logs1412.xiti.com^
-||mediacloseremail.com^
 ||ngfts.lge.com^
 ||northeasternobstinatedevelop.com^
 ||npaw1.rtl.fr^
@@ -74,19 +64,13 @@
 ||s.pemsrv.com^
 ||s.youtube.com^
 ||saleclosersemail.com^
-||scdns.link^
 ||settings-win.data.microsoft.com^
 ||snowplowanalytics.com^
-||sntf.femmeactuelle.fr^
 ||sntf.programme-tv.net^
-||ssl.p.jwpcdn.com^
 ||stats.it-connect.fr^
-||t.news.mediacloseremail.com^
-||t2.news.intersport.fr^
 ||thetradedesk.com^
 ||trace.googleapis.com^
 ||track-eu1.hubspot.com^
-||tracker.snowplowanalytics.com^
 ||tracking-api.production.g2.com^
 ||tracking.cdn.vpsvc.com^
 ||tracking.groupe-ldlc.com^
@@ -94,7 +78,6 @@
 ||tracking.watch4.com^
 ||unarmedlickpattern.com^
 ||unmalleableredistributeone.com^
-||vid.vidyard.com^
 ||web-tracking.splio.com^
 ||widget.intercom.io^
 ||wst.lefigaro.fr^
