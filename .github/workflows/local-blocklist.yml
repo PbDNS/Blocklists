@@ -1,0 +1,54 @@
+name: génération de local-blocklist.txt
+
+on:
+  schedule:
+    - cron: '0 0,8,16 * * *' # exécution à 00h, 08h, 16h UTC
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : cloner le dépôt
+      - name: Cloner le dépôt
+        uses: actions/checkout@v3
+
+      # Étape 2 : installer Python
+      - name: Installer Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # Étape 3 : configurer le fuseau horaire et la locale
+      - name: configurer fuseau horaire Europe/Paris et locale fr_FR.UTF-8
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y locales tzdata
+          sudo timedatectl set-timezone Europe/Paris
+          sudo locale-gen fr_FR.UTF-8
+          sudo update-locale LANG=fr_FR.UTF-8
+        env:
+          DEBIAN_FRONTEND: noninteractive
+
+      # Étape 4 : définir les variables d'environnement pour Python
+      - name: Définir LANG et LC_ALL pour l'environnement
+        run: |
+          echo "LANG=fr_FR.UTF-8" >> $GITHUB_ENV
+          echo "LC_ALL=fr_FR.UTF-8" >> $GITHUB_ENV
+
+      # Étape 5 : exécuter le script Python
+      - name: Exécuter local-blocklist.py
+        run: python local-blocklist.py
+        env:
+          LANG: fr_FR.UTF-8
+          LC_ALL: fr_FR.UTF-8
+
+      # Étape 6 : commit et push des fichiers modifiés
+      - name: commit et push de local-blocklist.txt et README.md
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add local-blocklist.txt README.md
+          git commit -m "🤖 mise à jour automatique locale - $(date '+%d/%m/%Y %H:%M')" || echo "aucun changement à committer"
+          git push
