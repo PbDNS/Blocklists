@@ -20,6 +20,11 @@ Adapté à une utilisation francophone et internationale
 | 131745 | **124127** |
 
 <!--IP_STATS_END-->
+
+<!--LOCAL_STATS_START-->
+
+<!--LOCAL_STATS_END-->
+
 ---
 
 ### Objectifs
