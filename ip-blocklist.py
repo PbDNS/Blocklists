@@ -10,13 +10,21 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 ########### listes IP incluses ###########
 # HaGeZi's TIF IP Blocklist
 # Data-Shield IPv4 Blocklist
-# FireHOL Level 1 Netset
+# FireHOL Level 1 Netset (via GitHub raw)
 
 ip_list_urls = [
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/ips/tif.txt",
     "https://raw.githubusercontent.com/duggytuxy/Data-Shield_IPv4_Blocklist/refs/heads/main/prod_data-shield_ipv4_blocklist.txt",
-    "https://iplists.firehol.org/files/firehol_level1.netset",
+    "https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/firehol_level1.netset",
 ]
+
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (X11; Linux x86_64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    )
+}
 
 
 def parse_entry(token):
@@ -25,7 +33,6 @@ def parse_entry(token):
     if not token:
         return None
     try:
-        # Plage CIDR
         if "/" in token:
             return ipaddress.ip_network(token, strict=False)
         else:
@@ -36,12 +43,12 @@ def parse_entry(token):
 
 def download_and_extract(url):
     try:
-        with urllib.request.urlopen(url, timeout=30) as response:
+        req = urllib.request.Request(url, headers=HEADERS)
+        with urllib.request.urlopen(req, timeout=30) as response:
             content = response.read().decode("utf-8", errors="ignore")
         entries = set()
         for line in content.splitlines():
             line = line.strip()
-            # Ignorer commentaires et lignes vides
             if not line or line.startswith("#") or line.startswith(";") or line.startswith("!"):
                 continue
             obj = parse_entry(line)
@@ -63,28 +70,23 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
 total_unique_before = len(all_entries)
 
 # ── Séparation IPs simples / plages CIDR ─────────────────────────────────────
-networks = sorted(
-    [e for e in all_entries if isinstance(e, ipaddress.IPv4Network)],
-    key=lambda n: (n.network_address, n.prefixlen),
-)
+networks = [e for e in all_entries if isinstance(e, ipaddress.IPv4Network)]
 single_ips = [e for e in all_entries if isinstance(e, ipaddress.IPv4Address)]
 
-# ── Dédoublonnage : suppression des IPs/plages couvertes par une plage plus large
-#    1. Fusionner/compacter les plages CIDR entre elles
+# ── Dédoublonnage ─────────────────────────────────────────────────────────────
+# 1. Fusionner/compacter les plages CIDR entre elles
 collapsed = list(ipaddress.collapse_addresses(networks))
 
-#    2. Construire un index des plages finales pour test d'appartenance rapide
+# 2. Supprimer les IPs simples déjà couvertes par une plage
 def ip_in_any_network(ip, nets):
-    """Teste si une IPv4Address est couverte par au moins un des réseaux."""
     for net in nets:
         if ip in net:
             return True
     return False
 
-# Filtrer les IPs simples redondantes avec les plages
 final_ips = [ip for ip in single_ips if not ip_in_any_network(ip, collapsed)]
 
-# Trier le tout
+# Tri numérique
 final_networks = sorted(collapsed)
 final_ips_sorted = sorted(final_ips)
 
