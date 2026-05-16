@@ -13,6 +13,9 @@ Adapté à une utilisation francophone et internationale
 
 <!-- STATISTICS_TABLE_END -->
 
+<!--IP_STATS_START-->
+
+<!--IP_STATS_END-->
 ---
 
 ### Objectifs
