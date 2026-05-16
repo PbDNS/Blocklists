@@ -1,4 +1,4 @@
-! Filtres additionnels, inclus à blockist.txt
+! Filtres additionnels, inclus à blocklist.txt
 
 ||2giga.link^
 ||admob.googleapis.com^
