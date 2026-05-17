@@ -4,6 +4,12 @@
 |:------------------------------------:|:------------------------------------:|
 | 607130 | **523283** |
 
+
+
+| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
+|:------------------------------------:|:------------------------------------:|
+| 607130 | **523283** |
+
 # 🛡️ Liste de blocage ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
