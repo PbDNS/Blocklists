@@ -7,6 +7,10 @@ Adapté à une utilisation francophone et internationale
 
 <!-- STATS_START -->
 
+| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
+|:------------------------------------:|:------------------------------------:|
+| 607137 | **523290** |
+
 <!-- STATS_END -->
 
 ---
