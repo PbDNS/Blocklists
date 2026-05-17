@@ -228,15 +228,27 @@ def write_blocklist(
 
 
 def update_readme(stats: dict[str, int], readme_path: str = "README.md") -> None:
-    """Met à jour le tableau de statistiques dans le README entre deux balises HTML."""
+    """Met à jour le bloc de statistiques dans le README entre deux balises HTML."""
     start_tag = "<!-- STATS_START -->"
     end_tag = "<!-- STATS_END -->"
 
+    count = stats["after"]
+    count_formatted = f"{count:,}".replace(",", "%2C")
+    source_count = len(BLOCKLIST_URLS)
+
     new_table = (
         "\n"
-        "| **filtres uniques sans redondance** |\n"
-        "|:------------------------------------:|\n"
-        f"| **{stats['after']}** |\n"
+        '<div align="center">\n'
+        "\n"
+        "## 🛡️ PbDNS Blocklist\n"
+        "\n"
+        "**Agrégation quotidienne intelligente de listes de blocage DNS**\n"
+        "\n"
+        f"![filtres](https://img.shields.io/badge/filtres%20uniques-{count_formatted}-brightgreen?style=for-the-badge)\n"
+        f"![listes](https://img.shields.io/badge/sources-{source_count}%20listes-blue?style=for-the-badge)\n"
+        "![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-orange?style=for-the-badge)\n"
+        "\n"
+        "</div>\n"
     )
 
     try:
