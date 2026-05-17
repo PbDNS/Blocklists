@@ -8,9 +8,7 @@ Agrégation quotidienne de listes de blocage réputées avec suppression des red
 Adapté à une utilisation francophone et internationale
 
 <!-- STATS_START -->
-| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
-|:------------------------------------:|:------------------------------------:|
-| 604297 | **520991** |
+
 <!-- STATS_END -->
 
 ---
