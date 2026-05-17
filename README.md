@@ -1,15 +1,3 @@
-
-
-| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
-|:------------------------------------:|:------------------------------------:|
-| 607137 | **523290** |
-
-
-
-| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
-|:------------------------------------:|:------------------------------------:|
-| 607137 | **523290** |
-
 # 🛡️ Liste de blocage ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
@@ -17,9 +5,9 @@
 Agrégation quotidienne de listes de blocage réputées avec suppression des redondances et des entrées invalides pour un usage DNS ou adblock au niveau réseau.
 Adapté à une utilisation francophone et internationale
 
-<!-- STATISTICS_TABLE_START -->
+<!-- STATS_START -->
 
-<!-- STATISTICS_TABLE_END -->
+<!-- STATS_END -->
 
 ---
 
