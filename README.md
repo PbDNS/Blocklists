@@ -1,4 +1,3 @@
-![Mis à jour](https://img.shields.io/badge/mis%20à%20jour-quotidiennement-blue)
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
 ![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-teal)
 
@@ -44,16 +43,16 @@ Adapté à une utilisation francophone et internationale
 ### Listes incluses
 
 <details>
-<summary> 📋 Voir les listes sources (28)</summary>
+<summary> 📋 Voir les listes sources </summary>
 
+- AWAvenue Ads Rule
 - AdGuard DNS filter
 - AdGuard French adservers
-- AWAvenue Ads Rule
-- Dandelion Sprout's Anti Malware List
-- Dandelion Sprout's Anti Push Notifications
+- AdGuard French adservers (first-party)
 - Dan Pollock's List
-- d3Host
-- Easylist FR
+- Dandelion Sprout's Anti Push Notifications
+- Dandelion Sprout's Anti-Malware List
+- EasyList FR
 - HaGeZi's Amazon Tracker DNS Blocklist
 - HaGeZi's Apple Tracker DNS Blocklist
 - HaGeZi's Badware Hoster Blocklist
@@ -65,14 +64,17 @@ Adapté à une utilisation francophone et internationale
 - HaGeZi's Windows/Office Tracker DNS Blocklist
 - Malicious URL Blocklist (URLHaus)
 - OISD Small
+- PbDNS Additional Rules
 - Peter Lowe's Blocklist
 - Phishing Army
-- Phishing URL Blocklist (PhishTank and OpenPhish)
+- Phishing URL Blocklist (PhishTank/OpenPhish)
 - Red Flag Domains
+- Red Flag Domains (FR)
 - Scam Blocklist by DurableNapkin
 - ShadowWhisperer's Malware List
 - Stalkerware Indicators List
 - Steven Black's List
 - The Big List of Hacked Malware Web Sites
+- d3Host
 
 </details>
