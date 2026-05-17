@@ -36,7 +36,7 @@ Adapté à une utilisation francophone et internationale
 
 
 <details>
-<summary>📋 ### Listes incluses Voir toutes les listes sources (28)</summary>
+<summary> ### 📋  Listes incluses Voir toutes les listes sources (28)</summary>
 
 - AdGuard DNS filter
 - AdGuard French adservers
