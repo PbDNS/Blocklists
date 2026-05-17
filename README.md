@@ -1,5 +1,3 @@
-[![Python 3.14.5](https://img.shields.io/badge/python-3.14.5-blue.svg)](https://www.python.org/downloads/release/python-3145/)
-![Filtres](https://img.shields.io/badge/filtres-520993-brightgreen?logo=shield&logoColor=white)
 ![Mis à jour](https://img.shields.io/badge/mis%20à%20jour-quotidiennement-blue)
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
 ![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-teal)
