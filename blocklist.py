@@ -175,8 +175,8 @@ def update_readme(stats):
 | {stats['before']} | **{stats['after']}** |
 """
 
-    start_tag = ""
-    end_tag = ""
+    start_tag = "<!-- STATS_START -->"
+    end_tag = "<!-- STATS_END -->"
 
     start_position = content.find(start_tag)
     end_position = content.find(end_tag)
