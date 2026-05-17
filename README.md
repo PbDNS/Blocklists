@@ -1,15 +1,3 @@
-
-
-| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
-|:------------------------------------:|:------------------------------------:|
-| 607130 | **523283** |
-
-
-
-| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
-|:------------------------------------:|:------------------------------------:|
-| 607130 | **523283** |
-
 # 🛡️ Liste de blocage ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
@@ -24,22 +12,6 @@ Adapté à une utilisation francophone et internationale
 | 606996                    | **523101**                 |
 
 <!-- STATISTICS_TABLE_END -->
-
-<!--IP_STATS_START-->
-
-| **entrées uniques avant traitement** | **entrées uniques sans redondance** |
-|:------------------------------------:|:-----------------------------------:|
-| 129455 | **121865** |
-
-<!--IP_STATS_END-->
-
-<!--LOCAL_STATS_START-->
-
-| **filtres uniques** |
-|:-------------------:|
-| **40673** |
-
-<!--LOCAL_STATS_END-->
 
 ---
 
