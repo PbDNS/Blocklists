@@ -10,9 +10,17 @@ Agrégation quotidienne de listes de blocage réputées avec suppression des red
 Adapté à une utilisation francophone et internationale
 
 <!-- STATS_START -->
-| **filtres uniques sans redondance** |
-|:------------------------------------:|
-| **520993** |
+<div align="center">
+
+## 🛡️ PbDNS Blocklist
+
+**Agrégation quotidienne intelligente de listes de blocage DNS**
+
+![filtres](https://img.shields.io/badge/filtres%20uniques-519%2C562-brightgreen?style=for-the-badge)
+![listes](https://img.shields.io/badge/sources-31%20listes-blue?style=for-the-badge)
+![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-orange?style=for-the-badge)
+
+</div>
 <!-- STATS_END -->
 
 ---
