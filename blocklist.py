@@ -22,30 +22,32 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # Constantes
 # ---------------------------------------------------------------------------
 
-########### blocklists incluses ###########
+########### Listes incluses ###########
 # AWAvenue Ads Rule
 # AdGuard DNS filter
 # AdGuard French adservers
+# AdGuard French adservers (first-party)
 # Dan Pollock's List
-# Dandelion Sprout's Anti Malware List
 # Dandelion Sprout's Anti Push Notifications
-# Easylist FR
+# Dandelion Sprout's Anti#Malware List
+# EasyList FR
 # HaGeZi's Amazon Tracker DNS Blocklist
 # HaGeZi's Apple Tracker DNS Blocklist
 # HaGeZi's Badware Hoster Blocklist
 # HaGeZi's DynDNS Blocklist
 # HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
 # HaGeZi's Normal DNS Blocklist
-# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's Pop#Up Ads DNS Blocklist
 # HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
 # HaGeZi's Windows/Office Tracker DNS Blocklist
 # Malicious URL Blocklist (URLHaus)
 # OISD Small
+# PbDNS Additional Rules
 # Peter Lowe's Blocklist
 # Phishing Army
-# Phishing URL Blocklist (PhishTank and OpenPhish)
-# Red Flags Domains
+# Phishing URL Blocklist (PhishTank/OpenPhish)
+# Red Flag Domains
+# Red Flag Domains (FR)
 # Scam Blocklist by DurableNapkin
 # ShadowWhisperer's Malware List
 # Stalkerware Indicators List
