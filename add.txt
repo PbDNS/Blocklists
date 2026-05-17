@@ -18,16 +18,12 @@
 ||cdn.raygun.io^
 ||cdn.rollbar.com^
 ||check.analytics.rlcdn.com^
-||click.mailchimp.com^
-||click.revolut.com^
-||clicks.malwarebytes.com^
 ||clientstream.launchdarkly.com^
 ||customer.io^
 ||dai.google.com^
 ||dgw.c10r.facebook.com^
 ||diagonaladdresslead.com^
 ||emailtracking-us3.email-messaging.com^
-||entitlements-cf.jwplayer.com^
 ||errorreporting.googleapis.com^
 ||event.trk-maiorum.com^
 ||everlusting-games.com^
@@ -41,8 +37,6 @@
 ||impact.com^
 ||ipapi.co^
 ||ironSource.mobi^
-||js.sentry-cdn.com^
-||jwplayer-dualstack.map.fastly.net^
 ||klaviyo.com^
 ||l.20minutes.fr^
 ||l.marmiton.org^
@@ -51,7 +45,6 @@
 ||ngfts.lge.com^
 ||northeasternobstinatedevelop.com^
 ||npaw1.rtl.fr^
-||o0.ingest.sentry.io^
 ||onetrack.carrefour.fr^
 ||oraldatefromindicate.com^
 ||plus.l.google.com^
