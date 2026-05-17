@@ -4,7 +4,6 @@ from datetime import datetime
 import locale
 import re
 import ipaddress
-import os
 
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
