@@ -1,11 +1,26 @@
-import urllib.request
+"""
+Agrégateur de blocklists DNS au format AdBlock.
+
+Télécharge plusieurs listes de blocage, extrait les domaines valides,
+élimine les sous-domaines redondants via un trie, et génère un fichier
+de sortie unique ainsi qu'un README mis à jour.
+"""
+
+from __future__ import annotations
+
 import concurrent.futures
-from datetime import datetime
-import locale
 import re
 import ipaddress
+import locale
+import urllib.error
+import urllib.request
+from datetime import datetime
 
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
+
+# ---------------------------------------------------------------------------
+# Constantes
+# ---------------------------------------------------------------------------
 
 ########### blocklists incluses ###########
 # AWAvenue Ads Rule
@@ -38,7 +53,7 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # The Big List of Hacked Malware Web Sites
 # d3Host
 
-blocklist_urls = [
+BLOCKLIST_URLS: list[str] = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
     "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
@@ -72,63 +87,108 @@ blocklist_urls = [
     "https://dl.red.flag.domains/red.flag.domains_fr.txt",
 ]
 
+# Regex pré-compilées au niveau module pour éviter la recompilation à chaque appel
+_RE_WHITESPACE = re.compile(r"\s+")
+_RE_DOMAIN_ONLY = re.compile(r"^[a-zA-Z0-9.-]+$")
+_RE_VALID_DOMAIN = re.compile(
+    r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$"
+)
 
-def is_valid_domain(domain):
+_DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; blocklist-aggregator/1.0)"}
+
+# ---------------------------------------------------------------------------
+# Validation
+# ---------------------------------------------------------------------------
+
+
+def is_valid_domain(domain: str) -> bool:
+    """Retourne True si `domain` est un nom de domaine valide (ni IP ni wildcard)."""
     try:
         ipaddress.ip_address(domain)
         return False
     except ValueError:
         pass
-    return re.match(r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$", domain) is not None
+    return _RE_VALID_DOMAIN.match(domain) is not None
 
 
-def download_and_extract(url):
+# ---------------------------------------------------------------------------
+# Téléchargement & extraction
+# ---------------------------------------------------------------------------
+
+
+def download_and_extract(url: str) -> set[str]:
+    """
+    Télécharge une blocklist et extrait les domaines valides.
+
+    Supporte les formats :
+    - hosts (0.0.0.0 / 127.0.0.1 <domaine>)
+    - AdBlock (||domaine^)
+    - liste brute de domaines
+    """
     try:
-        with urllib.request.urlopen(url, timeout=30) as response:
+        req = urllib.request.Request(url, headers=_DEFAULT_HEADERS)
+        with urllib.request.urlopen(req, timeout=30) as response:
             content = response.read().decode("utf-8", errors="ignore")
-        rules = set()
-        for line in content.splitlines():
-            line = line.strip()
-            if not line or line.startswith("!") or line.startswith("#"):
-                continue
-            if line.startswith("0.0.0.0") or line.startswith("127.0.0.1"):
-                parts = re.split(r"\s+", line)
-                if len(parts) >= 2:
-                    target = parts[1].strip()
-                    if "*" in target:
-                        continue
-                    if is_valid_domain(target):
-                        rules.add(target)
-            elif line.startswith("||") and line.endswith("^"):
-                target = line[2:-1]
-                if "*" in target:
-                    continue
-                if is_valid_domain(target):
-                    rules.add(target)
-            elif re.match(r"^[a-zA-Z0-9.-]+$", line):
-                if "*" in line:
-                    continue
-                if is_valid_domain(line):
-                    rules.add(line)
-        return rules
-    except Exception as e:
-        print(f"Erreur lors du téléchargement de {url} : {e}")
+    except urllib.error.HTTPError as exc:
+        print(f"Erreur HTTP {exc.code} lors du téléchargement de {url}")
+        return set()
+    except urllib.error.URLError as exc:
+        print(f"Erreur réseau lors du téléchargement de {url} : {exc.reason}")
+        return set()
+    except TimeoutError:
+        print(f"Délai dépassé pour {url}")
         return set()
 
+    rules: set[str] = set()
 
-all_entries = set()
-with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-    results = executor.map(download_and_extract, blocklist_urls)
-    for entry_set in results:
-        all_entries.update(entry_set)
+    for raw_line in content.splitlines():
+        line = raw_line.strip()
+
+        if not line or line.startswith("!") or line.startswith("#"):
+            continue
+
+        if line.startswith("0.0.0.0") or line.startswith("127.0.0.1"):
+            # Format hosts
+            host_parts = _RE_WHITESPACE.split(line)
+            if len(host_parts) >= 2:
+                target = host_parts[1].strip()
+                if "*" not in target and is_valid_domain(target):
+                    rules.add(target)
+
+        elif line.startswith("||") and line.endswith("^"):
+            # Format AdBlock
+            target = line[2:-1]
+            if "*" not in target and is_valid_domain(target):
+                rules.add(target)
+
+        elif _RE_DOMAIN_ONLY.match(line):
+            # Domaine brut
+            if "*" not in line and is_valid_domain(line):
+                rules.add(line)
+
+    return rules
+
+
+# ---------------------------------------------------------------------------
+# Trie de domaines (déduplication des sous-domaines)
+# ---------------------------------------------------------------------------
 
 
 class DomainTrieNode:
-    def __init__(self):
-        self.children = {}
-        self.is_terminal = False
+    """Nœud d'un trie de domaines inversés pour éliminer les redondances."""
 
-    def insert(self, parts):
+    __slots__ = ("children", "is_terminal")
+
+    def __init__(self) -> None:
+        self.children: dict[str, "DomainTrieNode"] = {}
+        self.is_terminal: bool = False
+
+    def insert(self, parts: list[str]) -> bool:
+        """
+        Insère un domaine (sous forme de labels inversés) dans le trie.
+
+        Retourne False si un domaine parent est déjà présent (redondance).
+        """
         node = self
         for part in parts:
             if node.is_terminal:
@@ -138,65 +198,101 @@ class DomainTrieNode:
         return True
 
 
-def domain_to_parts(domain):
+def domain_to_parts(domain: str) -> list[str]:
+    """Convertit un domaine en liste de labels inversés (ex: 'a.b.com' → ['com','b','a'])."""
     return domain.strip().split(".")[::-1]
 
 
-trie_root = DomainTrieNode()
-final_entries = set()
-
-for entry in sorted(all_entries, key=lambda e: e.count(".")):
-    if is_valid_domain(entry):
-        if trie_root.insert(domain_to_parts(entry)):
-            final_entries.add(entry)
-
-total_unique_before = len(all_entries)
-total_unique_after = len(final_entries)
-
-timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
-
-with open("blocklist.txt", "w", encoding="utf-8") as f:
-    f.write(f"! Agrégation - {timestamp}\n")
-    f.write(f"! {total_unique_after:06} entrées\n\n")
-    for entry in sorted(final_entries):
-        f.write(f"||{entry.lower()}^\n")
-
-print(f"✅ fichier blocklist.txt généré: {total_unique_after} entrées")
+# ---------------------------------------------------------------------------
+# Écriture de la blocklist
+# ---------------------------------------------------------------------------
 
 
-def update_readme(stats):
-    readme_path = "README.md"
-    with open(readme_path, "r") as file:
-        content = file.read()
+def write_blocklist(
+    entries: set[str],
+    output_path: str = "blocklist.txt",
+    timestamp: str = "",
+) -> None:
+    """Écrit les entrées triées dans un fichier au format AdBlock."""
+    count = len(entries)
+    with open(output_path, "w", encoding="utf-8") as fh:
+        fh.write(f"! Agrégation - {timestamp}\n")
+        fh.write(f"! {count:06} entrées\n\n")
+        for entry in sorted(entries):
+            fh.write(f"||{entry.lower()}^\n")
 
-    new_table_content = f"""
-| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
-|:------------------------------------:|:------------------------------------:|
-| {stats['before']} | **{stats['after']}** |
-"""
 
+# ---------------------------------------------------------------------------
+# Mise à jour du README
+# ---------------------------------------------------------------------------
+
+
+def update_readme(stats: dict[str, int], readme_path: str = "README.md") -> None:
+    """Met à jour le tableau de statistiques dans le README entre deux balises HTML."""
     start_tag = "<!-- STATS_START -->"
     end_tag = "<!-- STATS_END -->"
 
-    start_position = content.find(start_tag)
-    end_position = content.find(end_tag)
+    new_table = (
+        "\n"
+        "| **filtres uniques avant traitement** | **filtres uniques sans redondance** |\n"
+        "|:------------------------------------:|:------------------------------------:|\n"
+        f"| {stats['before']} | **{stats['after']}** |\n"
+    )
 
-    if start_position != -1 and end_position != -1:
-        content = content[:start_position + len(start_tag)] + "\n" + new_table_content + "\n" + content[end_position:]
+    try:
+        with open(readme_path, "r", encoding="utf-8") as fh:
+            content = fh.read()
+    except FileNotFoundError:
+        print(f"README introuvable : {readme_path}")
+        return
+
+    start_pos = content.find(start_tag)
+    end_pos = content.find(end_tag)
+
+    if start_pos != -1 and end_pos != -1:
+        content = content[: start_pos + len(start_tag)] + new_table + content[end_pos:]
     else:
-        if start_position == -1:
-            content += f"\n{start_tag}\n"
-        if end_position == -1:
-            content += f"\n{end_tag}\n"
-        content = content.replace(end_tag, f"\n{new_table_content}\n{end_tag}")
+        # Balises absentes : on les ajoute en fin de fichier
+        content += f"\n{start_tag}{new_table}{end_tag}\n"
 
-    with open(readme_path, "w") as file:
-        file.write(content)
+    with open(readme_path, "w", encoding="utf-8") as fh:
+        fh.write(content)
 
 
-stats = {
-    "before": total_unique_before,
-    "after": total_unique_after,
-}
+# ---------------------------------------------------------------------------
+# Point d'entrée
+# ---------------------------------------------------------------------------
 
-update_readme(stats)
+
+def main() -> None:
+    """Orchestre le téléchargement, la déduplication et l'écriture de la blocklist."""
+    # 1. Téléchargement parallèle
+    all_entries: set[str] = set()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        for entry_set in executor.map(download_and_extract, BLOCKLIST_URLS):
+            all_entries.update(entry_set)
+
+    # 2. Déduplication via trie (suppression des sous-domaines redondants)
+    trie_root = DomainTrieNode()
+    final_entries: set[str] = set()
+
+    for entry in sorted(all_entries, key=lambda e: e.count(".")):
+        if is_valid_domain(entry) and trie_root.insert(domain_to_parts(entry)):
+            final_entries.add(entry)
+
+    # 3. Statistiques
+    total_before = len(all_entries)
+    total_after = len(final_entries)
+    timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
+
+    # 4. Écriture de la blocklist
+    write_blocklist(final_entries, timestamp=timestamp)
+    print(f"✅ blocklist.txt généré : {total_after} entrées")
+
+    # 5. Mise à jour du README
+    update_readme({"before": total_before, "after": total_after})
+
+
+if __name__ == "__main__":
+    main()
+
