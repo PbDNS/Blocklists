@@ -60,6 +60,7 @@
 ||qevents.quora.com^
 ||redirector.googlevideo.com^
 ||relaytrie2025.com^
+||res.mail.laposte.info^
 ||rudderstack.com^
 ||s.pemsrv.com^
 ||s.youtube.com^
@@ -68,6 +69,7 @@
 ||snowplowanalytics.com^
 ||sntf.programme-tv.net^
 ||stats.it-connect.fr^
+||t.lidentitenumerique.laposte.info^
 ||thetradedesk.com^
 ||trace.googleapis.com^
 ||track-eu1.hubspot.com^
