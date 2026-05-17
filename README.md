@@ -1,3 +1,9 @@
+
+
+| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
+|:------------------------------------:|:------------------------------------:|
+| 607137 | **523290** |
+
 # 🛡️ Liste de blocage ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
