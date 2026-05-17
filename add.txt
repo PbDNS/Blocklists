@@ -60,7 +60,6 @@
 ||qevents.quora.com^
 ||redirector.googlevideo.com^
 ||relaytrie2025.com^
-||res.mail.laposte.info^
 ||rudderstack.com^
 ||s.pemsrv.com^
 ||s.youtube.com^
