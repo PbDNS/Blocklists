@@ -11,7 +11,7 @@ jobs:
       
     steps:
       - name: Cloner le dépôt
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Installer Python
         uses: actions/setup-python@v6
