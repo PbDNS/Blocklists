@@ -34,6 +34,10 @@ Adapté à une utilisation francophone et internationale
 ---
 
 ### Listes incluses
+
+<details>
+<summary>📋 Voir toutes les listes sources (28)</summary>
+
 - AdGuard DNS filter
 - AdGuard French adservers
 - AWAvenue Ads Rule
@@ -62,3 +66,5 @@ Adapté à une utilisation francophone et internationale
 - Stalkerware Indicators List
 - Steven Black's List
 - The Big List of Hacked Malware Web Sites
+
+</details>
