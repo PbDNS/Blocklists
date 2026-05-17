@@ -2,8 +2,6 @@
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
 ![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-teal)
 
-![GitHub Actions](https://github.com/PbDNS/Blocklists/actions/workflows/update.yml/badge.svg)
-
 # 🛡️ Liste de blocage ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
