@@ -17,8 +17,6 @@ Agrégation quotidienne de listes de blocage réputées avec suppression des red
 </div>
 <!-- STATS_END -->
 
----
-
 ### Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
@@ -26,15 +24,10 @@ Agrégation quotidienne de listes de blocage réputées avec suppression des red
 - améliorer la sécurité
 - réduire la consommation de données
 
----
-
 ### Format et utilisation
 - format Adblock Plus
 - sous-domaines redondants supprimés
 - compatible avec Adguard Home, Pihole...
-
----
-
 ### Listes incluses
 
 <details>
