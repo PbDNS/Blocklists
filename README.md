@@ -1,12 +1,7 @@
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
 ![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-teal)
 
-# 🛡️ Liste de blocage ###
-
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
-
-Agrégation quotidienne de listes de blocage réputées avec suppression des redondances et des entrées invalides pour un usage DNS ou adblock au niveau réseau.
-Adapté à une utilisation francophone et internationale
 
 <!-- STATS_START -->
 <div align="center">
