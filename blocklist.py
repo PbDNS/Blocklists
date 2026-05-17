@@ -244,7 +244,7 @@ def update_readme(stats: dict[str, int], readme_path: str = "README.md") -> None
         "\n"
         "## 🛡️ PbDNS Blocklist\n"
         "\n"
-        "**Agrégation quotidienne intelligente de listes de blocage DNS**\n"
+        "**Agrégation quotidienne  de listes de blocage DNS**\n"
         "\n"
         f"![filtres](https://img.shields.io/badge/filtres%20uniques-{count_formatted}-brightgreen?style=for-the-badge)\n"
         f"![listes](https://img.shields.io/badge/sources-{source_count}%20listes-blue?style=for-the-badge)\n"
