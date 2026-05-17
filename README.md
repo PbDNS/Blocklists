@@ -17,20 +17,6 @@ Adapté à une utilisation francophone et internationale
 
 ---
 
-<div align="center">
-
-## 🛡️ PbDNS Blocklist
-
-**Agrégation quotidienne intelligente de listes de blocage DNS**
-
-![filtres](https://img.shields.io/badge/filtres%20uniques-520%2C993-brightgreen?style=for-the-badge)
-![listes](https://img.shields.io/badge/sources-28%20listes-blue?style=for-the-badge)
-![fréquence](https://img.shields.io/badge/mise%20à%20jour-quotidienne-orange?style=for-the-badge)
-
-</div>
-
----
-
 ### Objectifs
 - bloquer les publicités
 - limiter la collecte de données personnelles (trackers, fingerprinting)
