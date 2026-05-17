@@ -1,5 +1,6 @@
-# 🛡️ Liste de blocage ###
 [![Python 3.14.5](https://img.shields.io/badge/python-3.14.5-blue.svg)](https://www.python.org/downloads/release/python-3145/)
+
+# 🛡️ Liste de blocage ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
