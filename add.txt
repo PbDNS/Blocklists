@@ -1,6 +1,7 @@
 ! Filtres additionnels, inclus à blocklist.txt
 
 ||2giga.link^
+||aax-eu-zaz.amazon.fr^
 ||admob.googleapis.com^
 ||ads.huawei.com^
 ||analytics.ameli.fr^
@@ -68,6 +69,7 @@
 ||tracking-api.production.g2.com^
 ||tracking.cdn.vpsvc.com^
 ||tracking.groupe-ldlc.com^
+||tracking.ibm.uber.com^
 ||tracking.lafourchette.com^
 ||tracking.watch4.com^
 ||unarmedlickpattern.com^
