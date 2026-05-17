@@ -1,15 +1,3 @@
-
-
-| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
-|:------------------------------------:|:------------------------------------:|
-| 607133 | **523286** |
-
-
-
-| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
-|:------------------------------------:|:------------------------------------:|
-| 607134 | **523287** |
-
 # 🛡️ Liste de blocage ###
 
 🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
@@ -18,10 +6,6 @@ Agrégation quotidienne de listes de blocage réputées avec suppression des red
 Adapté à une utilisation francophone et internationale
 
 <!-- STATISTICS_TABLE_START -->
-
-| **filtres uniques avant traitement** | **filtres uniques sans redondance** |
-|:------------------------------------:|:------------------------------------:|
-| 606996                    | **523101**                 |
 
 <!-- STATISTICS_TABLE_END -->
 
