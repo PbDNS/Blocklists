@@ -234,9 +234,9 @@ def update_readme(stats: dict[str, int], readme_path: str = "README.md") -> None
 
     new_table = (
         "\n"
-        "| **filtres uniques avant traitement** | **filtres uniques sans redondance** |\n"
-        "|:------------------------------------:|:------------------------------------:|\n"
-        f"| {stats['before']} | **{stats['after']}** |\n"
+        "| **filtres uniques sans redondance** |\n"
+        "|:------------------------------------:|\n"
+        f"| **{stats['after']}** |\n"
     )
 
     try:
@@ -281,16 +281,15 @@ def main() -> None:
             final_entries.add(entry)
 
     # 3. Statistiques
-    total_before = len(all_entries)
-    total_after = len(final_entries)
+    total = len(final_entries)
     timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
 
     # 4. Écriture de la blocklist
     write_blocklist(final_entries, timestamp=timestamp)
-    print(f"✅ blocklist.txt généré : {total_after} entrées")
+    print(f"✅ blocklist.txt généré : {total} entrées")
 
     # 5. Mise à jour du README
-    update_readme({"before": total_before, "after": total_after})
+    update_readme({"after": total})
 
 
 if __name__ == "__main__":
