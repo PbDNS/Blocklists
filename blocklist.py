@@ -8,35 +8,35 @@ import ipaddress
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
 ########### blocklists incluses ###########
-# HaGeZi's Normal DNS Blocklist
-# HaGeZi's Pop-Up Ads DNS Blocklist
-# HaGeZi's Amazon Tracker DNS Blocklist
-# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
-# HaGeZi's Badware Hoster Blocklist
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
-# HaGeZi's DynDNS Blocklist
-# HaGeZi's Windows/Office Tracker DNS Blocklist
-# ShadowWhisperer's Malware List
-# OISD Small
+# AWAvenue Ads Rule
+# AdGuard DNS filter
+# AdGuard French adservers
+# Dan Pollock's List
 # Dandelion Sprout's Anti Malware List
 # Dandelion Sprout's Anti Push Notifications
-# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-# AWAvenue Ads Rule
+# Easylist FR
+# HaGeZi's Amazon Tracker DNS Blocklist
 # HaGeZi's Apple Tracker DNS Blocklist
-# d3Host
-# AdGuard DNS filter
+# HaGeZi's Badware Hoster Blocklist
+# HaGeZi's DynDNS Blocklist
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass DNS Blocklist
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# HaGeZi's Windows/Office Tracker DNS Blocklist
+# Malicious URL Blocklist (URLHaus)
+# OISD Small
+# Peter Lowe's Blocklist
 # Phishing Army
 # Phishing URL Blocklist (PhishTank and OpenPhish)
-# Malicious URL Blocklist (URLHaus)
-# Scam Blocklist by DurableNapkin
-# AdGuard French adservers
-# Steven Black's List
-# Peter Lowe's Blocklist
-# Dan Pollock's List
-# Easylist FR
-# The Big List of Hacked Malware Web Sites
-# Stalkerware Indicators List
 # Red Flags Domains
+# Scam Blocklist by DurableNapkin
+# ShadowWhisperer's Malware List
+# Stalkerware Indicators List
+# Steven Black's List
+# The Big List of Hacked Malware Web Sites
+# d3Host
 
 blocklist_urls = [
     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
@@ -69,8 +69,9 @@ blocklist_urls = [
     "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
     "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
-    "https://dl.red.flag.domains/red.flag.domains_fr.txt"
+    "https://dl.red.flag.domains/red.flag.domains_fr.txt",
 ]
+
 
 def is_valid_domain(domain):
     try:
@@ -80,44 +81,47 @@ def is_valid_domain(domain):
         pass
     return re.match(r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$", domain) is not None
 
+
 def download_and_extract(url):
     try:
         with urllib.request.urlopen(url, timeout=30) as response:
             content = response.read().decode("utf-8", errors="ignore")
-            rules = set()
-            for line in content.splitlines():
-                line = line.strip()
-                if not line or line.startswith("!") or line.startswith("#"):
-                    continue
-                if line.startswith("0.0.0.0") or line.startswith("127.0.0.1"):
-                    parts = re.split(r"\s+", line)
-                    if len(parts) >= 2:
-                        target = parts[1].strip()
-                        if "*" in target:
-                            continue
-                        if is_valid_domain(target):
-                            rules.add(target)
-                elif line.startswith("||") and line.endswith("^"):
-                    target = line[2:-1]
+        rules = set()
+        for line in content.splitlines():
+            line = line.strip()
+            if not line or line.startswith("!") or line.startswith("#"):
+                continue
+            if line.startswith("0.0.0.0") or line.startswith("127.0.0.1"):
+                parts = re.split(r"\s+", line)
+                if len(parts) >= 2:
+                    target = parts[1].strip()
                     if "*" in target:
                         continue
                     if is_valid_domain(target):
                         rules.add(target)
-                elif re.match(r"^[a-zA-Z0-9.-]+$", line):
-                    if "*" in line:
-                        continue
-                    if is_valid_domain(line):
-                        rules.add(line)
-            return rules
+            elif line.startswith("||") and line.endswith("^"):
+                target = line[2:-1]
+                if "*" in target:
+                    continue
+                if is_valid_domain(target):
+                    rules.add(target)
+            elif re.match(r"^[a-zA-Z0-9.-]+$", line):
+                if "*" in line:
+                    continue
+                if is_valid_domain(line):
+                    rules.add(line)
+        return rules
     except Exception as e:
         print(f"Erreur lors du téléchargement de {url} : {e}")
         return set()
+
 
 all_entries = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     results = executor.map(download_and_extract, blocklist_urls)
     for entry_set in results:
         all_entries.update(entry_set)
+
 
 class DomainTrieNode:
     def __init__(self):
@@ -133,8 +137,10 @@ class DomainTrieNode:
         node.is_terminal = True
         return True
 
+
 def domain_to_parts(domain):
     return domain.strip().split(".")[::-1]
+
 
 trie_root = DomainTrieNode()
 final_entries = set()
@@ -157,19 +163,20 @@ with open("blocklist.txt", "w", encoding="utf-8") as f:
 
 print(f"✅ fichier blocklist.txt généré: {total_unique_after} entrées")
 
+
 def update_readme(stats):
-    readme_path = 'README.md'
-    with open(readme_path, 'r') as file:
+    readme_path = "README.md"
+    with open(readme_path, "r") as file:
         content = file.read()
 
     new_table_content = f"""
 | **filtres uniques avant traitement** | **filtres uniques sans redondance** |
 |:------------------------------------:|:------------------------------------:|
-| {stats['before']}                    | **{stats['after']}**                 |
+| {stats['before']} | **{stats['after']}** |
 """
 
-    start_tag = "<!-- STATISTICS_TABLE_START -->"
-    end_tag = "<!-- STATISTICS_TABLE_END -->"
+    start_tag = ""
+    end_tag = ""
 
     start_position = content.find(start_tag)
     end_position = content.find(end_tag)
@@ -183,12 +190,13 @@ def update_readme(stats):
             content += f"\n{end_tag}\n"
         content = content.replace(end_tag, f"\n{new_table_content}\n{end_tag}")
 
-    with open(readme_path, 'w') as file:
+    with open(readme_path, "w") as file:
         file.write(content)
 
+
 stats = {
-    'before': total_unique_before,
-    'after': total_unique_after
+    "before": total_unique_before,
+    "after": total_unique_after,
 }
 
 update_readme(stats)
