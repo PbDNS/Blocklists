@@ -1,12 +1,13 @@
 <div align="center">
 
-## 🛡️ PbDNS Blocklist
-
-Agrégation quotidienne de listes de blocage réputées avec suppression des redondances et des entrées invalides pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale
+# 🛡️ PbDNS Blocklist
 
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
 ![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-teal)
+
 </div>
+
+Agrégation quotidienne de listes de blocage réputées avec suppression des redondances et des entrées invalides pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale.
 
 <!-- STATS_START -->
 <div align="center">
@@ -18,23 +19,28 @@ Agrégation quotidienne de listes de blocage réputées avec suppression des red
 </div>
 <!-- STATS_END -->
 
-🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
+🔗 **Lien direct :** [blocklist.txt](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
-### Objectifs
-- bloquer les publicités
-- limiter la collecte de données personnelles (trackers, fingerprinting)
-- bloquer les logiciels malveillants, scams, phishing
-- améliorer la sécurité
-- réduire la consommation de données
+---
 
-### Format et utilisation
-- format Adblock Plus
-- sous-domaines redondants supprimés
-- compatible avec Adguard Home, Pihole...
-### Listes incluses
+## Objectifs
+
+- Bloquer les publicités
+- Limiter la collecte de données personnelles (trackers, fingerprinting)
+- Bloquer les logiciels malveillants, scams et phishing
+- Améliorer la sécurité réseau
+- Réduire la consommation de données
+
+## Format et utilisation
+
+- Format **Adblock Plus**
+- Sous-domaines redondants supprimés
+- Compatible avec **AdGuard Home**, **Pi-hole**, et tout filtrage DNS compatible Adblock
+
+## Listes incluses
 
 <details>
-<summary> 📋 Voir les listes sources </summary>
+<summary>📋 Voir les listes sources</summary>
 
 - AWAvenue Ads Rule
 - AdGuard DNS filter
