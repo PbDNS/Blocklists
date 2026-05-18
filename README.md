@@ -35,7 +35,7 @@ Agrégation quotidienne de listes de blocage réputées avec suppression des red
 
 - Format **Adblock Plus**
 - Sous-domaines redondants supprimés
-- Compatible avec **AdGuard Home**, **Pi-hole**, et tout filtrage DNS compatible Adblock
+- Compatible avec **AdGuard Home**, **Pi-hole** et tout filtrage DNS compatible Adblock
 
 ## Listes incluses
 
