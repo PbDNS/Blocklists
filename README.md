@@ -1,8 +1,6 @@
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
 ![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-teal)
 
-🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
-
 <div align="center">
 
 ## 🛡️ PbDNS Blocklist
@@ -20,6 +18,8 @@ Agrégation quotidienne de listes de blocage réputées avec suppression des red
 
 </div>
 <!-- STATS_END -->
+
+🔗 [blocklist](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
 ### Objectifs
 - bloquer les publicités
