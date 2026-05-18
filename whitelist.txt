@@ -18,10 +18,10 @@
 ! commentaires lecteurs presse-citron.net
 @@||api-2-0.spot.im^
 
-! photos lesnumeriques.com
+! vignettes lesnumeriques.com
 @@||cdn.affilizz.com^
 
-! photos darty.fr
+! vignettes darty.fr
 @@||uc-info.eu.abtasty.com^
 
 ! création compte bouygues telecom
