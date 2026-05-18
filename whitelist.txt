@@ -44,6 +44,11 @@
 ! certificats let's encrypt
 @@||e5.o.lencr.org^
 
+! trackers torrent
+@@||tracker.moxing.party^
+@@||tracker.parrotsec.org^
+@@||tracker.birkenwald.de^
+
 ! divers
 @@||brew.sh^
 @@||cdnjs.cloudflare.com^
