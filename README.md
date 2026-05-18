@@ -10,7 +10,7 @@
 
 Agrégation quotidienne de listes de blocage réputées avec suppression des redondances et des entrées invalides pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale
 
-![filtres](https://img.shields.io/badge/filtres%20uniques-519%2C509-brightgreen?style=for-the-badge)
+![filtres](https://img.shields.io/badge/filtres%20uniques-522%2C339-brightgreen?style=for-the-badge)
 ![listes](https://img.shields.io/badge/sources-31%20listes-blue?style=for-the-badge)
 ![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-orange?style=for-the-badge)
 
