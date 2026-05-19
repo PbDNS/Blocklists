@@ -89,17 +89,6 @@ PbDNS Blocklist est une liste de blocage DNS consolidée, construite automatique
 
 </details>
 
----
-
-## Format de la liste
-
-Le fichier `blocklist.txt` est au format **Adblock Plus** :
-
-```
-! Title: PbDNS Blocklist
-! Homepage: https://github.com/PbDNS/Blocklists
-! Expires: 1 day
-||ads.example.com^
 ||tracker.example.net^
 ...
 ```
