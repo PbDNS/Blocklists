@@ -89,8 +89,3 @@ PbDNS Blocklist est une liste de blocage DNS consolidée, construite automatique
 
 </details>
 
-||tracker.example.net^
-...
-```
-
-Chaque entrée bloque le domaine et **tous ses sous-domaines**, conformément au comportement DNS des résolveurs compatibles.
