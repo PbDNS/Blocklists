@@ -15,6 +15,7 @@
 ||app.storyblok.com^
 ||ateriel.net^
 ||bnc.lt^
+||cdn-analytics.alketech.eu^
 ||cdn.adgtw.orangeads.fr^
 ||cdn.raygun.io^
 ||cdn.rollbar.com^
@@ -37,7 +38,7 @@
 ||icu.newsroom.bi^
 ||impact.com^
 ||ipapi.co^
-||ironSource.mobi^
+||ironsource.mobi^
 ||klaviyo.com^
 ||l.20minutes.fr^
 ||l.marmiton.org^
@@ -48,6 +49,7 @@
 ||npaw1.rtl.fr^
 ||onetrack.carrefour.fr^
 ||oraldatefromindicate.com^
+||partitiveretinstitution.com^
 ||plus.l.google.com^
 ||posthog.com^
 ||prodlb.siteintercept.qualtrics.com.cdn.cloudflare.net^
@@ -64,6 +66,7 @@
 ||stats.it-connect.fr^
 ||t.lidentitenumerique.laposte.info^
 ||thetradedesk.com^
+||tk.bonial.fr
 ||trace.googleapis.com^
 ||track-eu1.hubspot.com^
 ||tracking-api.production.g2.com^
