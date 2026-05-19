@@ -7,8 +7,6 @@
 
 </div>
 
-Agrégation quotidienne de listes de blocage réputées avec suppression des redondances et des entrées invalides pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale.
-
 <!-- STATS_START -->
 <div align="center">
 
@@ -18,6 +16,10 @@ Agrégation quotidienne de listes de blocage réputées avec suppression des red
 
 </div>
 <!-- STATS_END -->
+
+Agrégation quotidienne de listes de blocage réputées avec suppression des redondances et des entrées invalides pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale.
+
+
 
 [![Liste brute](https://img.shields.io/badge/⬇️_Télécharger_la_liste-blocklist.txt-01696f?style=for-the-badge)](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
