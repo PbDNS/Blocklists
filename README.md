@@ -35,7 +35,7 @@ PbDNS Blocklist est une liste de blocage DNS consolidée, construite automatique
 | 🎣 **Phishing** | Hameçonnage, scams, imposteurs de marques |
 | 🔕 **Notifications** | Push notifications abusives |
 | 📱 **Stalkerware** | Logiciels de surveillance installés à l'insu |
-| 🪟 **Télémétrie** | Trackers Windows/Office, Apple, Amazon |
+| 🪟 **Télémétrie** | Trackers Windows/Office, Apple, Amazon... |
 
 ---
 
