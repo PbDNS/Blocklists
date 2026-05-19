@@ -1,5 +1,18 @@
 <div align="center">
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=28&duration=0&pause=1000&color=4F98A3&center=true&vCenter=true&width=600&lines=🛡️+PbDNS+Blocklist" />
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=28&duration=0&pause=1000&color=01696F&center=true&vCenter=true&width=600&lines=🛡️+PbDNS+Blocklist" alt="PbDNS Blocklist" />
+</picture>
+
+**Agrégation quotidienne de listes de blocage DNS — publicités, trackers, malwares, phishing**
+
+[![Liste brute](https://img.shields.io/badge/⬇️_Télécharger_la_liste-blocklist.txt-01696f?style=for-the-badge)](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
+
+</div>
+
+<div align="center">
+
 # 🛡️ PbDNS Blocklist
 
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
