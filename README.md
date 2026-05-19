@@ -17,63 +17,155 @@
 </div>
 <!-- STATS_END -->
 
-Agrégation quotidienne de listes de blocage réputées avec suppression des redondances et des entrées invalides pour un usage DNS ou adblock au niveau réseau. Adapté à une utilisation francophone et internationale.
+## Présentation
 
-
+PbDNS Blocklist est une liste de blocage DNS consolidée, construite automatiquement chaque jour à partir de **31 sources reconnues**. Le pipeline de génération fusionne ces listes, supprime les doublons, élimine les sous-domaines redondants et invalide les entrées mal formées. Conçue avec une attention particulière pour le contexte francophone.
 
 [![Liste brute](https://img.shields.io/badge/⬇️_Télécharger_la_liste-blocklist.txt-01696f?style=for-the-badge)](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
 ---
 
-## Objectifs
+## Objectifs de protection
 
-- Bloquer les publicités
-- Limiter la collecte de données personnelles (trackers, fingerprinting)
-- Bloquer les logiciels malveillants, scams et phishing
-- Améliorer la sécurité réseau
-- Réduire la consommation de données
+| Catégorie | Ce qui est bloqué |
+|---|---|
+| 🚫 **Publicités** | Serveurs de pub, régies, annonces intrusives |
+| 🕵️ **Trackers** | Fingerprinting, pistage cross-site, analytics invasifs |
+| 🦠 **Malwares** | Logiciels malveillants, badware, DynDNS suspects |
+| 🎣 **Phishing** | Hameçonnage, scams, imposteurs de marques |
+| 🔕 **Notifications** | Push notifications abusives |
+| 📱 **Stalkerware** | Logiciels de surveillance installés à l'insu |
+| 🪟 **Télémétrie** | Trackers Windows/Office, Apple, Amazon |
 
-## Format et utilisation
+---
 
-- Format **Adblock Plus**
-- Sous-domaines redondants supprimés
-- Compatible avec **AdGuard Home**, **Pi-hole** et tout filtrage DNS compatible Adblock
+## Installation
 
-## Listes incluses
+### AdGuard Home
+
+1. Aller dans **Filtres → Listes de blocage DNS**
+2. Cliquer sur **Ajouter une liste de blocage**
+3. Coller l'URL suivante :
+
+```
+https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt
+```
+
+### Pi-hole
+
+```bash
+# Ajouter dans les listes de blocage (Adlists)
+https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt
+```
+
+Puis mettre à jour les listes :
+```bash
+pihole -g
+```
+
+### Tout resolver DNS compatible Adblock Plus
+
+L'URL ci-dessus peut être utilisée dans tout logiciel supportant le format Adblock Plus (NextDNS, uBlock Origin, etc.).
+
+---
+
+## Pipeline de génération
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  31 sources (téléchargées quotidiennement via GitHub    │
+│  Actions)                                               │
+└──────────────────────┬──────────────────────────────────┘
+                       ▼
+          ┌────────────────────────┐
+          │  Fusion & déduplication │
+          │  des entrées brutes     │
+          └────────────┬───────────┘
+                       ▼
+          ┌────────────────────────┐
+          │  Suppression des        │
+          │  sous-domaines redond.  │
+          │  (ex: sub.ads.com si    │
+          │  ads.com est bloqué)    │
+          └────────────┬───────────┘
+                       ▼
+          ┌────────────────────────┐
+          │  Validation & nettoyage │
+          │  des entrées invalides  │
+          └────────────┬───────────┘
+                       ▼
+          ┌────────────────────────┐
+          │  ✅ blocklist.txt       │
+          │  Format Adblock Plus   │
+          │  ~519 000 règles       │
+          └────────────────────────┘
+```
+
+---
+
+## Sources incluses
 
 <details>
-<summary>📋 Voir les listes sources</summary>
+<summary>📋 Voir les 31 listes sources</summary>
 
-- AWAvenue Ads Rule
-- AdGuard DNS filter
-- AdGuard French adservers
-- AdGuard French adservers (first-party)
-- Dan Pollock's List
-- Dandelion Sprout's Anti Push Notifications
-- Dandelion Sprout's Anti-Malware List
-- EasyList FR
-- HaGeZi's Amazon Tracker DNS Blocklist
-- HaGeZi's Apple Tracker DNS Blocklist
-- HaGeZi's Badware Hoster Blocklist
-- HaGeZi's DynDNS Blocklist
-- HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
-- HaGeZi's Normal DNS Blocklist
-- HaGeZi's Pop-Up Ads DNS Blocklist
-- HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
-- HaGeZi's Windows/Office Tracker DNS Blocklist
-- Malicious URL Blocklist (URLHaus)
-- OISD Small
-- PbDNS Additional Rules
-- Peter Lowe's Blocklist
-- Phishing Army
-- Phishing URL Blocklist (PhishTank/OpenPhish)
-- Red Flag Domains
-- Red Flag Domains (FR)
-- Scam Blocklist by DurableNapkin
-- ShadowWhisperer's Malware List
-- Stalkerware Indicators List
-- Steven Black's List
-- The Big List of Hacked Malware Web Sites
-- d3Host
+### Généralistes
+- **OISD Small** — liste générale de référence, très précise
+- **Steven Black's List** — hosts file communautaire populaire
+- **Peter Lowe's Blocklist** — ads & tracking, maintenu depuis longtemps
+- **Dan Pollock's List** — liste historique d'hôtes malveillants
+
+### AdGuard
+- **AdGuard DNS filter** — liste officielle AdGuard pour le DNS
+- **AdGuard French adservers** — serveurs publicitaires francophones
+- **AdGuard French adservers (first-party)** — variante first-party FR
+
+### EasyList
+- **EasyList FR** — extension francophone d'EasyList
+
+### HaGeZi (DNS precision)
+- **HaGeZi's Normal DNS Blocklist**
+- **HaGeZi's Pop-Up Ads DNS Blocklist**
+- **HaGeZi's Amazon Tracker DNS Blocklist**
+- **HaGeZi's Apple Tracker DNS Blocklist**
+- **HaGeZi's Windows/Office Tracker DNS Blocklist**
+- **HaGeZi's TikTok Extended Fingerprinting DNS Blocklist**
+- **HaGeZi's Badware Hoster Blocklist**
+- **HaGeZi's DynDNS Blocklist**
+- **HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass**
+
+### Sécurité & Phishing
+- **Phishing Army**
+- **Phishing URL Blocklist (PhishTank/OpenPhish)**
+- **Red Flag Domains**
+- **Red Flag Domains (FR)** — domaines frauduleux francophones
+- **Scam Blocklist by DurableNapkin**
+- **Malicious URL Blocklist (URLHaus)**
+- **The Big List of Hacked Malware Web Sites**
+- **ShadowWhisperer's Malware List**
+
+### Spécialisées
+- **AWAvenue Ads Rule** — ciblage mobile/asiatique
+- **Dandelion Sprout's Anti Push Notifications**
+- **Dandelion Sprout's Anti-Malware List**
+- **Stalkerware Indicators List**
+- **d3Host**
+- **PbDNS Additional Rules** — règles personnalisées
 
 </details>
+
+---
+
+## Format de la liste
+
+Le fichier `blocklist.txt` est au format **Adblock Plus** :
+
+```
+! Title: PbDNS Blocklist
+! Homepage: https://github.com/PbDNS/Blocklists
+! Expires: 1 day
+||ads.example.com^
+||tracker.example.net^
+...
+```
+
+Chaque entrée bloque le domaine et **tous ses sous-domaines**, conformément au comportement DNS des résolveurs compatibles.
