@@ -19,7 +19,7 @@
 
 ## Présentation
 
-PbDNS Blocklist est une liste de blocage DNS consolidée, construite automatiquement chaque jour à partir de **31 sources reconnues**. Le pipeline de génération fusionne ces listes, supprime les doublons, élimine les sous-domaines redondants et invalide les entrées mal formées. Conçue avec une attention particulière pour le contexte francophone.
+PbDNS Blocklist est une liste de blocage DNS consolidée, construite automatiquement chaque jour à partir de sources reconnues. Le pipeline de génération fusionne ces listes, supprime les doublons, élimine les sous-domaines redondants et invalide les entrées mal formées. Conçue avec une attention particulière pour le contexte francophone.
 
 [![Liste brute](https://img.shields.io/badge/⬇️_Télécharger_la_liste-blocklist.txt-01696f?style=for-the-badge)](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
