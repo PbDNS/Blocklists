@@ -2,12 +2,16 @@
 @@||region1.analytics.google.com^
 @@||region1.google-analytics.com^
 @@||www.googletagmanager.com^
+@@||www.googletagservices.com^
 @@||www.gstatic.com^
 @@||yt3.ggpht.com^
 @@||yt3.googleusercontent.com^
 
 ! gestion cookies programme-tv.net
 @@||gate.first-id.fr^
+! ---
+@@||connect.programme-tv.net^
+@@||content-loader.com^
 
 ! vignettes dailymotion.com
 @@||graphql.api.dailymotion.com^
@@ -41,13 +45,31 @@
 @@||vogel.qqdl.site^
 @@||wolf.qqdl.site^
 
+! SpotiFLAC
+@@||spotiflac.zarz.moe^
+@@||spotify.afkarxyz.fun^
+@@||tidal.qqdl.site^
+
 ! certificats let's encrypt
 @@||e5.o.lencr.org^
 
 ! trackers torrent
+@@||tracker.birkenwald.de^
+@@||tracker.bittor.pw^
+@@||tracker.coppersurfer.tk^
+@@||tracker.internetwarriors.net^
 @@||tracker.moxing.party^
 @@||tracker.parrotsec.org^
-@@||tracker.birkenwald.de^
+! prolarr
+@@||tracker.ololosh.space^
+@@||open.free-tracker.ga^
+@@||acg.rip^
+@@||asnet.pw^
+@@||bangumi.moe^
+@@||crackingpatching.com^
+@@||utracker.ghostchu-services.top^
+@@||www.worldivx.cc^
+@@||www.wikibox.cc^
 
 ! divers
 @@||brew.sh^
@@ -75,6 +97,7 @@
 @@||partiality.itunes.apple.com^
 @@||pixibay.cc^
 @@||portail.lol^
+@@||res.mail.laposte.info^
 @@||simpledns.plus^
 @@||static.hotjar.com^
 @@||tags.tiqcdn.com^
@@ -93,20 +116,27 @@
 
 ! --------------------------------------------------
 
-! ✅ Whitelist CMP (Consent Management Platforms)
-! 📌 Autorise les domaines nécessaires à l'affichage des bandeaux cookies (RGPD/TCF)
-! 🛡️ N'autorise pas les trackers, uniquement l'interface utilisateur de consentement
+! ✅ Whitelist CMP (Consent Management Platforms) - Rev. Mai 2026 - Kimi K2.6 Thinking
+! 📌 Autorise uniquement l'interface de consentement (RGPD/TCF), pas les trackers
+! ⚠️ Domaines racine retirés quand ils hébergent aussi du tracking
+
+
+! ==========================================
+! 1. CMP Enterprise / TCF (Majeurs)
+! ==========================================
 
 ! Quantcast
 @@||cmp.quantcast.com^
 @@||quantcast.mgr.consensu.org^
 
-! OneTrust
+! OneTrust / CookieLaw
 @@||geolocation.onetrust.com^
+@@||myprivacy.onetrust.com^
 @@||privacyportal-de.onetrust.com^
 @@||privacyportal.onetrust.com^
+@@||cdn.cookielaw.org^
 
-! Cookiebot
+! Cookiebot (groupe Usercentrics)
 @@||consent.cookiebot.com^
 @@||static.cookiebot.com^
 @@||tcf2-api.cookiebot.com^
@@ -115,45 +145,93 @@
 ! Usercentrics
 @@||usercentrics.eu^
 @@||app.usercentrics.eu^
+@@||api.usercentrics.eu^
 @@||cdn.usercentrics.eu^
+@@||privacy-proxy.usercentrics.eu^
 
-! TrustArc
-@@||trustarc.com^
-@@||choices.trustarc.com^
-
-! Privacy Management
+! Sourcepoint (Privacy Management)
 @@||cdn.privacy-mgmt.com^
+@@||api.privacy-mgmt.com^
 @@||privacy-mgmt.com^
 
-! CookieYes
+! TrustArc (bandeau consentement uniquement)
+@@||choices.trustarc.com^
+
+! CookieYes (WebToffee)
+@@||cdn.cookieyes.com^
 @@||cdn.eu.cookieyes.com^
-@@||cookieyes.com^
 
 ! ConsentManager
 @@||consentmanager.net^
 @@||cdn.consentmanager.net^
+@@||delivery.consentmanager.net^
+
+! Iubenda
+@@||cdn.iubenda.com^
+@@||cs.iubenda.com^
+@@||iubenda.com^
+
+! Cookie Information (très utilisé en EU nordique/de l'est)
+@@||cdn.cookieinformation.com^
+@@||cookieinformation.com^
+
+
+! ==========================================
+! 2. CMP Européens & France (Alternatifs majeurs)
+! ==========================================
+
+! Didomi (leader FR/UE)
+@@||sdk.privacy-center.org^
+@@||api.privacy-center.org^
+@@||notice.sp-prod.net^
+@@||api.sp-prod.net^
+@@||assets.sp-prod.net^
+
+! Axeptio (populaire en France)
+@@||axept.io^
+@@||static.axept.io^
+@@||api.axept.io^
+@@||client.axept.io^
+
+! Sirdata
+@@||cmp.sirdata.com^
+@@||privacy.sirdata.com^
+@@||sddan.mgr.consensu.org^
+
+! Osano
+@@||cmp.osano.com^
+
+! UniConsent
+@@||uniconsent.com^
+@@||cdn.uniconsent.com^
+
+! Termly
+@@||app.termly.io^
+@@||cdn.termly.io^
 
 ! Klaro
 @@||klaro.kiprotect.com^
 
+
+! ==========================================
+! 3. Google & Fournisseurs cloud
+! ==========================================
+
 ! Google Consent Mode
 @@||consent.google.com^
+@@||consent.googleapis.com^
+
+! Funding Choices (déprécié par Google mais encore résiduel)
+@@||fundingchoicesmessages.google.com^
+
+
+! ==========================================
+! 4. Widgets / Solutions légères
+! ==========================================
 
 ! Cookie-Script
 @@||cookie-script.com^
 @@||cdn.cookie-script.com^
 
-! Funding Choices
-@@||fundingchoicesmessages.google.com^
-
-! Cookie Law
-@@||cdn.cookielaw.org^
-@@||cookielaw.org^
-
-! Privacy Portal
+! Privacy Portal (portails de droit d'accès allemands)
 @@||privacyportal.de^
-@@||cdn.privacyportal.com^
-
-! Iubenda
-@@||iubenda.com^
-@@||cdn.iubenda.com^
