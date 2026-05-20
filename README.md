@@ -30,10 +30,6 @@ Le pipeline de génération repose sur plusieurs étapes de nettoyage rigoureux 
 
 Le résultat est une liste **compacte et sans redondance**, où chaque entrée est strictement nécessaire. Conçue avec une attention particulière pour le contexte francophone, elle intègre notamment des sources dédiées aux régies publicitaires et domaines frauduleux français.
 
-## Présentation
-
-PbDNS Blocklist est une liste de blocage DNS consolidée, construite automatiquement chaque jour à partir de sources reconnues. Le pipeline de génération fusionne ces listes, supprime les doublons, élimine les sous-domaines redondants et invalide les entrées mal formées. Conçue avec une attention particulière pour le contexte francophone.
-
 [![Liste brute](https://img.shields.io/badge/⬇️_Télécharger_la_liste-blocklist.txt-01696f?style=for-the-badge)](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
 ---
