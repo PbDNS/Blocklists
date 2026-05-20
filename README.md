@@ -41,7 +41,7 @@ Le résultat est une liste **compacte et sans redondance**, où chaque entrée e
 | 🚫 **Publicités** | Serveurs de pub, régies, annonces intrusives |
 | 🕵️ **Trackers** | Fingerprinting, pistage cross-site, analytics invasifs |
 | 🦠 **Malwares** | Logiciels malveillants, badware, DynDNS suspects |
-| 🎣 **Phishing** | Hameçonnage, scams, imposteurs de marques |
+| 🎣 **Phishing** | Hameçonnage, scams, typosquatting et clones de marques |
 | 🔕 **Notifications** | Push notifications abusives |
 | 📱 **Stalkerware** | Logiciels de surveillance installés à l'insu |
 | 🪟 **Télémétrie** | Trackers Windows/Office, Apple, Amazon... |
