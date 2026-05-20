@@ -24,7 +24,7 @@ PbDNS Blocklist est une liste de blocage DNS consolidée au format **AdBlock Plu
 Le pipeline de génération repose sur plusieurs étapes de nettoyage rigoureux :
 
 - **Téléchargement parallèle** des listes sources
-- **Sélection** des entrées au format nom de domaine uniquement. Les règles cosmétiques, les modificateurs AdBlock, les URLs avec chemin sont écartés car non interprétables au niveau DNS ainsi que les adresses IP
+- **Sélection** des entrées au format nom de domaine uniquement. Les règles cosmétiques, les modificateurs AdBlock, les URLs avec chemin sont écartés ainsi que les adresses IP
 - **Déduplication intelligente** par trie de domaines inversés - si un domaine parent est déjà bloqué, ses sous-domaines sont automatiquement écartés comme redondants
 - **Normalisation** de toutes les entrées en minuscules au format `||domaine^`, compatible nativement avec AdGuard et Pi-hole
 
