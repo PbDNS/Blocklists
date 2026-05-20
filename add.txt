@@ -9,7 +9,6 @@
 ||api.honeybadger.io^
 ||api.impact.com^
 ||api.ipinfo.be^
-||api.raygun.com^
 ||app.chat.xiaomi.net^
 ||app.staticmoly.me^
 ||app.storyblok.com^
@@ -17,8 +16,6 @@
 ||bnc.lt^
 ||cdn-analytics.alketech.eu^
 ||cdn.adgtw.orangeads.fr^
-||cdn.raygun.io^
-||cdn.rollbar.com^
 ||check.analytics.rlcdn.com^
 ||clientstream.launchdarkly.com^
 ||customer.io^
@@ -78,7 +75,6 @@
 ||unarmedlickpattern.com^
 ||unmalleableredistributeone.com^
 ||web-tracking.splio.com^
-||widget.intercom.io^
 ||wst.lefigaro.fr^
 ||www.rudderstack.com^
 ||xh.yallowafridi.com^
