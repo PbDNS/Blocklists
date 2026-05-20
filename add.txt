@@ -6,9 +6,6 @@
 ||ads.huawei.com^
 ||analytics.ameli.fr^
 ||api-wrapper-tracking.imaginereplay.com^
-||api.honeybadger.io^
-||api.impact.com^
-||api.ipinfo.be^
 ||app.chat.xiaomi.net^
 ||app.staticmoly.me^
 ||app.storyblok.com^
