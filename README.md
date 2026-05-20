@@ -54,9 +54,9 @@ Le résultat est une liste **compacte et sans redondance**, où chaque entrée e
 <summary>📋 Voir les 31 listes sources</summary>
 
 ### Généralistes
-- **OISD Small** - liste générale de référence, très précise
-- **Steven Black's List** - hosts file communautaire populaire
-- **Peter Lowe's Blocklist** - ads & tracking, maintenu depuis longtemps
+- **OISD Small** - liste générale de référence
+- **Steven Black's List** - hosts file communautaire
+- **Peter Lowe's Blocklist** - ads & tracking
 - **Dan Pollock's List** - liste historique d'hôtes malveillants
 
 ### AdGuard
@@ -89,7 +89,7 @@ Le résultat est une liste **compacte et sans redondance**, où chaque entrée e
 - **ShadowWhisperer's Malware List**
 
 ### Spécialisées
-- **AWAvenue Ads Rule** - ciblage mobile/asiatique
+- **AWAvenue Ads Rule**
 - **Dandelion Sprout's Anti Push Notifications**
 - **Dandelion Sprout's Anti-Malware List**
 - **Stalkerware Indicators List**
