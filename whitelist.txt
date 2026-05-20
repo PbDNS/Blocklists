@@ -1,7 +1,6 @@
 ! google divers
 @@||region1.analytics.google.com^
 @@||region1.google-analytics.com^
-@@||www.googletagmanager.com^
 @@||www.googletagservices.com^
 @@||www.gstatic.com^
 @@||yt3.ggpht.com^
