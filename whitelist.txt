@@ -31,19 +31,6 @@
 @@||logws1361.ati-host.net^
 @@||try.abtasty.com^
 
-! SquidWTF
-@@||amazon.spotbye.qzz.io^
-@@||amzn.afkarxyz.qzz.io^
-@@||dab.yeet.su^
-@@||hund.qqdl.site
-@@||katze.qqdl.site
-@@||maus.qqdl.site
-@@||qbz.afkarxyz.fun^
-@@||squid.wtf^
-@@||tidal.kinoplus.online^
-@@||vogel.qqdl.site^
-@@||wolf.qqdl.site^
-
 ! SpotiFLAC
 @@||spotiflac.zarz.moe^
 @@||spotify.afkarxyz.fun^
@@ -59,7 +46,6 @@
 @@||tracker.internetwarriors.net^
 @@||tracker.moxing.party^
 @@||tracker.parrotsec.org^
-! prolarr
 @@||tracker.ololosh.space^
 @@||open.free-tracker.ga^
 @@||acg.rip^
@@ -92,7 +78,6 @@
 @@||lx1.dyncdn.cc^
 @@||next.ink^
 @@||numero.vip^
-@@||papadustream.golf^
 @@||partiality.itunes.apple.com^
 @@||pixibay.cc^
 @@||portail.lol^
@@ -104,7 +89,6 @@
 @@||up4fun.top^
 @@||ups2up.fun^
 @@||vudeo.ws^
-@@||waaw.to^
 @@||wander.science^
 @@||www.server-world.info^
 @@||www.titanium-software.fr^
