@@ -10,7 +10,6 @@
 @@||gate.first-id.fr^
 ! ---
 @@||connect.programme-tv.net^
-@@||content-loader.com^
 
 ! vignettes dailymotion.com
 @@||graphql.api.dailymotion.com^
