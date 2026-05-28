@@ -25,7 +25,7 @@ Le pipeline de génération repose sur plusieurs étapes de nettoyage rigoureux 
 
 - **Téléchargement parallèle** des listes sources
 - **Sélection** des entrées au format nom de domaine uniquement. Les règles cosmétiques, les modificateurs AdBlock, les URLs avec chemin sont écartés ainsi que les adresses IP
-- **Déduplication intelligente** par trie de domaines inversés - si un domaine parent est déjà bloqué, ses sous-domaines sont automatiquement écartés comme redondants
+- **Déduplication** par trie de domaines inversés - si un domaine parent est déjà bloqué, ses sous-domaines sont automatiquement écartés comme redondants
 - **Normalisation** de toutes les entrées en minuscules au format `||domaine^`, compatible nativement avec AdGuard et Pi-hole
 
 Le résultat est une liste **compacte et sans redondance**, où chaque entrée est strictement nécessaire. Conçue avec une attention particulière pour le contexte francophone, elle intègre notamment des sources dédiées aux régies publicitaires et domaines frauduleux français.
