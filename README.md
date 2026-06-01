@@ -20,7 +20,7 @@
 
 ## Présentation
 
-PbDNS Blocklist est une liste de blocage DNS consolidée au format **AdBlock Plus**, générée automatiquement chaque jour à partir de sources reconnues.
+Liste de blocage DNS consolidée au format **AdBlock Plus**, générée automatiquement chaque jour à partir de sources reconnues.
 
 Le pipeline de génération repose sur plusieurs étapes de nettoyage rigoureux :
 
