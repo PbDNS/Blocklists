@@ -1,3 +1,4 @@
+
 """
 Agrégateur de blocklists DNS au format AdBlock.
 
@@ -15,6 +16,7 @@ import locale
 import urllib.error
 import urllib.request
 from datetime import datetime
+from pathlib import Path
 
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
@@ -56,44 +58,44 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # d3Host
 
 BLOCKLIST_URLS: list[str] = [
-    "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt",
-    "https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
-    "https://small.oisd.nl/",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_52.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
-    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
-    "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_18.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
-    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
-    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
-    "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
-    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
-    "https://dl.red.flag.domains/red.flag.domains_fr.txt",
+"https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt",
+"https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
+"https://small.oisd.nl/",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_52.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
+"https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_18.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
+"https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
+"https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
+"https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
+"https://dl.red.flag.domains/red.flag.domains_fr.txt",
 ]
 
 # Regex pré-compilées au niveau module pour éviter la recompilation à chaque appel
 _RE_WHITESPACE = re.compile(r"\s+")
 _RE_DOMAIN_ONLY = re.compile(r"^[a-zA-Z0-9.-]+$")
 _RE_VALID_DOMAIN = re.compile(
-    r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$"
+r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$"
 )
 
 _DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; blocklist-aggregator/1.0)"}
@@ -101,7 +103,6 @@ _DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; blocklist-aggregator
 # ---------------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------------
-
 
 def is_valid_domain(domain: str) -> bool:
     """Retourne True si `domain` est un nom de domaine valide (ni IP ni wildcard)."""
@@ -112,11 +113,56 @@ def is_valid_domain(domain: str) -> bool:
         pass
     return _RE_VALID_DOMAIN.match(domain) is not None
 
+# ---------------------------------------------------------------------------
+# Chargement de la whitelist
+# ---------------------------------------------------------------------------
+
+def load_whitelist(whitelist_path: str = "whitelist.txt") -> set[str]:
+    """
+    Charge la whitelist depuis un fichier local.
+
+    - Ignore les lignes vides et les lignes commençant par '!'.
+    - Retourne un ensemble de domaines en minuscules.
+    """
+    path = Path(whitelist_path)
+    if not path.exists():
+        print(f"⚠️  Whitelist introuvable : {whitelist_path} — aucune exclusion appliquée")
+        return set()
+
+    whitelist: set[str] = set()
+    with path.open(encoding="utf-8") as fh:
+        for raw_line in fh:
+            line = raw_line.strip()
+            if not line or line.startswith("!"):
+                continue
+            whitelist.add(line.lower())
+
+    print(f"📋 Whitelist chargée : {len(whitelist)} domaine(s)")
+    return whitelist
+
+
+def is_whitelisted(domain: str, whitelist: set[str]) -> bool:
+    """
+    Retourne True si `domain` (ou l'un de ses domaines parents) est dans la whitelist.
+
+    Exemple : sub.example.com est exclu si example.com est dans la whitelist,
+    car bloquer example.com bloquerait aussi sub.example.com via le trie.
+    Cette vérification est symétrique : on retire aussi le domaine exact
+    ainsi que tout sous-domaine d'un domaine whitelisté.
+    """
+    if domain in whitelist:
+        return True
+    # Vérifie si un domaine parent est whitelisté (évite les faux positifs du trie)
+    parts = domain.split(".")
+    for i in range(1, len(parts)):
+        parent = ".".join(parts[i:])
+        if parent in whitelist:
+            return True
+    return False
 
 # ---------------------------------------------------------------------------
 # Téléchargement & extraction
 # ---------------------------------------------------------------------------
-
 
 def download_and_extract(url: str) -> set[str]:
     """
@@ -170,11 +216,9 @@ def download_and_extract(url: str) -> set[str]:
 
     return rules
 
-
 # ---------------------------------------------------------------------------
 # Trie de domaines (déduplication des sous-domaines)
 # ---------------------------------------------------------------------------
-
 
 class DomainTrieNode:
     """Nœud d'un trie de domaines inversés pour éliminer les redondances."""
@@ -204,11 +248,9 @@ def domain_to_parts(domain: str) -> list[str]:
     """Convertit un domaine en liste de labels inversés (ex: 'a.b.com' → ['com','b','a'])."""
     return domain.strip().split(".")[::-1]
 
-
 # ---------------------------------------------------------------------------
 # Écriture de la blocklist
 # ---------------------------------------------------------------------------
-
 
 def write_blocklist(
     entries: set[str],
@@ -223,11 +265,9 @@ def write_blocklist(
         for entry in sorted(entries):
             fh.write(f"||{entry.lower()}^\n")
 
-
 # ---------------------------------------------------------------------------
 # Mise à jour du README
 # ---------------------------------------------------------------------------
-
 
 def update_readme(stats: dict[str, int], readme_path: str = "README.md") -> None:
     """Met à jour le bloc de statistiques dans le README entre deux balises HTML."""
@@ -268,21 +308,33 @@ def update_readme(stats: dict[str, int], readme_path: str = "README.md") -> None
     with open(readme_path, "w", encoding="utf-8") as fh:
         fh.write(content)
 
-
 # ---------------------------------------------------------------------------
 # Point d'entrée
 # ---------------------------------------------------------------------------
 
-
 def main() -> None:
     """Orchestre le téléchargement, la déduplication et l'écriture de la blocklist."""
+    # 0. Chargement de la whitelist
+    whitelist = load_whitelist("whitelist.txt")
+
     # 1. Téléchargement parallèle
     all_entries: set[str] = set()
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         for entry_set in executor.map(download_and_extract, BLOCKLIST_URLS):
             all_entries.update(entry_set)
 
-    # 2. Déduplication via trie (suppression des sous-domaines redondants)
+    # 2. Filtrage whitelist (avant le trie pour éviter les faux négatifs liés
+    #    à la déduplication des sous-domaines)
+    if whitelist:
+        before_filter = len(all_entries)
+        all_entries = {
+            domain for domain in all_entries
+            if not is_whitelisted(domain.lower(), whitelist)
+        }
+        removed = before_filter - len(all_entries)
+        print(f"🚫 Whitelist : {removed} domaine(s) retiré(s) de la liste agrégée")
+
+    # 3. Déduplication via trie (suppression des sous-domaines redondants)
     trie_root = DomainTrieNode()
     final_entries: set[str] = set()
 
@@ -290,18 +342,17 @@ def main() -> None:
         if is_valid_domain(entry) and trie_root.insert(domain_to_parts(entry)):
             final_entries.add(entry)
 
-    # 3. Statistiques
+    # 4. Statistiques
     total = len(final_entries)
     timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
 
-    # 4. Écriture de la blocklist
+    # 5. Écriture de la blocklist
     write_blocklist(final_entries, timestamp=timestamp)
     print(f"✅ blocklist.txt généré : {total} entrées")
 
-    # 5. Mise à jour du README
+    # 6. Mise à jour du README
     update_readme({"after": total})
 
 
 if __name__ == "__main__":
     main()
-
