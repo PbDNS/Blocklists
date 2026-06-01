@@ -30,11 +30,6 @@ uc-info.eu.abtasty.com
 logws1361.ati-host.net
 try.abtasty.com
 
-! SpotiFLAC
-spotiflac.zarz.moe
-spotify.afkarxyz.fun
-tidal.qqdl.site
-
 ! certificats let's encrypt
 e5.o.lencr.org
 
@@ -91,7 +86,6 @@ vudeo.ws
 wander.science
 www.server-world.info
 www.titanium-software.fr
-x2x.fun
 xp.apple.com
 xp.v.aaplimg.com
 zimage.cc
