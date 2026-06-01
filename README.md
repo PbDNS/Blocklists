@@ -22,7 +22,7 @@
 
 Liste de blocage DNS consolidée au format **AdBlock Plus**, générée automatiquement chaque jour à partir de sources reconnues.
 
-Le pipeline de génération repose sur plusieurs étapes de nettoyage rigoureux :
+Le pipeline de génération repose sur plusieurs étapes de nettoyage :
 
 - **Sélection** des entrées au format nom de domaine uniquement. Les règles cosmétiques, les modificateurs AdBlock, les URLs avec chemin sont écartés ainsi que les adresses IP
 - **Déduplication** par trie de domaines inversés - si un domaine parent est déjà bloqué, ses sous-domaines sont automatiquement écartés comme redondants
