@@ -4,7 +4,7 @@
 
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
 ![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-teal)
-![Assisté par Claude](https://img.shields.io/badge/built%20with-Claude%20AI-yellow?style=flat-square)
+![Assisté par Claude](https://img.shields.io/badge/assist%C3%A9%20par-Claude%20AI-yellow?style=flat-square)
 
 </div>
 
