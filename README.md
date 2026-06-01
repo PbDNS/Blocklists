@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ PbDNS Blocklist
+# 🛡️ Blocklist
 
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
 ![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-teal)
