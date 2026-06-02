@@ -1,0 +1,79 @@
+! =====================================================
+! Blocage des ~55 TLDs les plus malveillants
+! Sources : Interisle Phishing Landscape 2025
+!           Cybercrime Supply Chain 2024/2025
+!           Cybercrime Information Center Q3-2025
+!           Spamhaus Domain Reputation 2024–2025
+! Classement : Score phishing combiné (ratio + volume)
+! Mis à jour : juin 2026 par Claude Sonnet 4.6 Thinking
+! =====================================================
+
+! ── TIER 1 — Score > 1000 : ratio catastrophique ───
+! Ces TLDs ont plus de domaines malveillants que légitimes
+||*.xin^
+||*.bond^
+||*.qpon^
+
+! ── TIER 2 — Score 500–1000 : très haute densité ───
+||*.help^
+||*.mobi^
+||*.win^
+||*.cfd^
+||*.icu^
+||*.pro^
+||*.finance^
+||*.support^
+
+! ── TIER 3 — Score 250–500 : haute densité ─────────
+||*.top^
+||*.lol^$denyallow=lukefirst.lol
+||*.world^
+||*.fyi^
+||*.cyou^
+||*.mom^
+||*.live^
+||*.zone^
+||*.monster^
+||*.pics^
+||*.buzz^
+||*.best^
+||*.sbs^
+
+! ── TIER 4 — Volume absolu élevé + score modéré ────
+||*.xyz^
+||*.vip^
+||*.shop^
+||*.info^
+||*.online^
+||*.cc^$denyallow=www.wikibox.cc|zimage.cc
+||*.site^
+||*.click^
+||*.ru^
+||*.cn^
+
+! ── TIER 5 — Score élevé, volume intermédiaire ─────
+! Confirmés par Cybercrime Supply Chain 2024 (rest, ooo, cam)
+! et Spamhaus (tk, gq, ml, cf, ga = anciens TLDs Freenom)
+||*.rest^
+||*.ooo^
+||*.cam^
+||*.tk^
+||*.gq^
+||*.ml^
+||*.cf^
+||*.ga^
+||*.ink^
+||*.fit^
+||*.lat^
+||*.cyou^
+||*.pw^
+||*.ws^
+||*.biz^$denyallow=vidmoly.biz
+
+! ── TIER 6 — Émergents / signalés Spamhaus 2025 ────
+||*.hair^
+||*.beauty^
+||*.skin^
+||*.boats^
+||*.motorcycles^
+||*.yachts^
