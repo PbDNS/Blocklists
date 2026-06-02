@@ -10,9 +10,9 @@
 <!-- STATS_START -->
 <div align="center">
 
-![filtres](https://img.shields.io/badge/filtres%20uniques-523%2C819-523%2C942-0a9396?style=for-the-badge)
-![listes](https://img.shields.io/badge/sources-31%20listes-52796f?style=for-the-badge)
-![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-e9a321?style=for-the-badge)
+![filtres](https://img.shields.io/badge/filtres%20uniques-518%2C548-brightgreen?style=for-the-badge)
+![listes](https://img.shields.io/badge/sources-31%20listes-blue?style=for-the-badge)
+![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-orange?style=for-the-badge)
 
 </div>
 <!-- STATS_END -->
