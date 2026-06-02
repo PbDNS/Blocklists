@@ -17,7 +17,11 @@
 </div>
 <!-- STATS_END -->
 
+<div align="center">
+
 ![Assisté par Claude](https://img.shields.io/badge/assist%C3%A9%20par-Claude%20AI-yellow?style=flat-square)
+
+</div>
 
 ## Présentation
 
