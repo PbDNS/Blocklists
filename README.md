@@ -2,8 +2,8 @@
 
 # 🛡️ Blocklist
 
-![Format](https://img.shields.io/badge/format-Adblock%20Plus-orange)
-![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-teal)
+![Format](https://img.shields.io/badge/format-Adblock%20Plus-5B8DB8)
+![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-6B7FA3)
 
 </div>
 
