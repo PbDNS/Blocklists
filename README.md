@@ -38,8 +38,6 @@ Le résultat est une liste **compacte et sans redondance**, où chaque entrée e
 
 [![Liste brute](https://img.shields.io/badge/⬇️_Télécharger_la_liste-blocklist.txt-01696f?style=for-the-badge)](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
 
----
-
 ## Objectifs de protection
 
 | Catégorie | Ce qui est bloqué |
@@ -51,8 +49,6 @@ Le résultat est une liste **compacte et sans redondance**, où chaque entrée e
 | 🔕 **Notifications** | Notifications push abusives |
 | 📱 **Stalkerware** | Logiciels de surveillance préinstallés |
 | 🪟 **Télémétrie** | Trackers Windows/Office, Apple, Amazon... |
-
----
 
 ## Sources incluses
 
