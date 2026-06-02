@@ -281,9 +281,9 @@ def update_readme(stats: dict[str, int], readme_path: str = "README.md") -> None
         "\n"
         '<div align="center">\n'
         "\n"
-        f"![filtres](https://img.shields.io/badge/filtres%20uniques-{count_formatted}-brightgreen?style=for-the-badge)\n"
-        f"![listes](https://img.shields.io/badge/sources-{source_count}%20listes-blue?style=for-the-badge)\n"
-        "![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-orange?style=for-the-badge)\n"
+        f"![filtres](https://img.shields.io/badge/filtres%20uniques-{count_formatted}-523%2C942-0a9396?style=for-the-badge)\n"
+        f"![listes](https://img.shields.io/badge/sources-{source_count}%20listes-52796f?style=for-the-badge)\n"
+        "![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-e9a321?style=for-the-badge)\n"
         "\n"
         "</div>\n"
     )
