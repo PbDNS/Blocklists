@@ -1,4 +1,3 @@
-
 """
 Agrégateur de blocklists DNS au format AdBlock.
 
