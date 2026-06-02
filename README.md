@@ -19,7 +19,7 @@
 
 <div align="center">
 
-![Assisté par Claude](https://img.shields.io/badge/assist%C3%A9%20par-Claude-D97757?style=for-the-badge&logo=claude&logoColor=white)
+![Assisté par Claude](https://img.shields.io/badge/assist%C3%A9%20par-Claude-D97757?style=flat&logo=claude&logoColor=white)
 
 </div>
 
