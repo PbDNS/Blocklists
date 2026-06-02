@@ -48,7 +48,7 @@ Le résultat est une liste **compacte et sans redondance**, où chaque entrée e
 | 🎣 **Phishing** | Hameçonnage, scams, typosquatting et clones de marques |
 | 🔕 **Notifications** | Notifications push abusives |
 | 📱 **Stalkerware** | Logiciels de surveillance préinstallés |
-| 🪟 **Télémétrie** | Trackers Windows/Office, Apple, Amazon... |
+| 🪟 **Télémétrie** | Trackers Windows/Office, Apple, Amazon, TikTok... |
 
 ## Sources incluses
 
