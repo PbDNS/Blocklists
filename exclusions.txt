@@ -12,13 +12,17 @@ xp.apple.com
 xp.itunes-apple.com.akadns.net
 xp.v.aaplimg.com
 
+! affichage encarts x dans articles
+platform.twitter.com
+t.co
+
 ! gestion cookies programme-tv.net
 gate.first-id.fr
 
 ! vignettes dailymotion.com
 graphql.api.dailymotion.com
 
-! video bfmtv
+! videos bfmtv
 nextms.profiles.tagger.opecloud.com
 
 ! commentaires lecteurs presse-citron.net
@@ -36,6 +40,9 @@ try.abtasty.com
 
 ! certificats let's encrypt
 e5.o.lencr.org
+
+! medias player WF
+yastatic.net
 
 ! divers
 brew.sh
