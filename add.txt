@@ -1,5 +1,9 @@
 ! Filtres additionnels, inclus à blocklist.txt
 
+! test Adblock - https://adblocktester.pages.dev
+||api.raygun.io^
+! ---
+
 ||2giga.link^
 ||aax-eu-zaz.amazon.fr^
 ||admob.googleapis.com^
