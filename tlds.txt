@@ -43,7 +43,7 @@
 ||*.xyz^
 ||*.vip^
 ||*.shop^
-||*.info^
+||*.info^$denyallow=korben.info
 ||*.online^
 ||*.cc^$denyallow=www.wikibox.cc|zimage.cc
 ||*.site^
