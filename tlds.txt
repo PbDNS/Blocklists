@@ -20,7 +20,7 @@
 ||*.win^
 ||*.cfd^
 ||*.icu^
-||*.pro^
+||*.pro^$denyallow=medias-prod-carrefour.e-catalogues.pro
 ||*.finance^
 ||*.support^
 
@@ -45,7 +45,7 @@
 ||*.shop^
 ||*.info^$denyallow=korben.info|res.mail.laposte.info
 ||*.online^
-||*.cc^$denyallow=www.wikibox.cc|zimage.cc|dl-protect.cc|pixibay.cc
+||*.cc^$denyallow=www.wikibox.cc|zimage.cc|dl-protect.cc|pixibay.cc|www.sharework1.cc
 
 ||*.site^
 ||*.click^
