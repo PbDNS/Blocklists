@@ -1,64 +1,64 @@
 ! google divers
-region1.analytics.google.com
-region1.google-analytics.com
-www.googletagservices.com
-www.gstatic.com
-yt3.ggpht.com
-yt3.googleusercontent.com
+@@||region1.analytics.google.com^
+@@||region1.google-analytics.com^
+@@||www.googletagservices.com^
+@@||www.gstatic.com^
+@@||yt3.ggpht.com^
+@@||yt3.googleusercontent.com^
 
 ! Apple ( bloquer xp provoque freezes sur iphone)
-xp-cdn-lb.itunes-apple.com.akadns.net
-xp.apple.com
-xp.itunes-apple.com.akadns.net
-xp.v.aaplimg.com
+@@||xp-cdn-lb.itunes-apple.com.akadns.net^
+@@||xp.apple.com^
+@@||xp.itunes-apple.com.akadns.net^
+@@||xp.v.aaplimg.com^
 
 ! affichage encarts x dans articles
-platform.twitter.com
-t.co
+@@||platform.twitter.com^
+@@||t.co^
 
 ! gestion cookies programme-tv.net
-gate.first-id.fr
+@@||gate.first-id.fr^
 
 ! vignettes dailymotion.com
-graphql.api.dailymotion.com
+@@||graphql.api.dailymotion.com^
 
 ! videos bfmtv
-nextms.profiles.tagger.opecloud.com
+@@||nextms.profiles.tagger.opecloud.com^
 
 ! commentaires lecteurs presse-citron.net
-api-2-0.spot.im
+@@||api-2-0.spot.im^
 
 ! vignettes lesnumeriques.com
-cdn.affilizz.com
+@@||cdn.affilizz.com^
 
 ! vignettes darty.fr
-uc-info.eu.abtasty.com
+@@||uc-info.eu.abtasty.com^
 
 ! création compte bouygues telecom
-logws1361.ati-host.net
-try.abtasty.com
+@@||logws1361.ati-host.net^
+@@||try.abtasty.com^
 
 ! certificats let's encrypt
-e5.o.lencr.org
+@@||e5.o.lencr.org^
 
 ! medias player WF
-yastatic.net
+@@||yastatic.net^
 
 ! divers
-brew.sh
-cdnjs.cloudflare.com
-dealabs.digidip.net
-dl-protect.link
-dns.notjakob.com
-dynamicwallpaper.club
-fluxradios.blogspot.com
-hola.org
-partiality.itunes.apple.com
-simpledns.plus
-static.hotjar.com
-tags.tiqcdn.com
-wander.science
-www.titanium-software.fr
+@@||brew.sh^
+@@||cdnjs.cloudflare.com^
+@@||dealabs.digidip.net^
+@@||dl-protect.link^
+@@||dns.notjakob.com^
+@@||dynamicwallpaper.club^
+@@||fluxradios.blogspot.com^
+@@||hola.org^
+@@||partiality.itunes.apple.com^
+@@||simpledns.plus^
+@@||static.hotjar.com^
+@@||tags.tiqcdn.com^
+@@||wander.science^
+@@||www.titanium-software.fr^
 
 
 ! --------------------------------------------------
@@ -73,54 +73,54 @@ www.titanium-software.fr
 ! ==========================================
 
 ! Quantcast
-cmp.quantcast.com
-quantcast.mgr.consensu.org
+@@||cmp.quantcast.com^
+@@||quantcast.mgr.consensu.org^
 
 ! OneTrust / CookieLaw
-geolocation.onetrust.com
-myprivacy.onetrust.com
-privacyportal-de.onetrust.com
-privacyportal.onetrust.com
-cdn.cookielaw.org
+@@||geolocation.onetrust.com^
+@@||myprivacy.onetrust.com^
+@@||privacyportal-de.onetrust.com^
+@@||privacyportal.onetrust.com^
+@@||cdn.cookielaw.org^
 
 ! Cookiebot (groupe Usercentrics)
-consent.cookiebot.com
-static.cookiebot.com
-tcf2-api.cookiebot.com
-cdn.cookiebot.com
+@@||consent.cookiebot.com^
+@@||static.cookiebot.com^
+@@||tcf2-api.cookiebot.com^
+@@||cdn.cookiebot.com^
 
 ! Usercentrics
-usercentrics.eu
-app.usercentrics.eu
-api.usercentrics.eu
-cdn.usercentrics.eu
-privacy-proxy.usercentrics.eu
+@@||usercentrics.eu^
+@@||app.usercentrics.eu^
+@@||api.usercentrics.eu^
+@@||cdn.usercentrics.eu^
+@@||privacy-proxy.usercentrics.eu^
 
 ! Sourcepoint (Privacy Management)
-cdn.privacy-mgmt.com
-api.privacy-mgmt.com
-privacy-mgmt.com
+@@||cdn.privacy-mgmt.com^
+@@||api.privacy-mgmt.com^
+@@||privacy-mgmt.com^
 
 ! TrustArc (bandeau consentement uniquement)
-choices.trustarc.com
+@@||choices.trustarc.com^
 
 ! CookieYes (WebToffee)
-cdn.cookieyes.com
-cdn.eu.cookieyes.com
+@@||cdn.cookieyes.com^
+@@||cdn.eu.cookieyes.com^
 
 ! ConsentManager
-consentmanager.net
-cdn.consentmanager.net
-delivery.consentmanager.net
+@@||consentmanager.net^
+@@||cdn.consentmanager.net^
+@@||delivery.consentmanager.net^
 
 ! Iubenda
-cdn.iubenda.com
-cs.iubenda.com
-iubenda.com
+@@||cdn.iubenda.com^
+@@||cs.iubenda.com^
+@@||iubenda.com^
 
 ! Cookie Information (très utilisé en EU nordique/de l'est)
-cdn.cookieinformation.com
-cookieinformation.com
+@@||cdn.cookieinformation.com^
+@@||cookieinformation.com^
 
 
 ! ==========================================
@@ -128,36 +128,36 @@ cookieinformation.com
 ! ==========================================
 
 ! Didomi (leader FR/UE)
-sdk.privacy-center.org
-api.privacy-center.org
-notice.sp-prod.net
-api.sp-prod.net
-assets.sp-prod.net
+@@||sdk.privacy-center.org^
+@@||api.privacy-center.org^
+@@||notice.sp-prod.net^
+@@||api.sp-prod.net^
+@@||assets.sp-prod.net^
 
 ! Axeptio (populaire en France)
-axept.io
-static.axept.io
-api.axept.io
-client.axept.io
+@@||axept.io^
+@@||static.axept.io^
+@@||api.axept.io^
+@@||client.axept.io^
 
 ! Sirdata
-cmp.sirdata.com
-privacy.sirdata.com
-sddan.mgr.consensu.org
+@@||cmp.sirdata.com^
+@@||privacy.sirdata.com^
+@@||sddan.mgr.consensu.org^
 
 ! Osano
-cmp.osano.com
+@@||cmp.osano.com^
 
 ! UniConsent
-uniconsent.com
-cdn.uniconsent.com
+@@||uniconsent.com^
+@@||cdn.uniconsent.com^
 
 ! Termly
-app.termly.io
-cdn.termly.io
+@@||app.termly.io^
+@@||cdn.termly.io^
 
 ! Klaro
-klaro.kiprotect.com
+@@||klaro.kiprotect.com^
 
 
 ! ==========================================
@@ -165,11 +165,11 @@ klaro.kiprotect.com
 ! ==========================================
 
 ! Google Consent Mode
-consent.google.com
-consent.googleapis.com
+@@||consent.google.com^
+@@||consent.googleapis.com^
 
 ! Funding Choices (déprécié par Google mais encore résiduel)
-fundingchoicesmessages.google.com
+@@||fundingchoicesmessages.google.com^
 
 
 ! ==========================================
@@ -177,8 +177,8 @@ fundingchoicesmessages.google.com
 ! ==========================================
 
 ! Cookie-Script
-cookie-script.com
-cdn.cookie-script.com
+@@||cookie-script.com^
+@@||cdn.cookie-script.com^
 
 ! Privacy Portal (portails de droit d'accès allemands)
-privacyportal.de
+@@||privacyportal.de^
