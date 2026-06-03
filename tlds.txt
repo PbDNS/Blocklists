@@ -40,12 +40,13 @@
 ||*.sbs^
 
 ! ── TIER 4 — Volume absolu élevé + score modéré ────
-||*.xyz^
-||*.vip^
+||*.xyz^$denyallow=tipfly.xyz
+||*.vip^$denyallow=numero.vip
 ||*.shop^
-||*.info^$denyallow=korben.info
+||*.info^$denyallow=korben.info|res.mail.laposte.info
 ||*.online^
-||*.cc^$denyallow=www.wikibox.cc|zimage.cc
+||*.cc^$denyallow=www.wikibox.cc|zimage.cc|dl-protect.cc|pixibay.cc
+
 ||*.site^
 ||*.click^
 ||*.ru^
@@ -67,7 +68,7 @@
 ||*.lat^
 ||*.cyou^
 ||*.pw^
-||*.ws^
+||*.ws^$denyallow=vudeo.ws
 ||*.biz^$denyallow=vidmoly.biz
 
 ! ── TIER 6 — Émergents / signalés Spamhaus 2025 ────
