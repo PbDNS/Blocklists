@@ -6,6 +6,12 @@ www.gstatic.com
 yt3.ggpht.com
 yt3.googleusercontent.com
 
+! Apple ( bloquer xp provoque freezes sur iphone)
+xp-cdn-lb.itunes-apple.com.akadns.net
+xp.apple.com
+xp.itunes-apple.com.akadns.net
+xp.v.aaplimg.com
+
 ! gestion cookies programme-tv.net
 gate.first-id.fr
 
@@ -46,8 +52,7 @@ static.hotjar.com
 tags.tiqcdn.com
 wander.science
 www.titanium-software.fr
-xp.apple.com
-xp.v.aaplimg.com
+
 
 ! --------------------------------------------------
 
