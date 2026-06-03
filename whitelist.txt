@@ -8,8 +8,6 @@ yt3.googleusercontent.com
 
 ! gestion cookies programme-tv.net
 gate.first-id.fr
-! ---
-connect.programme-tv.net
 
 ! vignettes dailymotion.com
 graphql.api.dailymotion.com
@@ -33,62 +31,23 @@ try.abtasty.com
 ! certificats let's encrypt
 e5.o.lencr.org
 
-! trackers torrent
-tracker.birkenwald.de
-tracker.bittor.pw
-tracker.coppersurfer.tk
-tracker.internetwarriors.net
-tracker.moxing.party
-tracker.parrotsec.org
-tracker.ololosh.space
-open.free-tracker.ga
-acg.rip
-asnet.pw
-bangumi.moe
-crackingpatching.com
-utracker.ghostchu-services.top
-www.worldivx.cc
-www.wikibox.cc
-
 ! divers
 brew.sh
 cdnjs.cloudflare.com
-configurator.porsche.com
 dealabs.digidip.net
-dl-protect.cc
 dl-protect.link
 dns.notjakob.com
 dynamicwallpaper.club
 fluxradios.blogspot.com
-hdstream.cool
 hola.org
-icc.xcc.porsche.digital
-images.tgtg.ninja
-iod.prs.porsche.com
-ippacket.stream
-jazzmusic.cool
-k2s.cc
-korben.info
-lx1.dyncdn.cc
-next.ink
-numero.vip
 partiality.itunes.apple.com
-pixibay.cc
-portail.lol
-res.mail.laposte.info
 simpledns.plus
 static.hotjar.com
 tags.tiqcdn.com
-tipfly.xyz
-up4fun.top
-ups2up.fun
-vudeo.ws
 wander.science
-www.server-world.info
 www.titanium-software.fr
 xp.apple.com
 xp.v.aaplimg.com
-zimage.cc
 
 ! --------------------------------------------------
 
