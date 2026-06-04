@@ -47,6 +47,9 @@
 ! contenu mails shopopop
 @@||cdn.braze.eu^
 
+! vidéos ina.fr
+@@||ssl.p.jwpcdn.com^
+
 ! divers
 @@||brew.sh^
 @@||cdnjs.cloudflare.com^
