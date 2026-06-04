@@ -44,6 +44,9 @@
 ! medias player WF
 @@||yastatic.net^
 
+! contenu mails shopopop
+@@||cdn.braze.eu^
+
 ! divers
 @@||brew.sh^
 @@||cdnjs.cloudflare.com^
