@@ -16,7 +16,6 @@
 
 </div>
 <!-- STATS_END -->
-</div>
 
 <div align="center">
 
