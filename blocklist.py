@@ -285,7 +285,6 @@ def update_readme(stats: dict[str, int], readme_path: str = "README.md") -> None
     source_count = len(BLOCKLIST_URLS)
 
     new_table = (
-        "\n"
         '<div align="center">\n'
         "\n"
         f"![filtres](https://img.shields.io/badge/filtres%20uniques-{count_formatted}-A43836?style=for-the-badge)\n"
