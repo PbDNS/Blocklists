@@ -63,13 +63,7 @@ OUTPUT_FILE = "local.txt"
 RULE_LIMIT = 150_000
 
 # ---------------------------------------------------------------------------
-# TLDs rares — à adapter selon les résultats de tests
-# Pays asiatiques à faible trafic occidental :
-#   .vn  Vietnam    ~80 
-#   .kh  Cambodge   ~5
-#   .mm  Myanmar    -5
-#   .la  Laos      
-#   .mn  Mongolie
+# TLDs rares — à adapter selon les résultats de tests (~400 filtres actuels)
 # ---------------------------------------------------------------------------
 
 RARE_TLDS: set[str] = {
