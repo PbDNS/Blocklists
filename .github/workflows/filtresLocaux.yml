@@ -1,4 +1,4 @@
-name: génération de local_network.txt et local_cosmetic.txt
+name: génération de local.txt
 
 on:
   schedule:
@@ -22,13 +22,13 @@ jobs:
           python-version: '3.14'
           check-latest: true
 
-      - name: Exécuter filtresLocaux.py
-        run: python scripts/filtresLocaux.py
+      - name: Exécuter local_blocklist.py
+        run: python scripts/local_blocklist.py
 
-      - name: Commit et push de local_network.txt et local_cosmetic.txt
+      - name: Commit et push de local.txt
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add local_network.txt local_cosmetic.txt
-          git commit -m "🤖 mise à jour local_network.txt et local_cosmetic.txt - $(date '+%d/%m/%Y %H:%M')" || echo "aucun changement à committer"
+          git add filtresLocaux.txt
+          git commit -m "🤖 mise à jour local.txt - $(date '+%d/%m/%Y %H:%M')" || echo "aucun changement à committer"
           git push
