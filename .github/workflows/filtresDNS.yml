@@ -1,4 +1,4 @@
-name: génération de blocklist.txt
+name: génération de filtresDNS.txt
 
 on:
   schedule:
@@ -43,10 +43,10 @@ jobs:
           LANG: fr_FR.UTF-8
           LC_ALL: fr_FR.UTF-8
 
-      - name: commit et push de blocklist.txt et README.md
+      - name: commit et push de filtresDNS.txt et README.md
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add blocklist.txt README.md
+          git add filtresDNS.txt README.md
           git commit -m "🤖 mise à jour automatique - $(date '+%d/%m/%Y %H:%M')" || echo "aucun changement à committer"
           git push
