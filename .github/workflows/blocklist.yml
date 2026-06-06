@@ -38,7 +38,7 @@ jobs:
           echo "LC_ALL=fr_FR.UTF-8" >> $GITHUB_ENV
 
       - name: Exécuter blocklist.py
-        run: python blocklist.py
+        run: python scripts/blocklist.py
         env:
           LANG: fr_FR.UTF-8
           LC_ALL: fr_FR.UTF-8
