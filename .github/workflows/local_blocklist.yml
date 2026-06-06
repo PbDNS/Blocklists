@@ -23,7 +23,7 @@ jobs:
           check-latest: true
 
       - name: Exécuter local_blocklist.py
-        run: python local_blocklist.py
+        run: python scripts/local_blocklist.py
 
       - name: Commit et push de local.txt
         run: |
