@@ -32,6 +32,7 @@ import urllib.request
 # ---------------------------------------------------------------------------
 
 ########### Listes incluses ###########
+# AdGuard DNS Filter
 # AdGuard Tracking Protection Filter
 # Easy Privacy
 # Online Security Filter
@@ -41,6 +42,8 @@ import urllib.request
 # ByPass Paywalls Clean Filter
 
 BLOCKLIST_URLS: list[tuple[str, str]] = [
+    ("AdGuard DNS Filter",
+     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/2_optimized.txt"),
     ("AdGuard Tracking Protection Filter",
      "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/3_optimized.txt"),
     ("Easy Privacy",
