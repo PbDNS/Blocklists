@@ -12,10 +12,11 @@ Déduplication avancée :
   - Règles d'exception en doublon (@@||…^)
   - Normalisation de casse pour les règles purement textuelles
 
-Sortie — deux fichiers sémantiquement distincts :
-  - local_network.txt  : règles réseau  (||domaine^, @@||domaine^, règles $options,
-                          regex /…/, règles de réécriture)
-  - local_cosmetic.txt : règles cosmétiques (##, #@#, #%#//scriptlet, ##+js(…))
+Compression par TLD :
+  Si le nombre de règles dépasse RULE_LIMIT (150 000), les règles ||domaine^
+  dont le TLD figure dans RARE_TLDS sont remplacées par une règle wildcard
+  ||*.tld^ unique. Les règles d'exception @@||domaine^ sur ces TLDs sont
+  conservées intactes (principe de moindre surprise).
 """
 
 from __future__ import annotations
@@ -25,7 +26,6 @@ import re
 import ipaddress
 import urllib.error
 import urllib.request
-from pathlib import Path
 
 # ---------------------------------------------------------------------------
 # Constantes
@@ -57,8 +57,28 @@ BLOCKLIST_URLS: list[tuple[str, str]] = [
      "https://bpc-filter-proxy.wmailrelayb8d890.workers.dev"),
 ]
 
-OUTPUT_NETWORK  = "local_network.txt"
-OUTPUT_COSMETIC = "local_cosmetic.txt"
+OUTPUT_FILE = "local.txt"
+
+# Seuil de déclenchement de la compression par TLD
+RULE_LIMIT = 150_000
+
+# ---------------------------------------------------------------------------
+# TLDs rares — à adapter selon les résultats de tests
+# Pays asiatiques à faible trafic occidental :
+#   .vn  Vietnam
+#   .kh  Cambodge
+#   .mm  Myanmar
+#   .la  Laos
+#   .mn  Mongolie
+# ---------------------------------------------------------------------------
+
+RARE_TLDS: set[str] = {
+    "vn",   # Vietnam
+    "kh",   # Cambodge
+    "mm",   # Myanmar
+    "la",   # Laos
+    "mn",   # Mongolie
+}
 
 # ---------------------------------------------------------------------------
 # Regex pré-compilées
@@ -67,16 +87,8 @@ OUTPUT_COSMETIC = "local_cosmetic.txt"
 _RE_VALID_DOMAIN     = re.compile(
     r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$"
 )
-# Règle de blocage de domaine pur  : ||example.com^
 _RE_PURE_DOMAIN_RULE = re.compile(r"^\|\|([a-zA-Z0-9._-]+)\^$")
-# Règle d'exception de domaine pur : @@||example.com^
 _RE_PURE_ALLOW_RULE  = re.compile(r"^@@\|\|([a-zA-Z0-9._-]+)\^$")
-
-# Règles cosmétiques / scriptlets — tout ce qui contient ## #@# #%# ##+js
-# On détecte intentionnellement large pour ne rien rater.
-_RE_COSMETIC = re.compile(
-    r"(?:^|[^!])(?:##|#@#|#\?#|#%#|##\+js\(|#@#\+js\()"
-)
 
 _DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; local-blocklist/1.0)"}
 
@@ -85,7 +97,6 @@ _DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; local-blocklist/1.0)
 # ---------------------------------------------------------------------------
 
 def is_valid_domain(domain: str) -> bool:
-    """Retourne True si *domain* est un FQDN valide (ni IP, ni wildcard)."""
     try:
         ipaddress.ip_address(domain)
         return False
@@ -95,12 +106,10 @@ def is_valid_domain(domain: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# Trie de domaines (déduplication des sous-domaines dans les règles ||…^)
+# Trie de domaines
 # ---------------------------------------------------------------------------
 
 class DomainTrieNode:
-    """Nœud d'un trie de domaines inversés."""
-
     __slots__ = ("children", "is_terminal")
 
     def __init__(self) -> None:
@@ -108,21 +117,16 @@ class DomainTrieNode:
         self.is_terminal: bool = False
 
     def insert(self, parts: list[str]) -> bool:
-        """
-        Insère un domaine (labels inversés) dans le trie.
-        Retourne False si un domaine parent est déjà présent (redondance).
-        """
         node = self
         for part in parts:
             if node.is_terminal:
-                return False   # parent déjà bloqué → sous-domaine inutile
+                return False
             node = node.children.setdefault(part, DomainTrieNode())
         node.is_terminal = True
         return True
 
 
 def _domain_parts(domain: str) -> list[str]:
-    """'sub.example.com' → ['com', 'example', 'sub']"""
     return domain.lower().strip().split(".")[::-1]
 
 
@@ -131,10 +135,6 @@ def _domain_parts(domain: str) -> list[str]:
 # ---------------------------------------------------------------------------
 
 def download_list(name: str, url: str) -> list[str]:
-    """
-    Télécharge une liste et retourne ses lignes brutes (hors commentaires
-    et lignes vides).
-    """
     try:
         req = urllib.request.Request(url, headers=_DEFAULT_HEADERS)
         with urllib.request.urlopen(req, timeout=30) as resp:
@@ -152,9 +152,7 @@ def download_list(name: str, url: str) -> list[str]:
     lines: list[str] = []
     for raw in content.splitlines():
         line = raw.strip()
-        if not line:
-            continue
-        if line.startswith("!") or line.startswith("#"):
+        if not line or line.startswith("!") or line.startswith("#"):
             continue
         lines.append(line)
 
@@ -163,48 +161,18 @@ def download_list(name: str, url: str) -> list[str]:
 
 
 # ---------------------------------------------------------------------------
-# Classification réseau / cosmétique
-# ---------------------------------------------------------------------------
-
-def classify(all_lines: list[str]) -> tuple[list[str], list[str]]:
-    """
-    Sépare les règles en deux catégories :
-      - network  : règles réseau (||…^, @@||…^, /regex/, règles $options, …)
-      - cosmetic : règles cosmétiques et scriptlets (##, #@#, #%#, ##+js)
-
-    Critère de classification :
-      Une règle est cosmétique si elle contient un séparateur cosmétique
-      (##+js, ##, #@#, #?#, #%#) hors contexte de commentaire.
-      Tout le reste est réseau.
-    """
-    network: list[str] = []
-    cosmetic: list[str] = []
-
-    for line in all_lines:
-        if _RE_COSMETIC.search(line):
-            cosmetic.append(line)
-        else:
-            network.append(line)
-
-    return network, cosmetic
-
-
-# ---------------------------------------------------------------------------
 # Déduplication avancée
 # ---------------------------------------------------------------------------
 
-def deduplicate_network(lines: list[str]) -> list[str]:
+def deduplicate(all_lines: list[str]) -> list[str]:
     """
-    Déduplique les règles réseau en trois passes :
-
-    1. Doublon strict (set) + normalisation de casse des règles ||…^ et @@||…^.
-    2. Trie sur les règles ||domaine^ pures : sous-domaines redondants supprimés.
-    3. Trie sur les règles @@||domaine^ pures : idem.
+    Passe 1 : déduplication stricte + normalisation de casse ||…^ / @@||…^.
+    Passe 2 : trie sur les règles ||domaine^ pures.
+    Passe 3 : trie sur les règles @@||domaine^ pures.
     """
-    # Passe 1 : déduplication stricte
     seen: set[str] = set()
     unique: list[str] = []
-    for line in lines:
+    for line in all_lines:
         norm = line.lower() if (_RE_PURE_DOMAIN_RULE.match(line)
                                 or _RE_PURE_ALLOW_RULE.match(line)) else line
         if norm not in seen:
@@ -213,7 +181,7 @@ def deduplicate_network(lines: list[str]) -> list[str]:
 
     block_pure:  list[str] = []
     allow_pure:  list[str] = []
-    other_net:   list[str] = []
+    other_rules: list[str] = []
 
     for line in unique:
         if _RE_PURE_DOMAIN_RULE.match(line):
@@ -221,9 +189,8 @@ def deduplicate_network(lines: list[str]) -> list[str]:
         elif _RE_PURE_ALLOW_RULE.match(line):
             allow_pure.append(line)
         else:
-            other_net.append(line)
+            other_rules.append(line)
 
-    # Passe 2 : trie blocage
     block_trie = DomainTrieNode()
     final_block: list[str] = []
     for rule in sorted(block_pure, key=lambda r: r.count(".")):
@@ -233,7 +200,6 @@ def deduplicate_network(lines: list[str]) -> list[str]:
             if is_valid_domain(domain) and block_trie.insert(_domain_parts(domain)):
                 final_block.append(rule)
 
-    # Passe 3 : trie exceptions
     allow_trie = DomainTrieNode()
     final_allow: list[str] = []
     for rule in sorted(allow_pure, key=lambda r: r.count(".")):
@@ -243,35 +209,57 @@ def deduplicate_network(lines: list[str]) -> list[str]:
             if is_valid_domain(domain) and allow_trie.insert(_domain_parts(domain)):
                 final_allow.append(rule)
 
-    return final_block + final_allow + other_net
+    return final_block + final_allow + other_rules
 
 
-def deduplicate_cosmetic(lines: list[str]) -> list[str]:
+# ---------------------------------------------------------------------------
+# Compression par TLD
+# ---------------------------------------------------------------------------
+
+def compress_by_tld(rules: list[str], rare_tlds: set[str]) -> list[str]:
     """
-    Déduplique les règles cosmétiques par déduplication stricte uniquement.
+    Remplace les règles ||domaine.tld^ dont le TLD est dans `rare_tlds` par
+    une règle wildcard unique ||*.tld^.
 
-    Une comparaison sémantique complète nécessiterait un vrai moteur AdBlock ;
-    on se limite donc à l'égalité de chaîne (insensible à la casse pour les
-    sélecteurs purement ASCII).
+    - Les règles @@||domaine.tld^ (exceptions) sont conservées intactes.
+    - Les autres règles (cosmétiques, regex, $options…) ne sont pas touchées.
     """
-    seen: set[str] = set()
-    unique: list[str] = []
-    for line in lines:
-        norm = line.lower()
-        if norm not in seen:
-            seen.add(norm)
-            unique.append(line)   # on conserve la casse d'origine
-    return unique
+    kept: list[str] = []
+    tlds_to_wildcard: set[str] = set()
+
+    for rule in rules:
+        m = _RE_PURE_DOMAIN_RULE.match(rule)
+        if m:
+            domain = m.group(1)
+            tld = domain.rsplit(".", 1)[-1].lower()
+            if tld in rare_tlds:
+                tlds_to_wildcard.add(tld)
+                continue   # règle individuelle abandonnée
+        kept.append(rule)
+
+    wildcards = sorted(f"||*.{tld}^" for tld in tlds_to_wildcard)
+
+    print(f"  TLDs compressés    : {sorted(tlds_to_wildcard)}")
+    print(f"  Règles wildcard    : {len(wildcards)}")
+
+    return wildcards + kept
 
 
 # ---------------------------------------------------------------------------
 # Écriture
 # ---------------------------------------------------------------------------
 
-def write_output(rules: list[str], path: str) -> None:
-    """Écrit les règles dans *path* sans en-tête ni commentaire."""
+def _sort_key(r: str) -> tuple[int, str]:
+    if r.startswith("||*.")          : return (0, r)   # wildcards TLD en tête
+    if _RE_PURE_DOMAIN_RULE.match(r) : return (1, r)
+    if _RE_PURE_ALLOW_RULE.match(r)  : return (2, r)
+    return (3, r)
+
+
+def write_output(rules: list[str], path: str = OUTPUT_FILE) -> None:
+    """Écrit les règles triées dans *path* sans en-tête ni commentaire."""
     with open(path, "w", encoding="utf-8") as fh:
-        for rule in rules:
+        for rule in sorted(rules, key=_sort_key):
             fh.write(rule + "\n")
 
 
@@ -292,38 +280,26 @@ def main() -> None:
     raw_count = len(all_raw)
     print(f"\n📥 Total brut       : {raw_count:,} règles")
 
-    # Classification
-    print("🗂  Classification réseau / cosmétique…")
-    network_raw, cosmetic_raw = classify(all_raw)
-    print(f"   réseau brut      : {len(network_raw):,} règles")
-    print(f"   cosmétique brut  : {len(cosmetic_raw):,} règles")
-
-    # Déduplication
     print("🔍 Déduplication…")
-    final_network  = deduplicate_network(network_raw)
-    final_cosmetic = deduplicate_cosmetic(cosmetic_raw)
+    final_rules = deduplicate(all_raw)
+    dedup_count = len(final_rules)
+    print(f"   Après dédup      : {dedup_count:,} règles"
+          f"  (−{raw_count - dedup_count:,} redondances)")
 
-    # Tri final
-    def _sort_key_net(r: str) -> tuple[int, str]:
-        if _RE_PURE_DOMAIN_RULE.match(r):  return (0, r)
-        if _RE_PURE_ALLOW_RULE.match(r):   return (1, r)
-        return (2, r)
+    if dedup_count > RULE_LIMIT:
+        print(f"\n⚠️  Limite {RULE_LIMIT:,} dépassée ({dedup_count:,})."
+              f" Compression par TLD…")
+        final_rules = compress_by_tld(final_rules, RARE_TLDS)
+        final_count = len(final_rules)
+        print(f"   Après compression : {final_count:,} règles"
+              f"  (−{dedup_count - final_count:,} règles remplacées)")
+    else:
+        final_count = dedup_count
+        print(f"✅ Limite non atteinte ({dedup_count:,} ≤ {RULE_LIMIT:,})"
+              f" — compression inutile.")
 
-    final_network.sort(key=_sort_key_net)
-    final_cosmetic.sort(key=str.lower)
-
-    net_count = len(final_network)
-    cos_count = len(final_cosmetic)
-
-    print(f"\n✅ local_network.txt  : {net_count:,} règles "
-          f"(−{len(network_raw)  - net_count:,} redondances)")
-    print(f"✅ local_cosmetic.txt : {cos_count:,} règles "
-          f"(−{len(cosmetic_raw) - cos_count:,} redondances)")
-    print(f"   Total final        : {net_count + cos_count:,} règles")
-
-    write_output(final_network,  OUTPUT_NETWORK)
-    write_output(final_cosmetic, OUTPUT_COSMETIC)
-    print(f"\n💾 {OUTPUT_NETWORK} et {OUTPUT_COSMETIC} générés.")
+    write_output(final_rules, OUTPUT_FILE)
+    print(f"\n💾 {OUTPUT_FILE} généré : {final_count:,} règles.")
 
 
 if __name__ == "__main__":
