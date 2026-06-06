@@ -65,19 +65,19 @@ RULE_LIMIT = 150_000
 # ---------------------------------------------------------------------------
 # TLDs rares — à adapter selon les résultats de tests
 # Pays asiatiques à faible trafic occidental :
-#   .vn  Vietnam
-#   .kh  Cambodge
-#   .mm  Myanmar
-#   .la  Laos
+#   .vn  Vietnam    ~80 
+#   .kh  Cambodge   ~5
+#   .mm  Myanmar    -5
+#   .la  Laos      
 #   .mn  Mongolie
 # ---------------------------------------------------------------------------
 
 RARE_TLDS: set[str] = {
-    "vn",   # Vietnam
-    "kh",   # Cambodge
-    "mm",   # Myanmar
-    "la",   # Laos
-    "mn",   # Mongolie
+    "vn",  "kh",  "mm",  "la",  "mn",  # Asie du Sud-Est
+    "bd",  "pk",  "uz",                 # Asie du Sud & Centrale
+    "ml",  "cf",  "gq",  "ga",  "td",  # Afrique (fort volume spam)
+    "kp",                               # Corée du Nord
+    "sy",                               # Syrie
 }
 
 # ---------------------------------------------------------------------------
