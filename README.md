@@ -9,7 +9,7 @@
 
 <!-- STATS_START --><div align="center">
 
-![filtres](https://img.shields.io/badge/filtres%20uniques-504%2C408-A43836?style=for-the-badge)
+![filtres](https://img.shields.io/badge/filtres%20uniques-504%2C634-A43836?style=for-the-badge)
 ![listes](https://img.shields.io/badge/sources-31%20listes-E9BD98?style=for-the-badge)
 ![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-F5E6CA?style=for-the-badge)
 
