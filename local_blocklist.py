@@ -37,7 +37,7 @@ from pathlib import Path
 # ByPass Paywalls Clean Filter
 
 BLOCKLIST_URLS: list[tuple[str, str]] = [
-    ("AdGuard Base Filter",                  "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/2_optimized.txt"),
+    # ("AdGuard Base Filter",                  "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/2_optimized.txt"),
     ("AdGuard Tracking Protection Filter",   "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/3_optimized.txt"),
     ("Easy Privacy",                         "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/118_optimized.txt"),
     ("Online Security Filter",               "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/208_optimized.txt"),
