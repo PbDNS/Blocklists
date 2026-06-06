@@ -44,8 +44,8 @@
 ||*.vip^$denyallow=numero.vip
 ||*.shop^
 ||*.info^$denyallow=korben.info|res.mail.laposte.info
-||*.online^
-||*.cc^$denyallow=www.wikibox.cc|zimage.cc|dl-protect.cc|pixibay.cc|www.sharework1.cc
+||*.online^$denyallow=vmwesa.online
+||*.cc^$denyallow=www.wikibox.cc|zimage.cc|dl-protect.cc|pixibay.cc|www.sharework1.cc|pixelflare.cc
 
 ||*.site^
 ||*.click^
