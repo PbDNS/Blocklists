@@ -23,7 +23,7 @@ jobs:
           check-latest: true
 
       - name: Exécuter filtresLocaux.py
-        run: python filtresLocaux.py
+        run: python scripts/filtresLocaux.py
 
       - name: Commit et push de local_network.txt et local_cosmetic.txt
         run: |
