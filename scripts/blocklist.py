@@ -260,7 +260,7 @@ def domain_to_parts(domain: str) -> list[str]:
 
 def write_blocklist(
     entries: set[str],
-    output_path: str = "blocklist.txt",
+    output_path: str = "filtresDNS.txt",
     timestamp: str = "",
 ) -> None:
     """Écrit les entrées triées dans un fichier au format AdBlock."""
@@ -353,7 +353,7 @@ def main() -> None:
 
     # 5. Écriture de la blocklist
     write_blocklist(final_entries, timestamp=timestamp)
-    print(f"✅ blocklist.txt généré : {total} entrées")
+    print(f"✅ filtresDNS.txt généré : {total} entrées")
 
     # 6. Mise à jour du README
     update_readme({"after": total})
