@@ -26,7 +26,7 @@
 
 ! ── TIER 3 — Score 250–500 : haute densité ─────────
 ||*.top^
-||*.lol^$denyallow=lukefirst.lol
+||*.lol^
 ||*.world^
 ||*.fyi^
 ||*.cyou^
