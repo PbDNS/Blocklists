@@ -93,6 +93,7 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # HaGeZi's Badware Hoster Blocklist
 # HaGeZi's DynDNS Blocklist
 # HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# HaGeZi's Fake DNS Blocklist
 # HaGeZi's Normal DNS Blocklist
 # HaGeZi's Pop-Up Ads DNS Blocklist
 # HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
@@ -113,37 +114,38 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # d3Host
 
 BLOCKLIST_URLS: list[str] = [
-"https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
-"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
-"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
-"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
-"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt",
-"https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
-"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
-"https://small.oisd.nl/",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
 "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_18.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
 "https://adguardteam.github.io/HostlistsRegistry/assets/filter_52.txt",
 "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
-"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
-"https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_18.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
+"https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
+"https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/fake.txt",
+"https://dl.red.flag.domains/red.flag.domains_fr.txt",
 "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
 "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
+"https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
+"https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
 "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
-"https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
-"https://dl.red.flag.domains/red.flag.domains_fr.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
+"https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
+"https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
+"https://small.oisd.nl/"
 ]
 
 # Regex pré-compilées au niveau module pour éviter la recompilation à chaque appel
