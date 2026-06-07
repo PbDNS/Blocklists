@@ -34,7 +34,6 @@ import urllib.request
 
 ########### Listes incluses ###########
 # exclu (dépassement +180000) : AdGuard DNS Filter
-# exclusions personnelles
 # additions personnelles
 # AdGuard French Filter
 # AdGuard Tracking Protection Filter
@@ -48,8 +47,6 @@ import urllib.request
 BLOCKLIST_URLS: list[tuple[str, str]] = [
     # ("AdGuard DNS Filter",
     #  "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/2_optimized.txt"),
-    ("exclusions personnelles",
-     "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/exclusions.txt"),
     ("additions personnelles",
      "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt"),
     ("AdGuard French Filter",
