@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ Blocklist
+# 🛡️ Listes de filtrage
 
 ![Format](https://img.shields.io/badge/format-Adblock%20Plus-4A919E)
 ![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-BED3C3)
@@ -78,6 +78,7 @@ Le résultat est une liste **compacte et sans redondance**, où chaque entrée e
 - **HaGeZi's Badware Hoster Blocklist**
 - **HaGeZi's DynDNS Blocklist**
 - **HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass**
+- **HaGeZi's Fake DNS Blocklist**
 
 ### Sécurité & Phishing
 - **Phishing Army**
