@@ -145,7 +145,7 @@ BLOCKLIST_URLS: list[str] = [
 "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
 "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
 "https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
-"https://small.oisd.nl/"
+"https://small.oisd.nl/",
 ]
 
 # Regex pré-compilées au niveau module pour éviter la recompilation à chaque appel
