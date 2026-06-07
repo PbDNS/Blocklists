@@ -60,7 +60,6 @@ Si une source contient :
 alors le fichier final ne conservera que `example.com`, car il couvre déjà
 les sous-domaines dans la logique de blocage DNS utilisée ici.
 """
-"""
 
 from __future__ import annotations
 
