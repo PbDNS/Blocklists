@@ -92,6 +92,7 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # HaGeZi's Badware Hoster Blocklist
 # HaGeZi's DynDNS Blocklist
 # HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# HaGeZi's Fake DNS Blocklist
 # HaGeZi's Normal DNS Blocklist
 # HaGeZi's Pop-Up Ads DNS Blocklist
 # HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
