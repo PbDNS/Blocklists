@@ -4,13 +4,6 @@
 ||api.raygun.io^
 ! ---
 
-! test Adblock - https://superadblocktest.com
-||youtubei.googleapis.com^
-||graph.instagram.com^
-||i.instagram.com^
-||click.mailchimp.com^
-! ---
-
 ! tracking mails ameli.fr
 ||statsndm.info.ameli.fr^
 ||sndm-tracking-cnam.worldline-solutions.com^
@@ -128,3 +121,12 @@
 ||xh.yallowafridi.com^
 ||zenaps.com^
 ||tra.scds.pmdstatic.net.cdn.cloudflare.net^
+
+||list-manage.com^
+||widget.intercom.io^
+||www3.l.google.com^
+||d2gt2ux04o03l1.cloudfront.net^
+||us-ibs-lgappstv-com.aws-prd.net^
+||star.fallback.c10r.instagram.com^
+||instagram.c10r.instagram.com^
+||youtubei.googleapis.com^
