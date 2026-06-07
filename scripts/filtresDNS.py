@@ -113,6 +113,7 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # d3Host
 
 BLOCKLIST_URLS: list[str] = [
+"https://raw.githubusercontent.com/FiltersHeroes/KADhosts/refs/heads/master/KADomains.txt",
 "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/fake.txt",
 "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
 "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
