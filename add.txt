@@ -131,3 +131,4 @@
 ||instagram.c10r.instagram.com^
 ||youtubei.googleapis.com^
 ||vk-ads.com^
+||click.mailchimp.com^
