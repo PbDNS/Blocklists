@@ -78,7 +78,7 @@ HAGEZI_REGEX_URL = (
 OUTPUT_FILE = "filtresLocaux.txt"
 
 # Seuil de déclenchement de la compression
-RULE_LIMIT = 110_000
+RULE_LIMIT = 150_000
 
 # ---------------------------------------------------------------------------
 # Regex pré-compilées
