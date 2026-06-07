@@ -60,6 +60,7 @@ Si une source contient :
 alors le fichier final ne conservera que `example.com`, car il couvre déjà
 les sous-domaines dans la logique de blocage DNS utilisée ici.
 """
+"""
 
 from __future__ import annotations
 
@@ -87,6 +88,7 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # Dandelion Sprout's Anti Push Notifications
 # Dandelion Sprout's Anti-Malware List
 # EasyList FR
+# HaGeZi's Fake DNS Blocklist
 # HaGeZi's Amazon Tracker DNS Blocklist
 # HaGeZi's Apple Tracker DNS Blocklist
 # HaGeZi's Badware Hoster Blocklist
@@ -112,6 +114,7 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # d3Host
 
 BLOCKLIST_URLS: list[str] = [
+"https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/fake.txt",
 "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
 "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
 "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
