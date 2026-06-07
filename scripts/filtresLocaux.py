@@ -12,11 +12,12 @@ Déduplication avancée :
   - Règles d'exception en doublon (@@||…^)
   - Normalisation de casse pour les règles purement textuelles
 
-Compression par TLD :
-  Si le nombre de règles dépasse RULE_LIMIT (150 000), les règles ||domaine^
-  dont le TLD figure dans RARE_TLDS sont remplacées par une règle wildcard
-  ||*.tld^ unique. Les règles d'exception @@||domaine^ sur ces TLDs sont
-  conservées intactes (principe de moindre surprise).
+Compression par regex/wildcard Hagezi :
+  Si le nombre de règles dépasse RULE_LIMIT (150 000) :
+    1. Téléchargement de la liste HaGeZi regex-wildcard-rules
+    2. Injection de ces règles en tête du fichier final
+    3. Suppression de toutes les règles ||domaine^ couvertes par ces patterns
+       (regex /…/ et wildcards |*…*^)
 """
 
 from __future__ import annotations
@@ -32,7 +33,7 @@ import urllib.request
 # ---------------------------------------------------------------------------
 
 ########### Listes incluses ###########
-# # exclu, (dépassement +180000) AdGuard DNS Filter
+# exclu (dépassement +180000) : AdGuard DNS Filter
 # exclusions personnelles
 # additions personnelles
 # AdGuard French Filter
@@ -69,22 +70,15 @@ BLOCKLIST_URLS: list[tuple[str, str]] = [
      "https://bpc-filter-proxy.wmailrelayb8d890.workers.dev"),
 ]
 
+HAGEZI_REGEX_URL = (
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists"
+    "/refs/heads/main/adguard/regex-wildcard-rules.txt"
+)
+
 OUTPUT_FILE = "filtresLocaux.txt"
 
-# Seuil de déclenchement de la compression par TLD
-RULE_LIMIT = 150_000
-
-# ---------------------------------------------------------------------------
-# TLDs rares — à adapter selon les résultats de tests (~400 filtres actuels)
-# ---------------------------------------------------------------------------
-
-RARE_TLDS: set[str] = {
-    "vn",  "kh",  "mm",  "la",  "mn",  # Asie du Sud-Est
-    "bd",  "pk",  "uz",                 # Asie du Sud & Centrale
-    "ml",  "cf",  "gq",  "ga",  "td",  # Afrique (fort volume spam)
-    "kp",                               # Corée du Nord
-    "sy",                               # Syrie
-}
+# Seuil de déclenchement de la compression
+RULE_LIMIT = 110_000
 
 # ---------------------------------------------------------------------------
 # Regex pré-compilées
@@ -95,6 +89,11 @@ _RE_VALID_DOMAIN     = re.compile(
 )
 _RE_PURE_DOMAIN_RULE = re.compile(r"^\|\|([a-zA-Z0-9._-]+)\^$")
 _RE_PURE_ALLOW_RULE  = re.compile(r"^@@\|\|([a-zA-Z0-9._-]+)\^$")
+
+# Règles regex Hagezi : /pattern/
+_RE_HAGEZI_REGEX     = re.compile(r"^/(.+)/$")
+# Règles wildcard Hagezi : |*motif*^  (ex: |*faceb00k*^)
+_RE_HAGEZI_WILDCARD  = re.compile(r"^\|\*(.+)\*\^$")
 
 _DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; local-blocklist/1.0)"}
 
@@ -166,6 +165,30 @@ def download_list(name: str, url: str) -> list[str]:
     return lines
 
 
+def fetch_hagezi_regex_wildcard() -> list[str]:
+    """
+    Télécharge la liste HaGeZi regex-wildcard-rules et retourne ses règles
+    actives (hors commentaires et lignes vides).
+    """
+    try:
+        req = urllib.request.Request(HAGEZI_REGEX_URL, headers=_DEFAULT_HEADERS)
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            content = resp.read().decode("utf-8", errors="ignore")
+    except Exception as exc:
+        print(f"  ✗ Impossible de charger HaGeZi regex/wildcard : {exc}")
+        return []
+
+    rules: list[str] = []
+    for raw in content.splitlines():
+        line = raw.strip()
+        if not line or line.startswith("!"):
+            continue
+        rules.append(line)
+
+    print(f"  ✓ HaGeZi regex/wildcard — {len(rules)} règles")
+    return rules
+
+
 # ---------------------------------------------------------------------------
 # Déduplication avancée
 # ---------------------------------------------------------------------------
@@ -219,36 +242,74 @@ def deduplicate(all_lines: list[str]) -> list[str]:
 
 
 # ---------------------------------------------------------------------------
-# Compression par TLD
+# Compression par regex/wildcard Hagezi
 # ---------------------------------------------------------------------------
 
-def compress_by_tld(rules: list[str], rare_tlds: set[str]) -> list[str]:
+def _build_matchers(hagezi_rules: list[str]) -> list[re.Pattern]:
     """
-    Remplace les règles ||domaine.tld^ dont le TLD est dans `rare_tlds` par
-    une règle wildcard unique ||*.tld^.
+    Compile les règles Hagezi en patterns Python pour tester les domaines.
 
-    - Les règles @@||domaine.tld^ (exceptions) sont conservées intactes.
-    - Les autres règles (cosmétiques, regex, $options…) ne sont pas touchées.
+    Deux formats supportés :
+      - /regex/          → compilé directement comme regex
+      - |*motif*^        → converti en regex .*motif.* (recherche partielle)
     """
+    patterns: list[re.Pattern] = []
+    for rule in hagezi_rules:
+        m_re = _RE_HAGEZI_REGEX.match(rule)
+        m_wc = _RE_HAGEZI_WILDCARD.match(rule)
+        try:
+            if m_re:
+                patterns.append(re.compile(m_re.group(1), re.IGNORECASE))
+            elif m_wc:
+                # |*motif*^ → le motif peut apparaître n'importe où dans le domaine
+                escaped = re.escape(m_wc.group(1))
+                patterns.append(re.compile(escaped, re.IGNORECASE))
+        except re.error:
+            pass   # règle mal formée, ignorée
+    return patterns
+
+
+def _domain_matched(domain: str, matchers: list[re.Pattern]) -> bool:
+    """Retourne True si le domaine est couvert par au moins un pattern Hagezi."""
+    for pat in matchers:
+        if pat.search(domain):
+            return True
+    return False
+
+
+def compress_by_hagezi(
+    rules: list[str],
+    hagezi_rules: list[str],
+) -> list[str]:
+    """
+    Injecte les règles Hagezi en tête et supprime toutes les règles
+    ||domaine^ couvertes par ces patterns.
+
+    - Les règles @@||domaine^ (exceptions) sont conservées intactes.
+    - Les règles cosmétiques, $options, etc. ne sont pas touchées.
+    """
+    matchers = _build_matchers(hagezi_rules)
+    if not matchers:
+        print("  ⚠️  Aucun pattern Hagezi compilé — compression ignorée.")
+        return rules
+
     kept: list[str] = []
-    tlds_to_wildcard: set[str] = set()
+    removed = 0
 
     for rule in rules:
         m = _RE_PURE_DOMAIN_RULE.match(rule)
         if m:
             domain = m.group(1)
-            tld = domain.rsplit(".", 1)[-1].lower()
-            if tld in rare_tlds:
-                tlds_to_wildcard.add(tld)
-                continue   # règle individuelle abandonnée
+            if _domain_matched(domain, matchers):
+                removed += 1
+                continue   # couvert par Hagezi → supprimé
         kept.append(rule)
 
-    wildcards = sorted(f"||*.{tld}^" for tld in tlds_to_wildcard)
+    print(f"  Règles supprimées (couvertes par Hagezi) : {removed:,}")
+    print(f"  Règles Hagezi injectées en tête          : {len(hagezi_rules)}")
 
-    print(f"  TLDs compressés    : {sorted(tlds_to_wildcard)}")
-    print(f"  Règles wildcard    : {len(wildcards)}")
-
-    return wildcards + kept
+    # Hagezi en tête, puis le reste
+    return hagezi_rules + kept
 
 
 # ---------------------------------------------------------------------------
@@ -256,14 +317,15 @@ def compress_by_tld(rules: list[str], rare_tlds: set[str]) -> list[str]:
 # ---------------------------------------------------------------------------
 
 def _sort_key(r: str) -> tuple[int, str]:
-    if r.startswith("||*.")          : return (0, r)   # wildcards TLD en tête
-    if _RE_PURE_DOMAIN_RULE.match(r) : return (1, r)
-    if _RE_PURE_ALLOW_RULE.match(r)  : return (2, r)
-    return (3, r)
+    if _RE_HAGEZI_REGEX.match(r)    : return (0, r)   # regex /…/ en tête
+    if _RE_HAGEZI_WILDCARD.match(r) : return (1, r)   # wildcards |*…*^
+    if _RE_PURE_DOMAIN_RULE.match(r): return (2, r)
+    if _RE_PURE_ALLOW_RULE.match(r) : return (3, r)
+    return (4, r)
 
 
 def write_output(rules: list[str], path: str = OUTPUT_FILE) -> None:
-    """Écrit les règles triées dans *path* sans en-tête ni commentaire."""
+    """Écrit les règles dans *path* sans en-tête ni commentaire."""
     with open(path, "w", encoding="utf-8") as fh:
         for rule in sorted(rules, key=_sort_key):
             fh.write(rule + "\n")
@@ -293,12 +355,18 @@ def main() -> None:
           f"  (−{raw_count - dedup_count:,} redondances)")
 
     if dedup_count > RULE_LIMIT:
-        print(f"\n⚠️  Limite {RULE_LIMIT:,} dépassée ({dedup_count:,})."
-              f" Compression par TLD…")
-        final_rules = compress_by_tld(final_rules, RARE_TLDS)
-        final_count = len(final_rules)
-        print(f"   Après compression : {final_count:,} règles"
-              f"  (−{dedup_count - final_count:,} règles remplacées)")
+        print(f"\n⚠️  Limite {RULE_LIMIT:,} dépassée ({dedup_count:,}).")
+        print("⬇  Chargement des règles HaGeZi regex/wildcard…")
+        hagezi_rules = fetch_hagezi_regex_wildcard()
+        if hagezi_rules:
+            print("🗜  Compression…")
+            final_rules = compress_by_hagezi(final_rules, hagezi_rules)
+            final_count = len(final_rules)
+            print(f"   Après compression : {final_count:,} règles"
+                  f"  (−{dedup_count - final_count + len(hagezi_rules):,} net)")
+        else:
+            print("  ⚠️  Hagezi indisponible — compression ignorée.")
+            final_count = dedup_count
     else:
         final_count = dedup_count
         print(f"✅ Limite non atteinte ({dedup_count:,} ≤ {RULE_LIMIT:,})"
