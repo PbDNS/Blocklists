@@ -46,8 +46,8 @@ import urllib.request
 # ByPass Paywalls Clean Filter
 
 BLOCKLIST_URLS: list[tuple[str, str]] = [
-    ("AdGuard DNS Filter",
-     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/2_optimized.txt"),
+    # ("AdGuard DNS Filter",
+    #  "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/2_optimized.txt"),
     ("exclusions personnelles",
      "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/exclusions.txt"),
     ("additions personnelles",
@@ -56,8 +56,8 @@ BLOCKLIST_URLS: list[tuple[str, str]] = [
      "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/refs/heads/master/platforms/extension/safari/filters/16_optimized.txt"),
     ("AdGuard Tracking Protection Filter",
      "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/3_optimized.txt"),
-    # ("Easy Privacy",
-    #  "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/118_optimized.txt"),
+    ("Easy Privacy",
+     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/118_optimized.txt"),
     ("Online Security Filter",
      "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/platforms/extension/safari/filters/208_optimized.txt"),
     ("AdGuard Popup Annoyances",
