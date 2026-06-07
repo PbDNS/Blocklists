@@ -52,7 +52,7 @@ Le résultat est une liste **compacte et sans redondance**, où chaque entrée e
 ## Sources incluses
 
 <details>
-<summary>📋 Voir les 31 listes sources</summary>
+<summary>📋 Voir les 33 listes sources</summary>
 
 ### Généralistes
 - **OISD Small** - liste générale de référence
@@ -97,6 +97,6 @@ Le résultat est une liste **compacte et sans redondance**, où chaque entrée e
 - **Stalkerware Indicators List**
 - **d3Host**
 - **PbDNS Additional Rules** - règles personnalisées
-
+- **KADhosts**
 </details>
 
