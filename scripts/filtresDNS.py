@@ -97,6 +97,7 @@ locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 # HaGeZi's Pop-Up Ads DNS Blocklist
 # HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
 # HaGeZi's Windows/Office Tracker DNS Blocklist
+# KADhosts
 # Malicious URL Blocklist (URLHaus)
 # OISD Small
 # PbDNS Additional Rules
