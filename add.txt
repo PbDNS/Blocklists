@@ -60,6 +60,7 @@
 ||dai.google.com^
 ||dgw.c10r.facebook.com^
 ||diagonaladdresslead.com^
+||dv.buddhiknutty.com^
 ||emailtracking-us3.email-messaging.com^
 ||errorreporting.googleapis.com^
 ||event.trk-maiorum.com^
