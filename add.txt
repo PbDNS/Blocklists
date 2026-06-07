@@ -1,6 +1,10 @@
 ! Filtres additionnels, inclus à filtresDNS.txt et filtresLocaux.txt
 
-! tracking mails ameli.fr
+! apple
+||partiality.itunes.apple.com^
+
+! tracking ameli.fr
+||analytics.ameli.fr^
 ||statsndm.info.ameli.fr^
 ||sndm-tracking-cnam.worldline-solutions.com^
 
@@ -41,7 +45,6 @@
 ||aax-eu-zaz.amazon.fr^
 ||admob.googleapis.com^
 ||ads.huawei.com^
-||analytics.ameli.fr^
 ||api-wrapper-tracking.imaginereplay.com^
 ||api.raygun.io^
 ||app.chat.xiaomi.net^
