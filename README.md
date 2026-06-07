@@ -35,7 +35,7 @@ La génération repose sur plusieurs étapes de nettoyage :
 
 Le résultat est une liste **compacte et sans redondance**, où chaque entrée est strictement nécessaire. Conçue avec une attention particulière pour le contexte francophone, elle intègre notamment des sources dédiées aux régies publicitaires et domaines frauduleux français.
 
-[![Liste brute](https://img.shields.io/badge/⬇️_Télécharger_la_liste-blocklist.txt-01696f?style=for-the-badge)](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/blocklist.txt)
+[![Liste brute](https://img.shields.io/badge/⬇️_Télécharger_la_liste-filtresDNS.txt-01696f?style=for-the-badge)](https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/filtresDNS.txt)
 
 ## Objectifs de protection
 
