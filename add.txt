@@ -4,6 +4,13 @@
 ||api.raygun.io^
 ! ---
 
+! test Adblock - https://superadblocktest.com
+||youtubei.googleapis.com^
+||graph.instagram.com^
+||i.instagram.com^
+||click.mailchimp.com^
+! ---
+
 ! tracking mails ameli.fr
 ||statsndm.info.ameli.fr^
 ||sndm-tracking-cnam.worldline-solutions.com^
