@@ -1,8 +1,4 @@
-! Filtres additionnels, inclus à blocklist.txt
-
-! test Adblock - https://adblocktester.pages.dev
-||api.raygun.io^
-! ---
+! Filtres additionnels, inclus à filtresDNS.txt et filtresLocaux.txt
 
 ! tracking mails ameli.fr
 ||statsndm.info.ameli.fr^
@@ -47,6 +43,7 @@
 ||ads.huawei.com^
 ||analytics.ameli.fr^
 ||api-wrapper-tracking.imaginereplay.com^
+||api.raygun.io^
 ||app.chat.xiaomi.net^
 ||app.staticmoly.me^
 ||app.storyblok.com^
@@ -55,8 +52,10 @@
 ||cdn-analytics.alketech.eu^
 ||cdn.adgtw.orangeads.fr^
 ||check.analytics.rlcdn.com^
+||click.mailchimp.com^
 ||clientstream.launchdarkly.com^
 ||customer.io^
+||d2gt2ux04o03l1.cloudfront.net^
 ||dai.google.com^
 ||dgw.c10r.facebook.com^
 ||diagonaladdresslead.com^
@@ -73,11 +72,13 @@
 ||heavy-handeddemagnetisepicture.com^
 ||icu.newsroom.bi^
 ||impact.com^
+||instagram.c10r.instagram.com^
 ||ipapi.co^
 ||ironsource.mobi^
 ||klaviyo.com^
 ||l.20minutes.fr^
 ||l.marmiton.org^
+||list-manage.com^
 ||logging.googleapis.com^
 ||logs1412.xiti.com^
 ||ngfts.lge.com^
@@ -99,12 +100,15 @@
 ||settings-win.data.microsoft.com^
 ||snowplowanalytics.com^
 ||sntf.programme-tv.net^
+||star.fallback.c10r.instagram.com^
 ||stats.it-connect.fr^
 ||sw.pitpropsizygia.com^
 ||t.jeu.carrefour.fr^
 ||t.lidentitenumerique.laposte.info^
 ||thetradedesk.com^
 ||tk.bonial.fr
+||tra.scds.pmdstatic.net.cdn.cloudflare.net^
+||tra.scds.pmdstatic.net^
 ||trace.googleapis.com^
 ||track-eu1.hubspot.com^
 ||tracking-api.production.g2.com^
@@ -115,21 +119,14 @@
 ||tracking.watch4.com^
 ||unarmedlickpattern.com^
 ||unmalleableredistributeone.com^
+||us-ibs-lgappstv-com.aws-prd.net^
+||vk-ads.com^
 ||web-tracking.splio.com^
+||widget.intercom.io^
 ||wst.lefigaro.fr^
 ||www.rudderstack.com^
-||xh.yallowafridi.com^
-||zenaps.com^
-||tra.scds.pmdstatic.net.cdn.cloudflare.net^
-||tra.scds.pmdstatic.net^
-
-||list-manage.com^
-||widget.intercom.io^
 ||www3.l.google.com^
-||d2gt2ux04o03l1.cloudfront.net^
-||us-ibs-lgappstv-com.aws-prd.net^
-||star.fallback.c10r.instagram.com^
-||instagram.c10r.instagram.com^
+||xh.yallowafridi.com^
 ||youtubei.googleapis.com^
-||vk-ads.com^
-||click.mailchimp.com^
+||zenaps.com^
+
