@@ -1,9 +1,64 @@
 """
 Agrégateur de blocklists DNS au format AdBlock.
 
-Télécharge plusieurs listes de blocage, extrait les domaines valides,
-élimine les sous-domaines redondants via un trie, et génère un fichier
-de sortie unique ainsi qu'un README mis à jour.
+Ce script construit une blocklist DNS unique à partir de plusieurs sources
+distantes, puis produit un fichier final nettoyé et dédupliqué.
+
+Mécanique générale
+------------------
+1. Charge les exclusions locales depuis `exclusions.txt`.
+2. Télécharge en parallèle toutes les blocklists définies dans `BLOCKLIST_URLS`.
+3. Extrait uniquement les domaines valides depuis trois formats supportés :
+   - hosts (`0.0.0.0 domaine` ou `127.0.0.1 domaine`)
+   - AdBlock (`||domaine^`)
+   - domaine brut (`example.com`)
+4. Ignore tout ce qui n'est pas un domaine exploitable :
+   - lignes vides
+   - commentaires
+   - IP
+   - wildcards (`*`)
+   - domaines invalides ou mal formés
+5. Applique les exclusions AVANT la déduplication :
+   - retire le domaine exact s'il est dans `exclusions.txt`
+   - retire aussi tous ses sous-domaines
+6. Déduplique ensuite par couverture DNS :
+   - si `example.com` est conservé, `sub.example.com` devient redondant
+   - seuls les domaines les plus généraux utiles sont gardés
+7. Écrit le résultat final dans `filtresDNS.txt` au format AdBlock.
+8. Met à jour le `README.md` avec le nombre final d'entrées.
+
+Ce qui est inclus
+-----------------
+- Les domaines valides extraits des URLs de `BLOCKLIST_URLS`
+- Les entrées au format hosts, AdBlock et domaine brut
+- Les domaines uniques non exclus
+- Les domaines parents conservés en priorité sur leurs sous-domaines
+
+Ce qui est exclu ou ignoré
+--------------------------
+- Les lignes vides
+- Les commentaires
+- Les adresses IP
+- Les règles contenant `*`
+- Les domaines invalides selon le validateur du script
+- Les domaines présents dans `exclusions.txt`
+- Les sous-domaines d'un domaine exclu
+
+Ce qui est retiré du résultat final
+-----------------------------------
+- Les entrées invalides détectées à l'extraction
+- Les entrées explicitement exclues
+- Les sous-domaines rendus inutiles par la présence d'un domaine parent
+
+Exemple
+-------
+Si une source contient :
+- `example.com`
+- `ads.example.com`
+- `track.ads.example.com`
+
+alors le fichier final ne conservera que `example.com`, car il couvre déjà
+les sous-domaines dans la logique de blocage DNS utilisée ici.
 """
 
 from __future__ import annotations
