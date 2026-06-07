@@ -121,6 +121,7 @@
 ||xh.yallowafridi.com^
 ||zenaps.com^
 ||tra.scds.pmdstatic.net.cdn.cloudflare.net^
+||tra.scds.pmdstatic.net^
 
 ||list-manage.com^
 ||widget.intercom.io^
