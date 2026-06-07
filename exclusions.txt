@@ -69,10 +69,9 @@
 
 ! --------------------------------------------------
 
-! ✅ Whitelist CMP (Consent Management Platforms) - Rev. Mai 2026 - Kimi K2.6 Thinking
+! ✅ Whitelist CMP (Consent Management Platforms) - Rev. Juin 2026 - Gemini 3.1 Pro Thinking
 ! 📌 Autorise uniquement l'interface de consentement (RGPD/TCF), pas les trackers
 ! ⚠️ Domaines racine retirés quand ils hébergent aussi du tracking
-
 
 ! ==========================================
 ! 1. CMP Enterprise / TCF (Majeurs)
@@ -101,11 +100,13 @@
 @@||api.usercentrics.eu^
 @@||cdn.usercentrics.eu^
 @@||privacy-proxy.usercentrics.eu^
+@@||cmp.usercentrics.eu^
 
 ! Sourcepoint (Privacy Management)
 @@||cdn.privacy-mgmt.com^
 @@||api.privacy-mgmt.com^
 @@||privacy-mgmt.com^
+@@||sourcepoint.mgr.consensu.org^
 
 ! TrustArc (bandeau consentement uniquement)
 @@||choices.trustarc.com^
@@ -124,10 +125,9 @@
 @@||cs.iubenda.com^
 @@||iubenda.com^
 
-! Cookie Information (très utilisé en EU nordique/de l'est)
+! Cookie Information
 @@||cdn.cookieinformation.com^
 @@||cookieinformation.com^
-
 
 ! ==========================================
 ! 2. CMP Européens & France (Alternatifs majeurs)
@@ -165,7 +165,6 @@
 ! Klaro
 @@||klaro.kiprotect.com^
 
-
 ! ==========================================
 ! 3. Google & Fournisseurs cloud
 ! ==========================================
@@ -174,9 +173,11 @@
 @@||consent.google.com^
 @@||consent.googleapis.com^
 
-! Funding Choices (déprécié par Google mais encore résiduel)
+! Funding Choices (encore présent sur certains sites)
 @@||fundingchoicesmessages.google.com^
 
+! InMobi / CMP liée
+@@||cmp.inmobi.com^
 
 ! ==========================================
 ! 4. Widgets / Solutions légères
