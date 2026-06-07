@@ -130,3 +130,4 @@
 ||star.fallback.c10r.instagram.com^
 ||instagram.c10r.instagram.com^
 ||youtubei.googleapis.com^
+||vk-ads.com^
