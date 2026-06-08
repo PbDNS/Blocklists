@@ -18,7 +18,9 @@
 <!-- STATS_END -->
 
 <p align="center">
+  
 ![Assisté par Claude](https://img.shields.io/badge/assist%C3%A9%20par-Claude-D97757?style=flat&logo=claude&logoColor=white)
+
 </p>
 
 ## Présentation
