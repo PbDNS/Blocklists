@@ -1,28 +1,23 @@
-<div align="center">
-
 # 🛡️ Listes de filtrage
 
-![Format](https://img.shields.io/badge/format-Adblock%20Plus-4A919E)
-![Compatibilité](https://img.shields.io/badge/compatible-AdGuard%20%7C%20Pi--hole-BED3C3)
-
-</div>
+<p align="center">
+  <img src="https://img.shields.io/badge/Format-Adblock%20Plus-4A919E" alt="Format">
+  <img src="https://img.shields.io/badge/Compatibilit%C3%A9-AdGuard%20%7C%20Pi--hole-BED3C3" alt="Compatibilité">
+</p>
 
 <!-- STATS_START -->
-<div align="center">
 
+<p align="center">
 ![filtres](https://img.shields.io/badge/filtres%20uniques-522%2C299-A43836?style=for-the-badge)
 ![listes](https://img.shields.io/badge/sources-33%20listes-E9BD98?style=for-the-badge)
 ![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-F5E6CA?style=for-the-badge)
-
-</div>
+</p>
 
 <!-- STATS_END -->
 
-<div align="center">
-
+<p align="center">
 ![Assisté par Claude](https://img.shields.io/badge/assist%C3%A9%20par-Claude-D97757?style=flat&logo=claude&logoColor=white)
-
-</div>
+</p>
 
 ## Présentation
 
