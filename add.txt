@@ -1,24 +1,10 @@
+! **********************************************************************
 ! Filtres additionnels, inclus à filtresDNS.txt et/ou filtresLocaux.txt
+! **********************************************************************
 
-! apple
-||partiality.itunes.apple.com^
-
-! tracking ameli.fr
-||analytics.ameli.fr^
-||statsndm.info.ameli.fr^
-||sndm-tracking-cnam.worldline-solutions.com^
-
-! streamers popus ads
-||annihilativefaltermillion.com^
-||carveddoublebogeyhigh.com^
-||drenchedtidyarticle.com^
-||flamechannel.com^
-||jnbhi.com^
-||mercurousswaddlesuggest.com^
-||wheatentricklecover.com^
-
-! ---------------------
-! trackers torrent obsolètes / abandonnés / très instables
+! -----------------------------------------------------------
+!  trackers torrent obsolètes / abandonnés / très instables
+! -----------------------------------------------------------
 
 ||coppersurfer.tk^
 ||leechers-paradise.org^
@@ -39,11 +25,20 @@
 ||rarbg.me^
 ||rarbg.to^
 ||rarbgproxy.org^
-! ---------------------
+
 
 ! -----------------------------------------------------------
 ! ------------------------ STREAMING ------------------------
 ! -----------------------------------------------------------
+
+! ----- général - popus ads -----
+||annihilativefaltermillion.com^
+||carveddoublebogeyhigh.com^
+||drenchedtidyarticle.com^
+||flamechannel.com^
+||jnbhi.com^
+||mercurousswaddlesuggest.com^
+||wheatentricklecover.com^
 
 ! ----- flemmix -----
 flemmix.*##script:contains(var marquee = $('div.marquee');)
@@ -55,12 +50,15 @@ flemmix.*##script:contains(var marquee = $('div.marquee');)
 ! ----- papadustream -----
 ||papadustream.*/engine/classes/js/bbcodes.js^$script
 
-! ----- vidara -----
-||cdnjs.cloudflare.com/ajax/libs/crypto-js/*/crypto-js.min.js$script,domain=vidara.*
-||cdnjs.cloudflare.com/ajax/libs/pako/*/pako.min.js$script,domain=vidara.*
-||vidara.*/api/heartbeat^
-||vidara.*/assets/js/new100.js$script
-||vidara.*/e/*$xhr
+! ----- dood -----
+||doodcdn.*/ads/*$script
+||static2.doodcdn.*/ajax/libs/react-dom/*/cjs/react-dom.get.min.js^$script
+
+! ----- lulustream -----
+||luluvid.com/js/dnsads.js^$script
+||luluvid.com/js/jdadbl.js^$script
+||luluvid.com/js/new100.js^$script
+||luluvid.com/js/pop.js^$script
 
 ! ----- savefiles -----
 ||savefiles.com/js/noadblocker.js$script
@@ -72,15 +70,28 @@ flemmix.*##script:contains(var marquee = $('div.marquee');)
 ||uqload.*/js2/adst.js$script
 ||uqload.*/player/jw8/vast.js$script
 
-! ----- dood -----
-||doodcdn.*/ads/*$script
+! ----- vidara -----
+||cdnjs.cloudflare.com/ajax/libs/crypto-js/*/crypto-js.min.js$script,domain=vidara.*
+||cdnjs.cloudflare.com/ajax/libs/pako/*/pako.min.js$script,domain=vidara.*
+||vidara.*/api/heartbeat^
+||vidara.*/assets/js/new100.js$script
+||vidara.*/e/*$xhr
 
 ! ----- voe -----
 ||jessicayeahcatch.com/build/assets/*$script
 
+
 ! -----------------------------------------------------------
+! ------------------------- DIVERS --------------------------
 ! -----------------------------------------------------------
-! -----------------------------------------------------------
+
+! ----- apple -----
+||partiality.itunes.apple.com^
+
+! ----- tracking ameli.fr -----
+||analytics.ameli.fr^
+||statsndm.info.ameli.fr^
+||sndm-tracking-cnam.worldline-solutions.com^
 
 ||2giga.link^
 ||aax-eu-zaz.amazon.fr^
@@ -173,4 +184,3 @@ flemmix.*##script:contains(var marquee = $('div.marquee');)
 ||xh.yallowafridi.com^
 ||youtubei.googleapis.com^
 ||zenaps.com^
-
