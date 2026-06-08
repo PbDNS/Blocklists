@@ -52,6 +52,9 @@ flemmix.*##script:contains(var marquee = $('div.marquee');)
 ||yastatic.net/*/share.js$script,domain=flemmix.*
 ||yastatic.net/es5-shims/*/es5-shims.min.js$script,domain=flemmix.*
 
+! ----- papadustream -----
+||papadustream.*/engine/classes/js/bbcodes.js^$script
+
 ! ----- vidara -----
 ||cdnjs.cloudflare.com/ajax/libs/crypto-js/*/crypto-js.min.js$script,domain=vidara.*
 ||cdnjs.cloudflare.com/ajax/libs/pako/*/pako.min.js$script,domain=vidara.*
