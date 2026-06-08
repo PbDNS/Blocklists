@@ -70,11 +70,10 @@ flemmix.*##script:contains(var marquee = $('div.marquee');)
 ||uqload.*/player/jw8/vast.js$script
 
 ! ----- dood -----
-||doodcdn.io/ads/*$script
+||doodcdn.*/ads/*$script
 
 ! ----- voe -----
 ||jessicayeahcatch.com/build/assets/*$script
-||jessicayeahcatch.com/jwplayer/*/provider.airplay.js$script
 
 ! -----------------------------------------------------------
 ! -----------------------------------------------------------
