@@ -41,6 +41,45 @@
 ||rarbgproxy.org^
 ! ---------------------
 
+! -----------------------------------------------------------
+! ------------------------ STREAMING ------------------------
+! -----------------------------------------------------------
+
+! ----- flemmix -----
+flemmix.*##script:contains(var marquee = $('div.marquee');)
+||flemmix.*/public/js/dle_js.js$script
+||google.com/recaptcha/api.js$script,domain=flemmix.*
+||yastatic.net/*/share.js$script,domain=flemmix.*
+||yastatic.net/es5-shims/*/es5-shims.min.js$script,domain=flemmix.*
+
+! ----- vidara -----
+||cdnjs.cloudflare.com/ajax/libs/crypto-js/*/crypto-js.min.js$script,domain=vidara.*
+||cdnjs.cloudflare.com/ajax/libs/pako/*/pako.min.js$script,domain=vidara.*
+||vidara.*/api/heartbeat^
+||vidara.*/assets/js/new100.js$script
+||vidara.*/e/*$xhr
+
+! ----- savefiles -----
+||savefiles.com/js/noadblocker.js$script
+||savefiles.com/js/pop.js$script
+
+! ----- uqload -----
+||pla.uqload.*/js/*$script
+||uqload.*/js/pop.js$script
+||uqload.*/js2/adst.js$script
+||uqload.*/player/jw8/vast.js$script
+
+! ----- dood -----
+||doodcdn.io/ads/*$script
+
+! ----- voe -----
+||jessicayeahcatch.com/build/assets/*$script
+||jessicayeahcatch.com/jwplayer/*/provider.airplay.js$script
+
+! -----------------------------------------------------------
+! -----------------------------------------------------------
+! -----------------------------------------------------------
+
 ||2giga.link^
 ||aax-eu-zaz.amazon.fr^
 ||admob.googleapis.com^
