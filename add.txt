@@ -1,4 +1,4 @@
-! Filtres additionnels, inclus à filtresDNS.txt et filtresLocaux.txt
+! Filtres additionnels, inclus à filtresDNS.txt et/ou filtresLocaux.txt
 
 ! apple
 ||partiality.itunes.apple.com^
