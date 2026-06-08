@@ -1,4 +1,6 @@
+<p align="center">
 # 🛡️ Listes de filtrage
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Format-Adblock%20Plus-4A919E" alt="Format">
