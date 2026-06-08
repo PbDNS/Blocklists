@@ -8,19 +8,15 @@
 <!-- STATS_START -->
 
 <p align="center">
-  
-![filtres](https://img.shields.io/badge/filtres%20uniques-522%2C299-A43836?style=for-the-badge)
-![listes](https://img.shields.io/badge/sources-33%20listes-E9BD98?style=for-the-badge)
-![fréquence](https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-F5E6CA?style=for-the-badge)
-
+  <img src="https://img.shields.io/badge/filtres%20uniques-522%2C299-A43836?style=for-the-badge" alt="filtres">
+  <img src="https://img.shields.io/badge/sources-33%20listes-E9BD98?style=for-the-badge" alt="listes">
+  <img src="https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-F5E6CA?style=for-the-badge" alt="fréquence">
 </p>
 
 <!-- STATS_END -->
 
 <p align="center">
-  
-![Assisté par Claude](https://img.shields.io/badge/assist%C3%A9%20par-Claude-D97757?style=flat&logo=claude&logoColor=white)
-
+  <img src="https://img.shields.io/badge/assist%C3%A9%20par-Claude-D97757?style=flat&logo=claude&logoColor=white" alt="Assisté par Claude">
 </p>
 
 ## Présentation
