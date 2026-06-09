@@ -41,18 +41,6 @@
 ||mercurousswaddlesuggest.com^
 ||wheatentricklecover.com^
 
-! ----- flemmix -----
-flemmix.*##.marquee
-flemmix.*##script:contains(marquee)
-! flemmix.*##script:contains(var marquee = $('div.marquee');)
-||flemmix.*/public/js/dle_js.js$script
-||google.com/recaptcha/api.js$script,domain=flemmix.*
-||yastatic.net/*/share.js$script,domain=flemmix.*
-||yastatic.net/es5-shims/*/es5-shims.min.js$script,domain=flemmix.*
-
-! ----- papadustream -----
-||papadustream.*/engine/classes/js/bbcodes.js^$script
-
 ! ----- dood -----
 ||doodcdn.*/ads/*$script
 ||static2.doodcdn.*/ajax/libs/react-dom/*/cjs/react-dom.get.min.js^$script
