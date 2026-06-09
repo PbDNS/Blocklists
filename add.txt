@@ -41,7 +41,9 @@
 ||wheatentricklecover.com^
 
 ! ----- flemmix -----
-flemmix.*##script:contains(var marquee = $('div.marquee');)
+flemmix.*##.marquee
+flemmix.*##script:contains(marquee)
+! flemmix.*##script:contains(var marquee = $('div.marquee');)
 ||flemmix.*/public/js/dle_js.js$script
 ||google.com/recaptcha/api.js$script,domain=flemmix.*
 ||yastatic.net/*/share.js$script,domain=flemmix.*
