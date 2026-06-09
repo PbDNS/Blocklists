@@ -27,6 +27,7 @@ import re
 import ipaddress
 import urllib.error
 import urllib.request
+import unicodedata
 
 # ---------------------------------------------------------------------------
 # Constantes
@@ -95,6 +96,22 @@ _RE_HAGEZI_WILDCARD  = re.compile(r"^\|\*(.+)\*\^$")
 _DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; local-blocklist/1.0)"}
 
 # ---------------------------------------------------------------------------
+# Nettoyage prudent des lignes
+# ---------------------------------------------------------------------------
+
+_ZERO_WIDTH_TRANSLATION = str.maketrans('', '', "\u200b\u200c\u200d\ufeff\u2060")
+_CONTROL_CHARS_RE = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
+
+def sanitize_rule_line(raw: str) -> str:
+    """Nettoie une ligne sans altérer la syntaxe légitime des règles AdBlock."""
+    line = raw.rstrip("\r\n")
+    line = unicodedata.normalize("NFKC", line)
+    line = line.translate(_ZERO_WIDTH_TRANSLATION)
+    line = _CONTROL_CHARS_RE.sub('', line)
+    return line.strip()
+
+
+# ---------------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------------
 
@@ -153,7 +170,7 @@ def download_list(name: str, url: str) -> list[str]:
 
     lines: list[str] = []
     for raw in content.splitlines():
-        line = raw.strip()
+        line = sanitize_rule_line(raw)
         if not line or line.startswith("!") or line.startswith("#"):
             continue
         lines.append(line)
@@ -177,7 +194,7 @@ def fetch_hagezi_regex_wildcard() -> list[str]:
 
     rules: list[str] = []
     for raw in content.splitlines():
-        line = raw.strip()
+        line = sanitize_rule_line(raw)
         if not line or line.startswith("!"):
             continue
         rules.append(line)
@@ -314,11 +331,17 @@ def compress_by_hagezi(
 # ---------------------------------------------------------------------------
 
 def _sort_key(r: str) -> tuple[int, str]:
-    if _RE_HAGEZI_REGEX.match(r)    : return (0, r)   # regex /…/ en tête
-    if _RE_HAGEZI_WILDCARD.match(r) : return (1, r)   # wildcards |*…*^
-    if _RE_PURE_DOMAIN_RULE.match(r): return (2, r)
-    if _RE_PURE_ALLOW_RULE.match(r) : return (3, r)
-    return (4, r)
+    if _RE_HAGEZI_REGEX.match(r):
+        return (0, r)
+    if _RE_HAGEZI_WILDCARD.match(r):
+        return (1, r)
+    if _RE_PURE_DOMAIN_RULE.match(r):
+        return (2, r)
+    if _RE_PURE_ALLOW_RULE.match(r):
+        return (3, r)
+    if r.startswith("@@"):
+        return (4, r.lower())
+    return (5, r.lower())
 
 
 def write_output(rules: list[str], path: str = OUTPUT_FILE) -> None:
