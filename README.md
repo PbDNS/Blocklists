@@ -100,3 +100,13 @@ Le résultat est une liste compacte, cohérente et sans redondance, avec une att
 - **KADhosts**
 
 </details>
+
+<!-- filtresDNS:start -->
+| Indicateur | Valeur |
+|---|---:|
+| Domaines uniques | 204528 |
+| Sources OK | 6 |
+| Sources en échec | 2 |
+| Sources totales | 8 |
+
+<!-- filtresDNS:end -->
