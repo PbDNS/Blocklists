@@ -317,7 +317,6 @@ def deduplicate_with_logs(entries: set[str]) -> tuple[set[str], DeduplicationSta
 
     sorted_entries = sorted(entries, key=lambda e: (e.count("."), e))
     progress_step = max(1, len(sorted_entries) // 20)
-    redundant_examples: list[str] = []
     invalid_examples: list[str] = []
 
     print(f"🔎 Début de la suppression des redondances : {len(sorted_entries)} domaines candidats")
@@ -336,8 +335,6 @@ def deduplicate_with_logs(entries: set[str]) -> tuple[set[str], DeduplicationSta
             stats.total_kept += 1
         else:
             stats.total_redundant += 1
-            if len(redundant_examples) < 10:
-                redundant_examples.append(entry)
 
         if index % progress_step == 0 or index == len(sorted_entries):
             print(
@@ -350,8 +347,6 @@ def deduplicate_with_logs(entries: set[str]) -> tuple[set[str], DeduplicationSta
         f"{stats.total_kept} conservés, {stats.total_redundant} redondants retirés, {stats.total_invalid} invalides ignorés"
     )
 
-    if redundant_examples:
-        print("🧪 Exemples de domaines redondants ignorés : " + ", ".join(redundant_examples))
 
     if invalid_examples:
         print("🧪 Exemples de domaines invalides ignorés : " + ", ".join(invalid_examples))
