@@ -1,392 +1,421 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+"""
+Agrégateur de blocklists DNS au format AdBlock.
+
+Ce script construit une blocklist DNS unique à partir de plusieurs sources
+distantes, puis produit un fichier final nettoyé et dédupliqué.
+
+Mécanique générale
+------------------
+1. Télécharge en parallèle toutes les blocklists définies dans `BLOCKLIST_URLS`.
+2. Extrait uniquement les domaines valides depuis trois formats supportés :
+   - hosts (`0.0.0.0 domaine` ou `127.0.0.1 domaine`)
+   - AdBlock (`||domaine^`)
+   - domaine brut (`example.com`)
+3. Ignore tout ce qui n'est pas un domaine exploitable :
+   - lignes vides
+   - commentaires
+   - IP
+   - wildcards (`*`)
+   - domaines invalides ou mal formés
+4. Déduplique par couverture DNS :
+   - si `example.com` est conservé, `sub.example.com` devient redondant
+   - seuls les domaines les plus généraux utiles sont gardés
+5. Écrit le résultat final dans `filtresDNS.txt` au format AdBlock.
+6. Met à jour le `README.md` avec le nombre final d'entrées.
+
+Ce qui est inclus
+-----------------
+- Les domaines valides extraits des URLs de `BLOCKLIST_URLS`
+- Les entrées au format hosts, AdBlock et domaine brut
+- Les domaines uniques
+- Les domaines parents conservés en priorité sur leurs sous-domaines
+
+Ce qui est exclu ou ignoré
+--------------------------
+- Les lignes vides
+- Les commentaires
+- Les adresses IP
+- Les règles contenant `*`
+- Les domaines invalides selon le validateur du script
+
+Ce qui est retiré du résultat final
+-----------------------------------
+- Les entrées invalides détectées à l'extraction
+- Les sous-domaines rendus inutiles par la présence d'un domaine parent
+
+Exemple
+-------
+Si une source contient :
+  - `example.com`
+  - `ads.example.com`
+  - `track.ads.example.com`
+
+alors le fichier final ne conservera que `example.com`, car il couvre déjà
+les sous-domaines dans la logique de blocage DNS utilisée ici.
+"""
+
+from __future__ import annotations
 
 import concurrent.futures
-import gzip
-import http.client
-import io
-import lzma
 import re
+import ipaddress
+import locale
 import socket
 import ssl
-import sys
 import time
+import http.client
 import urllib.error
-import urllib.parse
 import urllib.request
-import zipfile
 from dataclasses import dataclass
 from datetime import datetime
-from email.utils import parsedate_to_datetime
 from pathlib import Path
-from typing import Iterable
 
-BASE_DIR = Path(__file__).resolve().parents[1] if '__file__' in globals() else Path.cwd()
-OUTPUT_FILE = BASE_DIR / 'filtresDNS.txt'
-README_FILE = BASE_DIR / 'README.md'
+locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
-MAX_WORKERS = 5
-REQUEST_TIMEOUT = 45
-MAX_RETRIES = 4
-BACKOFF_BASE = 2
-MAX_DOWNLOAD_SIZE = 100 * 1024 * 1024
-USER_AGENT = 'Mozilla/5.0 (compatible; filtresDNS/2.0; +https://github.com/)'
+# ---------------------------------------------------------------------------
+# Constantes
+# ---------------------------------------------------------------------------
 
-BLOCKLIST_URLS = [
-    'https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tif.txt',
-    'https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts',
-    'https://someonewhocares.org/hosts/zero/hosts',
-    'https://mirror1.malwaredomains.com/files/justdomains',
-    'https://adaway.org/hosts.txt',
-    'https://v.firebog.net/hosts/AdguardDNS.txt',
-    'https://v.firebog.net/hosts/Easyprivacy.txt',
-    'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext',
+########### Listes incluses ###########
+# AWAvenue Ads Rule
+# AdGuard DNS filter
+# AdGuard French adservers
+# AdGuard French adservers (first-party)
+# Dan Pollock's List
+# Dandelion Sprout's Anti Push Notifications
+# Dandelion Sprout's Anti-Malware List
+# EasyList FR
+# HaGeZi's Amazon Tracker DNS Blocklist
+# HaGeZi's Apple Tracker DNS Blocklist
+# HaGeZi's Badware Hoster Blocklist
+# HaGeZi's DynDNS Blocklist
+# HaGeZi's Encrypted DNS/VPN/TOR/Proxy Bypass
+# HaGeZi's Fake DNS Blocklist
+# HaGeZi's Normal DNS Blocklist
+# HaGeZi's Pop-Up Ads DNS Blocklist
+# HaGeZi's TikTok Extended Fingerprinting DNS Blocklist
+# HaGeZi's Windows/Office Tracker DNS Blocklist
+# KADhosts
+# Malicious URL Blocklist (URLHaus)
+# OISD Small
+# PbDNS Additional Rules
+# Peter Lowe's Blocklist
+# Phishing Army
+# Phishing URL Blocklist (PhishTank/OpenPhish)
+# Red Flag Domains
+# Red Flag Domains (FR)
+# Scam Blocklist by DurableNapkin
+# ShadowWhisperer's Malware List
+# Stalkerware Indicators List
+# Steven Black's List
+# The Big List of Hacked Malware Web Sites
+# d3Host
+
+BLOCKLIST_URLS: list[str] = [
+    "https://raw.githubusercontent.com/FiltersHeroes/KADhosts/refs/heads/master/KADomains.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/fake.txt",
+    "https://raw.githubusercontent.com/PbDNS/Blocklists/refs/heads/main/add.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/multi.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/popupads.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.amazon.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.tiktok.extended.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt",
+    "https://raw.githubusercontent.com/ngfblog/dns-blocklists/refs/heads/main/adblock/doh-vpn-proxy-bypass.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.winoffice.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt",
+    "https://small.oisd.nl/",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_52.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/native.apple.txt",
+    "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_18.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/FrenchFilter/sections/adservers_firstparty.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt",
+    "https://raw.githubusercontent.com/easylist/listefr/refs/heads/master/hosts.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt",
+    "https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt",
+    "https://dl.red.flag.domains/red.flag.domains_fr.txt",
 ]
 
-COMMENT_PREFIXES = ('#', '!', ';', '[')
-LOCAL_SKIP = {'localhost', 'localhost.localdomain', 'local', 'broadcasthost', 'ip6-localhost'}
-DOMAIN_RE = re.compile(
-    r'^(?=.{1,253}$)(?!-)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$',
-    re.IGNORECASE,
+# Regex pré-compilées au niveau module pour éviter la recompilation à chaque appel
+_RE_WHITESPACE = re.compile(r"\s+")
+_RE_DOMAIN_ONLY = re.compile(r"^[a-zA-Z0-9.-]+$")
+_RE_VALID_DOMAIN = re.compile(
+    r"^(?!-)(?!.*--)(?!.*\.$)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$"
 )
-IPV4_RE = re.compile(r'^(?:\d{1,3}\.){3}\d{1,3}$')
-HOSTS_SPLIT_RE = re.compile(r'\s+')
+
+_DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; blocklist-aggregator/1.1)"}
+_REQUEST_TIMEOUT = 30
+_MAX_RETRIES = 4
+_MAX_WORKERS = 5
+_BACKOFF_BASE = 2
 
 
 @dataclass(slots=True)
 class DownloadResult:
+    """Résultat détaillé d'un téléchargement de source."""
+
     url: str
     entries: set[str]
     success: bool
     error: str | None = None
     attempts: int = 1
-    status: int | None = None
-    bytes_downloaded: int = 0
-    last_modified: str | None = None
 
+# ---------------------------------------------------------------------------
+# Validation
+# ---------------------------------------------------------------------------
+
+def is_valid_domain(domain: str) -> bool:
+    """Retourne True si `domain` est un nom de domaine valide (ni IP ni wildcard)."""
+    try:
+        ipaddress.ip_address(domain)
+        return False
+    except ValueError:
+        pass
+    return _RE_VALID_DOMAIN.match(domain) is not None
+
+# ---------------------------------------------------------------------------
+# Téléchargement & extraction
+# ---------------------------------------------------------------------------
+
+def download_and_extract(url: str) -> DownloadResult:
+    """
+    Télécharge une blocklist et extrait les domaines valides.
+
+    Supporte les formats :
+      - hosts (0.0.0.0 / 127.0.0.1 <domaine>)
+      - AdBlock (||domaine^)
+      - liste brute de domaines
+
+    Robustesse ajoutée :
+      - plusieurs tentatives en cas d'erreur réseau transitoire
+      - backoff exponentiel
+      - capture des erreurs SSL / socket / reset de connexion
+      - retour structuré pour ne jamais interrompre tout le pipeline
+    """
+    last_error: str | None = None
+
+    for attempt in range(1, _MAX_RETRIES + 1):
+        try:
+            req = urllib.request.Request(url, headers=_DEFAULT_HEADERS)
+            with urllib.request.urlopen(req, timeout=_REQUEST_TIMEOUT) as response:
+                content = response.read().decode("utf-8", errors="ignore")
+
+            rules: set[str] = set()
+
+            for raw_line in content.splitlines():
+                line = raw_line.strip()
+
+                if not line or line.startswith("!") or line.startswith("#"):
+                    continue
+
+                if line.startswith("0.0.0.0") or line.startswith("127.0.0.1"):
+                    # Format hosts
+                    host_parts = _RE_WHITESPACE.split(line)
+                    if len(host_parts) >= 2:
+                        target = host_parts[1].strip()
+                        if "*" not in target and is_valid_domain(target):
+                            rules.add(target)
+
+                elif line.startswith("||") and line.endswith("^"):
+                    # Format AdBlock
+                    target = line[2:-1]
+                    if "*" not in target and is_valid_domain(target):
+                        rules.add(target)
+
+                elif _RE_DOMAIN_ONLY.match(line):
+                    # Domaine brut
+                    if "*" not in line and is_valid_domain(line):
+                        rules.add(line)
+
+            return DownloadResult(url=url, entries=rules, success=True, attempts=attempt)
+
+        except urllib.error.HTTPError as exc:
+            last_error = f"HTTP {exc.code}"
+            print(f"Erreur HTTP {exc.code} lors du téléchargement de {url} (tentative {attempt}/{_MAX_RETRIES})")
+        except urllib.error.URLError as exc:
+            last_error = f"URLError: {exc.reason}"
+            print(f"Erreur réseau lors du téléchargement de {url} : {exc.reason} (tentative {attempt}/{_MAX_RETRIES})")
+        except (
+            TimeoutError,
+            socket.timeout,
+            ConnectionResetError,
+            ConnectionAbortedError,
+            ConnectionRefusedError,
+            ssl.SSLError,
+            http.client.HTTPException,
+            OSError,
+        ) as exc:
+            last_error = f"{type(exc).__name__}: {exc}"
+            print(f"Erreur transitoire pour {url} : {last_error} (tentative {attempt}/{_MAX_RETRIES})")
+
+        if attempt < _MAX_RETRIES:
+            time.sleep(_BACKOFF_BASE ** (attempt - 1))
+
+    return DownloadResult(url=url, entries=set(), success=False, error=last_error, attempts=_MAX_RETRIES)
+
+# ---------------------------------------------------------------------------
+# Trie de domaines (déduplication des sous-domaines)
+# ---------------------------------------------------------------------------
 
 class DomainTrieNode:
-    __slots__ = ('children', 'terminal')
+    """Nœud d'un trie de domaines inversés pour éliminer les redondances."""
+
+    __slots__ = ("children", "is_terminal")
 
     def __init__(self) -> None:
-        self.children: dict[str, 'DomainTrieNode'] = {}
-        self.terminal = False
+        self.children: dict[str, "DomainTrieNode"] = {}
+        self.is_terminal: bool = False
 
     def insert(self, parts: list[str]) -> bool:
+        """
+        Insère un domaine (sous forme de labels inversés) dans le trie.
+
+        Retourne False si un domaine parent est déjà présent (redondance).
+        """
         node = self
         for part in parts:
-            if node.terminal:
+            if node.is_terminal:
                 return False
             node = node.children.setdefault(part, DomainTrieNode())
-        if node.terminal:
-            return False
-        node.terminal = True
-        node.children.clear()
+        node.is_terminal = True
         return True
 
 
 def domain_to_parts(domain: str) -> list[str]:
-    return domain.lower().rstrip('.').split('.')[::-1]
+    """Convertit un domaine en liste de labels inversés (ex: 'a.b.com' → ['com','b','a'])."""
+    return domain.strip().split(".")[::-1]
 
+# ---------------------------------------------------------------------------
+# Écriture de la blocklist
+# ---------------------------------------------------------------------------
 
-def is_valid_domain(domain: str) -> bool:
-    domain = domain.strip().lower().rstrip('.')
-    if not domain or len(domain) > 253:
-        return False
-    if domain in LOCAL_SKIP:
-        return False
-    if '*' in domain or '/' in domain or ':' in domain:
-        return False
-    if IPV4_RE.match(domain):
-        return False
-    return bool(DOMAIN_RE.match(domain))
+def write_blocklist(
+    entries: set[str],
+    output_path: str = "filtresDNS.txt",
+    timestamp: str = "",
+) -> None:
+    """Écrit les entrées triées dans un fichier au format AdBlock."""
+    count = len(entries)
+    with open(output_path, "w", encoding="utf-8") as fh:
+        fh.write(f"! Agrégation - {timestamp}\n")
+        fh.write(f"! {count:06} entrées\n\n")
+        for entry in sorted(entries):
+            fh.write(f"||{entry.lower()}^\n")
 
+# ---------------------------------------------------------------------------
+# Mise à jour du README
+# ---------------------------------------------------------------------------
 
-def normalize_domain(value: str) -> str | None:
-    value = value.strip().lower().strip('.')
-    if not value:
-        return None
-    if value.startswith('||'):
-        value = value[2:]
-    if value.startswith('*.'):
-        value = value[2:]
-    if value.startswith('.'):
-        value = value[1:]
-    if '^' in value:
-        value = value.split('^', 1)[0]
-    if '$' in value:
-        value = value.split('$', 1)[0]
-    if '#' in value:
-        value = value.split('#', 1)[0]
-    if value.startswith('http://') or value.startswith('https://'):
-        parsed = urllib.parse.urlparse(value)
-        value = parsed.hostname or ''
-    if '/' in value:
-        value = value.split('/', 1)[0]
-    if ':' in value:
-        value = value.split(':', 1)[0]
-    if value.startswith('www.') and value.count('.') >= 2:
-        value = value[4:]
-    return value if is_valid_domain(value) else None
+def update_readme(stats: dict[str, int], readme_path: str = "README.md") -> None:
+    """Met à jour le bloc de statistiques dans le README entre deux balises HTML."""
+    start_tag = "<!-- STATS_START -->"
+    end_tag = "<!-- STATS_END -->"
 
+    count = stats["after"]
+    count_formatted = f"{count:,}".replace(",", "%2C")
+    source_count = len(BLOCKLIST_URLS)
 
-def extract_from_hosts_line(line: str) -> list[str]:
-    parts = HOSTS_SPLIT_RE.split(line.strip())
-    if len(parts) < 2:
-        return []
-    ip = parts[0]
-    if ip not in {'0.0.0.0', '127.0.0.1', '::1', '::', '255.255.255.255'} and not IPV4_RE.match(ip):
-        return []
-    out: list[str] = []
-    for host in parts[1:]:
-        dom = normalize_domain(host)
-        if dom:
-            out.append(dom)
-    return out
-
-
-def extract_entries_from_text(text: str) -> set[str]:
-    entries: set[str] = set()
-    for raw_line in text.splitlines():
-        line = raw_line.strip()
-        if not line:
-            continue
-        if line.startswith(COMMENT_PREFIXES):
-            continue
-        if ' ' in line or '\t' in line:
-            for dom in extract_from_hosts_line(line):
-                entries.add(dom)
-            continue
-        dom = normalize_domain(line)
-        if dom:
-            entries.add(dom)
-    return entries
-
-
-def maybe_decompress(data: bytes, url: str, content_type: str | None, encoding: str | None) -> bytes:
-    lower_url = url.lower()
-    ctype = (content_type or '').lower()
-    cenc = (encoding or '').lower()
-
-    try:
-        if cenc == 'gzip' or lower_url.endswith('.gz') or 'gzip' in ctype:
-            return gzip.decompress(data)
-    except OSError:
-        pass
-
-    try:
-        if lower_url.endswith('.xz') or 'xz' in ctype:
-            return lzma.decompress(data)
-    except lzma.LZMAError:
-        pass
-
-    if lower_url.endswith('.zip') or 'zip' in ctype:
-        with zipfile.ZipFile(io.BytesIO(data)) as zf:
-            names = [n for n in zf.namelist() if not n.endswith('/')]
-            if not names:
-                return b''
-            candidate = min(names, key=len)
-            return zf.read(candidate)
-
-    return data
-
-
-def decode_bytes(data: bytes) -> str:
-    for enc in ('utf-8', 'utf-8-sig', 'iso-8859-1'):
-        try:
-            return data.decode(enc)
-        except UnicodeDecodeError:
-            continue
-    return data.decode('utf-8', errors='replace')
-
-
-def build_request(url: str) -> urllib.request.Request:
-    return urllib.request.Request(
-        url,
-        headers={
-            'User-Agent': USER_AGENT,
-            'Accept': 'text/plain,text/*;q=0.9,*/*;q=0.5',
-            'Accept-Encoding': 'gzip',
-            'Connection': 'close',
-        },
-    )
-
-
-def fetch_url_bytes(url: str) -> tuple[bytes, int | None, str | None, str | None, str | None]:
-    req = build_request(url)
-    with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as response:
-        status = getattr(response, 'status', None)
-        content_type = response.headers.get('Content-Type')
-        content_encoding = response.headers.get('Content-Encoding')
-        last_modified = response.headers.get('Last-Modified')
-        data = response.read(MAX_DOWNLOAD_SIZE + 1)
-        if len(data) > MAX_DOWNLOAD_SIZE:
-            raise ValueError(f'Téléchargement trop volumineux (> {MAX_DOWNLOAD_SIZE} octets) : {url}')
-        return data, status, content_type, content_encoding, last_modified
-
-
-def download_and_extract(url: str) -> DownloadResult:
-    last_error: str | None = None
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            data, status, content_type, content_encoding, last_modified = fetch_url_bytes(url)
-            payload = maybe_decompress(data, url, content_type, content_encoding)
-            text = decode_bytes(payload)
-            entries = extract_entries_from_text(text)
-            return DownloadResult(
-                url=url,
-                entries=entries,
-                success=True,
-                attempts=attempt,
-                status=status,
-                bytes_downloaded=len(data),
-                last_modified=last_modified,
-            )
-        except (
-            urllib.error.HTTPError,
-            urllib.error.URLError,
-            TimeoutError,
-            ConnectionResetError,
-            ConnectionAbortedError,
-            ConnectionRefusedError,
-            socket.timeout,
-            socket.gaierror,
-            ssl.SSLError,
-            http.client.HTTPException,
-            ValueError,
-            OSError,
-            EOFError,
-            zipfile.BadZipFile,
-            lzma.LZMAError,
-        ) as exc:
-            last_error = f'{type(exc).__name__}: {exc}'
-            print(f'⚠️  Échec {attempt}/{MAX_RETRIES} pour {url} -> {last_error}', file=sys.stderr)
-            if attempt < MAX_RETRIES:
-                time.sleep(BACKOFF_BASE ** (attempt - 1))
-
-    return DownloadResult(url=url, entries=set(), success=False, error=last_error, attempts=MAX_RETRIES)
-
-
-def write_blocklist(entries: Iterable[str], timestamp: str, output_path: Path = OUTPUT_FILE) -> None:
-    header = [
-        '! Title: filtresDNS',
-        '! Description: Liste de domaines consolidée et dédupliquée',
-        f'! Last modified: {timestamp}',
-        '! Expires: 12 hours',
-        '! Homepage: https://github.com/',
-        '! Syntax: Adblock Plus / hosts-like domains',
-        '',
-    ]
-    lines = header + sorted(entries)
-    output_path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
-
-
-def update_readme(stats: dict[str, int], readme_path: Path = README_FILE) -> None:
-    start_tag = '<!-- filtresDNS:start -->'
-    end_tag = '<!-- filtresDNS:end -->'
-    total = stats.get('after', 0)
-    failed = stats.get('failed_sources', 0)
-    ok = stats.get('successful_sources', 0)
-    skipped = stats.get('total_sources', 0) - ok
     new_table = (
-        '\n'
-        '| Indicateur | Valeur |\n'
-        '|---|---:|\n'
-        f'| Domaines uniques | {total} |\n'
-        f'| Sources OK | {ok} |\n'
-        f'| Sources en échec | {failed} |\n'
-        f'| Sources totales | {stats.get("total_sources", 0)} |\n'
+        "\n"
+        '<p align="center">\n'
+        f'  <img src="https://img.shields.io/badge/filtres%20uniques-{count_formatted}-A43836?style=for-the-badge" alt="filtres">\n'
+        f'  <img src="https://img.shields.io/badge/sources-{source_count}%20listes-E9BD98?style=for-the-badge" alt="listes">\n'
+        '  <img src="https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-F5E6CA?style=for-the-badge" alt="fréquence">\n'
+        "</p>\n"
+        "\n"
     )
-
+   
     try:
-        content = readme_path.read_text(encoding='utf-8')
+        with open(readme_path, "r", encoding="utf-8") as fh:
+            content = fh.read()
     except FileNotFoundError:
-        print(f'ℹ️ README introuvable : {readme_path}', file=sys.stderr)
+        print(f"README introuvable : {readme_path}")
         return
 
     start_pos = content.find(start_tag)
     end_pos = content.find(end_tag)
-    if start_pos != -1 and end_pos != -1 and end_pos > start_pos:
-        content = content[: start_pos + len(start_tag)] + new_table + '\n' + content[end_pos:]
+
+    if start_pos != -1 and end_pos != -1:
+        content = content[: start_pos + len(start_tag)] + new_table + content[end_pos:]
     else:
-        content += f'\n{start_tag}{new_table}\n{end_tag}\n'
+        content += f"\n{start_tag}{new_table}{end_tag}\n"
 
-    readme_path.write_text(content, encoding='utf-8')
+    with open(readme_path, "w", encoding="utf-8") as fh:
+        fh.write(content)
 
-
-def deduplicate_domains(entries: set[str]) -> set[str]:
-    trie_root = DomainTrieNode()
-    final_entries: set[str] = set()
-    for entry in sorted(entries, key=lambda e: (e.count('.'), e)):
-        if trie_root.insert(domain_to_parts(entry)):
-            final_entries.add(entry)
-    return final_entries
-
-
-def format_dt_fr(dt: datetime) -> str:
-    jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
-    mois = [
-        'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
-        'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'
-    ]
-    return f"{jours[dt.weekday()]} {dt.day:02d} {mois[dt.month - 1]} {dt.year}, {dt:%H:%M}"
-
-
-def format_last_modified(value: str | None) -> str | None:
-    if not value:
-        return None
-    try:
-        return parsedate_to_datetime(value).isoformat()
-    except Exception:
-        return value
-
+# ---------------------------------------------------------------------------
+# Point d'entrée
+# ---------------------------------------------------------------------------
 
 def main() -> None:
-    started = time.perf_counter()
+    """Orchestre le téléchargement, la déduplication et l'écriture de la blocklist."""
+    # 1. Téléchargement parallèle, avec isolation des erreurs par source
     all_entries: set[str] = set()
     results: list[DownloadResult] = []
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_map = {executor.submit(download_and_extract, url): url for url in BLOCKLIST_URLS}
-        for future in concurrent.futures.as_completed(future_map):
-            url = future_map[future]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=_MAX_WORKERS) as executor:
+        futures = {executor.submit(download_and_extract, url): url for url in BLOCKLIST_URLS}
+
+        for future in concurrent.futures.as_completed(futures):
+            url = futures[future]
             try:
                 result = future.result()
-            except Exception as exc:
-                result = DownloadResult(url=url, entries=set(), success=False, error=f'Unhandled: {type(exc).__name__}: {exc}')
+            except Exception as exc:  # filet de sécurité supplémentaire
+                result = DownloadResult(
+                    url=url,
+                    entries=set(),
+                    success=False,
+                    error=f"Unhandled {type(exc).__name__}: {exc}",
+                )
+
             results.append(result)
             all_entries.update(result.entries)
+
             if result.success:
-                lm = format_last_modified(result.last_modified)
-                suffix = f', last-modified={lm}' if lm else ''
-                print(f'✅ {url} -> {len(result.entries)} entrées (tentative {result.attempts}{suffix})')
+                print(
+                    f"OK: {url} -> {len(result.entries)} domaines "
+                    f"(tentative {result.attempts}/{_MAX_RETRIES})"
+                )
             else:
-                print(f'❌ {url} -> {result.error}', file=sys.stderr)
+                print(f"ÉCHEC: {url} -> {result.error}")
 
-    final_entries = deduplicate_domains(all_entries)
+    # 2. Déduplication via trie (suppression des sous-domaines redondants)
+    trie_root = DomainTrieNode()
+    final_entries: set[str] = set()
+
+    for entry in sorted(all_entries, key=lambda e: e.count(".")):
+        if is_valid_domain(entry) and trie_root.insert(domain_to_parts(entry)):
+            final_entries.add(entry)
+
+    # 3. Statistiques
     total = len(final_entries)
-    timestamp = format_dt_fr(datetime.now())
+    timestamp = datetime.now().strftime("%A %d %B %Y, %H:%M")
+    success_count = sum(1 for r in results if r.success)
+    failure_count = len(results) - success_count
+
+    # 4. Écriture de la blocklist
     write_blocklist(final_entries, timestamp=timestamp)
+    print(f"✅ filtresDNS.txt généré : {total} entrées")
+    print(f"Sources OK : {success_count}/{len(results)} | Sources en échec : {failure_count}")
 
-    successful_sources = sum(1 for r in results if r.success)
-    failed_sources = len(results) - successful_sources
-    duration = time.perf_counter() - started
+    # 5. Mise à jour du README
+    update_readme({"after": total})
 
-    print(f'✅ filtresDNS.txt généré : {total} entrées uniques')
-    print(f'📦 Sources OK: {successful_sources}/{len(results)} | échecs: {failed_sources} | durée: {duration:.1f}s')
-
-    update_readme(
-        {
-            'after': total,
-            'successful_sources': successful_sources,
-            'failed_sources': failed_sources,
-            'total_sources': len(results),
-        }
-    )
-
-    if successful_sources == 0:
-        raise SystemExit('Aucune source n’a pu être téléchargée.')
+    # 6. Échec global uniquement si aucune source n'a pu être récupérée
+    if success_count == 0:
+        raise SystemExit("Aucune source n'a pu être téléchargée.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
