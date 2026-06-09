@@ -41,7 +41,6 @@
 ||wheatentricklecover.com^
 
 ! ----- flemmix -----
-! script inline
 flemmix.*##.marquee
 flemmix.*##script:contains(marquee)
 ! flemmix.*##script:contains(var marquee = $('div.marquee');)
@@ -79,6 +78,10 @@ flemmix.*##script:contains(marquee)
 ||vidara.*/api/heartbeat^
 ||vidara.*/assets/js/new100.js$script
 ||vidara.*/e/*$xhr
+
+! Vidsonic
+||vidsonic.net/sonicSpeedCode.js$script
+||vidsonic.net/sonicSpeedHLS$script
 
 ! ----- voe -----
 ||jessicayeahcatch.com/build/assets/*$script
