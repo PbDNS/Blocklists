@@ -46,11 +46,8 @@
 ||*.info^$denyallow=korben.info|res.mail.laposte.info
 ||*.online^$denyallow=vmwesa.online
 ||*.cc^$denyallow=www.wikibox.cc|zimage.cc|dl-protect.cc|pixibay.cc|www.sharework1.cc|pixelflare.cc
-
 ||*.site^
 ||*.click^
-||*.ru^
-||*.cn^
 
 ! ── TIER 5 — Score élevé, volume intermédiaire ─────
 ! Confirmés par Cybercrime Supply Chain 2024 (rest, ooo, cam)
@@ -78,3 +75,41 @@
 ||*.boats^
 ||*.motorcycles^
 ||*.yachts^
+
+
+! =====================================================
+! TLDs peu utilisés en Europe occidentale
+! Pays utilisant majoritairement un alphabet non latin
+! Blocage optionnel (réduction surface d'attaque)
+! =====================================================
+
+! ── Russie et ex-URSS ────────────────────────────────
+||*.ru^
+||*.su^
+||*.kz^
+||*.kg^
+||*.tj^
+
+! ── Moyen-Orient ─────────────────────────────────────
+||*.ir^
+||*.iq^
+||*.sy^
+||*.af^
+
+! ── Asie orientale ───────────────────────────────────
+||*.cn^
+||*.mo^
+
+! ── Asie du Sud ──────────────────────────────────────
+||*.pk^
+||*.bd^
+
+! ── Caucase et Asie centrale ─────────────────────────
+||*.am^
+||*.az^
+||*.ge^
+||*.uz^
+||*.tm^
+
+! ── Mongolie ─────────────────────────────────────────
+||*.mn^
