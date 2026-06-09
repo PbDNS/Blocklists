@@ -85,10 +85,9 @@ flemmix.*##script:contains(marquee)
 ||vidsonic.net/sonicSpeedHLS$script
 
 ! ----- voe -----
-||jeanprofessorcentral.com/build/assets/*^$script
+||jeanprofessorcentral.com/build/assets/*$script
 ||jessicayeahcatch.com/build/assets/*$script
 ||upns.pro/assets/*^$script
-
 
 
 ! -----------------------------------------------------------
