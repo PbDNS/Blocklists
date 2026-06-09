@@ -67,6 +67,7 @@ import http.client
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
+from itertools import islice
 from datetime import datetime
 from pathlib import Path
 
@@ -170,6 +171,17 @@ class DownloadResult:
     success: bool
     error: str | None = None
     attempts: int = 1
+
+
+@dataclass(slots=True)
+class DeduplicationStats:
+    """Statistiques détaillées de la phase de suppression des redondances."""
+
+    total_examined: int = 0
+    total_valid: int = 0
+    total_invalid: int = 0
+    total_kept: int = 0
+    total_redundant: int = 0
 
 # ---------------------------------------------------------------------------
 # Validation
@@ -296,6 +308,56 @@ def domain_to_parts(domain: str) -> list[str]:
     """Convertit un domaine en liste de labels inversés (ex: 'a.b.com' → ['com','b','a'])."""
     return domain.strip().split(".")[::-1]
 
+
+def deduplicate_with_logs(entries: set[str]) -> tuple[set[str], DeduplicationStats]:
+    """Déduplique les domaines et journalise l'activité de suppression des redondances."""
+    trie_root = DomainTrieNode()
+    final_entries: set[str] = set()
+    stats = DeduplicationStats(total_examined=len(entries))
+
+    sorted_entries = sorted(entries, key=lambda e: (e.count("."), e))
+    progress_step = max(1, len(sorted_entries) // 20)
+    redundant_examples: list[str] = []
+    invalid_examples: list[str] = []
+
+    print(f"🔎 Début de la suppression des redondances : {len(sorted_entries)} domaines candidats")
+
+    for index, entry in enumerate(sorted_entries, start=1):
+        if not is_valid_domain(entry):
+            stats.total_invalid += 1
+            if len(invalid_examples) < 10:
+                invalid_examples.append(entry)
+            continue
+
+        stats.total_valid += 1
+
+        if trie_root.insert(domain_to_parts(entry)):
+            final_entries.add(entry)
+            stats.total_kept += 1
+        else:
+            stats.total_redundant += 1
+            if len(redundant_examples) < 10:
+                redundant_examples.append(entry)
+
+        if index % progress_step == 0 or index == len(sorted_entries):
+            print(
+                f"🔁 Déduplication : {index}/{len(sorted_entries)} | "
+                f"conservés={stats.total_kept} | redondants={stats.total_redundant} | invalides={stats.total_invalid}"
+            )
+
+    print(
+        f"✅ Fin de la suppression des redondances : "
+        f"{stats.total_kept} conservés, {stats.total_redundant} redondants retirés, {stats.total_invalid} invalides ignorés"
+    )
+
+    if redundant_examples:
+        print("🧪 Exemples de domaines redondants ignorés : " + ", ".join(redundant_examples))
+
+    if invalid_examples:
+        print("🧪 Exemples de domaines invalides ignorés : " + ", ".join(invalid_examples))
+
+    return final_entries, stats
+
 # ---------------------------------------------------------------------------
 # Écriture de la blocklist
 # ---------------------------------------------------------------------------
@@ -391,12 +453,7 @@ def main() -> None:
                 print(f"ÉCHEC: {url} -> {result.error}")
 
     # 2. Déduplication via trie (suppression des sous-domaines redondants)
-    trie_root = DomainTrieNode()
-    final_entries: set[str] = set()
-
-    for entry in sorted(all_entries, key=lambda e: e.count(".")):
-        if is_valid_domain(entry) and trie_root.insert(domain_to_parts(entry)):
-            final_entries.add(entry)
+    final_entries, dedup_stats = deduplicate_with_logs(all_entries)
 
     # 3. Statistiques
     total = len(final_entries)
@@ -408,6 +465,10 @@ def main() -> None:
     write_blocklist(final_entries, timestamp=timestamp)
     print(f"✅ filtresDNS.txt généré : {total} entrées")
     print(f"Sources OK : {success_count}/{len(results)} | Sources en échec : {failure_count}")
+    print(
+        f"Déduplication : examinés={dedup_stats.total_examined} | valides={dedup_stats.total_valid} | "
+        f"conservés={dedup_stats.total_kept} | redondants={dedup_stats.total_redundant} | invalides={dedup_stats.total_invalid}"
+    )
 
     # 5. Mise à jour du README
     update_readme({"after": total})
