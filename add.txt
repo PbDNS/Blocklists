@@ -2,6 +2,8 @@
 ! Filtres additionnels, inclus à filtresDNS.txt et/ou filtresLocaux.txt
 ! **********************************************************************
 
+||bladelikefreightwhat.com^
+
 ! ----- apple -----
 ||partiality.itunes.apple.com^
 
