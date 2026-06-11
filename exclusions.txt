@@ -49,7 +49,6 @@
 
 ! divers
 @@||brew.sh^
-@@||cdnjs.cloudflare.com^
 @@||dealabs.digidip.net^
 @@||dl-protect.link^
 @@||dns.notjakob.com^
