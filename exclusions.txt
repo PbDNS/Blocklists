@@ -48,7 +48,7 @@
 @@||cdn.braze.eu^
 
 ! vidéos ina.fr
-@@||ssl.p.jwpcdn.com^
+! @@||ssl.p.jwpcdn.com^
 
 ! divers
 @@||brew.sh^
