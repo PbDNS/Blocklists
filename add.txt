@@ -2,7 +2,15 @@
 ! Filtres additionnels, inclus à filtresDNS.txt et/ou filtresLocaux.txt
 ! **********************************************************************
 
+! ----- popus ads -----
+||annihilativefaltermillion.com^
 ||bladelikefreightwhat.com^
+||carveddoublebogeyhigh.com^
+||drenchedtidyarticle.com^
+||flamechannel.com^
+||jnbhi.com^
+||mercurousswaddlesuggest.com^
+||wheatentricklecover.com^
 
 ! ----- apple -----
 ||partiality.itunes.apple.com^
