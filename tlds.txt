@@ -98,7 +98,7 @@
 
 ! ── Asie orientale ───────────────────────────────────
 ! (.jp, .kr, .tw ou .hk hébergent énormément de sites parfaitement légitimes)
-||*.cn^
+||*.cn^^$denyallow=chatglm.cn|shlab.org.cn
 ||*.mo^
 
 ! ── Asie du Sud ──────────────────────────────────────
