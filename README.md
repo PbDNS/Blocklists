@@ -7,7 +7,7 @@
 
 <!-- STATS_START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/filtres%20uniques-519%2C471-A43836?style=for-the-badge" alt="filtres">
+  <img src="https://img.shields.io/badge/filtres%20uniques-519%2C505-A43836?style=for-the-badge" alt="filtres">
   <img src="https://img.shields.io/badge/sources-33%20listes-E9BD98?style=for-the-badge" alt="listes">
   <img src="https://img.shields.io/badge/mise%20%C3%A0%20jour-quotidienne-F5E6CA?style=for-the-badge" alt="fréquence">
 </p>
