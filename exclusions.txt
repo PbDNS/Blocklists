@@ -41,9 +41,6 @@
 ! certificats let's encrypt
 @@||e5.o.lencr.org^
 
-! medias player WF
-@@||yastatic.net^
-
 ! contenu mails shopopop
 @@||cdn.braze.eu^
 
