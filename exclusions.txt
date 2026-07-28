@@ -62,7 +62,8 @@
 
 ! --------------------------------------------------
 
-! ✅ Whitelist CMP (Consent Management Platforms) - Rev. Juin 2026 - Gemini 3.1 Pro Thinking
+
+! ✅ Whitelist CMP (Consent Management Platforms) - Rev. Juillet 2026 - 
 ! 📌 Autorise uniquement l'interface de consentement (RGPD/TCF), pas les trackers
 ! ⚠️ Domaines racine retirés quand ils hébergent aussi du tracking
 
@@ -80,6 +81,9 @@
 @@||privacyportal-de.onetrust.com^
 @@||privacyportal.onetrust.com^
 @@||cdn.cookielaw.org^
+
+! OneTrust / CookiePro : CDN utilisé par certaines implémentations
+@@||cookie-cdn.cookiepro.com^
 
 ! Cookiebot (groupe Usercentrics)
 @@||consent.cookiebot.com^
@@ -157,6 +161,9 @@
 
 ! Klaro
 @@||klaro.kiprotect.com^
+
+! Cookiebot : endpoint européen officiel du bandeau et de la déclaration
+@@||consent.cookiebot.eu^
 
 ! ==========================================
 ! 3. Google & Fournisseurs cloud
