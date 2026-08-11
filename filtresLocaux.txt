@@ -8177,6 +8177,7 @@
 ||assets.modeathletics.com^
 ||assets.modehypertext.com^
 ||assets.ogrzewanie-pex.pl^
+||assets.onedollarstats.com^
 ||assets.oupe.es^
 ||assets.piercingkungen.se^
 ||assets.prydligt.com^
@@ -55007,6 +55008,7 @@
 ||rum-collector.leaderint.workers.dev^
 ||rum-ingress-coralogix.com^
 ||rum-metrics.bunny.net^
+||rum.aliyuncs.com^
 ||rum.api.intuit.com^
 ||rum.azion.com^
 ||rum.azioncdn.net^
@@ -77115,6 +77117,7 @@
 ||stats.digiexpert.store^
 ||stats.digital-natives.de^
 ||stats.dillen.dev^
+||stats.divee.ai^
 ||stats.divyanshu013.dev^
 ||stats.dmail.co.nz^
 ||stats.dmarcdigests.com^
@@ -77354,6 +77357,7 @@
 ||stats.jdheyburn.co.uk^
 ||stats.jeremygreenawalt.com^
 ||stats.jerickson.net^
+||stats.jerkmotion.com^
 ||stats.jessesquires.com^
 ||stats.jetzt-aktivieren.de^
 ||stats.jhsheridan.com^
@@ -87486,6 +87490,7 @@
 ||u.knuffelwuff.at^
 ||u.knuffelwuff.dk^
 ||u.landing.ni.com^
+||u.lessbutbetter.studio^
 ||u.salony.com^
 ||u.strike.bz^
 ||u.unison-doors.com^
@@ -88822,6 +88827,7 @@
 ||v.perfumesclub.com^
 ||v.shopify.com^
 ||v.topya.com^
+||v.voltmail.io^
 ||v.voxberg.com^
 ||v.vratiexpress.com^
 ||v063.4029tv.com^
@@ -101904,7 +101910,6 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 13wmaz.com,ktvb.com,whas11.com,king5.com,wnep.com,firstcoastnews.com,wtsp.com,wfaa.com,kgw.com,wcnc.com,wusa9.com,khou.com,ksdk.com,kens5.com,abc10.com,wwltv.com,wfmynews2.com,thv11.com,wzzm13.com,kare11.com,wkyc.com,localmemphis.com,kcentv.com,wtol.com,9news.com,newswest9.com,weareiowa.com,krem.com,newscentermaine.com,wltx.com,wgrz.com,kvue.com,cbs8.com,12newsnow.com,kiiitv.com,wqad.com,fox43.com,10tv.com,myfoxzone.com,12news.com,13newsnow.com,5newsonline.com,fox61.com##.grid__cell[data-columns]:has(> div[data-analytics-name="Braze Newsletter Signup-1"])
 13wmaz.com,ktvb.com,whas11.com,king5.com,wnep.com,firstcoastnews.com,wtsp.com,wfaa.com,kgw.com,wcnc.com,wusa9.com,khou.com,ksdk.com,kens5.com,abc10.com,wwltv.com,wfmynews2.com,thv11.com,wzzm13.com,kare11.com,wkyc.com,localmemphis.com,kcentv.com,wtol.com,9news.com,newswest9.com,weareiowa.com,krem.com,newscentermaine.com,wltx.com,wgrz.com,kvue.com,cbs8.com,12newsnow.com,kiiitv.com,wqad.com,fox43.com,10tv.com,myfoxzone.com,12news.com,13newsnow.com,5newsonline.com,fox61.com##.grid__main > div.grid__cell:has(> div.grid__module > div.grid__module-sizer_name_braze-signup)
 15min.lt#?#.col-right > div.widget-group:has(> div.widget div.item-info > div.item-category:contains(Reklama))
-165.22.246.130#%#//scriptlet('adjust-setInterval', '/wpsafe|wait|timer/', '*', '0.001')
 1800contacts.com#%#//scriptlet('set-cookie', 'hasSeenEmailCaptureModal', 'true')
 1800petmeds.com#%#//scriptlet('set-local-storage-item', 'emailLightBox', 'false')
 18comic.org,18comic.vip##.float-right-image
@@ -103740,6 +103745,7 @@ axios.com#%#//scriptlet('set-cookie', '_pc_bypass_subwall', 'true')
 axisbank.com##.dealPopup
 axisbank.com##.overLay
 ayntec.com##section[data-section-type="newsletter-popup"]
+ayradvertiser.com,ayrshire-today.co.uk,barkinganddagenhampost.co.uk,times-series.co.uk,barrheadnews.com,barryanddistrictnews.co.uk,echo-news.co.uk,basingstokegazette.co.uk,becclesandbungayjournal.co.uk,bicesteradvertiser.net,birmingham-now.co.uk,bordercountiesadvertizer.co.uk,bordertelegraph.com,borehamwoodtimes.co.uk,bournemouthecho.co.uk,bracknellnews.co.uk,thetelegraphandargus.co.uk,braintreeandwithamtimes.co.uk,kilburntimes.co.uk,brentwoodlive.co.uk,bridgwatermercury.co.uk,bridportnews.co.uk,bromsgroveadvertiser.co.uk,living-magazines.co.uk,bucksfreepress.co.uk,burnhamandhighbridgeweeklynews.co.uk,burymercury.co.uk,burytimes.co.uk,thenorthernecho.co.uk,cambstimes.co.uk,celticway.co.uk,centralfifetimes.com,chardandilminsternews.co.uk,chelmsfordweeklynews.co.uk,cheshirelife.co.uk,living-magazines.co.uk,chesterstandard.co.uk,clactonandfrintongazette.co.uk,clydebankpost.co.uk,gazette-news.co.uk,cornwalllife.co.uk,cotswoldjournal.co.uk,cotswoldlife.co.uk,living-magazines.co.uk,cravenherald.co.uk,cumbrialife.co.uk,cumnockchronicle.com,darlingtonandstocktontimes.co.uk,denbighshirefreepress.co.uk,derbyshirelife.co.uk,derehamtimes.co.uk,devonlife.co.uk,dissmercury.co.uk,dorsetecho.co.uk,living-magazines.co.uk,dorsetmagazine.co.uk,dudleynews.co.uk,dumbartonreporter.co.uk,dumfriesandgallowaylife.co.uk,dunfermlinepress.com,dunmowbroadcast.co.uk,ealingtimes.co.uk,eadt.co.uk,eastlondonadvertiser.co.uk,guardian-series.co.uk,eastlothiancourier.com,edp24.co.uk,echo-news.co.uk,elystandard.co.uk,enfieldindependent.co.uk,eppingforestguardian.co.uk,essexcountynews.co.uk,essexlifemag.co.uk,eveshamjournal.co.uk,exchangeandmart.co.uk,exmouthjournal.co.uk,fakenhamtimes.co.uk,falmouthpacket.co.uk,forestryjournal.co.uk,freepressseries.co.uk,gazetteandherald.co.uk,gazetteherald.co.uk,gazetteseries.co.uk,glasgowtimes.co.uk,greatbritishlife.co.uk,greatyarmouthmercury.co.uk,greenocktelegraph.co.uk,hackneygazette.co.uk,halesowennews.co.uk,halsteadgazette.co.uk,hamhigh.co.uk,hampshirechronicle.co.uk,hampshire-life.co.uk,harrowtimes.co.uk,harwichandmanningtreestandard.co.uk,heartsstandard.co.uk,helensburghadvertiser.co.uk,heraldscotland.com,heraldseries.co.uk,herefordtimes.com,living-magazines.co.uk,hertsad.co.uk,hexham-courant.co.uk,hibsobserver.co.uk,hillingdontimes.co.uk,huntspost.co.uk,ilfordrecorder.co.uk,ilkleygazette.co.uk,impartialreporter.com,in-cumbria.com,ipswichstar.co.uk,irvinetimes.com,countypress.co.uk,islingtongazette.co.uk,keighleynews.co.uk,kent-life.co.uk,kidderminstershuttle.co.uk,knutsfordguardian.co.uk,lancashirelife.co.uk,lancashiretelegraph.co.uk,largsandmillportnews.com,ledburyreporter.co.uk,leighjournal.co.uk,london-now.co.uk,lowestoftjournal.co.uk,ludlowadvertiser.co.uk,maldonandburnhamstandard.co.uk,malverngazette.co.uk,messengernewspapers.co.uk,living-magazines.co.uk,midweekherald.co.uk,milfordmercury.co.uk,newhamrecorder.co.uk,newsandstar.co.uk,newsshopper.co.uk,norfolkmag.co.uk,living-magazines.co.uk,northnorfolknews.co.uk,northsomersettimes.co.uk,northwaleschronicle.co.uk,northwalespioneer.co.uk,northwichguardian.co.uk,eveningnews24.co.uk,oxfordmail.co.uk,living-magazines.co.uk,peeblesshirenews.com,penarthtimes.co.uk,peterboroughmatters.co.uk,pinkun.com,countytimes.co.uk,rangersreview.co.uk,readingchronicle.co.uk,redditchadvertiser.co.uk,redhillandreigatelife.co.uk,the-gazette.co.uk,rhyljournal.co.uk,richmondandtwickenhamtimes.co.uk,romfordrecorder.co.uk,royston-crow.co.uk,runcornandwidnesworld.co.uk,saffronwaldenreporter.co.uk,salisburyjournal.co.uk,scotlandrugbynews.com,sidmouthherald.co.uk,sloughobserver.co.uk,somersetcountygazette.co.uk,somerset-life.co.uk,southwalesargus.co.uk,southwalesguardian.co.uk,southwestfarmer.co.uk,southendstandard.co.uk,dailyecho.co.uk,sthelensstar.co.uk,stirlingnews.co.uk,stourbridgenews.co.uk,stowmarketmercury.co.uk,stroudnewsandjournal.co.uk,sudburymercury.co.uk,suffolkmag.co.uk,surreycomet.co.uk,sussexlife.co.uk,swindonadvertiser.co.uk,theargus.co.uk,theboltonnews.co.uk,thecomet.net,leaderlive.co.uk,nwemail.co.uk,thenational.scot,thenorthernecho.co.uk,northernfarmer.co.uk,theoldhamtimes.co.uk,theresident.co.uk,thescottishfarmer.co.uk,theterrace.scot,thewestmorlandgazette.co.uk,thetfordandbrandontimes.co.uk,thisisoxfordshire.co.uk,thisiswiltshire.co.uk,thurrockgazette.co.uk,timesandstar.co.uk,tivysideadvertiser.co.uk,thetottenhamindependent.co.uk,wearevoice.co.uk,walesfarmer.co.uk,wandsworthguardian.co.uk,warringtonguardian.co.uk,watfordobserver.co.uk,wattonandswaffhamtimes.co.uk,wearesunderland.com,whtimes.co.uk,westerntelegraph.co.uk,thewestonmercury.co.uk,wharfedaleobserver.co.uk,whitchurchherald.co.uk,whitehavennews.co.uk,wiltsglosstandard.co.uk,living-magazines.co.uk,wiltshiretimes.co.uk,wimbledonguardian.co.uk,wirralglobe.co.uk,wisbechstandard.co.uk,witneygazette.co.uk,worcesternews.co.uk,wymondhamandattleboroughmercury.co.uk,yeovilexpress.co.uk,yorkpress.co.uk,yorkshirelife.co.uk,living-magazines.co.uk,yourlocalguardian.co.uk,asianimage.co.uk,ardrossanherald.com,alloaadvertiser.com,andoveradvertiser.co.uk,thewestmorlandgazette.co.uk,dorsetecho.co.uk,glasgowtimes.co.uk,dailyecho.co.uk###po-inline-article-above
 aysenuryazici.com,post-punk.com##.adp-popup
 azbooka.ru##._1wDzjU2f
 azbooka.ru##._26wxVNOj
@@ -107410,6 +107416,7 @@ fb.ru##.intext
 fb2.top#%#//scriptlet('set-cookie', 'vk_ad_shown', '1')
 fbc.biz.ua,iphone-gps.ru##.post_subscribe
 fbi.gov###meta-tile-meta-sticky-footer
+fbk.info##body > div.fixed:has(> form input[type="email"])
 fbref.com##.stathead_player_highlight
 fcbarcelona.com##.quicklinks
 fcbayern.com##div[data-upscore-zone^="content(NEWSLETTER)"]
@@ -107889,6 +107896,7 @@ forsal.pl,dziennik.pl##.newsButton
 fortinet.com#$#body { overflow: auto !important; }
 fortnitetracker.com##.love-container
 fortnitetracker.com#%#//scriptlet('trusted-set-local-storage-item', 'winter-2023-premium-frame-announcement', 'closed')
+fortune.com##.article-page-wrapper .contents > .flex:has(> .container-content > .flex > button[aria-label^="Add Fortune as a preferred source on Google"])
 fortune.com##.related-video-container
 fortune.com##div[class]:has(> div#article-piano-template-plea-container)
 fortune.com##div[class^="tp-"]
@@ -112034,6 +112042,7 @@ masmotors.ru###block-webform-client-block-5816.block-webform
 masmotors.ru###block-webform-client-block-7622.block-webform
 masrawy.com##.lstNwsNtfy
 masrawy.com,ciasex.com.br##.notification
+masrawytrend.com#%#//scriptlet('adjust-setInterval', 'clearInterval')
 master-plus.com.ua##.popup_alert
 masterclass.com###email-capture
 masterclass.com##main > div[class*="Sticky_top"]
@@ -112050,6 +112059,7 @@ matadornetwork.com#$#body { overflow: auto !important; }
 matchendirect.fr###akceloTopAdArea
 matchtv.ru##div[id^="webcaster_player"] > a[href^="https://matchtv.ru/subscriptions?"]
 materializedview.io#%#//scriptlet('trusted-set-local-storage-item', 'pub-2070040-subscribe-prompt-next-shown-at', '99999999999999')
+math-aids.com##.article__body > center:has(> #email-form-parent)
 math-prosto.ru###requestShutOfBlocker
 mathbang.net,teus.me,archwin.net,funfunhan.com,onpc.kr,bookpost.kr,donghun.kr,zoommastory.com,kokone.co.kr,blog.hangyeong.com,stevenh.net,ideas0419.com,raycat.net,hosii.info,blahblah.pe.kr,tokyodomin.com,modoobrisbane.com,geniusjw.com,gamegame.kr,centrair.kr,blog.esherloon.com,tistory.com#%#//scriptlet('abort-current-inline-script', 'tjQuery', 'body')
 mathebibel.de##.relative:has(> form.newsletter-form)
@@ -112657,6 +112667,7 @@ moum.top#%#//scriptlet('trusted-click-element', '.MuiDialog-container div[aria-l
 mover.uz###oframeplayer > [class][style^="display: block"]
 mover.uz##.block-info-vertical
 movie-tsutaya.tsite.jp##.banner-detail
+moviebite.cc###root > div[role="status"]
 movieinsider.com,halfbakedharvest.com,antonovsad.ru,auslogics.com,expressvpn.com,singlegrain.com##.sidebar-subscribe
 moviekhhd.biz##a[alt^="Subscribe"]
 movielens.org#@#.marketing-container
@@ -113279,9 +113290,11 @@ newssky.com.ua##.boxxx
 newssky.com.ua##.single-content > h4
 newstatesman.com##.newsletter-inner-container
 newstomato.com##.rn_container div[style^="text-align:"][style*="margin-top:"]
+newsweek.com###piano-inline-engagement
 newsweek.com##.newsletter-signup-horizontal
 newsweek.com##.subscribe-block-wrapper
 newsweek.com##div[class*="tickyPlayer"] > div.videocontent
+newsweek.com##div[class^="GooglePreferredSourceBanner"]
 newsweek.com#$#body { overflow: auto !important; }
 newsweek.com#$#html { overflow: auto !important; }
 newsweek.pl###tpTopBarSticky
@@ -113886,6 +113899,7 @@ opendemocracy.net##.donate__sticky-banner
 opendemocracy.net##.donation-cta-contenttop
 opendemocracy.net##.sidebar--newsletter
 opengapps.org##.advertisement > #donatebox
+openinbox.io##.inset-0.fixed
 openmedia.io##.subscribePopUp
 opennet.ru##a[href^="/banners"]
 opennet.ru##div[style="background-color: #E9EAD6; width:100%; height: 61px;"]
@@ -115041,6 +115055,8 @@ qualtrics.com##ul[data-gatext="Banners"]
 quantamagazine.org##.sidebar__newsletter + .mb05.theme__accent-hover
 quantamagazine.org##.sidebar__newsletter ~ a[href*="campaign-archive2.com/home/"]
 quantamagazine.org,nftnow.com##.sidebar__newsletter
+quantvps.com##.sticky > div[class^="relative overflow-hidden rounded-xl border border-brand-primary-500/20"]
+quantvps.com#%#//scriptlet('trusted-set-local-storage-item', 'quantvps-user', '{"emailDialogDismissed":false,"emailDialogMinimized":true}')
 qub.ca##legend[data-testid="adTag"]
 qub.ca#$#.adsbox.ad-banner:not([style="height: 5px; width: 5px; position: absolute; top: 0;"]):not(.blocker-tester + .ad-banner) { display: block !important; }
 qub.ca#$#.pub_300x250.pub_300x250m.pub_728x90.text-ad.textAd.text_ad.text_ads.text-ads.text-ad-links { display: block !important; }
@@ -117787,6 +117803,9 @@ thesimsresource.com##.vip-leader.hideme
 thesimsresource.com##.vip-square
 thesoccermomblog.com#%#//scriptlet('set-cookie', 'bswp-display-7811', '1')
 thesource.com###custom_html-8
+thespiritsbusiness.com##aside > div.mb-6 > div.bg-secondary:has(> div > div.c-subscription)
+thespiritsbusiness.com,europeelects.eu,historyofroyalwomen.com#$#.pum-overlay[data-popmake*='newsletter'] { display: none !important; }
+thespiritsbusiness.com,europeelects.eu,historyofroyalwomen.com#$#html.pum-open-overlay { overflow: auto !important; }
 thesportsmanchannel.com###MainContent_HomePageNewsletterSignup_newsletterPanel
 thespruce.com###site-wide-notification_1-0
 thestar.co.uk,sussexexpress.co.uk,portsmouth.co.uk,newsletter.co.uk,northantstelegraph.co.uk,falkirkherald.co.uk,nationalworld.com,sunderlandecho.com,scotsman.com###sidebar-newsletter-signup
@@ -117848,7 +117867,6 @@ theweek.com##.slice-widget-wrapper
 theweek.com##div.kiosq-main-layer
 theweek.com,fitandwell.com,moneyweek.com##.social__item--newsletter
 theweek.in##.article-post > div.specialpromo:has(> div.video-iframe-new a[href^="https://whatsapp.com/channel/"])
-thewestmorlandgazette.co.uk,dorsetecho.co.uk,glasgowtimes.co.uk,dailyecho.co.uk###po-inline-article-above
 thewikihow.com##.tg-channel-lnk
 thewire.in##.side-article-content > .icp3-wrapper
 thewrap.com##+js(cookie-remover, blaize_session)
@@ -118514,6 +118532,7 @@ ufret.jp###carouselExampleIndicators
 ufret.jp###full-screen-ad
 ufret.jp##.btn-lg[href="/signup.php"]
 ufret.jp##.p-banner-primary--fix
+ufret.jp##.p-trial
 ufret.jp,joysound.com#%#(()=>{["contextmenu","copy","selectstart"].forEach((o=>{window.addEventListener(o,(o=>{o.stopPropagation()}),!0)}));})();
 ufret.jp,tekniknot.com,toptoon.com#$#html * { user-select: auto !important; -webkit-touch-callout: default !important; -webkit-user-select: auto !important; -moz-user-select: text !important; -ms-user-select: text !important; }
 ug.ru##.contact-form-link
@@ -126864,6 +126883,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||empire-streaming.*/serviceWorker.js
 ||emploipartner.com/uploads/media/5fb6411bbfd4d310595939.jpg
 ||emploitic.com/images/banners/
+||emrldtp.com/collect
 ||ems.youku.com/event?
 ||emu-france.com/wp-content/themes/emufrance/*casino
 ||emule-security.org/tracker.js
@@ -127572,6 +127592,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||forspeed.onlinedown.net^$all
 ||forter.com^$third-party
 ||fortnitechat.site^$all
+||fortune.com/api/recommendations/feedback/view/
 ||fortune.com/api/tinypass.min.js$script,~third-party
 ||fortune.com/comscore-json/
 ||fortvision.com^$third-party
@@ -127898,6 +127919,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||gcp.api.snapchat.com/web-blizzard/web/send^
 ||gcpsmapi.vodafone.com/submit-events
 ||gde.ru/isapi/tracker.dll?
+||gdebenz.ru/api/rum
 ||gdeslon.ru^$third-party
 ||gecid.com/inc/bstat.php
 ||gecko.space/count.js
@@ -132587,8 +132609,8 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||mark.isbank.com.tr/hit
 ||marker.io/widget/ping
 ||market-click2.yandex.ru/safeclick/json|
-||market.samm.com/0/sendEventV2
 ||market.samm.com/0/sendeventv2
+||market.samm.com/0/sendEventV2
 ||marketcat.co/pixel/
 ||marketing-page.de^$third-party
 ||marketingautomation.services/client/ss.js
@@ -132673,8 +132695,8 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||maxtraffic.com^$third-party
 ||maxymiser.com^$third-party
 ||maxymiser.net^$third-party
-||mayla.jp/tracking/
 ||mayla.jp/TRACKING/
+||mayla.jp/tracking/
 ||mb-srv.com^$third-party
 ||mb.mtvnservices.com/data/collect/
 ||mb4a.com^$third-party
@@ -144043,8 +144065,8 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||trip.com/restapi/soa2/*/tripAds.json
 ||tripadvisor.*/actionrecord
 ||tripadvisor.*/BALinkImpressionTracking/
-||tripadvisor.*/cookiepingback?
 ||tripadvisor.*/CookiePingback?
+||tripadvisor.*/cookiepingback?
 ||tripadvisor.*/garecord
 ||tripadvisor.*/GARecord^
 ||tripadvisor.*/impressionrecord
@@ -144294,6 +144316,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||ucoz.net/stat/
 ||ucoz.ru/stat/
 ||ucuzabilet.com/ajax/referrerAnalytics
+||ucuztap.az/api/ads/track
 ||ucweb.com/collect/
 ||udc.yahoo.com/v*/public/*&yhlClient=rapid*&yhlClientVer=$domain=yahoo.com
 ||udc.yahoo.com/v2/public/yql?
@@ -144846,6 +144869,8 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||volkswagen-italia.it^*/tracking/
 ||volleybox.net/media/js/analytics/
 ||vologda-info.ru^$third-party
+||voltmail.io/static/js/form-embed.js$third-party
+||voltmail.io/static/js/push-embed.ts$third-party
 ||volument.com^$third-party
 ||voluumtlkrnarketing.com^$third-party
 ||voonik.com/analytics.min.js
