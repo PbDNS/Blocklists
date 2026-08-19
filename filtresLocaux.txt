@@ -4772,6 +4772,7 @@
 ||analytics-1.cavai.com^
 ||analytics-api-s.cloudinary.com^
 ||analytics-api.a-f.io^
+||analytics-api.byub.org^
 ||analytics-api.gemcommerce.com^
 ||analytics-api.invideo.io^
 ||analytics-api.klickly.com^
@@ -5004,6 +5005,7 @@
 ||analytics.byecorps.com^
 ||analytics.byeternify.com^
 ||analytics.byondesign.com^
+||analytics.byub.org^
 ||analytics.calculavalorvivienda.es^
 ||analytics.calibrecleaning.com.au^
 ||analytics.callbell.eu^
@@ -12848,6 +12850,7 @@
 ||cdn.medlandspann.is^
 ||cdn.meno-me.com^
 ||cdn.metodolumens.com.br^
+||cdn.mgln.ai^
 ||cdn.mircheigeshoa.com^
 ||cdn.monlabubu.ch^
 ||cdn.naturprodukt.cz^
@@ -106148,6 +106151,7 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 &l=dataLayer&cx=c
 &lptoken=*&zoneid=$popup
 &pagegroup=*&url=$script
+&pload=*&eclog=
 &pub_id=$popup
 &pubfeed=*&subid=$popup
 &publisherid=$popup
@@ -110619,7 +110623,7 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 10desires.org#%#!function(){if(-1<window.location.href.indexOf("/?r=aHR0c")){var a=location.href.split("/?r=");if(a&&a[1])try{window.location=atob(a[1])}catch(b){}}}();
 10haber.net##.sospaylas
 10mtv.jp##.popup-area
-10tv.com,11alive.com,12news.com,12newsnow.com,13newsnow.com,13wmaz.com,5newsonline.com,9news.com,abc10.com,apnews.com,artforum.com,artnews.com,billboard.com,birdsandblooms.com,calgaryherald.com,calgarysun.com,cbs19.tv,cbs8.com,cleveland.com,crooksandliars.com,deadline.com,dpreview.com,driving.ca,familyhandyman.com,financialpost.com,firstcoastnews.com,fox43.com,fox61.com,goldderby.com,golfdigest.com,hollywoodreporter.com,indiewire.com,kare11.com,kcentv.com,kens5.com,kgw.com,kiiitv.com,king5.com,krem.com,ktvb.com,kvue.com,lfpress.com,localmemphis.com,masslive.com,myfoxzone.com,nationalpost.com,nbcsports.com,newscentermaine.com,newswest9.com,oregonlive.com,ottawasun.com,rd.com,robbreport.com,rollingstone.com,sherdog.com,sidereel.com,superherohype.com,tasteofhome.com,thv11.com,torontosun.com,vancouversun.com,variety.com,vibe.com,wbir.com,wcnc.com,weareiowa.com,wfaa.com,wfmynews2.com,wgrz.com,whas11.com,windsorstar.com,wkyc.com,wltx.com,wnep.com,wqad.com,wthr.com,wtol.com,wtsp.com,wusa9.com,wwd.com,wwltv.com,wzzm13.com#%#//scriptlet('ubo-acs', 'document.getElementsByTagName', '.pubads')
+10tv.com,11alive.com,12news.com,12newsnow.com,13newsnow.com,13wmaz.com,5newsonline.com,9news.com,abc10.com,apnews.com,artforum.com,artnews.com,billboard.com,birdsandblooms.com,calgaryherald.com,calgarysun.com,cbs19.tv,cbs8.com,cleveland.com,crooksandliars.com,deadline.com,dpreview.com,driving.ca,familyhandyman.com,financialpost.com,firstcoastnews.com,fox43.com,fox61.com,goldderby.com,golfdigest.com,hollywoodreporter.com,indiewire.com,kare11.com,kcentv.com,kens5.com,kgw.com,kiiitv.com,king5.com,krem.com,ktvb.com,kvue.com,lehighvalleylive.com,lfpress.com,localmemphis.com,masslive.com,myfoxzone.com,nationalpost.com,nbcsports.com,newscentermaine.com,newswest9.com,oregonlive.com,ottawasun.com,rd.com,robbreport.com,rollingstone.com,sherdog.com,sidereel.com,superherohype.com,tasteofhome.com,thv11.com,torontosun.com,vancouversun.com,variety.com,vibe.com,wbir.com,wcnc.com,weareiowa.com,wfaa.com,wfmynews2.com,wgrz.com,whas11.com,windsorstar.com,wkyc.com,wltx.com,wnep.com,wqad.com,wthr.com,wtol.com,wtsp.com,wusa9.com,wwd.com,wwltv.com,wzzm13.com#%#//scriptlet('ubo-acs', 'document.getElementsByTagName', '.pubads')
 115.com##.ceiling-feature
 115.com##.feature-float
 115.com##.sharing-banner
@@ -110740,7 +110744,6 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 2ememain.be#?#.hz-Listing--list-item:has(.hz-Listing-priority:contains(Pub au top))
 2ememain.be#?#.hz-Listing--list-item:has(.hz-Listing-seller-link:contains(Visiter le site internet))
 2ememain.be#?#.hz-Listing--list-item:has(span:contains(/Topadvertentie|Pub au top/))
-2eylul.com.tr,eskisehirhaberajansi.com,urfanatik.com,afyonpostasi.com.tr,macg.co,futboo.com,dogruhaber.com.tr,tomsguide.com,shortlist.com,trf1.net,bessarabiainform.com,techorange.com,impress.co.jp,ispazio.net,techradar.com,dumka.media,comments.ua,muhalif.com.tr,vidomo.media,dexerto.com,malatyaguncel.com,yenisakarya.com,phonearena.com,ortadogugazetesi.com,gucluanadolugazetesi.com,alanyapostasi.com.tr,samsungazetesi.com,hamlegazetesi.com.tr,uyan32.com,yeniizmir.com,ilerigazetesi.com.tr,egetelgraf.com,referansgazetesi.com.tr,sonmuhur.com,gazetearena.com,gazetegercek.com.tr,politikam.com,gercekhaberci.com,newsofx2.com,thedailystar.net,samayam.com,teluguone.com,hockeyfeed.com,marasbugun.com.tr,cinemascomics.com,iguru.gr,lidergazete.com,autocarindia.com,112.ua,tunota.com,tomshardware.com,24saatgazetesi.com,halktv.com.tr,www-ntv-com-tr.cdn.ampproject.org,libertatea.ro,afyonturkeligazetesi.com,moja-ostroleka.pl,kamudanhaber.net,ajansspor.com,takvim.com.tr,dirilispostasi.com,americatv.com.pe,haberantalya.com,gunhaber.com.tr,pisapapeles.net,antalyahurses.com,sozcu.com.tr,aydinkulis.com,doisongphapluat.com.vn,reisetopia.de,gazetebirlik.com,iscihaber.net,sonhaber.eu,politic.gr,asianetnews.com,lance.com.br,cxid.info,nld.com.vn,vtcnews.vn,theblock.co,bibamagazine.fr,business-standard.com,autoplus.fr,buzzorange.com,abendzeitung-muenchen.de,bayburtmedya.com,12punto.com.tr,athina984.gr,pchome.com.tw,bayburtmanset.com,tele1.com.tr,dealabs.com,pcquest.com,tko.pl,generacionxbox.com,menemenhaber.com.tr,matricedigitale.it,armyrecognition.com,analyticsindiamag.com,blocktrends.com.br,investing.com,studyfinds.org,trhaber.com,avgi.gr,deccanherald.com,aksam.com.tr,daily-bangladesh.com,noticiasautomotivas.com.br,turkiyegazetesi.com.tr,haberler.com,www-news18-com.cdn.ampproject.org,haberler.com,eurasiantimes.com,vesti-ua.net,hlavnespravy.sk,ictvietnam.vn,giga.de,news.itsfoss.com,fpsjp.net,bedavainternet.com.tr,buyuksivas.com,kredibankalar.com,akyazihaber.com,kamuajans.com,tamgaturk.com,tarsushaber.com,akademikpersonel.org,inegolonline.com,ordugazete.com,gunes.com,koinfinans.com,startefacts.com,donanimhaber.com,iha.com.tr,star.com.tr,karadenizgazete.com.tr,alem.com.tr,egepostasi.com,dunya.com,ulusal.com.tr,turkgun.com,cepkolik.com,teknoloji.org,lavnik.net,gadgets360.com,sokgazetesi.com.tr,fotospor.com,neowin.net,haberturk.com,memurlar.net,mirchi9.com,eltiempo.pe,vietnamnet.vn,sportskeeda.com,desidime.com,tuoitre.vn,clutchpoints.com,ithardware.pl,listelist.com,imparcialoaxaca.mx,elpais.com.co,minuto30.com,impact.ro,b1tv.ro,moviesroom.pl,techwafer.com,moonshot.news,radiokp.ru,brestcity.com,aykiri.com.tr,yenicaggazetesi.com.tr,cnnbrasil.com.br,saudigazette.com.sa##a[href^="https://news.google.com/publications/"]
 2gis.*##div[class^="_im"]
 2gis.*#%#//scriptlet('set-cookie', 'dg5_bnrcls_dskfrdprm', '1')
 2gis.*#?#div[style="justify-content:flex-end"] button:has(> div:contains(Ваши друзья на карте))
@@ -116126,9 +116129,6 @@ faselhds.*##body > div[id]:has(> div > a[href^="https://www.faselplus.com/onboar
 fashionsnap.com#?#div[class] > section:has(> form > input[type="email"])
 fashionsnap.com#?#footer[class^="_"] > div[class^="_"] > div[class^="_"] > div[class^="_"]:has(> p + form)
 fashiontechnews.zozo.com##div[class^="style-module--contentAreaInne"] > div[class^="style-module--bottomContainer--"]:has(> div[class^="style-module--footer"] > div[class^="style-module--reactions"])
-fast-growing-trees.com##.transition-transform.bottom-0.fixed
-fast-growing-trees.com#$#.inset-0.fixed { display: none !important; }
-fast-growing-trees.com#%#//scriptlet('trusted-click-element', 'form[aria-label="Welcome offer for new customers"] > button[value="verify"] + button')
 fastbikesmag.com#%#//scriptlet('remove-class', 'hustle-no-scroll', 'html')
 fastcompany.com##.bottomBannerContainer
 fastcompany.com##article ~ div.border-t.border-solid.border-primary-light
@@ -117691,12 +117691,16 @@ h178.com###banner div.panel:has(> div.panel-body > div.text-center > a[href="htt
 h2-mobile.fr###main-container .blog__content:has(> .col-md-4 > div[id^="optidigital-adslot-"])
 haaretz.com##.footer-toolbar.float
 haber.sol.org.tr#%#//scriptlet('set-local-storage-item', 'sol_popup_views', '1')
+haber365.com##.author-social > ul:has(> span.subscribe)
 haber7.com##a[title="Haber7'yi Google Haberler'de Takip Edin"]
 haberkibris.com##.boxfb
 haberler.com###notification-popup
 haberturk.com#$#.widget-mini-player { display: none !important; }
 haberturk.com#%#//scriptlet('remove-class', 'show', '.widget-mini-player')
 haberturk.com#@#.div-gpt-ad
+haberx.com##.bildirim-com-tr-modal-overlay
+haberx.com,2eylul.com.tr,eskisehirhaberajansi.com,urfanatik.com,afyonpostasi.com.tr,macg.co,futboo.com,dogruhaber.com.tr,tomsguide.com,shortlist.com,trf1.net,bessarabiainform.com,techorange.com,impress.co.jp,ispazio.net,techradar.com,dumka.media,comments.ua,muhalif.com.tr,vidomo.media,dexerto.com,malatyaguncel.com,yenisakarya.com,phonearena.com,ortadogugazetesi.com,gucluanadolugazetesi.com,alanyapostasi.com.tr,samsungazetesi.com,hamlegazetesi.com.tr,uyan32.com,yeniizmir.com,ilerigazetesi.com.tr,egetelgraf.com,referansgazetesi.com.tr,sonmuhur.com,gazetearena.com,gazetegercek.com.tr,politikam.com,gercekhaberci.com,newsofx2.com,thedailystar.net,samayam.com,teluguone.com,hockeyfeed.com,marasbugun.com.tr,cinemascomics.com,iguru.gr,lidergazete.com,autocarindia.com,112.ua,tunota.com,tomshardware.com,24saatgazetesi.com,halktv.com.tr,www-ntv-com-tr.cdn.ampproject.org,libertatea.ro,afyonturkeligazetesi.com,moja-ostroleka.pl,kamudanhaber.net,ajansspor.com,takvim.com.tr,dirilispostasi.com,americatv.com.pe,haberantalya.com,gunhaber.com.tr,pisapapeles.net,antalyahurses.com,sozcu.com.tr,aydinkulis.com,doisongphapluat.com.vn,reisetopia.de,gazetebirlik.com,iscihaber.net,sonhaber.eu,politic.gr,asianetnews.com,lance.com.br,cxid.info,nld.com.vn,vtcnews.vn,theblock.co,bibamagazine.fr,business-standard.com,autoplus.fr,buzzorange.com,abendzeitung-muenchen.de,bayburtmedya.com,12punto.com.tr,athina984.gr,pchome.com.tw,bayburtmanset.com,tele1.com.tr,dealabs.com,pcquest.com,tko.pl,generacionxbox.com,menemenhaber.com.tr,matricedigitale.it,armyrecognition.com,analyticsindiamag.com,blocktrends.com.br,investing.com,studyfinds.org,trhaber.com,avgi.gr,deccanherald.com,aksam.com.tr,daily-bangladesh.com,noticiasautomotivas.com.br,turkiyegazetesi.com.tr,haberler.com,www-news18-com.cdn.ampproject.org,haberler.com,eurasiantimes.com,vesti-ua.net,hlavnespravy.sk,ictvietnam.vn,giga.de,news.itsfoss.com,fpsjp.net,bedavainternet.com.tr,buyuksivas.com,kredibankalar.com,akyazihaber.com,kamuajans.com,tamgaturk.com,tarsushaber.com,akademikpersonel.org,inegolonline.com,ordugazete.com,gunes.com,koinfinans.com,startefacts.com,donanimhaber.com,iha.com.tr,star.com.tr,karadenizgazete.com.tr,alem.com.tr,egepostasi.com,dunya.com,ulusal.com.tr,turkgun.com,cepkolik.com,teknoloji.org,lavnik.net,gadgets360.com,sokgazetesi.com.tr,fotospor.com,neowin.net,haberturk.com,memurlar.net,mirchi9.com,eltiempo.pe,vietnamnet.vn,sportskeeda.com,desidime.com,tuoitre.vn,clutchpoints.com,ithardware.pl,listelist.com,imparcialoaxaca.mx,elpais.com.co,minuto30.com,impact.ro,b1tv.ro,moviesroom.pl,techwafer.com,moonshot.news,radiokp.ru,brestcity.com,aykiri.com.tr,yenicaggazetesi.com.tr,cnnbrasil.com.br,saudigazette.com.sa##a[href^="https://news.google.com/publications/"]
+haberx.com,timeturk.com,saopaulosecreto.com,urfanatik.com,stadt-bremerhaven.de,ekonomim.com,omgubuntu.co.uk,winfuture.de,movilforum.com,sponichi.co.jp,gamingbible.com,ladbible.com,sportbible.com,thecontentbible.com,tyla.com,unilad.com,clubic.com,sugarfreelondoner.com,fotomac.com.tr,dengarden.com,mako.co.il,ajansspor.com,gazetadopovo.com.br,onejailbreak.com,progameguides.com,aydinlik.com.tr,euronews.com,rtl.be,dogruhaber.com.tr,daily.co.jp,autoblog.com,haberturk.com,kp.ua,rotaborsa.com,mid-day.com,betaprofiles.com,news.tv-asahi.co.jp,zakzak.co.jp,donanimhaber.com,tokyo-sports.co.jp,searchengineland.com,jornaldenegocios.pt,gigazine.net,football24.ua,47news.jp,stuff.co.nz,eleconomista.es,lance.com.br,skateboarding.com,ua.tribuna.com,bloomberght.com,thestreet.com,redmas.com.co,record.pt,zamin.uz,thesun.co.uk,footballtransfers.com,gamingbible.com,yenisafak.com,sportsdunia.com,bsc.news,movilzona.es,isinolsa.com,gendai.media,clutchpoints.com,newstime.joyn.de,hisse.net,gazetegercek.com.tr,focus.ua,polygon.com,autoevolution.com,onedio.co,sn-jp.com,games.gg,hongkongfp.com,computerbase.de,gzt.com,crash.net,foxsports.com.mx,theguardian.com,star.com.tr,halktv.com.tr,zaxid.net,ballotpedia.org,timesofmalta.com,24tv.ua,thepost.co.nz,sportbible.com,washingtonpost.com,expert.in.ua,turkiyegazetesi.com.tr,aksam.com.tr,trhaber.com.tr,droidwin.com,onedio.com,cheezburger.com,tastesbetterfromscratch.com,techgear.gr,glavcom.ua,noticias.yahoo.com,hurriyet.com.tr,dexerto.com,saltandbaker.com,bbc.com,decrypt.co,uniladtech.com,mothership.sg,pcmag.com,coindesk.com,sammyfans.com,m9.news,crankers.com,asiaone.com,cbr.com,thedailyjagran.com,digitaltrends.com,hardwaretimes.com,www.yahoo.com,interestingengineering.com##a[href^="https://www.google.com/preferences/source?q="]
 habr.com##.header-banner-wrapper
 habr.com##.header-feature
 habr.com##.single-banner
@@ -122714,6 +122718,7 @@ organic-chemistry.org##div#top:empty
 organic-chemistry.org#%#//scriptlet('set-constant', 'square', '5')
 organic-mix.ru##.popup-best-price
 oricon.co.jp##.block-banner
+oricon.co.jp##.modalArea-small
 oricon.co.jp#$#.all-lyrics { -webkit-touch-callout: default !important; -webkit-user-select: auto !important;-moz-user-select: text !important; -ms-user-select: text !important; user-select: auto !important; -webkit-tap-highlight-color: black !important; }
 oricon.co.jp#%#//scriptlet('remove-attr', 'oncontextmenu|onmousedown|onMouseDown|onselectstart', '.all-lyrics')
 orientation-chabab.com##.footer
@@ -123523,6 +123528,7 @@ premierzal.ru###vk_community_messages
 premierzal.ru##.modals > div#messageModal:has(a[href^="https://premierzal.ru/schedule/cmo1024of9ggn0829tu7fql0l"])
 premierzal.ru,tracxn.com,maltadaily.mt,ntr-games.com,irliepaja.lv,asiatimes.com,8lordfilm-0.xyz,thedailybeast.com##.grecaptcha-badge[data-style^="bottom"]
 premiumebooks.*#%#//scriptlet("adjust-setTimeout", "st2", "", "0.02")
+premiummobile.pl,profbud.pl,grupabemo.pl,nagaba.pl,nagaba.eu,nagaba.cz,nagaba.de,nagaba.sk,duda-cars.pl###yl__prompt
 premsgo.fr##.results-sidebar
 prepostseo.com##.bg-dark
 prepostseo.com##.king-box
@@ -124268,6 +124274,7 @@ rexdl.com#?#.group center > h2 > p > button:has(> span > a[href^="https://www.yo
 reycade.com,pabrikarang.com,genuineactivator.com,now.rememberapp.co.kr,techieway.blogspot.com,chronologia.pl#%#//scriptlet('abort-current-inline-script', 'document.onselectstart')
 rezence.com#%#//scriptlet("adjust-setInterval", "counter", "2000", "0.02")
 rezka-tv.org,hdrezka.la,rezka-ag.net,hdrezka.fans,rezka-ua.co,rezka-ua.pub,hdrezka.inc,hdrezka-home.tv,3ivi.com,bestofkinopoisk.com,drezka.pl,flymaterez.net,hdrezka-sex-city.net,hdrezka.ag,hdrezka.club,hdrezka.cm,hdrezka.co,hdrezka.in,hdrezka.kim,hdrezka.me,hdrezka.name,hdrezka.pl,hdrezka.rest,hdrezka.sh,hdrezka.site,hdrezka.today,hdrezka.tv,hdrezka.vip,hdrezka.website,hdrezka19139.org,hdrezka1twwpb.org,hdrezka2tepnm.org,hdrezka2vmmty.org,hdrezka720dhh.org,hdrezka8bdhtq.org,hdrezka9bsbhq.org,hdrezka9fmskj.org,hdrezkaonline.com,hdrezkayou.com,hello-rezka.tv,kinopub.me,kvk.pub,omnirezka.tv,punisher-hdrezka.net,rezka-ua.in,rezka-ua.org,rezka-ua.tv,rezka.fi,rezka.si,rezka.space,rezkery.com,rezkify.com,standby-rezka.tv,rezka.ag##div[style]:has(> a.b-prem-button)
+rf4-stat.ru##.yad
 rg.ru##section[class^="ChannelButtonGroup_root"]
 rg.ru#%#//scriptlet('set-constant', 'Object.prototype.renderTo', 'undefined')
 rg.ru#%#//scriptlet('set-local-storage-item', 'rekl_modal_shown', 'emptyObj')
@@ -124587,7 +124594,6 @@ sante-dz.com###partners-container
 sante-dz.com###revenue-wrapper
 sante-dz.com##.revenue-wrapper
 sante.journaldesfemmes.fr,linternaute.com#$#.AdBox.Ligatus.pub_300x250.pub_300x250m.pub_728x90.text-ad.textAd.text_ad.text_ads.text-ads.text-ad-links { display: block !important; }
-saopaulosecreto.com,urfanatik.com,stadt-bremerhaven.de,ekonomim.com,omgubuntu.co.uk,winfuture.de,movilforum.com,sponichi.co.jp,gamingbible.com,ladbible.com,sportbible.com,thecontentbible.com,tyla.com,unilad.com,clubic.com,sugarfreelondoner.com,fotomac.com.tr,dengarden.com,mako.co.il,ajansspor.com,gazetadopovo.com.br,onejailbreak.com,progameguides.com,aydinlik.com.tr,euronews.com,rtl.be,dogruhaber.com.tr,daily.co.jp,autoblog.com,haberturk.com,kp.ua,rotaborsa.com,mid-day.com,betaprofiles.com,news.tv-asahi.co.jp,zakzak.co.jp,donanimhaber.com,tokyo-sports.co.jp,searchengineland.com,jornaldenegocios.pt,gigazine.net,football24.ua,47news.jp,stuff.co.nz,eleconomista.es,lance.com.br,skateboarding.com,ua.tribuna.com,bloomberght.com,thestreet.com,redmas.com.co,record.pt,zamin.uz,thesun.co.uk,footballtransfers.com,gamingbible.com,yenisafak.com,sportsdunia.com,bsc.news,movilzona.es,isinolsa.com,gendai.media,clutchpoints.com,newstime.joyn.de,hisse.net,gazetegercek.com.tr,focus.ua,polygon.com,autoevolution.com,onedio.co,sn-jp.com,games.gg,hongkongfp.com,computerbase.de,gzt.com,crash.net,foxsports.com.mx,theguardian.com,star.com.tr,halktv.com.tr,zaxid.net,ballotpedia.org,timesofmalta.com,24tv.ua,thepost.co.nz,sportbible.com,washingtonpost.com,expert.in.ua,turkiyegazetesi.com.tr,aksam.com.tr,trhaber.com.tr,droidwin.com,onedio.com,cheezburger.com,tastesbetterfromscratch.com,techgear.gr,glavcom.ua,noticias.yahoo.com,hurriyet.com.tr,dexerto.com,saltandbaker.com,bbc.com,decrypt.co,uniladtech.com,mothership.sg,pcmag.com,coindesk.com,sammyfans.com,m9.news,crankers.com,asiaone.com,cbr.com,thedailyjagran.com,digitaltrends.com,hardwaretimes.com,www.yahoo.com,interestingengineering.com##a[href^="https://www.google.com/preferences/source?q="]
 sartorbohemia.com,paulandshark.com,drmartens.com,doityourself.com,slate.fr,hs.fi,aktuality.sk,aamulehti.fi,satakunnankansa.fi,penguinrandomhouse.com,parallaximag.gr,exame.com,nabd.com,pastemagazine.com,stiripesurse.ro,lance.com.br,1prospekte.de,wallpaper.com,marksandspencer.com,deingartenbedarf.de,amp.usatoday.com,thebaffler.com,androidpolice.com##.newsletter-container
 sarvgyan.com#?#.entry > div.blue_box:has(> div.blue_box_content > div.enquiry-form)
 satelliteguys.us#%#//scriptlet("set-constant", "adBlockDetected", "false")
@@ -124927,6 +124933,8 @@ shingakunet.com##.js-OCbunyaModalView
 shingakunet.com##.js-targetPrArea
 shingakunet.com##.l-footerFix
 shinypkm.com,genpkm.com###discordWidget
+shiopa.com##body > div[class^="fixed inset-0 z-[100]"]:has(> div.w-full > div.overflow-hidden > img[alt="Poprink Discord"])
+shiopa.com#%#//scriptlet('set-local-storage-item', 'poprink_discord_invite_seen', 'true')
 shockwave.com#%#(function(){window.swua={swEvent:function(){}}})();
 shoebacca.com##.yotpo-widget-loyalty-floater-widget
 shoes.com###_GUARANTEE_SealSpan
@@ -125835,6 +125843,7 @@ sushiscan.st#$#.ad-wrap { display: none !important; }
 sushiscan.st#%#//scriptlet('abort-current-inline-script', 'Array.prototype.forEach', '/bloqueur|amazon-adsystem\.com/')
 sushiscan.st#%#//scriptlet('abort-on-property-read', '__vpx')
 sushiscan.st#%#//scriptlet('prevent-setTimeout', '/walled|adsbygoogle|new Image\(\)\.src|\)return;if\(_/')
+suspilne.media##.l-article-content__container-inner > p:has(> a[href^="https://t.me/suspilne"])
 suto.co.kr#%#//scriptlet('remove-attr', 'oncontextmenu', '#bo_v_atc')
 suto.co.kr#%#//scriptlet('remove-attr', 'oncontextmenu', 'article')
 sutochno.ru##.get-cashback
@@ -125887,6 +125896,7 @@ t.ly#$#body.modal-open { overflow: auto !important; padding-right: 0 !important;
 t.ly,hurtopony.pl,intellinews.com#%#//scriptlet('set-cookie', 'viewedOuibounceModal', 'true')
 t.pia.jp###piacard_banner
 t13.cl,inquirer.net##.sib-form
+t24.com.tr###story-content-wrapper > table:has(a[href="https://t24.com.tr/abonelik"])
 t24.com.tr##.t24-subscription-callout
 t24.com.tr#%#//scriptlet('set-constant', 'Object.prototype.autoplay', '0')
 t3n.de##.c-native-newsletterbox
@@ -126571,6 +126581,9 @@ theresanaiforthat.com#$#.noscroll { overflow: auto !important; }
 theresanaiforthat.com#$#body.noscroll { overflow: auto !important; }
 theresanaiforthat.com#$#div[id^="signin_modal"] { display: none !important; }
 theriagames.com##.theria-plus-banner
+therokuchannel.roku.com#$##anonymous-nudge { display: none !important; }
+therokuchannel.roku.com#$#body.anonymous-nudge-visible { overflow: auto !important; }
+therokuchannel.roku.com#%#//scriptlet('trusted-set-local-storage-item', 'nudge-last-shown', '$currentISODate$')
 theroot.com###tnp-subscription-posts
 theroot.com##.wp-block-column:has(> div.newslettersignup)
 thesaurus.com###synonym-of-the-day
@@ -126751,7 +126764,9 @@ timesofisrael.com##.nlsignup
 timesofisrael.com#%#//scriptlet('remove-class', 'vjs-pip-active', '.video-js.vjs-pip-active')
 timesofkarachi.pk###adblock-notice
 timesofmalta.com###engagement_banners_container
+timeturk.com###push-permission-prompt
 timeturk.com##.google-publicher-space
+timeturk.com##form[data-newsletter]
 timeturk.com#?#.sidebar > div.sidebar-widget:has(> form.mail-form)
 timeweb.cloud#%#//scriptlet('trusted-set-local-storage-item', 'was_hello_telegram_dialog', 'Y')
 timeweb.com##.cm-banner-aside-telegram
@@ -127009,6 +127024,7 @@ travelrussia.ru##noindex > div[class^="widget-"]:not(#widget-topBar)
 travelrussia.ru#%#//scriptlet('remove-class', 'topBar', 'body')
 travelvoice.jp##.mailalert
 travelvoice.jp##.mailmagazine-button
+trees.com#%#//scriptlet('trusted-click-element', 'form[aria-label="Welcome offer for new customers"] > button[value="verify"] + button.items-center[type="button"]:not([value])')
 trendblog.euronics.de,parkurmerkezi.com,courseamz.com##div[class*="mailpoet_form_popup"]
 trendhunter.com##.hcamp--bottom
 trends.rbc.ru##.article__special_container
@@ -131447,6 +131463,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||api.beleggersbelangen.nl//api/statistics/
 ||api.biggylabs.com.br/event-api/
 ||api.biggylabs.com.br/track-api/
+||api.bildirim.com.tr/storage/sdk/*.js
 ||api.bit.ly/*/clicks?$third-party
 ||api.biz.sbs.co.kr/statistics/
 ||api.blink.net/a/
@@ -133121,6 +133138,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||cdn-widgetsrepository.yotpo.com/widget-assets/yotpo-pixel/
 ||cdn.*.com/prod/*/loader.min.js$script
 ||cdn.24h.com.vn/js/24hgatracking/
+||cdn.2way.app/prod2/tracking.js
 ||cdn.7days.ru/bitrix/templates/7days-redesign-2021/js/SparrowPush.js
 ||cdn.abcotvs.net/abcotv/assets/news/global/js/analytics/VideoHeartbeat.min.js
 ||cdn.activity.smart-bdash.com/tag-manager/bd-ilprod/btm.js
@@ -134548,6 +134566,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||d3mapax0c3izpi.cloudfront.net/lib/ajax/events.js
 ||d3nn82uaxijpm6.cloudfront.net/8f96b1247cf4359f8fec.js
 ||d3qxef4rp70elm.cloudfront.net/m.js
+||d3rsy74zmigk0i.cloudfront.net/linkExtractorKineticHarbor.js
 ||d3sbxpiag177w8.cloudfront.net/Analytics/
 ||d41.co^$third-party
 ||d99xz3flubf0x.cloudfront.net/js/payhelm.*.js
@@ -141672,7 +141691,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||mgmlcdn.com/stats/
 ||mgntrn.nl/api/event
 ||mgtmod01.com^$third-party
-||mha.fi/simple.gif?
 ||mhcdn.net^*/banner/
 ||mhealth.ru/_stat/log/
 ||mhevent.segye.com/mbi/pvcount
@@ -141961,7 +141979,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||mts.ru/fe-api/logger
 ||mtsbank.ru/hustonwehaveaproblem/
 ||mtv.it/flux/trackingcodes/
-||mtv3.fi/remarketing.js
 ||mtvema.com/media/module/ENT_Reporting
 ||mtvnservices.com/aria/projectX/
 ||mtvnservices.com/aria/uuid.html
@@ -142627,9 +142644,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||om.lds.org/id*AnalyticsFields
 ||omappapi.com^$third-party
 ||omarsys.com^$third-party
-||omataloyhtio.fi/ffsw-pushcrew.js
-||omataloyhtio.fi/kuvat/pi.gif$image
-||omataloyhtio.fi/statb.asp
 ||omeda.com^$third-party
 ||ometria.com^$third-party
 ||omgpm.com^$third-party
@@ -143791,8 +143805,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||pussy.org^*.cgi?pid=
 ||pussy.org^*/track.php
 ||pusti.svc.litv.tv/puid
-||puutarha.net/ffsw-pushcrew.js
-||puutarha.net/statb.asp
 ||pv.kuaizhan.com^$third-party
 ||pv.ltn.com.tw/impression?
 ||pv.ltn.com.tw/RI_Server?a=
@@ -143994,7 +144006,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raiplaysound.it/common/assets/js/theplayer/TheoPlayer/plugins/THEOplayerAkamaiSDK/THEOplayer_AkamaiMediaAnalytics.js
 ||rajacasablanca.com/site/images/flash_banners/
 ||rakanto.com/cx_collector/
-||rakentaja.fi/kuvat/pi.gif$image
 ||rakuten-bank.co.jp/shared/images/top/pr/
 ||rakuten-life.co.jp/rat/rat_customtracking.js
 ||rakuten-static.com/1/grp/banner/js/create.js
@@ -152475,7 +152486,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||torah-box.com/upl/ban/
 ||torbit.com^$third-party
 ||torbobit.net/js/analytics/
-||tori.fi/img/none.gif$image
 ||toro-tags.com^$third-party
 ||toru0vane.com^$third-party
 ||toss.im/pages/ekdil/tragoudo|
@@ -152728,6 +152738,8 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||treasuredata.com^$third-party
 ||tree-nation.com/js/track.js
 ||treehousei.com^$third-party
+||trees.com/a|
+||trees.com/rtb
 ||trendcounter.com^$third-party
 ||trendcounter.de^$third-party
 ||trendemon.com^$third-party
