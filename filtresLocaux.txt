@@ -3908,7 +3908,6 @@
 ||affiliates.myfax.com^
 ||affiliates.treasureisland.com^
 ||affiliates.vpn.ht^
-||affiliation.porn.fr^
 ||affilpartner.descanti.com^
 ||affilpartneri.affilbusiness.cz^
 ||affluentmirth.com^
@@ -3948,7 +3947,6 @@
 ||aft.inhetvolkspark.nl^
 ||aft.kingdance.nl^
 ||aft.onderderadarfestival.nl^
-||afternoonreeds.com^
 ||aftership-pixel.com^
 ||afuit.functionofbeauty.com^
 ||afxypwan.outrageldn.com^
@@ -22713,6 +22711,7 @@
 ||drvive.lamoda.ru^
 ||drxeqq.wishhotels.com.br^
 ||drydrum.com^
+||dryerwasher.com^
 ||drzbe.agileoffroad.com^
 ||drzzg.mallet.com^
 ||ds-aksb-a.akamaihd.net^
@@ -27373,6 +27372,7 @@
 ||floweryfact.com^
 ||floweryflavor.com^
 ||floweryoperation.com^
+||flowhot.info^
 ||flowing.fkplus.com^
 ||flpfl.sokolovelaw.com^
 ||flpwto.lohaco.jp^
@@ -32079,7 +32079,6 @@
 ||hit.salesfire.co.uk^
 ||hit.skrz.cz^
 ||hitboxdesigns.com^
-||hitchelseptal.qpon^
 ||hitmse.altinbas.com^
 ||hits-i.iubenda.com^
 ||hits.antena3.com^
@@ -53229,6 +53228,7 @@
 ||notify-bugs-fra1.rtl.de^
 ||notify.eset.com^
 ||notify.pray.com^
+||notify.premium-news.me^
 ||notify.rocks^
 ||notifyglass.com^
 ||notix.io^
@@ -59653,7 +59653,6 @@
 ||rimwtv.theclassictshirt.com^
 ||rimxqx.slickdeals.net^
 ||rina.yes.flysmarketing.com^
-||rinceauendark.com^
 ||ring.staticmoly.me^
 ||ringplant.com^
 ||ringsrecord.com^
@@ -67807,6 +67806,7 @@
 ||slickcontent.com^
 ||slike.indiatimes.com^
 ||slim.slimkiezen.eu^
+||slimcdn.com^
 ||slimesupplies.net^
 ||slimsense.net^
 ||slimyscarf.com^
@@ -96547,7 +96547,6 @@
 ||uiqca.swimoutlet.com^
 ||uisxua.benettonmall.com^
 ||uitdz.biomel.life^
-||uiuh2zr6vtr3e1.rest^
 ||uiusqp.crowdcow.com^
 ||uiwock.epantofi.ro^
 ||uiwyirmq.kids-world.com^
@@ -104501,6 +104500,7 @@
 @@||googletagservices.com/tag/js/gpt.js$domain=phileweb.com
 @@||googletagservices.com/tag/js/gpt.js$domain=thestar.co.uk
 @@||gov1.siteintercept.qualtrics.com^$domain=healthcare.gov
+@@||govad.*/js/jquery.min.js$script,domain=govad.xyz
 @@||grapeshot.co.uk/image-resize/$image
 @@||grapeshot.co.uk/sare-api/
 @@||graphracer.com/js/libs/heatmap.js
@@ -105233,7 +105233,6 @@
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xmlhttprequest,domain=talksport.com
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xmlhttprequest,domain=toolskitpro.net
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub$domain=fuucdayo.com
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js|$domain=textstudio.com
 @@||pagead2.googlesyndication.com/pagead/js/r*/show_ads_impl.js$domain=genesisowners.com
 @@||pagead2.googlesyndication.com/pagead/js/r*/show_ads_impl.js$domain=jtrouver.com
 @@||pagead2.googlesyndication.com/pagead/managed/js/adsense/*/show_ads_impl_with_ama_*.js$domain=cinefil.com
@@ -105722,6 +105721,7 @@
 @@||solitarios-online.com/script.*.js
 @@||solr.sas.com/query/$xmlhttprequest,domain=jmp.com
 @@||som.aeroplan.com/b/ss/
+@@||sonar.viously.com/*/js$domain=supersoluce.com
 @@||sonar.viously.com/*/js$script,domain=futura-sciences.com
 @@||sonar.viously.com/*/js?*vastPassbackCustomMacro$domain=futura-sciences.com
 @@||songza.com/static/*/songza/systems/$script
@@ -106569,7 +106569,6 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 -inview-tracker.
 -logging.nextmedia.com^
 -logsdk.kwai-pro.com^
--monero-miner-
 -native-ad-
 -pcre-js-gen.herokuapp.com/tracking-event|
 -pia.appsflyersdk.com^
@@ -108638,6 +108637,7 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 /ibd-ads/*
 /ibeat.min.js
 /icf-analytics.js
+/ichhar.
 /id?d_visid_
 /if/services/tdg$domain=foerde-sparkasse.de|sparkasse-dachau.de|sparkasse-hochfranken.de|sparkasse-mittelfranken-sued.de
 /if/services/tdg?hs=
@@ -109167,6 +109167,7 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 /neilson.js
 /nelio-ab-testing/assets/dist/js/visitor-type.js
 /neoworx_tracker.php
+/netmera_worker.html$subdocument,domain=kanald.com.tr|denizpay.com
 /netmining.js
 /netresults.js
 /network-analytics.js
@@ -110700,7 +110701,6 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 /web_answertip.js
 /Web_JS_Stats.
 /Web_JS_Stats.js
-/web_miner/*
 /web_traffic_capture.js
 /WebAnalytics.$domain=~webanalytics.italia.it
 /webAnalytics/*
@@ -110987,6 +110987,7 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 1024terabox.com,terabox.com,terabox.app##.u-carousel__container
 1024terabox.com,terabox.com,terabox.app#$#.component-header-index-fixed { top: 0 !important; }
 1024terabox.com,terabox.com,terabox.app#$#.operate-top-notice { display: none !important; }
+1025kiss.com,1027kord.com,1037theloon.com,103gbfrocks.com,103kkcn.com,1057crushfm.com,1057thehawk.com,1057thexrocks.com,1061evansville.com,1063cowboycountry.com,1063thebuzz.com,1075zoofm.com,1079ishot.com,929nin.com,929thebull.com,943thepoint.com,943thex.com,963theblaze.com,96xrocks.com,973rivercountry.com,973thedawg.com,975kgkl.com,979kickfm.com,97rockonline.com,983thesnake.com,98country.com,999ktdy.com,999thepoint.com,banana1015.com,bigfrog104.com,blakefm.com,bozemanskissfm.com,catcountry1073.com,classicrock1051.com,club937.com,gator995.com,highway989.com,k945.com,k96fm.com,k99.com,katsfm.com,kbat.com,kctr.com,keanradio.com,keyj.com,keyw.com,kezj.com,kffm.com,kfmx.com,kfox95.com,kicks105.com,kisscasper.com,kisselpaso.com,kissfm969.com,kixs.com,kkcb.com,kkyr.com,klaq.com,klaw.com,klubtejano.com,kmhk.com,knue.com,kqbr.com,kqvt.com,kxkx.com,kygl.com,kyssfm.com,lonestar1023.com,mix108.com,mix925abilene.com,mix931fm.com,mix949.com,my1035.com,mychannel957.com,mycountry955.com,mykisscountry937.com,power1029noco.com,power959.com,q103albany.com,q1077.com,river967.com,rock967online.com,sojo1049.com,us103.com,wbkr.com,wbnq.com,wgna.com,wgrd.com,wkdq.com,wyrk.com,xlcountry.com,y95country.com,z94.com##.newsletter-overlay
 10desires.org#%#!function(){if(-1<window.location.href.indexOf("/?r=aHR0c")){var a=location.href.split("/?r=");if(a&&a[1])try{window.location=atob(a[1])}catch(b){}}}();
 10haber.net##.sospaylas
 10mtv.jp##.popup-area
@@ -111147,6 +111148,7 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 3rabsnews.com#%#//scriptlet('adjust-setInterval', '#mdtimer', '', '0.02')
 404media.co###announcement-bar-root
 420on.cz##.n42-bg-telegram
+43rumors.com##div[id^="mailpoet_form"]
 47news.jp#?#.page_layout > div.container section.col:has(> div#slick_pr)
 47news.jp#?#.side_inner > div.side_pc_row4:has(> div.inner_row2 > #slick_feat)
 47news.ru##.text-after-article
@@ -111252,7 +111254,6 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 ://a869.$~image
 ://acces.*/a.php?
 ://aclick.
-://act-http-ban.
 ://ad-start.
 ://ad.*&sid=
 ://ad.*/ad/*.gif
@@ -111450,7 +111451,6 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 ?adSelector=
 ?adTagId=
 ?advert_type=
-?aff=*&roll=
 ?aff=*&size=
 ?affiliateCode=
 ?bannertag=
@@ -111515,6 +111515,7 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 [$path=/a]dzen.ru##div[class*="ad-block__placeholder"]
 [$path=/a]dzen.ru##div[class*="articleLayout-"] > div[class*="Column-3P"] > div[class]:has(div:is([id*="-R-A-"][id*="-articleRight-"], [id^="default-"][id*="-articleRight-"]))
 [$path=/a]dzen.ru##div[class*="bottomAdUnderComments-"]
+[$path=/a]dzen.ru##div[class^="article-feed--redesign-feed"] div[class*="article-feed--base"] > div[id][class]:not(:has(> div[class^="article-feed-"][class*="_cardWrapper-"]))
 [$path=/a]dzen.ru#%#//scriptlet('set-constant', 'Object.prototype.rtb', 'undefined')
 [$path=/download]datanodes.to#%#//scriptlet('trusted-click-element', '.adsBox ~ div:last-child > button:first-child')
 [$path=/downloads]chip.de##div[class][style^="border-radius: "]:has(> div > green-video)
@@ -111674,7 +111675,6 @@ _pages_ad.
 _pagespeed_beacon?
 _personalized_ads
 _popads.
-_profits_ad-
 _pub.gif
 _pub_728.
 _pub_iframe.
@@ -111684,7 +111684,6 @@ _publicite.
 _publicite_
 _regie/aff.
 _rpc/log?
-_sca_ads.
 _smads_
 _social_tracking.js
 _social_tracking.js^
@@ -112595,7 +112594,6 @@ astroportal.com#$#body { overflow: auto !important; }
 astv.ru###fullscreenmf
 astv.ru##form[id^="FormUpdateUser"]
 astv.ru,kam24.ru,sastv.ru###followwhatsapp
-asuracomic.net##body > #header-ads + .w-full:has(> .relative > .mx-auto > .absolute  > button[aria-label="Close promotion"])
 asuracomic.net##body > .bg-gradient-to-br:has(> .relative > .items-center > button)
 asuracomic.net#%#//scriptlet('set-local-storage-item', 'showPrompt', 'false')
 asuracomic.net#%#//scriptlet('trusted-click-element', 'button', 'containsText:Skip Ad', '1500')
@@ -112635,6 +112633,7 @@ atorus.ru###block-visit-conditions
 atptour.com##._lpSurveyEmbed
 atptour.com##.atp_article > p:has(> a[href^="https://www.atptour.com/"][href$="/news/atp-number-one-club"])
 atptour.com##.atp_newsletter--content
+atsugi-lab.com##a[href="https://atsugi-lab.com/sponsor-partner/"] img
 att.com##.lazyload-wrapper:has(> div[class] > div.container > div.undefined > div.row button[data-testid="email-capture-button"])
 attacomsian.com,catwalkyourself.com,egyptianstreets.com,sklum.com,comicbook.com###newsletterModal
 atu.de#%#//scriptlet('set-cookie', 'closeNewsletter', 'true')
@@ -113746,7 +113745,6 @@ builtin.com##.brand-boost-banner
 bulletin.cebpubservice.com##div[class^="mian_list_"] > .PublicAddress[style^="border:"]
 bulletin.sntba.com#%#//scriptlet("set-constant", "returnCitySN", "emptyObj")
 bulten.mserdark.com,nicolasbustamante.com,blog.bytebytego.com,latent.space,secondthoughts.ai,ciw.news,chipsandcheese.com,noahpinion.blog,hardcoresoftware.learningbyshipping.com,newsguardrealitycheck.com,newsletter.pragmaticengineer.com,gamefile.news,substack.com##article > div > div.pencraft:has(> div.pencraft > div.subscribe-widget)
-bulten.mserdark.com,nicolasbustamante.com,read.engineerscodex.com,sources.news,thegamebusiness.com,dwarkesh.com,secondthoughts.ai,newcomer.co,blog.sshh.io,newsletter.techworld-with-milan.com,domainanalysis.io,blog.corkmac.app##.subscription-widget-wrap
 bulten.mserdark.com,sources.news,latent.space,ciw.news,noahpinion.blog,newcomer.co,blog.corkmac.app,blog.sshh.io,hardcoresoftware.learningbyshipping.com,newsguardrealitycheck.com,newsletter.techworld-with-milan.com,newsletter.pragmaticengineer.com,usermag.co,domainanalysis.io,substack.com##article > .pc-display-contents:has(> div[class*="subscribeDialog"])
 bundesliga.com##dfl-newsletter-banner
 bunshun.jp###mail-magazine
@@ -113797,7 +113795,6 @@ businessinsider.de##.ll_partnerexpert
 businessinsider.de##.piano-article__after-block--2
 businessinsider.de##.piano__footer
 businessinsider.de,npr.org,heise.de##.newsletter-subscription
-businessinsider.fr#?##related-post-:has(a[href*="/contenu-sponsorise"])
 businessinsider.in#?#.bi-articleshow > div.border-grey-400:has(> div.container > div > span:contains(BI NEWSLETTER))
 businessinsider.jp###piano-paywall-after
 businessinsider.jp###piano-register-form
@@ -113827,7 +113824,6 @@ buzip.net###linkerBanner
 buzzdefou.com,gerardmerinfo.fr###habillage_site
 buzzfeed.com##.buzzblock-newsletter
 buzzfeed.com##div[class^="newsletter-signup-"]
-buzzly.fr##.article_pubtop
 buzzorange.com##a[href^="https://buzzorange.com/techorange/"] > img
 buzzorange.com##div[data-id="90a1ed5"]
 bw-online-shop.com##.footer__container--newsletter
@@ -114179,7 +114175,6 @@ chunichi.co.jp##.cmp-bnr001
 chunichi.co.jp##.cmp-bnr003
 chunichi.co.jp##.cscmp-subscription
 chunichi.co.jp#?#.sub-container-wrp > div.l-container:has(> div[class] > div.l-column > div.wrp > a[href^="https://plus.chunichi.co.jp/"])
-churchtechtoday.com#$#body { overflow: auto !important; }
 chzzk.naver.com#@#.banner_ad_wrapper
 ci-labo.com##.ecm-emailregistration
 cian.ru###map-search-frontend div[data-name="BannerWrapper"]
@@ -114324,7 +114319,6 @@ club-opel.com##.toplist
 club.autodoc.*##.header__b
 club.autodoc.*##.popup.popup-visitor-auth
 club.autodoc.de###ajax-popup-container
-club.autodoc.de###banner-auth
 club.berkovich-zametki.com,koneta.nifty.com###custom_html-2
 club.dns-shop.ru##div[data-role="club-product"]
 clubdam.com##.l-page-bottom__cv
@@ -114428,6 +114422,7 @@ codeur.com##.project-option-premium
 codingnepalweb.com#%#//scriptlet("adjust-setInterval", "counter--", "1300", "0.02")
 codingnepalweb.com#%#//scriptlet('adjust-setInterval', 'cnDownloadBtn', '*', '0.02')
 codziennypoznan.pl##header > div[data-elementor-type="jet_header"] > section[data-settings*="jet_parallax_layout_animation_prop"]
+codziennypoznan.pl,banglatech24.com,minsknews.by###perfecty-push-dialog-container
 cofe.ru###fb_popup
 coffeecup.com###coffeecup_ads
 cofp.ru##.admitad-checker-popup
@@ -114888,7 +114883,6 @@ cyclismactu.net#%#//scriptlet('prevent-addEventListener', 'load', 'isAdblock')
 cyclismactu.net#%#//scriptlet('prevent-setTimeout', 'isAdblock')
 cyfral-group.ru#$#.t-body_popupshowed { overflow: auto !important; }
 cyfral-group.ru#$#div[data-tooltip-hook="#popup:subscribe"] { display: none !important; }
-cyprus-mail.com##a[class^="_googleNewsContainer"]
 cyzo.com##.rmodule > a[href^="https://cyzo.co.jp/publicity/"]
 cz.de,dewezet.de,dieharke.de,dnn.de,gnz.de,goettinger-tageblatt.de,haz.de,kn-online.de,landeszeitung.de,ln-online.de,lvz.de,maz-online.de,ndz.de,neuepresse.de,op-marburg.de,ostsee-zeitung.de,paz-online.de,remszeitung.de,rga.de,rnd.de,saechsische.de,siegener-zeitung.de,szlz.de,sn-online.de,solinger-tageblatt.de,tah.de,torgauerzeitung.de,waz-online.de##+js(set, window.Fusion.globalContent.isPaid, false)
 d.tube##.sticky.centered > div.announcement[style="width: 100%;"]
@@ -115171,7 +115165,6 @@ detmir.ru##header > div[data-testid="advContainer"]
 detstrana.ru##.subscription_offer
 deutschestheater.de##.JS-Newsletter-Registration
 deutschlandistvegan.de,31mag.nl,der-postillon.com###steady-floating-button-wrapper
-dev.ozon.ru##div[class^="_telegramWrapper_"]
 dev.to#%#//scriptlet('trusted-click-element', 'button[id^="sponsorship-close-trigger"]')
 dev.ua##.afterheader-widget
 dev.ua##.subscription-block
@@ -115270,8 +115263,6 @@ diepresse.com##+js(ra, class, div.premium-content.hide, stay)
 diepresse.com##div.paywall-container--locked
 diesachsen.de,diethueringer.de##.newsletter-widget2
 diesachsen.de,diethueringer.de##section > .container > .row > div:has(> .blog-style1 > .blog-img > a[href^="/sponsored-content/"])
-diets.ru###thirdclick_message
-diets.ru##.dayrecipes_p
 diets.ru##.left-newsletter
 diets.ru,povarenok.ru###web-push-sub
 diffchecker.com#%#//scriptlet('set-local-storage-item', 'visitsUntilUpsellModal', '999')
@@ -115683,7 +115674,6 @@ dzone.com##.signin-prompt
 e-begin.jp#$#.inviewSection:not(.is-show) { transform: translateY(0) !important; opacity: 1 !important; }
 e-budownictwo.pl,strefaobrony.pl,shownews.pl,e-ogrodek.pl,gra.pl,stronakuchni.pl,stronapodrozy.pl,strefaedukacji.pl,i.pl,stronazdrowia.pl,naszahistoria.pl,regiodom.pl,dziennikbaltycki.pl,dzienniklodzki.pl,dziennikpolski24.pl,dziennikzachodni.pl,echodnia.eu,expressbydgoski.pl,expressilustrowany.pl,gazetakrakowska.pl,gazetalubuska.pl,gazetawroclawska.pl,gk24.pl,gloswielkopolski.pl,gol24.pl,gp24.pl,gs24.pl,katowice.naszemiasto.pl,kurierlubelski.pl,motofakty.pl,naszemiasto.pl,nowiny24.pl,nowosci.com.pl,nto.pl,polskatimes.pl,pomorska.pl,poranny.pl,sportowy24.pl,strefaagro.pl,strefabiznesu.pl,stronakobiet.pl,telemagazyn.pl,to.com.pl,wspolczesna.pl##.atomsNavigationStickyReturnHome
 e-commerce-magazin.de#$#body { overflow: visible!important; }
-e-consystems.com,ilksesgazetesi.com###fvpp-blackout
 e-didaskalia.blogspot.com,fforfree.net###popupFbLikeBox
 e-flux.com##.landing-subscribe
 e-forologia.gr###NotificationModal
@@ -115825,6 +115815,7 @@ ecosia.org##section[data-test-id="ad-block-notice"]
 ecranlarge.com##.top-banner
 ecranlarge.com#%#//scriptlet("abort-on-property-write", "__yget_ad_list")
 edb.gov.sg#%#//scriptlet('set-local-storage-item', 'subPromptShown', 'yes')
+edb.gov.sg,nationalgeographic.pt,historia.nationalgeographic.com.es##.sticky-subscription
 edcom.fr##a[href^="/regie"]
 edeka.de#%#(()=>{window.tC={event:{track(){}}}})();
 edeka.de#%#//scriptlet('prevent-addEventListener', 'bugfix', 'fix')
@@ -116059,7 +116050,6 @@ empire-streamz.fr,empire-stream.*,empire-streaming.*#$#body { overflow: auto !im
 emsisoft.com#%#//scriptlet('remove-class', 'promo-above', 'body.promo-above')
 emturbovid.com#%#//scriptlet('adjust-setInterval', 'download', '*', '0.001')
 emu-france.com###pub_casino_header
-emu-france.com###sidebar-right a > img[style^="width:"]
 emu-france.com##.cas_version_mobile_cache_grande_pub
 emu-france.com##.sidebar > div.widget_polls-widget ~ div > a[onclick^="javascript:window.open('"]
 emu-france.com##.sidebar > div.widget_polls-widget ~ div > a[target="_blank"]
@@ -117235,7 +117225,6 @@ futureaudiophile.com#@#.adslot
 futureaudiophile.com#@#.adslot_1
 futureaudiophile.com#@#.adunit
 futurelearn.com##div[data-react-component-path="components/Partials/PreFooter"]
-futurepedia.io##a[href*="futurepediaacademy.in/"][href*="&utm_medium=banner&"]
 futurezone.at##.fuzoBox--newsletter
 futurezone.at#$#.adFreeOffer { display: none !important; }
 futurezone.at#$#html { overflow: auto !important; }
@@ -117334,7 +117323,6 @@ gamelegends.it,mirage.ru,mywifequitherjob.com#$#.mfp-wrap { display: none !impor
 gamelegends.it,mirage.ru,mywifequitherjob.com#$#html[style*="overflow:"] { overflow: auto !important; margin-right: 0 !important; }
 gamemag.ru#%#//scriptlet("abort-on-property-read", "window.adblockDiv")
 gamemodding.com#%#//scriptlet("adjust-setTimeout", "timer_end", "20000", "0.02")
-gameost.net##.apsc-floating-sidebar
 gameost.net##.tt-share
 gamepro.de#?#body div.container-fluid:has(> div.container div.newsletter-info)
 gamer-network.fr###pubLarge
@@ -117712,7 +117700,6 @@ goduke.com,uwaterloo.ca##div[aria-label="Ad Blocker Detected"]
 goetheweb.jp##.p-magazine-latest-bottom
 gofile.io###adsATF
 gofile.io###index_ads
-gofile.io##a.mr-1[target="_blank"]
 goflix.sbs,multiup.eu,multiup.org##.content-body > .text-center:has(> a[href*="list_adblock.txt&"])
 goflix.sbs,multiup.io,multiup.org#$#.mfp-ready { display: none !important; }
 gogov.ru##.gg-post-meta__subscribe
@@ -118008,6 +117995,7 @@ hackster.io###hello-world
 hackster.io##div[class^="article_layout__signupCTA"]
 hackster.io##div[data-hacksternova-key="ProjectCountBanner"]
 hackster.io##div[data-hypernova-key="ModularAd"]
+hackstore.net,bicfic.com,boxcracked.com,androidride.com,cracksmod.com,creativefabrica.com,downloadmockup.com,f4freesoftware.com,freeappstorepc.com,fullpcsoftz.com,latestcracked.com,megawarez.org,procrackerz.org,profullcrack.com,psdfreebies.com,shehrozpc.com,warezcrack.net#$#.onp-sl-content { display: block !important; }
 hackware.ru,courseboat.com,armchairopinions.org,socialsuccessor.club,nerdyelectronics.com,stevessmarthomeguide.com,hackstime.com,appwikia.com,niksdeveloper.com,sodapdf.com,hiorg-server.de,electricalvolt.com,ruecken-zentrum.de,freecourseweb.com,devcourseweb.com##.widget_email-subscribers-form
 haertle.de#$#body.modal-open { overflow: auto !important; padding-right: 0 !important; }
 haertle.de#$#div[aria-labelledby="cob-modal-campaign-label"] { display: none !important; }
@@ -118034,7 +118022,6 @@ hangikredi.com##div.w-full > .relative[data-testid="nativeCard"]:has(> a[target=
 hangikredi.com##div.w-full > div[class]:has(> div[class^="product-list-card"] > div[class^="product-list-card_card_banner"])
 hangikredi.com#?#.mt-5 > div:not(.relative):has(> div.flex > div > span:contains(Mevduat Listeleme Alarm))
 hankyung.com#%#//scriptlet('prevent-window-open', 'popup')
-hanopatch4u.com##.et-popup-wrapper
 hanopatch4u.com#%#//scriptlet('adjust-setTimeout', 'elementor-invisible', '*', '0.001')
 haokan.baidu.com#%#//scriptlet('prevent-setTimeout', '/autoShow.*localStorage\.setItem\(.auto_login_show_count/')
 haonguyen.top#%#//scriptlet("adjust-setInterval", "counter", "*", "0.02")
@@ -118358,7 +118345,6 @@ hr-portal.ru##.region > div.region-inner > section.block.last
 hrw.org###block-rollupnewslettersignup
 hrw.org###block-signupbarblock
 hrw.org,eurasianet.org,tribuneindia.com##.follow
-hsbc.com.tr###RenewedWebsiteModal
 hsfo.dk##+js(ra, class, div.article__parts--paywalled, stay)
 hsreplay.net#$#.site-modal { display: none !important; }
 hsreplay.net#$#body { overflow: visible!important; }
@@ -118795,7 +118781,6 @@ inquirer.com###banner-wrapper
 insales.ru##.bannerNY_article
 insales.ru##.register-bg
 insales.ru##.register-modal
-insauga.com#$#.modal-backdrop { display: none !important; }
 inshokuten.com##.mailMagazineArea
 inside-games.jp##.cx-subhead
 inside.bahn.de##.dbs-newsletter
@@ -119077,7 +119062,6 @@ itsfoss.com##.gh-portal-triggerbtn-iframe
 itsfoss.com##.kg-cta-card
 itsfoss.com##.sidebar__section:has(> .sidebar__subscribe)
 itsfoss.com,cyberghostvpn.com,pornfidelity.com##.hero
-itsider.com.ua###fkbuwslenv-3
 itsmycity.ru#$##subscribeModal { display: none !important; }
 itsmycity.ru#$#body { overflow: auto !important; padding-right: 0 !important; }
 itsu.com#%#//scriptlet('set-constant', 'AtreemoTrackingLbr', 'noopFunc')
@@ -119145,7 +119129,6 @@ japan.cnet.com##a[data-ga_label="right_col_newsletter"]
 japan.cnet.com,japan.zdnet.com###article_under_nllink
 japan.hackers.com##.closing-banner-area
 japan.zdnet.com##.ad-bnr-rect-btm
-japanhousela.com###block-footer-freearea
 japanmetaldaily.com##.m-ad-bnr-rec
 japantimes.co.jp##+js(cookie-remover, xbc)
 japscan.*#$#body > div.full-container > div.full-container.text-center > div.mt-2[style="margin: 0px auto; display: block;"] > a.Aikoi.donate[target="_blank"][rel][href^="https://www.longosto.shop/?utm_source="] > img.img-fluid { content-visibility: hidden !important; }
@@ -119365,7 +119348,6 @@ journaldunet.com#?##jSidebarSticky > div.sticky-zone:has(> div.sticky-element sp
 journalduweb.org#%#//scriptlet('prevent-setTimeout', '/siteAccessNotification|checkBaitElement/')
 journalduweb.org#@#.ad-slot
 journalduweb.org#@#.ads-banner
-journalmetro.com##div[data-sticky-ad-container]
 journalstar.com#?#section.block:has(> div.clearfix > div h3:contains(/Print|ads/))
 jovempan.com.br##.cta-model
 jovenesweb.com#%#//scriptlet('remove-class', 'no-select', 'div')
@@ -119716,8 +119698,6 @@ kompasiana.com##.kolom-newslt
 komputerswiat.pl,auto-swiat.pl##.googleNewsBanner
 komputerswiat.pl,businessinsider.com.pl,fakt.pl,plejada.pl,medonet.pl,onet.pl#%#//scriptlet("set-constant", "Object.prototype.isFloatingEnabled", "false")
 komputronik.pl###snrs-wp-subscriber
-komunalniekologie.cz,tamaris.com#$#.modal-backdrop { display: none !important; }
-komunalniekologie.cz,tamaris.com#$#body { overflow: auto !important; }
 komus.ru##.online_call
 konbini.com##div[data-ad-unit-path]
 konest.com###SafeTravelNotice
@@ -119774,7 +119754,6 @@ krakenfiles.com##.buy-premium-promo-file-banner
 krakenfiles.com##.buyPremiumAlert
 krakenfiles.com#%#//scriptlet('fingerprintjs3')
 kralmuzik.com.tr,techbang.com##.google-news-wrapper
-kraloyun.com##.pop-up-mobile-view
 krautreporter.de##+js(rc, blurred, .blurred, stay)
 krautreporter.de##+js(rc, json-ld-paywall-marker, .json-ld-paywall-marker, stay)
 krautreporter.de##section.js-access-wall,div.js-paywall-divider,#steady-checkout
@@ -119864,6 +119843,7 @@ kyivindependent.com###war-notes-homepage-banner-place
 kyivindependent.com##.bannerBelarus
 kyivindependent.com##.popupJoinUsInThisFight
 kyivindependent.com##div[class^="MembershipCampaignArticleBanner"]
+kyivindependent.com##div[class^="page_newsletterBoxWrapper"]
 kyivindependent.com##div[class^="TopBanners_wrapper"]
 kyobun.co.jp#$?#.tp-backdrop { display: none !important; }
 kyobun.co.jp#$?#body { overflow: auto !important; }
@@ -120042,6 +120022,7 @@ ldmnq.com##.ld-download-zuanban
 le10sport.com,ozap.com#%#(function(){var a={cmd:[],public:{getVideoAdUrl:function(){},createNewPosition:function(){},refreshAds:function(){},setTargetingOnPosition:function(){},getDailymotionAdsParamsForScript:function(c,a){if("function"==typeof a)try{if(1===a.length){a({})}}catch(a){}}}};a.cmd.push=function(b){let a=function(){try{"function"==typeof b&&b()}catch(a){}};"complete"===document.readyState?a():window.addEventListener("load",()=>{a()})},window.jad=a})();
 le2minutes.com,senscritique.com##.habillage-left
 leaddev.com#%#//scriptlet('abort-on-property-write', 'HTMLDialogElement.prototype.showModal')
+leaflet.pub##.subscribePanel
 leagueoflegends.com#%#//scriptlet('remove-class', 'async-hide', 'html')
 leakedpacks.com#%#//scriptlet('adjust-setInterval', 'counter', '*', '0.001')
 leakgallery.com#$#app-creator-banner { display: none !important; }
@@ -120085,7 +120066,6 @@ ledenicheur.fr##div[class^="AdPlacement"]
 ledevoir.com###top-publicite-placeholder
 ledevoir.com##+js(cookie-remover, pw6)
 ledge.ai##.flex-col > img[src*="EXPO_AUTUMN_bnr"]
-ledkia.com###modalPromotionschedule
 ledkia.com##.modal-backdrop
 leeapk.com##.content-area a.f-telegram
 leeapk.com#?#article > div.text-center:has(> a[href="https://t.me/leeapk_official"])
@@ -120179,9 +120159,7 @@ leparisien.fr##.article-section .nl-article-card
 leparisien.fr##.dailymotion-cpe > div.pip
 leparisien.fr##.footerSubscribe
 leparisien.fr##.homepage__top-subscribe-anchor
-leparisien.fr##.marketingParisien
 leparisien.fr##.moduleNew300
-leparisien.fr##.newsletter-text
 leparisien.fr##.paywall-article-inread-ads
 leparisien.fr##.paywall-sticky
 leparisien.fr##.sub-anchor
@@ -120293,7 +120271,6 @@ lewdzone.com##main > div.alert:has(> a[href="https://lzmods.com/68/how-to-whitel
 lexception.com#$##modal_welcome { display: none !important; }
 lexception.com#$#body { overflow: auto !important; padding-right: 0 !important; }
 lexigram.gr###divAdRLGAds
-lexpress.fr##.bloc_partenaire
 lexpress.fr##.bottom-bar-full
 lexpress.fr##.placeholder--ban-atf
 lexpress.fr##.placeholder--ban-atf-wrapper
@@ -120524,7 +120501,6 @@ loeildelaphotographie.com##+js(ra, style, img[style*="blur"], stay)
 loeildelaphotographie.com##.premium-pic-box,.membership-promo-container,.login_form_litle
 logicool.co.jp#$#.email-subscription-modal { display: none !important; }
 logicool.co.jp#$#body[style="overflow: hidden;"] { overflow: auto !important; }
-login.account.rakuten.com###omni-container div.s.e > div.hc.cx.s.r.wf.cl.ccy.max-width-760
 login.yahoo.co.jp###ads
 logitechg.com##.pangea-site-notification
 logitechg.com#%#//scriptlet('prevent-addEventListener', 'click', '', 'elements', 'a[class^="btn-"][data-analytics-title^="download-g-hub"]')
@@ -120571,6 +120547,7 @@ lovense.com##.notice_wrap
 lovepanky.com##.single-subscribe
 lovepik.com##.anniversary_detail
 loveplanet.ru##.flash_notify_block
+low-ya.com##.v--modal-overlay
 lowcygier.pl##.browser-plugin-info
 lowcygier.pl#%#//scriptlet("abort-current-inline-script", "document.createElement", "pagead2.googlesyndication.com")
 lowcygier.pl#%#//scriptlet("set-constant", "niceAdsCheck", "true")
@@ -120586,7 +120563,6 @@ lpnt.fr,lepoint.fr##div[id^="WRAP_"][id*="_ATF"]
 lpnt.fr,lepoint.fr##div[id^="WRAP_NATIVE_"]
 lr-club.com##a[href="https://adblockplus.org/ru/faq_basics#disable"]
 lrb.co.uk##+js(set-local-storage-item, /^lrb_/, $remove$)
-lrb.co.uk##.app-cta-block
 lrepacks.net###sidebar > a[href="https://t.me/lrepacks"]
 lrepacks.net##.header-top
 lrytas.lt#$#.safe-top > div.sticky { margin-bottom: 0 !important; }
@@ -121065,7 +121041,6 @@ masterclass.com#$#body { overflow: visible!important; }
 masterclass.com#%#//scriptlet('set-local-storage-item', 'video_muted', 'true')
 masterclass.com#?#main > div > section:has(> div > h2:contains(Learn From the Best))
 mastercoria.com#%#//scriptlet("adjust-setInterval", "countdown", "", "0.02")
-masterpaiki.ru#?##secondary .widget-title:contains(Новые статьи на почту)
 mastory.jp##.p-article-mail
 mastory.jp##.p-article__banners
 matadornetwork.com#$#.brazen-modal-newsletter-subscribe { display: none !important; }
@@ -121154,7 +121129,6 @@ mdpi.com#?##right-column > .content__container:has(> .target-item > #journal-ale
 mdpr.jp#?#.p-articleList__heading:has(+ div#taboola-below-article-thumbnails-desktop)
 me.fo#%#//scriptlet('prevent-addEventListener', 'scroll', '/function\([a-z]?\){return"undefined"/')
 mealty.ru#%#//scriptlet('set-cookie-reload', 'no_reg2_popup', '1')
-meaningfuleats.com,veganricha.com,nutmegnanny.com,leitesculinaria.com##.top-hat
 meat-expert.ru##.subscribe-side-form
 meawfy.com#%#//scriptlet('adjust-setInterval', 'counter--', '*', '0.001')
 meawfy.com#%#//scriptlet('prevent-addEventListener', 'blur', 'stopCounter')
@@ -121402,7 +121376,6 @@ microsoftedge.microsoft.com###banner
 microsoftedgewelcome.microsoft.com###popup-1000
 microsoftstore.com.cn##.modals-overlay
 microsoftstore.com.cn##.slimBanner-content
-mid-day.com##.rhselement > div.row:has(> div.text-center > a[href="https://epaper.mid-day.com/Package"])
 middleeasteye.net##.field-body > div[style^="display: flex; align-items: center; justify-content: center; background-color: transparent;"]
 miechat.tv###modal_reserve_campaign
 migalhas.com.br##.flutuante
@@ -121820,7 +121793,6 @@ muyinteresante.okdiario.com#%#(()=>{const t={construct:(t,e,n)=>{const r=e[0],o=
 muyinteresante.okdiario.com#%#//scriptlet('prevent-addEventListener', 'scroll', 'a.forEach(function(t)')
 muylinux.com#%#//scriptlet('abort-current-inline-script', 'sessionStorage', 'isAmpDevMode')
 muylinux.com,newsmaker.md,gkseries.com###media_image-3
-muz-tv.ru###social_popup_window
 muzofond.fm###banner_auth
 muztext.com##div[id^="noty_bar_"]
 mv-voice.com##+js(cookie-remover, /^/)
@@ -122031,7 +122003,6 @@ nbcnews.com,today.com##.nl-signup-inline
 nbcnewyork.com##section[id^="nbc_newsletter"]
 nbcnewyork.com#%#//scriptlet('remove-class', 'video-flyout--fixed', '.video-flyout')
 nbcsports.com#%#//scriptlet('prevent-element-src-loading', 'script', 'sb.scorecardresearch.com')
-nbg.gr##app-email-field-box
 ncars.com.ua##.lkdm_vw__container
 ncbi.nlm.nih.gov#%#//scriptlet('set-constant', 'ncbi.sg', 'emptyObj')
 ncbi.nlm.nih.gov#%#//scriptlet('set-constant', 'ncbi.sg.ping', 'noopFunc')
@@ -122088,7 +122059,6 @@ neoline.ru##a[href="/company/news/interesnoe/yandex-split-pay/"]
 neoseeker.com##div[style="max-width:900px;margin-left:auto;margin-right:auto;padding-top: 15px;"]
 neoseeker.com#%#//scriptlet('abort-current-inline-script', 'document.createElement', '.offsetHeight === 0')
 neostencil.com###enquirefooter
-neostencil.com###hubSpotFormDialog
 neowin.net###sidebar > div.widget-content
 neowin.net###sidebar > div.widget-header
 neowin.net##div.trending-item-title[class*="w_stackcn"] > span[class*="rec"]
@@ -122209,6 +122179,7 @@ news.livedoor.com##.specialHeadingFloatLink
 news.mail.ru##.c3405583bc:has(button[data-logger="SubscribeButton"])
 news.mail.ru##div[data-qa="Box"]:has(div[data-qa="subscription_form"])
 news.mail.ru##div[data-tooltip-root][data-popper-placement="bottom"]
+news.mail.ru#?#body > div:has(> div[id] > div > div.title:contains(блокировщика рекламы))
 news.mail.ru,e.mail.ru,octavius.mail.ru#%#//scriptlet('abort-on-stack-trace', 'Promise', 'onSlotRender')
 news.milli.az,spektr.press,vbr.ru##.social-banner
 news.mit.edu##.front-page--message-block--top:has(a[href="http://web.mit.edu/mit-daily-weekly/"])
@@ -122289,7 +122260,6 @@ newsnow.com#%#//scriptlet('trusted-click-element', '.popup--MembershipMain > div
 newsnow.com,newsnow.co.uk##.ad__container + div
 newson6.com###misty-newsletter-subscribe
 newsroom.activisionblizzard.com#$#.intro-popup { display: none !important; }
-newsroom.activisionblizzard.com#$#.show-intro-popup { overflow: auto !important; }
 newsru.co.il##.main--single--article--content--links
 newsru.co.il##article > a[href="https://t.me/s/NEWSruIsrael"]
 newssky.com.ua##.bb1
@@ -122331,7 +122301,6 @@ newzviz.com#%#//scriptlet('adjust-setInterval', '(time)', '*', '0.001')
 nexbelt.com,sintra.ai#%#//scriptlet('trusted-click-element', 'div[id^="alia-popup-root-alia-"] div[aria-label="Close popup"]')
 nexcess.net###page-banner
 nextgov.com#%#//scriptlet('set-cookie', 'views-since-welcome-ad', '3')
-nextinpact.com#?#app-home-item:has(.article:has(.sponsored))
 nextmgz.com,nextmag.com.tw#$#.article-content { display: block!important; visibility: visible!important; }
 nextmgz.com,nextmag.com.tw#%#//scriptlet("set-constant", "paywall", "noopFunc")
 nexus-games.net,hentai-sharing.net,news.webike.net###custom_html-3
@@ -122371,7 +122340,6 @@ nicematin.com#@?#section:has(.brand:contains(sponsorisé))
 nickles.de#%#//scriptlet('set-constant', 'Nickles.Consent.show', 'noopFunc')
 nicolasbustamante.com#%#//scriptlet('trusted-set-local-storage-item', 'pub-106583-subscribe-prompt-next-shown-at', '99999999999999')
 nicolasbustamante.com#%#//scriptlet('trusted-set-local-storage-item', 'pub-106583-takeover-next-shown-at', '99999999999999')
-nicolasbustamante.com,read.engineerscodex.com,sources.news,nicolasbustamante.com,thegamebusiness.com,secondthoughts.ai,pragmaticengineer.com##.navbar-buttons button[data-testid="noncontributor-cta-button"]
 nicomanga.com##div[class^="col-"] > center:has(> h3 > b > a[href="https://nicomanga.com/remove-all-ads/"])
 nicovideo.jp###jsMarqueeContainer
 nicovideo.jp##.PreVideoStartPremiumLinkOnEconomyTimeContainer
@@ -122407,7 +122375,6 @@ nike.com#%#//scriptlet('set-local-storage-item', 'pi_visit_count', '$remove$')
 nike.com#%#//scriptlet('set-local-storage-item', 'pi_visit_track', '$remove$')
 nike.com#%#//scriptlet('set-local-storage-item', 'pulse_insights_udid', '$remove$')
 nikkansports.com#$#.tp-backdrop { display: none !important; }
-nikkansports.com#$#.tp-modal:has(> div > button.tp-close + div.plan-wrapper) { display: none !important; }
 nikke.win#%#//scriptlet('prevent-fetch', '/doubleclick|google-analytics/')
 nikkei-cnbc.co.jp##.bannerAreaB
 nikkei-cnbc.co.jp##li > a[href="https://www.nikkei-cnbc.co.jp/kouza"]
@@ -122510,7 +122477,6 @@ nouvelobs.com##.notifications > .banner
 nouvelobs.com##.partenaires-services
 nouvelobs.com##.slice--ad
 nouvelobs.com##body .dfp-slot:not(#style_important)
-nova.rambler.ru##div[class^="RabotaWidgetNew__root_ready--"]
 nova.rs#@#div[data-ad]
 novaescola.org.br###evaDrawer
 novaescola.org.br###evaDrawerOpacity
@@ -122768,7 +122734,6 @@ okensaku.com#@#.doubleclick
 okinawatimes.co.jp###free-article-nl
 okino.ua##.on-story-tags_subscribe
 okino.ua#$#body { overflow: visible!important; }
-okkazeo.com,radarbox.com###ads
 okko.tv#%#//scriptlet('set-local-storage-item', 'sbid_logUid', '$remove$')
 okmagazine.com##article > div[class^="sc-"]:has(> a[href^="https://google.com/preferences/source?q="])
 okmagazine.com##article > div[class^="sc-"]:has(> form#aigeon-form)
@@ -122937,7 +122902,6 @@ orange.fr##div[class^="media-advert"]
 orange.fr##div[id="oan_ora_1_300x250_hp.prospects"]
 orange.pl##.snrs-container-webpush
 orangespotlight.com#%#//scriptlet("remove-attr", "data-protect", "body[data-protect]")
-order-order.com#$#.v-overlay-container { display: none !important; }
 order-order.com#%#//scriptlet('remove-class', 'v-overlay-scroll-blocked', 'html')
 order-order.com#?#.column--right > div.v-card:has(> div.v-card__text > div[id^="mc_embed_signup"])
 order.ymobile.jp#$##not-supported-browser-modal { display: none !important; }
@@ -123095,7 +123059,6 @@ pacificleague.com###bannerBox-newsTopBanner
 page.auctions.yahoo.co.jp###fltbnr
 page.auctions.yahoo.co.jp###prmdl
 page.auctions.yahoo.co.jp##.idpfLPOpen
-page.kakao.com#$#.disableImageSave { pointer-events: auto!important; }
 pagellapolitica.it##.bg-blue:has(a[class^="hover:text-blue"])
 pagellapolitica.it##section.bg-black:has(> .container > .grid)
 pagesix.com##.google-preferred-sources
@@ -123567,6 +123530,7 @@ pngtree.com###__flogin
 pngtree.com###__lazy > astro-island + div[class^="_"][style^="color:"]
 pngtree.com##a[data-huejs="couponside-nologin-click"]
 pnp.de,mittelbayerische.de###piano_newsletter
+pnp.ru##.art_news_plus_wrap_second > div.infoblock_pub:has(> a[href="https://max.ru/parlament_novosti"])
 pnp.ru##.full_width_hr:has(> a[onclick^="dataLayer"][onclick*="'social'}"])
 pobreflixtv.*,vizertv.*##.ipsModal
 pochta.ru##a[class*="UnauthorizedPopupstyled__"]
@@ -123707,7 +123671,6 @@ povar.ru##.soc-banner
 povarenok.ru##.dr
 povarenok.ru##.social-groups
 povarenok.ru#?#.content-md-sub > div.bl:has(> span:contains(Наши рассылки))
-povarenok.ru,diets.ru##div[onclick="closeDailyRecipesPopup()"]
 powder.com#%#//scriptlet('set-session-storage-item', 'arena-bottom-drawer', 'true')
 power-technology.com##.gdm-recommended-reports
 power-technology.com##.gms-b2b-marketing
@@ -123901,7 +123864,6 @@ protanki.tv#$#body { overflow: visible!important; }
 protect-link.biz#$#body { overflow: auto !important; }
 proton.me##.animate-enter-top
 proton.me#%#//scriptlet('set-session-storage-item', 'modal-password', 'true')
-protonvpn.com##.entry > div.text-center > a[href="https://protonvpn.com/pricing"]
 protonvpn.com##a[href="/free-vpn"] > img
 protothema.gr##.infoContent
 provenwinners.com##.footer-topbar
@@ -124108,7 +124070,6 @@ r34.app#%#//scriptlet('set-local-storage-item', 'statistics-appOpenedCount', '1'
 r3owners.net#%#//scriptlet("set-constant", "XenForo.rellect.AdBlockDetector", "noopFunc")
 r6.tracker.network,realmtracker.com,fortnitetracker.com##.trn-topad
 rabota.ru##.subscribe-block__inner
-rachaelsgoodeats.com##.new-recipe
 rachlmansfield.com,poder360.com.br#$#body { overflow: visible !important; }
 racingnews365.com##.content-fields > div.entry-highlight
 racketboy.com###rb-newsletter
@@ -124180,6 +124141,7 @@ rakuten.co.jp##[irc="SdmLogin"]
 rakuten.com##div[class*="rads_placement"]
 rakuten.com#?#[data-productid]:has(a[href^="/offer?action="])
 rakuten.com.tw##.popup-wrap
+rallys.online##.side_box01
 ralphs.com,smithsfoodanddrug.com,frysfood.com,fredmeyer.com#%#//scriptlet('set-local-storage-item', 'analytics-device', '$remove$')
 rambler.ru#%#//scriptlet('trusted-set-cookie', 'rhead-giga-accent', 'closed', '', '/', 'rambler.ru')
 rambler.ua,rambler.ru#%#//scriptlet('set-cookie', '_blocker_hidden', '1')
@@ -124463,7 +124425,6 @@ revistaoeste.com##.newsletter-side
 revistaoeste.com##svg.spinner-eclipse
 revistaoeste.com,elliberal.com.ar,opovo.com.br,brasilescola.uol.com.br,forbes.com.br,abril.com.br#%#//scriptlet('prevent-addEventListener', 'copy', '.clipboardData.setData')
 revistapegn.globo.com,oglobo.globo.com,valor.globo.com#$#body { overflow: visible !important; }
-reviversoft.com##.find
 reviversoft.com##.left_side > #add_block
 reviversoft.com#$#.eip-overlay { display: none !important; }
 reviversoft.com#$#.eip-wrapper { display: none !important; }
@@ -124538,6 +124499,7 @@ robinwieruch.de###gatsby-focus-wrapper div[class^="withBorder-module"]:has(> lab
 robinwieruch.de#$#nav[class^="Navigation-module--announcement"] { display: none !important; }
 robinwieruch.de#$#nav[role="navigation"] { top: 0 !important; }
 roboexpert.pl,granitnaturalny.pl,przeciwpozarowy.com,lpbros.pl,rowerowelove.shop,straganzdrowia.pl###box_newsletter
+roboma.io##.pum-overlay[data-popmake*="380px"]
 robota.ua##alliance-telegram-bot-promo
 robotstart.info##.r-col > div.widget:first-child
 rockdelux.com##+js(ra, class|style, body, stay)
@@ -125338,7 +125300,6 @@ skysmart.ru#%#//scriptlet('remove-class', 'cdk-global-scrollblock', 'html')
 skysmart.ru#?#.block:has(> div[class] > span.button > span.button-text:contains(/^(Узнать бесплатно|Начать учиться)/))
 skywardplus.jal.co.jp##.adbnr_related
 skywardplus.jal.co.jp##.ranking.subpage-main-left
-slam.nl##.svelte-176pwuq
 slantmagazine.com##.donate
 slashdot.org##.ad-blocked-newsletter
 slashgear.com##.add-on-google-widget
@@ -125883,7 +125844,6 @@ storm.mg###premium_block
 storm.mg###premium_block_inner_wrap_outer
 storm.mg##.googleNotify
 storry.tv#$#body { overflow: visible!important; }
-storry.tv#$#cloudflare-app[data-goal="signup"] { display: none!important; }
 straemplay.*,powwideo.*,powcloud.*,powstream.*,stre4mplay.*,streampiay.*,stemplay.*,steamplay.*,steanplay.*,streamp1ay.*,streanplay.*,steampiay.cc,pouvideo.cc#%#//scriptlet('adjust-setTimeout', '/letgo|grecaptcha/', '*', '0.001')
 straight.com###article > h3:has(> a[href^="http://newsletter.straight.com/subscribe/"])
 straight.com###gs_newsletter_popup_overlay
@@ -126496,7 +126456,6 @@ theasianparent.com,tutoganga.blogspot.com,texte.work#%#//scriptlet("abort-on-pro
 theatermania.com##section.archive-info > .row > .justify-content-end:has(> article > a[data-bs-target="#subscribeModal"])
 theatlantic.com###nonMeteredNudge
 theatlantic.com###paywall
-theatlantic.com##.article-body > .injector-promo-wrapper--article-top > .injector-promo > aside
 theatlantic.com##aside#paywall,div[class^="LostInventoryMessage_"]
 theatlantic.com##aside[aria-label="Subscribe to The Atlantic"]
 theatlantic.com##div[class^="HomepageMiddle_newsletters"]
@@ -126531,7 +126490,6 @@ thecode.media##.article-content > div.wp-block-lazyblock-plashka:has(> p > a[hre
 thecode.media##.float-link
 thecode.media##.main-subscribe-wrp
 thecode.media##.pr-b
-thecode.media##.wp-block-lazyblock-plashka
 thecode.media##div[class^="lazyblock-banner"]
 thecollector.com##.CTA
 thecompleteuniversityguide.co.uk###uniSelectPodReveal
@@ -127272,7 +127230,6 @@ trovit.fr##.js-loadPremium
 trovo.live##.login-guide-footer
 troyhunt.com###floating_subscribe
 troyhunt.com##.footer_subscription_block
-truckstop.com###schedule-demo
 truckstop.com##.blog-detail-page__blog-content > figure:has(> a[href="/demo/"] > img)
 trucnet.net#%#//scriptlet('trusted-click-element', 'a[href].btn.redirect')
 trueid.net##div[data-testid="bannerOverlay-div"]
@@ -127454,6 +127411,7 @@ twilog.togetter.com##.subscription_banner
 twitch.tv###twilight-sticky-footer-root
 twitch.tv##.follow-prompt
 twitch.tv##.side-info-container
+twitch.tv##body div.subtember-gradient
 twitchmetrics.net##.col-md-3 > div.card:has(> div.card-body > div.hbspt-form)
 twitchnosub.com###twitterBanner
 twitchquotes.com##.ad-parent
@@ -127534,7 +127492,6 @@ ug.ru##.social-news-links
 ugreen.com###ecomsend-widget
 ugreen.com###shopify-section-top-activity-bar
 ugreen.com###smile-ui-lite-container
-uincar.ru###dialog-popap
 uinterview.com##.alert-discreet
 uinterview.com#$##myNewsModal { display: none!important; }
 ukr.media##.push_btn
@@ -127751,7 +127708,6 @@ vancouversun.com,nationalpost.com###article-counter
 vandal.elespanol.com#$#.articulo_wrapper { margin-top: 88px !important; }
 vangraaf.com##.pc-newsletter
 vanityfair.com##.consumer-marketing-unit--article-mid-content
-vanityfair.com##.journey-template--footer
 vanityfair.com##aside[class^="PaywallBarWrapper-"]
 varianty.lviv.ua###donate-popup
 variety.com#$#.a-article-nl-fade * { color: unset !important; text-shadow: unset !important; }
@@ -128876,7 +128832,6 @@ yourstory.com#%#(()=>{const n=function(){};window.pa={avInsights:{Media:function
 yourstory.com,gardenersworld.com#$#.tp-backdrop { display: none !important; }
 yourstory.com,gardenersworld.com#$?#body > div.tp-modal:has(> div.tp-iframe-wrapper > iframe[id^="offer_"]) { display: none !important; }
 yourstory.com,geek.com,rapidseedbox.com###newsletter-widget
-youscribe.com##.interpage
 youshows.org#%#//scriptlet('set-local-storage-item', 'youshows_ads_notice_seen', 'true')
 youskbe.com#%#//scriptlet('set-local-storage-item', '__adm_uid', '$remove$')
 youtube-nocookie.com,youtube.com##.annotation.iv-branding
@@ -129055,7 +129010,6 @@ zvuch.com#%#//scriptlet('trusted-click-element', '#show_popup_auth .close', '', 
 zvuk.com#%#//scriptlet('set-session-storage-item', 'desktop_showedSaSubscriptionModal', 'true')
 zvuk.com#?#main > div > div[width]:has(> a[href] > img[data-banner-category])
 zwischengas.com##.fixed-bottom
-zwoltex.pl##.email_subscription div.movie-container ~ div[class]
 zx-pk.ru###stickymsg
 zx-pk.ru##div[style="background-color: yellow; border-width: 2px; border-style: dashed; border-color: red;"]
 zyro.com#$#.ebook-before-leave-modal { display: none !important; }
@@ -129120,39 +129074,35 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||102.53.15.17^$all
 ||102.53.15.18^$all
 ||102.68.74.45^$all
-||102.68.74.69^$all
 ||1024tera.com/api/analytics?
-||103.101.85.165^$all
-||103.101.85.173^$all
 ||103.106.250.161^$all
 ||103.116.190.93^$all
 ||103.153.93.18^$all
+||103.154.90.21^$all
 ||103.159.152.118^$all
-||103.160.130.109^$all
-||103.160.130.178^$all
+||103.159.221.33^$all
 ||103.161.17.92^$all
 ||103.163.119.220^$all
 ||103.164.117.74^$all
 ||103.164.128.184^$all
 ||103.168.67.55^$all
-||103.172.186.146^$all
 ||103.187.151.107^$all
 ||103.20.213.34^$all
 ||103.206.139.61^$all
 ||103.209.67.34^$all
-||103.217.215.238^$all
 ||103.226.124.232^$all
 ||103.227.118.45^$all
+||103.236.135.177^$all
 ||103.240.211.121^$all
 ||103.245.10.51^$all
 ||103.245.204.42^$all
 ||103.247.164.242^$all
+||103.31.103.204^$all
 ||103.36.80.114^$all
 ||103.41.167.237/v2/resolv?host=
 ||103.54.153.49^$all
 ||103.59.134.98^$all
 ||103.68.95.197^$all
-||103.74.5.124^$all
 ||103.77.246.150^$all
 ||103.8.164.18^$all
 ||103.83.87.122^$all
@@ -129160,7 +129110,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||103.90.207.234^$all
 ||103.96.96.35^$all
 ||103bees.com^$third-party
-||105.184.58.165^$all
 ||105app.com/report/?
 ||105app.com^$third-party
 ||106.14.58.169^$all
@@ -129170,7 +129119,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||106.40.243.20^$all
 ||106.54.220.107^$all
 ||106.54.223.106^$all
-||106.58.114.77^$all
 ||107.128.101.219^$all
 ||107.172.172.216^$all
 ||107.172.172.254^$all
@@ -129192,36 +129140,36 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||109.207.216.197^$all
 ||109.207.217.114^$all
 ||109.236.46.215^$all
-||109.245.220.229^$all
 ||109.25.123.70^$all
+||109.69.79.44^$all
 ||109.74.204.206^$all
 ||109.92.143.90^$all
 ||10haber.net/cu1m/
 ||10xlaunch.ai^$third-party
+||110.186.230.101^$all
 ||110.227.197.204^$all
 ||110.93.143.144^$third-party
 ||111.173.158.197^$all
-||111.228.4.54^$all
+||111.185.147.232^$all
 ||111.235.143.155^$all
 ||111.59.254.165^$all
 ||111.72.43.182^$all
 ||111.74.21.155^$all
 ||112.109.205.48^$all
 ||112.198.130.112^$all
+||112.198.132.186^$all
 ||112.198.186.249^$all
 ||112.226.189.193^$all
 ||112.229.203.112^$all
 ||112.238.146.18^$all
-||112.248.107.28^$all
+||112.248.108.207^$all
 ||112.248.115.39^$all
-||112.254.188.159^$all
 ||112.254.223.118^$all
+||112.254.25.161^$all
 ||112.4.110.28^$all
 ||112.4.110.42^$all
 ||112.74.47.172^$all
 ||112.93.136.173^$all
-||112.93.137.230^$all
-||112.93.139.117^$all
 ||113.160.251.236^$all
 ||113.221.11.164^$all
 ||113.221.58.41^$all
@@ -129232,21 +129180,22 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||113.229.188.243^$all
 ||113.230.30.175^$all
 ||113.231.84.91^$all
-||113.232.254.209^$all
 ||113.233.12.188^$all
 ||113.236.116.189^$all
+||113.236.91.179^$all
 ||113.236.93.92^$all
 ||113.237.104.66^$all
+||113.237.109.86^$all
 ||113.239.216.250^$all
 ||113.239.246.19^$all
 ||113.239.64.220^$all
 ||113.254.36.153^$all
 ||113.45.17.8^$all
-||113.45.253.80^$all
 ||114.129.49.131^$all
 ||114.132.77.127^$all
 ||114.221.254.230^$all
 ||114.226.26.236^$all
+||114.228.0.125^$all
 ||114.231.138.67^$all
 ||114.31.8.22^$all
 ||114.31.8.25^$all
@@ -129256,41 +129205,41 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||115.159.149.113^$all
 ||115.178.100.190^$all
 ||115.190.250.28^$all
-||115.203.187.145^$all
-||115.50.149.84^$all
-||115.50.28.52^$all
-||115.50.70.160^$all
+||115.240.70.185^$all
+||115.50.1.231^$all
+||115.50.110.157^$all
+||115.54.151.32^$all
 ||115.55.165.198^$all
-||115.55.238.97^$all
+||115.55.251.79^$all
 ||115.55.47.135^$all
-||115.55.60.18^$all
-||115.57.68.144^$all
+||115.56.46.185^$all
+||115.57.184.196^$all
+||115.57.48.79^$all
+||115.58.128.60^$all
 ||115.58.183.11^$all
-||115.59.19.244^$all
+||115.61.114.25^$all
+||115.62.179.188^$all
+||115.62.219.128^$all
 ||116.118.47.149^$all
 ||116.136.142.2^$all
 ||116.138.107.198^$all
 ||116.138.108.112^$all
-||116.140.133.187^$all
-||116.140.187.100^$all
 ||116.15.188.27^$all
 ||116.171.106.3^$all
 ||116.205.168.247^$all
+||116.58.51.90^$all
 ||116.58.62.74^$all
 ||116.86.50.18^$all
-||117.14.160.69^$all
+||116.90.122.2^$all
 ||117.157.17.194^$all
+||117.20.27.25^$all
 ||117.215.129.223^$all
 ||117.216.139.127^$all
 ||117.240.155.245^$all
-||117.241.78.146^$all
-||117.247.101.185^$all
-||117.247.101.217^$all
-||117.247.101.63^$all
+||117.26.226.51^$all
 ||117.72.181.104^$all
 ||117.72.183.111^$all
 ||117.72.242.9^$all
-||118.125.5.64^$all
 ||118.139.167.36^$all
 ||118.178.133.241^$all
 ||118.179.121.235^$all
@@ -129305,14 +129254,11 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||118.70.244.17^$all
 ||118.71.250.6^$all
 ||119.114.107.134^$all
-||119.115.33.201^$all
-||119.115.67.25^$all
 ||119.116.161.23^$all
-||119.117.164.177^$all
 ||119.118.34.3^$all
 ||119.165.89.154^$all
 ||119.166.194.8^$all
-||119.179.252.91^$all
+||119.179.236.153^$all
 ||119.179.30.73^$all
 ||119.192.128.163^$all
 ||119.193.158.215^$all
@@ -129326,22 +129272,24 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||120.26.166.249^$all
 ||120.28.161.11^$all
 ||120.28.193.113^$all
+||120.28.215.129^$all
 ||120.43.48.73^$all
 ||120.46.12.14^$all
 ||120.46.15.254^$all
 ||120.71.0.131^$all
+||120.76.143.184^$all
 ||120.77.1.20^$all
 ||120.77.237.174^$all
 ||120.77.79.42^$all
 ||120.79.64.164^$all
-||121.101.79.178^$all
+||120.84.212.164^$all
+||120.84.213.157^$all
+||120.84.214.107^$all
 ||121.184.128.134^$all
 ||121.202.142.68^$all
 ||121.202.153.132^$all
 ||121.202.196.93^$all
-||121.202.204.227^$all
 ||121.202.208.107^$all
-||121.202.208.193^$all
 ||121.202.208.237^$all
 ||121.202.209.31^$all
 ||121.202.209.46^$all
@@ -129349,59 +129297,68 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||121.239.128.71^$all
 ||121.40.213.105^$all
 ||121.43.104.75^$all
+||122.157.191.96^$all
 ||122.165.240.3^$all
 ||122.170.110.131^$all
 ||122.170.8.40^$all
 ||122.179.136.112^$all
 ||122.192.191.125^$all
+||122.241.11.11^$all
+||122.241.244.12^$all
 ||123-counter.de^$third-party
+||123.10.226.98^$all
+||123.11.2.109^$all
+||123.11.78.158^$all
 ||123.117.136.97^$all
+||123.12.169.223^$all
+||123.12.20.34^$all
 ||123.12.232.76^$all
 ||123.132.166.255^$all
-||123.132.166.45^$all
+||123.14.176.71^$all
 ||123.14.35.219^$all
-||123.14.91.240^$all
 ||123.143.141.75^$all
 ||123.170.100.105^$all
 ||123.188.6.56^$all
+||123.188.79.165^$all
 ||123.188.79.47^$all
+||123.189.142.70^$all
 ||123.232.43.185^$all
 ||123.249.20.250^$all
-||123.4.232.69^$all
 ||123.57.250.154^$all
+||123.57.51.183^$all
 ||123.7.220.37^$all
+||123.8.80.122^$all
+||123.ywxww.net^$all
 ||123compteur.com^$third-party
 ||123count.com^$third-party
 ||123recht.de/include/menu/header-stats.asp
 ||123rf.com/apicore-index/traffic_log
 ||123stat.com^$third-party
-||124.131.128.79^$all
+||124.123.123.15^$all
 ||124.135.10.58^$all
 ||124.194.46.204^$all
 ||124.223.105.161^$all
 ||124.229.32.123^$all
 ||124.230.216.19^$all
 ||124.234.246.166^$all
-||124.235.239.199^$all
-||124.36.156.140^$all
+||124.235.106.150^$all
+||124.235.169.39^$all
 ||124.44.3.74^$all
+||124.6.167.113^$all
+||124.6.169.46^$all
 ||124.6.185.132^$all
 ||124.67.254.109^$all
 ||124.92.74.29^$all
 ||124.94.144.192^$all
 ||124.94.194.151^$all
 ||125.106.117.223^$all
-||125.110.12.253^$all
 ||125.166.48.235^$all
 ||125.253.125.72^$all
-||125.40.2.84^$all
-||125.41.219.120^$all
-||125.41.3.138^$all
-||125.41.5.190^$all
-||125.41.7.246^$all
-||125.45.60.9^$all
-||125.46.131.9^$all
+||125.40.94.151^$all
+||125.42.25.32^$all
+||125.44.41.249^$all
 ||125.46.214.183^$all
+||125.47.211.92^$all
 ||125.47.247.14^$all
 ||126.23.203.236^$all
 ||126.76.103.220^$all
@@ -129411,6 +129368,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||13.113.8.105^$all
 ||13.71.2.244^$all
 ||130.12.182.175^$all
+||130.12.182.77^$all
 ||130.12.209.153^$all
 ||130.185.193.208^$all
 ||130.61.147.74^$all
@@ -129428,12 +129386,12 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||138.219.58.34^$all
 ||138.36.2.110^$all
 ||139.159.233.200^$all
+||139.162.53.175^$all
 ||139.196.111.118^$all
 ||139.198.15.223^$all
 ||13p76nnir.de^$third-party
 ||14-0-204-188.static.pccw-hkt.com^$all
 ||14.0.204.188^$all
-||14.142.209.198^$all
 ||14.161.6.225^$all
 ||14.224.205.246^$all
 ||140.238.229.80^$all
@@ -129453,11 +129411,13 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||146.158.4.238^$all
 ||147.182.224.216^$all
 ||148.113.205.94^$all
+||149.62.200.106^$all
 ||150.158.25.244^$all
 ||150.187.25.242^$all
 ||150.95.27.35^$all
 ||150.co.il^$all
 ||151.236.247.230^$all
+||152.230.111.46^$all
 ||152.32.240.167^$all
 ||152.42.130.4^$all
 ||152.42.178.130^$all
@@ -129465,7 +129425,8 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||153.37.77.156^$all
 ||154.0.129.114^$all
 ||154.0.129.134^$all
-||154.219.116.177^$all
+||154.68.30.214^$all
+||154.73.64.16^$all
 ||154.73.64.24^$all
 ||154.84.212.18^$all
 ||154.90.70.23^$all
@@ -129480,7 +129441,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||158.255.83.204^$all
 ||158.94.211.92^$all
 ||159.112.183.71^$all
-||159.196.16.186^$all
 ||159.250.122.151^$all
 ||15gifts.com^$third-party
 ||15min.lt/cached/tgif$~third-party
@@ -129492,7 +129452,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||162.215.130.152^$all
 ||162.215.218.82^$all
 ||162.215.218.94^$all
-||163.142.93.233^$all
+||163.142.92.67^$all
 ||163.182.97.242^$all
 ||163.com/*/__utm.gif?
 ||163.com/sn.gif?
@@ -129500,6 +129460,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||164.160.41.10^$all
 ||164.90.210.228^$all
 ||165.154.184.75^$all
+||165.22.225.110^$all
 ||165.73.108.6^$all
 ||166.144.131.188^$all
 ||166.147.146.187^$all
@@ -129519,63 +129480,55 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||172.96.189.153^$all
 ||174.105.154.212^$all
 ||174.71.237.86^$all
-||174.71.238.196^$all
 ||175.0.60.188^$all
+||175.107.210.184^$all
+||175.146.157.174^$all
 ||175.146.231.101^$all
 ||175.146.240.50^$all
 ||175.146.244.227^$all
 ||175.148.76.63^$all
-||175.150.176.248^$all
 ||175.151.224.238^$all
-||175.151.74.60^$all
 ||175.161.212.214^$all
+||175.165.106.238^$all
 ||175.165.142.242^$all
 ||175.165.76.134^$all
+||175.165.84.48^$all
 ||175.167.47.248^$all
 ||175.168.233.120^$all
 ||175.172.9.203^$all
 ||175.173.117.208^$all
 ||175.173.60.37^$all
-||175.173.85.64^$all
 ||175.175.210.205^$all
+||175.175.235.48^$all
 ||175.175.56.87^$all
 ||175.31.252.29^$all
 ||175.44.156.36^$all
 ||176.102.192.245^$all
 ||176.102.198.226^$all
 ||176.106.241.72^$all
-||176.120.203.230^$all
 ||176.221.111.222^$all
-||176.65.139.131^$all
+||176.65.139.136^$all
+||176.65.139.137^$all
 ||176.65.139.139^$all
 ||176.65.139.140^$all
 ||176.65.139.195^$all
 ||176.65.139.196^$all
 ||176.65.139.202^$all
+||176.65.139.208^$all
 ||176.65.139.209^$all
 ||176.65.139.211^$all
-||176.65.139.229^$all
-||176.65.139.230^$all
-||176.65.139.236^$all
-||176.65.139.237^$all
-||176.65.139.238^$all
-||176.65.139.239^$all
-||176.65.139.240^$all
-||176.65.139.241^$all
-||176.65.139.242^$all
-||176.65.139.243^$all
-||176.65.139.244^$all
+||176.65.139.226^$all
+||176.65.139.234^$all
 ||177.125.169.218^$all
 ||177.22.88.133^$all
-||177.247.2.226^$all
 ||177.70.102.228^$all
 ||177.70.102.232^$all
-||178.132.114.159^$all
 ||178.151.143.2^$all
 ||178.16.52.133^$all
 ||178.16.52.221^$all
 ||178.16.53.176^$all
 ||178.16.54.109^$all
+||178.16.54.90^$all
 ||178.16.55.240^$all
 ||178.16.55.93^$all
 ||178.176.204.250^$all
@@ -129587,7 +129540,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||178.210.214.48^$all
 ||178.210.83.9^$all
 ||178.211.135.170^$all
-||178.219.38.228^$all
 ||178.220.234.5^$all
 ||178.238.27.138^$all
 ||178.248.3.202.ll.sta.mana.pf^$all
@@ -129601,48 +129553,56 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||17track.net/externalcall.js
 ||18.176.47.246^$all
 ||18.217.254.255^$all
+||180.106.130.119^$all
 ||180.116.151.75^$all
+||180.119.100.5^$all
 ||180.148.33.24^$all
 ||180.149.198.22^$all
-||180.190.202.146^$all
 ||180.191.16.206^$all
+||180.191.16.46^$all
 ||180.191.34.236^$all
-||180.191.42.15^$all
-||180.252.217.7^$all
+||180.76.141.175^$all
 ||180.76.153.78^$all
 ||180.76.2.18^$third-party
 ||180.92.225.138^$all
 ||1800cnt.com^$third-party
+||181.129.100.123^$all
+||181.129.177.162^$all
 ||181.129.182.138^$all
 ||181.171.188.254^$all
 ||181.211.252.34^$all
 ||181.49.47.190^$all
-||181.79.85.69^$all
 ||182.109.0.22^$all
-||182.113.203.209^$all
+||182.113.41.227^$all
+||182.113.45.180^$all
 ||182.113.45.93^$all
 ||182.116.33.183^$all
-||182.116.72.222^$all
+||182.116.55.159^$all
 ||182.117.50.169^$all
+||182.119.29.244^$all
+||182.120.166.229^$all
 ||182.120.32.245^$all
 ||182.121.177.176^$all
-||182.122.171.172^$all
-||182.124.178.175^$all
-||182.126.116.139^$all
-||182.126.124.161^$all
+||182.121.224.34^$all
+||182.123.165.57^$all
+||182.126.90.177^$all
+||182.126.92.89^$all
+||182.127.29.73^$all
 ||182.160.102.188^$all
 ||182.163.114.232^$all
-||182.23.87.242^$all
 ||182.253.115.155^$all
 ||182.253.115.156^$all
 ||182.52.51.239^$all
 ||182.72.167.124^$all
+||182.73.129.30^$all
 ||182.92.99.95^$all
 ||182.93.58.234^$all
 ||182.93.83.124^$all
 ||183.63.8.194^$all
 ||183.81.156.121^$all
+||183.81.156.123^$all
 ||183.81.156.124^$all
+||183.81.156.125^$all
 ||183.83.186.77^$all
 ||183.91.77.253^$all
 ||184.160.27.44^$all
@@ -129652,7 +129612,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||185.118.128.34^$all
 ||185.12.78.161^$all
 ||185.133.214.138^$all
-||185.136.195.193^$all
+||185.138.68.19^$all
 ||185.152.219.150^$all
 ||185.166.91.145^$all
 ||185.190.20.228^$all
@@ -129662,6 +129622,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||185.20.19.72^$all
 ||185.205.226.191^$all
 ||185.224.107.4^$all
+||185.236.46.120^$all
 ||185.253.75.188^$all
 ||185.32.179.229^$all
 ||185.4.64.128^$all
@@ -129674,6 +129635,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||185.71.69.198^$all
 ||185.8.233.160^$all
 ||185.80.0.36^$all
+||185.82.165.26^$all
 ||185.93.89.72^$all
 ||186.138.107.5^$all
 ||186.154.93.81^$all
@@ -129681,12 +129643,12 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||186.42.98.2^$all
 ||186.87.82.140^$all
 ||187.247.242.34^$all
-||188.0.131.200^$all
 ||188.118.38.161^$all
 ||188.134.8.43^$all
 ||188.147.175.138^$all
 ||188.167.179.75^$all
 ||188.170.32.148^$all
+||188.173.136.155^$all
 ||188.212.158.75^$all
 ||188.233.80.29^$all
 ||188.243.36.33^$all
@@ -129703,7 +129665,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||190.113.124.155^$all
 ||190.12.99.194^$all
 ||190.128.195.138^$all
-||190.145.205.178^$all
 ||190.183.254.69^$all
 ||190.196.38.77^$all
 ||190.2.237.104^$all
@@ -129715,7 +129676,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||192.162.199.249^$all
 ||192.176.50.190^$all
 ||192.252.181.68^$all
-||192.255.159.254^$all
 ||193.104.58.65^$all
 ||193.106.58.174^$all
 ||193.111.117.135^$all
@@ -129728,16 +129688,13 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||195.158.88.156^$all
 ||195.158.90.40^$all
 ||195.178.110.204^$all
-||195.250.173.158^$all
 ||195.26.97.59^$all
 ||195.34.102.234^$all
 ||195.34.91.22^$all
-||196.190.11.194^$all
 ||196.251.107.186^$all
 ||196.251.121.142^$all
 ||196.251.121.185^$all
 ||196.39.143.113^$all
-||196.41.63.178^$all
 ||197.159.1.58^$all
 ||198.144.179.82^$all
 ||198.166.72.242^$all
@@ -129770,7 +129727,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||2.136.63.232^$all
 ||2.26.136.128^$all
 ||2.26.81.46^$all
-||2.27.12.54^$all
 ||2.27.248.13^$all
 ||2.54.238.31^$all
 ||2.54.239.97^$all
@@ -129787,17 +129743,14 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||2.54.96.52^$all
 ||2.55.126.179^$all
 ||2.55.81.169^$all
-||2.55.94.142^$all
 ||2.56.10.3^$all
 ||2.57.122.121^$all
 ||20.detik.com/embed/$subdocument,~third-party
 ||20.detik.com/watch/livestreaming-20d?
-||200.115.102.2^$all
 ||200.122.211.138^$all
 ||200.14.250.72^$all
 ||200.29.120.130^$all
 ||200.54.221.234^$all
-||200.61.163.235^$all
 ||200.69.219.25^$all
 ||200summit.com^$third-party
 ||201.16.236.187^$all
@@ -129817,7 +129770,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||202.148.20.138^$all
 ||202.148.5.34^$all
 ||202.155.8.56^$all
-||202.162.36.210^$all
 ||202.166.218.154^$all
 ||202.175.181.210^$all
 ||202.3.248.178^$all
@@ -129845,7 +129797,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||203.212.222.22^$all
 ||203.76.108.6^$all
 ||203.83.186.62^$all
-||204.44.69.216^$all
 ||204st.us^$third-party
 ||205.185.114.150^$all
 ||205.185.121.21^$all
@@ -129883,10 +129834,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||210.208.111.74^$all
 ||210.208.116.107^$all
 ||210.96.44.219^$all
-||211.186.82.229^$all
-||211.204.100.20^$all
 ||211.219.49.173^$all
-||212.107.232.167^$all
 ||212.156.106.146^$all
 ||212.224.107.246^$all
 ||212.232.22.87^$all
@@ -129899,6 +129847,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||213.165.183.55^$all
 ||213.47.243.57^$all
 ||213.5.194.56^$all
+||213.6.101.83^$all
 ||213.6.196.230^$all
 ||213.6.74.138^$all
 ||213.87.112.128^$all
@@ -129910,51 +129859,50 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||216.18.176.4/logger/
 ||216.196.170.32^$all
 ||216.201.80.197^$all
+||216.249.4.20^$all
 ||217.115.212.126^$all
 ||217.154.188.255^$all
 ||217.168.128.146^$all
 ||217.208.164.149^$all
-||217.218.235.202^$all
 ||217.60.102.12^$all
 ||217.60.195.113^$all
 ||217.60.195.219^$all
+||217.60.241.237^$all
 ||217.60.241.32^$all
-||217.64.135.181^$all
 ||217.65.15.51^$all
 ||217.75.193.34^$all
 ||217.92.214.15^$all
 ||218.103.122.102^$all
 ||218.155.74.6^$all
-||218.188.43.38^$all
+||218.200.94.63^$all
 ||218.212.2.95^$all
-||219.155.86.205^$all
+||218.74.111.153^$all
+||219.155.203.92^$all
+||219.155.209.76^$all
+||219.156.52.99^$all
+||220.118.75.244^$all
 ||220.180.99.71^$all
 ||220.184.35.74^$all
 ||220.192.224.73^$all
-||220.192.234.145^$all
-||220.201.29.161^$all
 ||220.246.34.66^$all
-||221.1.227.161^$all
 ||221.10.233.217^$all
 ||221.143.49.222^$all
-||221.15.14.31^$all
-||221.200.113.178^$all
+||221.15.226.98^$all
+||221.15.88.237^$all
 ||221.202.17.182^$all
-||221.202.22.141^$all
 ||221.203.123.95^$all
-||222.137.39.209^$all
-||222.141.130.234^$all
 ||222.142.253.198^$all
 ||222.165.237.58^$all
 ||222.165.237.59^$all
 ||222.165.237.60^$all
-||222.165.237.61^$all
 ||222.165.237.62^$all
 ||222.185.199.120^$all
+||222.219.25.40^$all
 ||222.239.87.50^$all
 ||222.252.31.94^$all
 ||2222.ro^$third-party
 ||223.10.2.194^$all
+||223.100.248.64^$all
 ||223.108.58.13^$all
 ||223.108.58.15^$all
 ||223.76.100.36^$all
@@ -129986,18 +129934,16 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||24ur.com/bin/player/?mod=statistics&
 ||27.125.169.235^$all
 ||27.147.225.2^$all
-||27.152.11.30^$all
 ||27.203.158.156^$all
+||27.204.196.39^$all
 ||27.215.108.44^$all
 ||27.215.210.140^$all
-||27.215.54.219^$all
 ||27.219.119.11^$all
 ||27.220.132.248^$all
 ||27.222.48.192^$all
 ||27.222.89.207^$all
-||27.37.100.83^$all
-||27.44.145.195^$all
-||27.44.146.43^$all
+||27.44.144.48^$all
+||27.44.145.84^$all
 ||27.72.159.162^$all
 ||27.96.228.235^$all
 ||2cfc0222.salamanderprocessing.pages.dev^$all
@@ -130034,6 +129980,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||31.184.194.114^$all
 ||31.220.3.140^$all
 ||31.222.113.214^$all
+||31.28.31.6^$all
 ||31.4.254.241^$all
 ||31.55.236.199^$all
 ||31.56.209.84^$all
@@ -130053,7 +130000,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||36.64.227.134^$all
 ||36.66.139.36^$all
 ||36.67.246.82^$all
-||36.70.228.154^$all
+||36.69.79.50^$all
 ||36.88.180.115^$all
 ||36.88.6.203^$all
 ||36.89.62.19^$all
@@ -130068,9 +130015,11 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||365dmp.com^$third-party
 ||37.142.77.163^$all
 ||37.157.212.138^$all
-||37.220.123.125^$all
 ||37.233.63.185^$all
 ||37.252.66.188^$all
+||37.252.69.10^$all
+||37.255.210.242^$all
+||37.255.217.87^$all
 ||37.34.230.9^$all
 ||37.49.230.40^$all
 ||37.57.33.51^$all
@@ -130079,13 +130028,9 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||39.100.33.142^$all
 ||39.105.223.127^$all
 ||39.74.114.50^$all
-||39.79.22.252^$all
-||39.79.63.119^$all
 ||39.80.60.21^$all
 ||39.81.37.15^$all
-||39.87.216.223^$all
 ||39.88.200.53^$all
-||39.97.246.227^$all
 ||3dlivestats.com^$third-party
 ||3dn.ru/stat/
 ||3dnews.ru/track
@@ -130099,35 +130044,33 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||40nuggets.com^$third-party
 ||40svintageporn.com/hit
 ||40svintageporn.com/hit|
-||41.162.188.251^$all
 ||41.190.69.6^$all
 ||41.215.23.222^$all
 ||41.77.74.90^$all
 ||41.78.75.186^$all
 ||41.87.80.123^$all
-||42.177.102.201^$all
-||42.177.182.116^$all
 ||42.177.20.8^$all
 ||42.178.115.36^$all
 ||42.178.212.5^$all
 ||42.178.45.124^$all
 ||42.178.98.211^$all
 ||42.192.39.152^$all
-||42.224.7.71^$all
+||42.224.146.79^$all
+||42.224.99.104^$all
 ||42.225.231.39^$all
+||42.226.76.23^$all
+||42.227.185.203^$all
+||42.227.238.137^$all
 ||42.228.46.234^$all
-||42.232.225.227^$all
-||42.232.29.165^$all
-||42.232.80.182^$all
-||42.235.175.10^$all
 ||42.235.44.102^$all
 ||42.235.90.191^$all
+||42.235.90.27^$all
 ||42.237.59.222^$all
-||42.239.149.25^$all
+||42.237.83.246^$all
+||42.239.158.155^$all
+||42.242.128.179^$all
 ||42.4.140.241^$all
 ||42.4.163.42^$all
-||42.4.17.29^$all
-||42.5.8.190^$all
 ||42.53.3.62^$all
 ||42.54.15.53^$all
 ||42.54.156.10^$all
@@ -130135,22 +130078,21 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||42.54.30.220^$all
 ||42.55.12.60^$all
 ||42.55.19.113^$all
-||42.56.136.70^$all
+||42.55.8.85^$all
 ||42.56.161.38^$all
 ||42.56.166.234^$all
 ||42.56.192.38^$all
-||42.56.35.155^$all
 ||42.59.228.146^$all
+||42.59.234.164^$all
 ||42.59.236.147^$all
 ||42.6.33.35^$all
 ||42.7.113.51^$all
 ||42.7.150.192^$all
+||42.7.203.122^$all
 ||42.85.15.247^$all
-||42.85.180.51^$all
 ||42.85.203.171^$all
 ||42.85.209.65^$all
 ||42.85.51.157^$all
-||42.87.220.88^$all
 ||43.132.12.146^$all
 ||43.132.13.252^$all
 ||43.139.88.161^$all
@@ -130158,9 +130100,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||43.228.157.102^$all
 ||43.228.157.73^$all
 ||43.229.20.247^$all
-||43.229.20.42^$all
 ||43.230.44.36^$all
-||43.245.131.27^$all
 ||43.245.39.127^$all
 ||43.245.39.42^$all
 ||43.252.159.79^$all
@@ -130168,6 +130108,8 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||4399.com/plugins/tj/event?
 ||43koke89.user.webaccel.jp/images2/promptia-chatgpt.jpg$domain=qr.quel.jp
 ||44.208.147.17^$all
+||45.115.254.68^$all
+||45.115.254.91^$all
 ||45.118.79.103^$all
 ||45.120.38.214^$all
 ||45.125.44.137^$all
@@ -130182,10 +130124,8 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||45.197.12.73^$all
 ||45.198.224.131^$all
 ||45.207.157.28^$all
-||45.207.196.86^$all
 ||45.225.135.160^$all
 ||45.234.234.14^$all
-||45.236.116.198^$all
 ||45.66.228.93^$all
 ||45.76.122.186^$all
 ||45.77.254.180^$all
@@ -130206,7 +130146,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||46.236.65.142^$all
 ||46.236.65.160^$all
 ||46.236.65.163^$all
-||46.236.65.230^$all
 ||46.236.65.235^$all
 ||46.236.65.23^$all
 ||46.236.65.252^$all
@@ -130233,7 +130172,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||47.236.70.102^$all
 ||47.237.167.249^$all
 ||47.239.127.71^$all
-||47.239.191.177^$all
 ||47.242.66.123^$all
 ||47.243.208.30^$all
 ||47.245.111.51^$all
@@ -130273,8 +130211,11 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||5.149.184.170^$all
 ||5.166.107.132^$all
 ||5.182.210.174^$all
+||5.202.46.59^$all
 ||5.250.157.166^$all
+||5.253.59.16^$all
 ||5.26.174.234^$all
+||5.26.195.93^$all
 ||5.59.107.59^$all
 ||5.63.157.201^$all
 ||5.89.102.77^$all
@@ -130286,7 +130227,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||51network.com^$third-party
 ||51nongyao.net/js/analytics.js
 ||52.248.41.253^$all
-||54.197.245.249^$all
 ||55bbs.com/east.html
 ||55labs.com^$third-party
 ||57.129.23.24^$all
@@ -130295,40 +130235,34 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||58.205.218.4/pos?act=
 ||58.216.207.82^$all
 ||58.22.18.152^$all
-||58.255.43.126^$all
+||58.242.147.50^$all
 ||58.37.101.152^$all
-||58.47.120.31^$all
 ||58.49.210.250^$all
 ||59.103.116.68^$all
 ||59.110.9.189^$all
 ||59.56.110.227^$all
-||59.58.115.150^$all
 ||591.com.tw/stats/
 ||5baf1288cf.dl8.me^$third-party
 ||5ch.*/images/uplift-itest.png
 ||60.18.214.19^$all
+||60.18.56.204^$all
+||60.216.131.62^$all
 ||60.22.111.206^$all
 ||60.22.23.50^$all
 ||60.22.248.177^$all
 ||60.22.62.241^$all
 ||60.23.123.119^$all
+||60.23.192.74^$all
 ||60.23.194.219^$all
-||60.23.233.250^$all
 ||60aaf9c6.salamanderprocessing.pages.dev^$all
 ||61.137.130.193^$all
 ||61.137.134.196^$all
-||61.137.204.83^$all
 ||61.160.215.114^$all
 ||61.183.16.127^$all
 ||61.184.10.103^$all
-||61.2.45.141^$all
-||61.2.45.172^$all
-||61.2.45.191^$all
 ||61.240.239.106^$all
 ||61.244.254.110^$all
-||61.53.133.147^$all
-||61.53.240.10^$all
-||61.53.88.0^$all
+||61.52.216.153^$all
 ||62.197.62.195^$all
 ||62.56.225.99^$all
 ||62.60.226.140^$all
@@ -130395,6 +130329,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||77.237.29.219^$all
 ||77.238.209.82^$all
 ||77.247.88.88^$all
+||77.39.107.229^$all
 ||77.46.170.18^$all
 ||77.50.222.238^$all
 ||77.89.245.118^$all
@@ -130403,17 +130338,18 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||78.140.32.219^$all
 ||78.153.140.16^$all
 ||78.153.29.33^$all
+||78.187.104.169^$all
 ||78.20.115.5^$all
 ||78.25.123.5^$all
 ||78.26.180.129^$all
 ||78.26.81.99^$all
 ||78.36.11.185^$all
+||78.38.16.176^$all
 ||78.44.199.50^$all
 ||78.46.19.203^$third-party,domain=~sprueche-zitate.net.ip
 ||79.1.229.42^$all
 ||79.125.117.123^$third-party
 ||79.135.225.50^$all
-||79.175.42.206^$all
 ||7bpeople.com^$third-party
 ||7cd77.v.fwmrm.net/ad/
 ||7days.ru/ajax/route/browser
@@ -130451,7 +130387,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||80.24.87.77^$all
 ||80.249.6.118^$all
 ||80.28.228.106^$all
-||80.89.189.98^$all
 ||8020solutions.net^$third-party
 ||81.133.96.61^$all
 ||81.16.123.55^$all
@@ -130462,12 +130397,12 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||81.230.148.181^$all
 ||81.231.7.219^$all
 ||81.236.234.16^$all
-||81.4.156.50^$all
 ||81.42.247.62^$all
 ||81.42.249.132^$all
 ||81.45.183.125^$all
-||82.114.178.6^$all
+||82.102.74.238^$all
 ||82.114.181.233^$all
+||82.139.187.78^$all
 ||82.139.95.202^$all
 ||82.146.62.232^$all
 ||82.148.194.54^$all
@@ -130488,14 +130423,15 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||85.130.160.219^$all
 ||85.137.245.141^$all
 ||85.141.98.244^$all
+||85.15.119.255^$all
 ||85.163.234.15^$all
 ||85.187.54.142^$all
 ||85.203.4.64^$all
 ||85.25.72.70^$all
 ||86.106.101.159^$all
-||86.106.155.155^$all
 ||86.54.25.213^$all
 ||86.89.95.77^$all
+||87.120.196.255^$all
 ||87.138.104.129^$all
 ||87.227.140.66^$all
 ||87.249.142.126^$all
@@ -130521,6 +130457,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||89.32.41.16^$all
 ||89.35.233.220^$all
 ||89.40.31.51^$all
+||90.174.93.135^$all
 ||90.180.227.121^$all
 ||90.224.208.161^$all
 ||90.224.208.190^$all
@@ -130542,7 +130479,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||91.92.47.97^$all
 ||91.92.82.180^$all
 ||91jp3.beauty/000/flink/analytics.php
-||92.126.230.58^$all
 ||92.127.156.174^$all
 ||92.150.82.148^$all
 ||92.203.169.41^$all
@@ -130551,19 +130487,15 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||92.66.30.68^$all
 ||93.105.205.92.host.secureserver.net^$all
 ||93.114.194.171^$all
-||93.116.56.78^$all
 ||93.126.1.30^$all
 ||93.182.76.169^$all
 ||93.182.77.20^$all
-||93.39.215.44^$all
 ||93.43.53.67^$all
 ||93.55.251.246^$all
 ||93.82.169.218^$all
 ||93.87.31.84^$all
 ||93.87.42.154^$all
 ||94.154.35.240^$all
-||94.154.43.189^$all
-||94.19.130.58^$all
 ||94.203.254.14^$all
 ||94.231.164.10^$all
 ||94.244.113.217^$all
@@ -130577,6 +130509,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||95.158.175.214^$all
 ||95.170.116.28^$all
 ||95.170.119.100^$all
+||95.220.126.209^$all
 ||95.230.215.65^$all
 ||95.255.114.11^$all
 ||95.43.76.100^$all
@@ -130841,6 +130774,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||adcontroll.com^$third-party
 ||adcounter*.uptolike.ru^
 ||adcrowd.com^$third-party
+||adctanzania.co.tz^$all
 ||addefend-platform.com/s?
 ||addfreestats.com^$third-party
 ||addthis.com/at/
@@ -131197,6 +131131,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||aktion.kurier.de/umfrage/anlvi/setIframeParent
 ||al.levels.fyi/api/event
 ||aladinia.app/tracking.js
+||alahlam.sa^$all
 ||alarm.youku.com/api/sendAlarm
 ||alarmline.com.br^$all
 ||alaskaair.com/AlXMT4Ma/init.js
@@ -131206,6 +131141,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||alcmpn.com^$third-party
 ||alenty.com^$third-party
 ||alertme.news^$third-party
+||alerts.thedailystar.net/js/alerts.js
 ||alex.leonard.ie/misc-images/transparent.png
 ||alexa.com/minisiteinfo/$third-party
 ||alexa.com/traffic/
@@ -132161,6 +132097,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||at.cbsi.com^*/event?
 ||at.mklaud.com/at/at_log_*.php
 ||at.ua/stat/
+||atasapka.com.tr^$all
 ||atatus.com^$third-party
 ||atc.studybreakmedia.com/modules/abb^
 ||atcdn.co.uk/frostbite/
@@ -132233,6 +132170,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||auriro.net/views.cfm?
 ||aurora.network/images/banners/
 ||auryc.com/v1/event
+||australia.national-lottery.com/images/jackpot-promo/
 ||australvaldivia.cl/impresa/*/assets/vendor.js$script,~third-party
 ||auth-*.hismarttv.com^
 ||auth.bz^$third-party
@@ -132306,7 +132244,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||avsplow.com^$third-party
 ||avtoradio.ru/design/images/site-design/top100.gif
 ||avvenire.it/content/js/track.es5.min.js?
-||awarenessexhibition.com^$all
 ||awasete.com^$third-party
 ||awe.sm/conversions/
 ||aweber.com/form/displays.htm?$image
@@ -132511,7 +132448,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||beacons.ai/api/next_api/rta_v1/
 ||beacons.mediamelon.com^$third-party
 ||beaconstreetservices.com^$third-party
-||beak.in^$all
 ||beam.koddi.com^$third-party
 ||beampulse.com^$third-party
 ||beanstalkdata.com^$third-party
@@ -132817,6 +132753,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||book.naver.com/monitor/cc
 ||book.rollingvideogames.com^$all
 ||bookcabin.com/api/log-browser
+||booking.captcha-message-extranet.com^$all
 ||booking.com/*/track^
 ||booking.com/87sduif98q3rijax
 ||booking.com/c360/v1/track
@@ -133198,7 +133135,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||cartstack.com^$third-party
 ||carview.co.jp/include_api/log/
 ||cas-live.das-onlinespiel.de/gateway?
-||casasmediterraneas.com^$all
 ||casavie.com/images/index_logo.gif
 ||casavie.com/pubs/
 ||cashburners.com^$third-party
@@ -133337,7 +133273,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||cdn.duden.de/public_files/*/DO_Plus-banner-boxer.mp4
 ||cdn.dzen.ru/pingx
 ||cdn.eapteka.ru/local/react/build/static/*/loyaltyProgramm.
-||cdn.embedly.com/widgets/media.html?src=*upscri.be*as_embed*&schema=upscri
 ||cdn.enkod.ru/script/enpop.min.js
 ||cdn.escortdude.com/static/bn/
 ||cdn.eu.amplitude.com/libs/analytics-browser-
@@ -133600,7 +133535,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||cgmagonline.com/wp-content/plugins/perfmatters/js/analytics-minimal-v*.js
 ||cgtn.com/api/collect/
 ||ch3ngl0rd.com/hit/
-||chamjs.com^$all
 ||championat.com/api/unity-id/*/init
 ||championat.com/atlas/metrics/
 ||change.org/*/collector
@@ -133789,6 +133723,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||clevi.com^$third-party
 ||clewm.net/public/cli_analytics.js$domain=cli.im
 ||cli2020.com^$third-party
+||click-fr.com^$third-party
 ||click-url.com^$third-party
 ||click.abchina.com/*/wtid.js?callback=
 ||click.aliexpress.com^$image
@@ -134347,6 +134282,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||cookpad.com/*/activity_logs
 ||cookpad.com/FqtAw5et/init.js
 ||cooladata.com^$third-party
+||coolairesgroup.com^$all
 ||coolbe.*/api/*/events
 ||coolblue.de/js/mimir/
 ||coolblue.nl/monitoring/
@@ -134564,6 +134500,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||crypto-webminer.com^$third-party
 ||cryptobara.com^$third-party
 ||cryptonoter.com^$third-party
+||cryptovectorhub1.lol^$all
 ||crystalpvp.ru^$all
 ||cs*.mp3bars.com^
 ||cs.*/pixeljs|
@@ -135122,7 +135059,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||dl.2345.com^$all
 ||dl.360safe.com/offlinepackv4.exe^$all
 ||dl.dzqzd.com^$all
-||dl.ijinshan.com/safe/setup_smart.exe^$all
 ||dl.natgo.cn^$all
 ||dl8.me/*.gif?
 ||dl8.me^$third-party
@@ -135265,6 +135201,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||doubleverify.com^$third-party
 ||douyucdn.cn/fish3/1.gif
 ||dove.com*/Assets/JS/udm.js
+||down.54nb.com^$all
 ||down.ftp21.cc^$all
 ||down.fwqlt.com^$all
 ||down.pcclear.com^$all
@@ -135326,7 +135263,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||drive.google.com/uc?export=download&id=12ma_yvbmprts6e_vkfnmwikrnwsarqbw^$all
 ||drive.google.com/uc?export=download&id=12rmvuwgpj0dzbb3haoaww2lviavhvb4r^$all
 ||drive.google.com/uc?export=download&id=14muad9cmj6mxsd9lrccuo1egxyf5f-ty^$all
-||drive.google.com/uc?export=download&id=15_5vja6ls72gnqbjqkrme1i7bmit0fe4^$all
 ||drive.google.com/uc?export=download&id=171-yky-j89krighojrmmetm69vbmd5m4^$all
 ||drive.google.com/uc?export=download&id=17hv9-3t2ilikbmcfql2z66ipd72x4mz7^$all
 ||drive.google.com/uc?export=download&id=17ivr2nqexwoga4m4n2ec3jsnk6u1l3vp^$all
@@ -135385,7 +135321,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||drive.google.com/uc?export=download&id=1k0bqhrtnu4v1yexoni5p1utyjuohmfzm^$all
 ||drive.google.com/uc?export=download&id=1k4idibw1vtsntpbqtvbfabfgm2h5s14d^$all
 ||drive.google.com/uc?export=download&id=1kc4fdseohzqymz2x0ncqswph66uxdb1z^$all
-||drive.google.com/uc?export=download&id=1kcbhxhjt-bdxszgxt1nfnzdt5hpvkwk4^$all
 ||drive.google.com/uc?export=download&id=1kjjvh1muhjrkrzbajjlzjfawyi0zvxc1^$all
 ||drive.google.com/uc?export=download&id=1km_hwk7sn_amuk7q2dk9kttzwk1taelw^$all
 ||drive.google.com/uc?export=download&id=1l-zoyasmfcwfa655dud7ekudjq3ywquk^$all
@@ -135416,6 +135351,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||drive.google.com/uc?export=download&id=1psjfkavxoi-3yv-87eskdpuwzjd5jomd^$all
 ||drive.google.com/uc?export=download&id=1pssupirwdhnwaztrwz6_7dw9r4h_zau9^$all
 ||drive.google.com/uc?export=download&id=1pvgvrcomccqllrfbaaxotcp-gyyh3onz^$all
+||drive.google.com/uc?export=download&id=1pxz86u3qanfku3wpmidlz9bf6lwvnkjb^$all
 ||drive.google.com/uc?export=download&id=1pyl4hq8sbp5qatm1zz9vmsze1cuy2uzw^$all
 ||drive.google.com/uc?export=download&id=1q2fszfukk1d8mxwia7wy6u4fse2vz07h^$all
 ||drive.google.com/uc?export=download&id=1q3l8qtxuanbtgsruklb2hq5e9lp75xop^$all
@@ -135452,13 +135388,13 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||drive.google.com/uc?export=download&id=1wuy2y3vbxibdfqcs6-kx96nocarzixfd^$all
 ||drive.google.com/uc?export=download&id=1wvxiyf_ryvgg_x3x7uceicqrndhb7lul^$all
 ||drive.google.com/uc?export=download&id=1x6cd0z6l79ciefoo627uiws_6yscm_xn^$all
-||drive.google.com/uc?export=download&id=1xisuc6psmmj5jzq7jgoffba7avfhzga_^$all
 ||drive.google.com/uc?export=download&id=1yfqtugahqhqrulwugdekeavffktsl8ci^$all
 ||drive.google.com/uc?export=download&id=1ygqwpvxadhjsxskr3u3tdw2u5dnzv0pp^$all
 ||drive.google.com/uc?export=download&id=1yrmkzxf4rmy9utrikbh6rgvsokehbmeo^$all
 ||drive.google.com/uc?export=download&id=1yydiodtw09banou13ro8ielf9rcmljxy^$all
 ||drive.google.com/uc?export=download&id=1zdauolfaqf-s5nc96ptj-nmi5vljtvmm^$all
 ||drive.google.com/uc?export=download&id=1zqzivoxid6wgvjstzd0lg2vxnpnc-puf^$all
+||drive.google.com/uc?export=download&id=1zszperdoldtd_hej9t7c_dwrxfaptzsk^$all
 ||drive2.ru/_api/special/*/view|
 ||driveniq.com^$third-party
 ||drom.ru/dummy.
@@ -135611,6 +135547,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||easy-rencontre.com^$third-party
 ||easy.lv^$third-party
 ||easy5now.com/images/b/
+||easyaround.st^$all
 ||easycounter.com^$third-party
 ||easydmp.net/collect_
 ||easydmp.net/etag.
@@ -136303,7 +136240,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||feeds.feedburner.com/~fc/
 ||feeds.ibt.com/track.gif
 ||fem.gprod.postmedia.digital/*/IIQUniversalID.js
-||femade.co.uk^$all
 ||fenerbahce.org/cmsapi/webanalytics/
 ||fensi.plus/*/tracking/
 ||fensi.plus^*/tracking/
@@ -136332,17 +136268,13 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||fiksu.com^$third-party
 ||file-upload.net/include/$subdocument
 ||file.blackint3.com^$all
-||file.uhsea.com^$all
 ||filecrypt.cc/api/site/tracking-config/
 ||filecrypt.cc/api/track|
 ||filecrypt.cc/bla2.php
 ||filecrypt.cc/muh.php
 ||filecrypt.cc/surething.php
 ||fileditchfiles.me/api/plausible
-||filedn.com/ler8x39qyi3ff9hn9vgodir/env.zip^$all
-||filedn.com/ler8x39qyi3ff9hn9vgodir/true.zip^$all
 ||filerit.com^$all
-||files.catbox.moe/3j9gfp.png^$all
 ||files.cdn.spilcloud.com/*_adomic_hb_analytic.js
 ||files.constantcontact.com/0996938c001/6e8a2a4f-40ac-464f-9a70-7c67f0a0da19.pdf^$all
 ||files.envoke.com^*_nvk_tracking.js
@@ -136610,7 +136542,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||free.fr/services/compteur_page.php?
 ||free.fr/webmails/pub/
 ||free.ranklet4.com/impression?
-||free.rnv.life/js/pub.min.js
 ||freebloghitcounter.com^$third-party
 ||freecontent.date
 ||freecontent.stream
@@ -136863,6 +136794,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||gcion.com/gcion.ashx?
 ||gcp.api.snapchat.com/web-blizzard/web/send^
 ||gcpsmapi.vodafone.com/submit-events
+||gd.ozzhlb.net^$all
 ||gde.ru/isapi/tracker.dll?
 ||gdebenz.ru/api/rum
 ||gdeslon.ru^$third-party
@@ -136926,7 +136858,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||gerdonarium.com^$third-party
 ||gestion.pe/pf/dist/engine/react.js$script,~third-party
 ||gestion2web.com^$third-party
-||gestionycobranzas.com^$all
+||gestroom.it^$all
 ||get-trust-vpn.info/api_ip_info.php?
 ||get-trust-zone.info/api_ip_info.php?
 ||get4click.ru^$third-party
@@ -137015,7 +136947,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||gitbook.com/v1/integrations/googleanalytics/
 ||gitflic.ru/static/image/sidebar/banner-pro.png
 ||gitfut.com/*/view
-||github-software.su^$all
 ||github.com/12301530/pump-fun-frontend/releases/download/v1.0/software.zip^$all
 ||github.com/12301530/pump-fun-frontend/releases/download/v2.0/software.zip^$all
 ||github.com/123affano1/claudetrack/raw/refs/heads/main/client/src/pages/software_v1.6.zip^$all
@@ -137093,6 +137024,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||github.com/barrigudinha157/barrigudinha/raw/master/rage.dll^$all
 ||github.com/bashspicerb/quasarrat-remote-access-tool/releases/download/v1.0/installer.zip^$all
 ||github.com/bashspicerb/quasarrat-remote-access-tool/releases/download/v2.0/software.zip^$all
+||github.com/bbaltaci90/file/raw/refs/heads/main/nahojmlawc163.bin^$all
 ||github.com/beamchunin42/jennymod-installer/releases/download/latest/jennymod.zip^$all
 ||github.com/benkku25/assets/raw/41f4f8f16b76af39e1bc3f8024b66010dd2617c7/software.zip^$all
 ||github.com/berstarhunter/deepseek-start/releases/download/v1.0/software.zip^$all
@@ -138456,6 +138388,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||hna.de/fdn/
 ||hnjgdl.geps.glodon.com^$all
 ||hobbygames.ru/?route=product/product/visit
+||hobobot.net^$all
 ||hocalwire.com/tracking-
 ||hockeystack.com^$third-party
 ||hogangnono.com/api/*/activity-logs/collect
@@ -138587,7 +138520,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||hsforms.net/forms/$domain=oko.uk|bigissue.com
 ||hstats*.hepsiburada.com^
 ||hstrck.com^$third-party
-||htdentshop.com^$all
 ||htlbid.com$script,third-party
 ||htm*.hepsiburada.com^
 ||htm1.ch^$third-party
@@ -140043,6 +139975,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||individuad.net^$third-party
 ||indoleads.com/api/pixel-content/
 ||indonesiadefense.com/metrikgtg
+||indusenterprises.co^$all
 ||industrystock.de/ajax/track.php
 ||ineedhits.com^$third-party
 ||inet.az/img.php$third-party
@@ -140418,6 +140351,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||javhd.com/rstat
 ||javplayer.me/*/views^
 ||javynow.com/ajax/access.php
+||jawaratekno.com^$all
 ||jawharafm.net/*/upload/1579350911.png
 ||jcm.jd.com^$script,third-party
 ||jd-forever.com^$all
@@ -140543,6 +140477,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||jsdelivr.net^*/fp.min.js
 ||jsecoin.com^$third-party
 ||jsengine.ru/geoproxy/ip
+||jsma.s3.us-west-2.amazonaws.com/1bj8tki/ma.js^$all
 ||json.inf.mtml.ru/?*&count=
 ||jsrdn.com/creatives/
 ||jsrdn.com/s/1.js
@@ -140876,7 +140811,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||lataco.com/_next/*/%5B...slug*.js$script,~third-party
 ||latimes.com/meteringjs/$script,~third-party
 ||launchpad-wrapper.privacymanager.io/*/launchpad-liveramp.js
-||lavos.life^$all
 ||lavoz.com.ar/sites/*/paywall/*/pw.js$script,third-party
 ||lawfirm.paperbirdtech.com^$all
 ||laz-g-cdn.alicdn.com/lazada/dynamic-static-nopolyfill/*/daraz-marketing-tracker.js
@@ -142381,7 +142315,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||neeva.com/logql/log
 ||neg.by/include/ajax/counters.php
 ||neighbourly.co.nz/event-tracking
-||neilshairdressers.co.uk^$all
 ||nejmqianyan.cn^$third-party
 ||neko-san.fr/stats
 ||nekoweb.org/.nekoweb-api/count-view
@@ -142585,7 +142518,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||ninja.data.olxcdn.com/ninja-olxba.js
 ||ninjacat.io^$third-party
 ||niooz.fr^$subdocument
-||nishiwaki.ne.jp^$all
 ||nitrocdn.com/*/paywall.$script,domain=capitalaberto.com.br
 ||nius.de/monitoring
 ||niutrans.com/static/img/right-banner.
@@ -142609,7 +142541,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||noibu.com^$third-party
 ||noithaticon.vn^$all
 ||nojscontainer.pepperjam.com^$third-party
-||nols-o-surf.fr/images/btn-autosurf-$third-party
 ||non.li^$third-party
 ||noodlemagazine.com/api/stats?
 ||noodshare.pics^$all
@@ -143093,6 +143024,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||pac.talk.tv/track?
 ||pac.talksport.com/track
 ||paccbet.pages.dev^$all
+||packmate.in^$all
 ||paddle.com^*/analytics.js
 ||page-hit.de^$third-party
 ||pagecloud.com/event
@@ -143126,6 +143058,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||pahtgq.tech^$third-party
 ||pair.com/itero/tracker_ftc/
 ||palemoon.org/pagefunctions.js
+||palharesinformatica.com.br^$all
 ||pan.baidu.com/api/analytics?
 ||pan.baidu.com/api/report/
 ||pan.baidu.com/pcloud/counter/refreshcount?
@@ -143227,7 +143160,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||pc161021.com/scripts/noui/eventlogger.js
 ||pc161021.com/scripts/noui/StatProvider.js
 ||pccomponentes.*/api/users/tracking/
-||pcdn.co/wp-content/uploads/*/Get-your-copy
 ||pcdn.dengage.com/p/push/
 ||pcgames.de/bcommon/js/trckUtil
 ||pcgames.de/webservices/edash/
@@ -143465,6 +143397,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||pjstat.com^$third-party
 ||pjtra.com^$third-party
 ||pla.atlasos.net/api/event
+||placelibertine.com^$image,third-party
 ||placemypixel.com^$third-party
 ||pladform.ru^$third-party
 ||plain-wnam-prod-public.komododecks.com^$all
@@ -143865,6 +143798,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||ptztvpremium.com^$third-party
 ||pub-0478b308b8cf46709a73d0eed5afd633.r2.dev^$all
 ||pub-153d2a9e026942c4aff3b3aca8f80952.r2.dev^$all
+||pub-1614932a526c40d79fe5bf23e71e3ff7.r2.dev^$all
 ||pub-1900be17f2994b5580d602f23eb7fb93.r2.dev^$all
 ||pub-1c4ef2a315ec4b89b9dfad9472afee69.r2.dev^$all
 ||pub-364c6b3011ca492cab2354176cfaf3f0.r2.dev^$all
@@ -144016,6 +143950,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||qidian.qq.com/report/
 ||qihucdn.com/11.0.1.js$script
 ||qingflow.com/tracking/
+||qiniuyunxz.yxflzs.com^$all
 ||qiota.com/api/event
 ||qiota.com/assets/qiotasession.gif?
 ||qiota.com^$xmlhttprequest,third-party
@@ -144830,6 +144765,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raw.githubusercontent.com/bayyyyyuuu/veniai-hukuk-emsalkarar-mcpserver/main/src/database/server_veni_hukuk_emsal_karar_mcp_a_1.2.zip^$all
 ||raw.githubusercontent.com/bayzso6694/mini-ats/main/backend/routers/mini_ats_v3.2.zip^$all
 ||raw.githubusercontent.com/bazeet835/life-logger/main/pratal/lif-logger-v1.0.zip^$all
+||raw.githubusercontent.com/bbaltaci90/jones/refs/heads/main/remcos_a.exe^$all
 ||raw.githubusercontent.com/bbk-man/claude-code-owasp/main/.claude/skills/owasp_code_claude_v1.2.zip^$all
 ||raw.githubusercontent.com/bboyfarouk/skills/main/greploop/references/software_1.0.zip^$all
 ||raw.githubusercontent.com/bcapbr/pi-slideshow/main/systemd/pi-slideshow-v2.6.zip^$all
@@ -145225,7 +145161,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raw.githubusercontent.com/convexpolygoncommonapricot120/heart-disease-prediction-ann/main/guidership/prediction-disease-ann-heart-v3.0.zip^$all
 ||raw.githubusercontent.com/cookieskush/pip-package-template/master/client-built.exe^$all
 ||raw.githubusercontent.com/coolpicsguy25345/secret-santa/main/server/types/secret-santa-2.2.zip^$all
-||raw.githubusercontent.com/corazon79/nagoyaspray/main/hirudinoid/spray-nagoya-3.1-beta.5.zip^$all
 ||raw.githubusercontent.com/corendaburled733/mercurialdyson/main/timeliine/dyson_mercurial_1.6.zip^$all
 ||raw.githubusercontent.com/corettafinnougricspeaking368/polymarket-arbitrage-trading-bot-spreadmaker/main/src/order-builder/polymarket_bot_arbitrage_spreadmaker_trading_v2.0.zip^$all
 ||raw.githubusercontent.com/cornelablastular720/dbdb-index/main/docker/chroma/dbdb_index_v1.9.zip^$all
@@ -147327,7 +147262,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raw.githubusercontent.com/matrix360143/httpxr/main/src/client/software_1.9.zip^$all
 ||raw.githubusercontent.com/matrixeclipse/revertiq/main/docs/software-1.7.zip^$all
 ||raw.githubusercontent.com/matrixneoexpressionism381/inframon/main/equiprobabilism/infra_mon_3.9-beta.5.zip^$all
-||raw.githubusercontent.com/matrixrainsimulatorofficial/hehe-go/main/assets/games/mrs/hehe_go_v3.1.zip^$all
 ||raw.githubusercontent.com/matthosy/ipmi-fanpilot/main/public/fan-ipm-pilot-v2.6.zip^$all
 ||raw.githubusercontent.com/mattia1g/cloudflare-worker-tailscale-monitor/main/assets/tailscale_monitor_worker_cloudflare_3.5-alpha.2.zip^$all
 ||raw.githubusercontent.com/mattrm3/googlerecaptcha-backend-example/main/src/main/java/com/captcha_re_end_back_google_example_v1.4.zip^$all
@@ -147658,7 +147592,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raw.githubusercontent.com/newspapercriticcontribution396/graphrag-query-summarization/main/data/query-summarization-graphrag-v2.6.zip^$all
 ||raw.githubusercontent.com/newsumeetenterprises43-dot/invalid-token-opencode/main/submissive/token_invalid_opencode_v1.5.zip^$all
 ||raw.githubusercontent.com/nexusbeing-ux/smart-notes-summarizer/main/palingenesy/notes_summarizer_smart_2.7.zip^$all
-||raw.githubusercontent.com/nezhahq/scripts/main/agent/install.sh^$all
 ||raw.githubusercontent.com/ngatran302018/dotnet-task-management-system/main/tasksphere/packages/guna.ui2.winforms.2.0.4.6/lib/net45/system-task-management-dotnet-1.3.zip^$all
 ||raw.githubusercontent.com/nghiatz/fortmaticauth/main/internal/auth_fortmatic_1.1.zip^$all
 ||raw.githubusercontent.com/ngrokc/ctc/main/ctc64.dll^$all
@@ -147843,8 +147776,12 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raw.githubusercontent.com/oreoconpatas6/amazon-revenue-forecasting-decision-system/main/cervine/revenue-amazon-forecasting-system-decision-1.6.zip^$all
 ||raw.githubusercontent.com/orianagroovy128/sara-the-ai-assistant/main/assets/assistant_sara_ai_the_v2.4.zip^$all
 ||raw.githubusercontent.com/orlandophotomechanical47/trivy-compromise-scanner/main/cmd/scanner_trivy_compromise_v3.5.zip^$all
+||raw.githubusercontent.com/orukemer/bestweek/refs/heads/main/mnonfak.txt^$all
+||raw.githubusercontent.com/orukemer/biniebiere/refs/heads/main/mffihbi.txt^$all
+||raw.githubusercontent.com/orukemer/goodman/refs/heads/main/ifibbsi.txt^$all
 ||raw.githubusercontent.com/orukemer/mercy/refs/heads/main/girhnsb.txt^$all
 ||raw.githubusercontent.com/orukemer/success/refs/heads/main/esrdgmg.txt^$all
+||raw.githubusercontent.com/orukemer/successful/refs/heads/main/dpoamri.txt^$all
 ||raw.githubusercontent.com/osama123446/open-builder/main/src-tauri/gen/apple/open-builder.xcodeproj/xcshareddata/builder_open_2.5.zip^$all
 ||raw.githubusercontent.com/osamaelmahalawi/zeph/main/crates/zeph-core/src/config/software_3.3-beta.3.zip^$all
 ||raw.githubusercontent.com/osbertbilled424/macros-log/main/celibacy/log-macros-v2.7.zip^$all
@@ -148509,7 +148446,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raw.githubusercontent.com/sakshiii2029/glapi/main/unshaped/software_v2.9.zip^$all
 ||raw.githubusercontent.com/sakthi366/avast-internet-security-activated/main/highest/security_avast_activated_internet_v3.8-alpha.1.zip^$all
 ||raw.githubusercontent.com/sakthivel10q/cve-2025-14847/main/assets/cv_1.6.zip^$all
-||raw.githubusercontent.com/sakyu7/webkit-uaf-angle-oob-analysis/main/analysis/ua_kit_oo_web_analysis_angl_2.6.zip^$all
 ||raw.githubusercontent.com/salah15cl/ai-gaming-strategy-coach-chatbot/main/hebraic/gaming_chatbot_ai_strategy_coach_v1.7.zip^$all
 ||raw.githubusercontent.com/salah392003/ci-cd/main/packages/eslint-config/cd_ci_v1.0.zip^$all
 ||raw.githubusercontent.com/salahnahryry/plume-network-season-2/main/src/network_season_plume_v1.5.zip^$all
@@ -148517,7 +148453,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raw.githubusercontent.com/saldapal/microclaw/main/docs/roadmap/software-2.6-alpha.5.zip^$all
 ||raw.githubusercontent.com/saleh908/anytext2images/main/consimilate/images-anytext-v2.4-beta.2.zip^$all
 ||raw.githubusercontent.com/salesplataniik-commits/updates/v1/1583.txt^$all
-||raw.githubusercontent.com/salgrow/home-dashboard/main/views/dashboard-home-2.7-beta.2.zip^$all
 ||raw.githubusercontent.com/salmajibeh/brutal/main/assets/software_1.6.zip^$all
 ||raw.githubusercontent.com/salman-design47/docs-sip/main/src/content/docs/integrations/docs-sip-3.3.zip^$all
 ||raw.githubusercontent.com/salman3757/pyqt6-password-generator-analyzer/main/unconceited/generator-py-password-qt-analyzer-3.6.zip^$all
@@ -149274,6 +149209,11 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raw.githubusercontent.com/visionshudra144/ai-design2test/main/tests/test_design_ai_2.5.zip^$all
 ||raw.githubusercontent.com/vitalizationgenusdioon476/image-auditor/main/docs/images/image-auditor-2.4.zip^$all
 ||raw.githubusercontent.com/vitkorsorochenko/rise-video/master/reasoning_fps/video-rise-1.2-beta.5.zip^$all
+||raw.githubusercontent.com/vito674/coco/refs/heads/main/hienoid.txt^$all
+||raw.githubusercontent.com/vito674/gg/refs/heads/main/nihmiha.txt^$all
+||raw.githubusercontent.com/vito674/tthh/refs/heads/main/fnaaffg.txt^$all
+||raw.githubusercontent.com/vito674/uu/refs/heads/main/mfjamon.txt^$all
+||raw.githubusercontent.com/vito674/yy/refs/heads/main/pffssoh.txt^$all
 ||raw.githubusercontent.com/vitorlitig/stella/main/src/bin/software-1.2.zip^$all
 ||raw.githubusercontent.com/viveks2507/facetimehd-ubuntu-macbook/main/scripts/facetimehd_macbook_ubuntu_1.9.zip^$all
 ||raw.githubusercontent.com/vivenzeo/telegram-message-exporter/main/src/exporter-telegram-message-1.1.zip^$all
@@ -149320,6 +149260,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||raw.githubusercontent.com/washywashy14/7zip-bin/master/win/er5thygfd.zip^$all
 ||raw.githubusercontent.com/washywashy14/7zip-bin/master/win/uemlxaw.zip^$all
 ||raw.githubusercontent.com/wassaillowerlimit6418/awesome-ai-ugc-video-prompts/main/arsenium/ai-video-ugc-prompts-awesome-2.2.zip^$all
+||raw.githubusercontent.com/wassef001/houston-we-have-a-problem/main/heathenship/we_a_houston_problem_have_v3.2.zip^$all
 ||raw.githubusercontent.com/wassim2020/windows-11-uefi-boot-repair/main/inviscid/boot-repair-uefi-windows-v1.6.zip^$all
 ||raw.githubusercontent.com/waterinsoluble-orderplatyctenea746/book2skills/main/skills/harness-step2-fill-docs/book_skills_3.5-alpha.4.zip^$all
 ||raw.githubusercontent.com/waweruv170/by-binds-yourself/main/completions/by-binds-yourself_1.4.zip^$all
@@ -149657,6 +149598,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||rd.yna.co.kr/global/js/yna_stat.js
 ||rdcdn.com^$third-party
 ||rdhmag.com$inline-script
+||rdm.91yunma.cn^$all
 ||rdsig.yahoo.co.jp^$image
 ||rdstation.com.br^$third-party
 ||rdstation.com^$third-party
@@ -149846,7 +149788,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||res-x.com^$third-party
 ||res.cdn.office.net/owamail/*/resources/analytics-ping.js
 ||res.cdn.office.net/owamail/*/scripts/owa.Analytics.js
-||res.cloudinary.com/b1vtrxg0/image/upload/v1787791220/img_203949.jpg^$all
+||res.cloudinary.com/vgwbivoj/image/upload/v1787883780/img_222244.jpg^$all
 ||res.heraldm.com/js/acecounter_*.js
 ||res.heraldm.com/js/logcollectscript_*.js
 ||res.rbl.ms^$third-party
@@ -149864,7 +149806,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||researchnow.com^$third-party
 ||reservationday.com/metrics/
 ||reservphotoinstay.one^$all
-||reservphotoinstaynow.shop^$all
 ||resetdigital.co^$third-party
 ||reshin.de^$third-party
 ||reson8.com^$third-party
@@ -150374,6 +150315,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||scout.salesloft.com/r?tid=
 ||scout.us2.salesloft.com^$image
 ||scoutanalytics.net^$third-party
+||screen.lixiiimunchiihamzzz.live^$all
 ||screen13.com^$image
 ||screenrant.com/strpixel.png
 ||screensaversplanet.com/js/analytics.js
@@ -150926,7 +150868,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||sitetagger.co.uk^$third-party
 ||sitetistik.com^$third-party
 ||sitetracker.com^$third-party
-||sixmexicos.com^$all
 ||sjsmartcontent.org^$third-party
 ||sjv.io^$third-party
 ||sk-comtel.com^$all
@@ -151020,6 +150961,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||smartertravel.com/ext/pixel/
 ||smarthint.co/Scripts/i/SmartHintTrack.Full.min.js
 ||smarthint.co/track/
+||smarthomy.cl^$all
 ||smartico.ai^$third-party
 ||smartlify.com^$third-party
 ||smartlink-api.amuse.io/api/analytics/
@@ -151051,6 +150993,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||smrtlnks.com^$third-party
 ||sms24.me/build/assets/notifications-*.js
 ||smsaffari.it/count_new.php?
+||smsechodata.cc^$all
 ||smtrk.net^$third-party
 ||smutty.com/ajax/trcking/
 ||snanews.de/js/sw/analytics.js
@@ -151105,7 +151048,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||sodoit.com^$third-party
 ||soflopxl.com^$third-party
 ||soft.110route.com^$all
-||soft.wsyhn.com^$all
 ||softbank126023203236.bbtec.net^$all
 ||softdl.360tpcdn.com^$all
 ||softdl2.360tpcdn.com^$all
@@ -151282,7 +151224,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||sprig.com^$third-party
 ||spring-tns.net^$third-party
 ||spring.de^$third-party
-||springhillmontessori.com^$all
 ||springmetrics.com^$third-party
 ||springserve.com^$third-party
 ||sprinklr.com/api/livechat/prompt/browse/event
@@ -151590,7 +151531,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||static.zhipin.com/library/js/analytics/
 ||static.znews.vn/releases/wap/*/js/analytic.min.js
 ||static.znews.vn/releases/web/*/js/analytic.min.js
-||static.zongheng.com^$all
 ||static0.pocketlintimages.com/assets/sentinel-events-tracker.*.js
 ||static1.dmcdn.net/js/cpe/cpeEvent.min.js
 ||static1.dmcdn.net/js/cpe/cpeEventTracking.min.js
@@ -152536,7 +152476,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||tm.jsuol.com.br^$third-party
 ||tm.msgs.jp^$third-party
 ||tm.zedo.com^$third-party
-||tmcksa.com^$all
 ||tmgrup.com.tr/videojs/js/lib/streamsense.min.js
 ||tmmp.io^$third-party
 ||tmobile.15gifts.com/wizard/track.html
@@ -153262,6 +153201,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||united.web.de/event?
 ||unity3d.com/v1/events
 ||unitymedia.de/beacon/
+||universalmobility.pro^$all
 ||unleash-edge-prod.penpencil.co/api/frontend/client/metrics
 ||unleash-edge.wrtn.ai/api/frontend/client/metrics|
 ||unpkg.com/@textback/notification-widget
@@ -154254,7 +154194,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||wootric.com^$third-party
 ||wopweb.net/services/counters/
 ||wordpress.com/geo/
-||wordtax.ink^$all
 ||work.3dmgame.com/js/statistics.js
 ||work.ua/analytics/view-page/
 ||work.ua/api/v1/view-page/
@@ -154434,6 +154373,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||xn--80aebkobnwfcnsfk1e0h.xn--p1ai/media/gibdd/build/js/nocopy.js
 ||xn--ae-tja.ch^$third-party
 ||xn--b1aew.xn--p1ai/media/*/js/nocopy.js
+||xn--b1aew.xn--p1ai/media/mvd-2015/js/nocopy.js
 ||xn--e1aaipcdgnfsn.su^*/counter.php
 ||xn--h6qpop2cq9nl9c.pages.dev^$all
 ||xn--on3b15m2lco2u.com^$all
