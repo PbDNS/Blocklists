@@ -10138,6 +10138,7 @@
 ||best.turajmart.com^
 ||bestboundary.com^
 ||bestclimbers.net^
+||bestcoffeemachine.net^
 ||bestcontentcost.top^
 ||bestfreecounterstat.com^
 ||bestill.help.no^
@@ -36549,6 +36550,7 @@
 ||juris.pedroburak.com^
 ||just.playvici.com^
 ||justconfig.com^
+||justfordocs.com^
 ||justicejudo.com^
 ||justid.io^
 ||justlagoon.com^
@@ -53746,6 +53748,7 @@
 ||obs.esnlocco.com^
 ||obs.forseasky.com^
 ||obs.greencolumnblog.com^
+||obs.sd4823.spglobal.com^
 ||obs.system1onesource.com^
 ||obscenesidewalk.com^
 ||obscure.stomp-nutrition.com^
@@ -56493,6 +56496,7 @@
 ||pixel.tuko.co.ke^
 ||pixel.udpauto.ru^
 ||pixel.underzstore.com^
+||pixel.uppromote.com^
 ||pixel.veritone-ce.com^
 ||pixel.videohub.tv^
 ||pixel.visitiq.io^
@@ -106979,7 +106983,6 @@ $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.l
 /\.straitstimes\.com\/.+(\w+-){3,}.+\?rel=plus/$inline-script,domain=straitstimes.com
 /\.subscriptioninsider\.com\/.+\/(\w+-){3,}/$inline-script,domain=subscriptioninsider.com
 /\.telegram\.hr\/.+\/(\w+-){3,}/$inline-script
-/\.vanityfair\.it\/[-\w]+$/$script,~third-party
 /\.vn\.at\/.+\/\d{4}\//$inline-script,domain=vn.at
 /\/(license|script)\.\d{1,5}\.js/$script,badfilter
 /\/(public|resources|static|assets)\/([a-f0-9]){28,31}$/$script,xmlhttprequest,~third-party
@@ -112043,6 +112046,8 @@ aliasdmc.fr,allocine.fr,annuaire-streaming.com,blablastream.com,centerblog.net,c
 alibabacloud.com###alicloud-home-top-banner
 alibabacloud.com##.BottomBanner
 aliexpress.*##.image-poplayer-modal
+aliexpress.com,aliexpress.ru,aliexpress.us#%#//scriptlet('ubo-set', 'navigator.bluetooth', 'undefined')
+aliexpress.com,aliexpress.ru,aliexpress.us#%#//scriptlet('ubo-set', 'OfflineAudioContext', 'undefined')
 aliexpress.com,aliexpress.us##body > div[style="display: block; z-index: 1000000;"]
 aliexpress.com,aliexpress.us#?#._2FypS:has(._1rKqn:contains(/AD|Annonce|إعلان/))
 aliexpress.ru#$#body { overflow: auto!important; padding-right: 0!important; }
@@ -118301,8 +118306,6 @@ hotline.finance#$#.ReactModal__Overlay { display: none !important; }
 hotline.finance#$#body { overflow: auto !important; }
 hotline.ua##.promo-3-products
 hotline.ua##.promo-list-item
-hotnews.ro##+js(ra, hidden|inert, div.article-single-content[hidden], stay)
-hotnews.ro##+js(rc, hn-paywall, div.hn-paywall, stay)
 hotokami.jp##.register-banner
 hotokami.jp##div[data-controller="spots-lists"] > .border-b-gray-200.border-solid[onclick^="gtag"]
 hotpepper.jp##.header-banners
@@ -126401,8 +126404,6 @@ the-ans.jp##.single-links
 the-ans.jp##a[id^="c2_click_textlink_"]
 the-ans.jp##a[id^="c2_click_W-ANS_"]
 the-ans.jp##center > script + a[id^="c2_click_"]
-the-decoder.com##+js(ra, class, div.paywall-hidden-content, stay)
-the-decoder.com##section.paywall-content
 the-independent.com,abc.net.au##div[data-component="Newsletter"]
 the-japan-news.com#%#//scriptlet('set-cookie-reload', 'fp', '1')
 the-race.com##.gh-footer-signup
@@ -130960,6 +130961,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||adyen.com/checkoutshopper/v2/analytics/log?
 ||ae-api.ximera.com/api/*/gtm
 ||ae.dmxleo.com/*/events
+||aeis.alicdn.com/awsc/fireyejs/$script,domain=alibaba.com
 ||aemet.es/js/stats.js
 ||aerlingus.com/ahktqsewxjhguuxe.js
 ||aerolla.net/0.js
@@ -131709,6 +131711,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||api.tinypass.com/api/v*/anon/error/log
 ||api.tomi.ai^$third-party
 ||api.transcy.io/api/statistic/
+||api.transtore.app/api/v2/storefront/tracking
 ||api.trustisto.com/events/push/basket$domain=dlabrodacza.pl
 ||api.trwl1.com/ascripts/gcrt.js
 ||api.tsc.ca/Tracking/v1/events/
@@ -131759,6 +131762,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||apkpure.com/api/v1/get-withdraw-count
 ||apkpure.com/static/script/device-*-min.js
 ||apl.roskomsvoboda.org/js/script.js
+||aplus.aliexpress.$image,ping,~third-party
 ||aplus.aliexpress.*/ae.pc_click.statweb_ae_click
 ||aplus.aliexpress.*/ae.pc_ctr.statweb_ae_ctr
 ||aplus.aliexpress.*/aes.1.1
@@ -136660,7 +136664,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||fz.tiansys.cn^$all
 ||g-scale.org/scripts/EventLog.js
 ||g.alicdn.com/alilog/s/*/plugin/aplus_spmact.js
-||g.alicdn.com/AWSC/fireyejs/
 ||g.delfi.lt/g.js
 ||g.ezoic.net/ezosuigeneris.js
 ||g.ivi.ru/track
@@ -141474,6 +141477,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||marktplaats.nl/px/
 ||marmiton.org/reloaded/errpix.php
 ||maropost.com^$third-party
+||marriott.com/mi/api/shop-renderer/logger
 ||marsflag.com/mf2file/site/ext/tr.js
 ||martechsecresponse.s3.us-east-2.amazonaws.com/HotelTracker-*.js
 ||marvelmetrix.com^$third-party
@@ -149704,6 +149708,7 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||regmedia.co.uk/*/tp.gif
 ||rei.com/customer-analytics-attributes/
 ||reibootmac.com/script/rn_event_track_v*.min.js
+||reibootmac.com/script/rn_event_track_v2.min.js
 ||reichelt.com/setsid.php?
 ||reifenquick.de^$all
 ||reindaks.com^$third-party
@@ -152391,7 +152396,6 @@ zyro.com#$#body.modal-open { display: none !important; }
 ||time4shopping.com.ua/api/api.php/stat
 ||timejs.game.easebar.com/bad_report?
 ||timejs.game.easebar.com/report?
-||timesofindia.indiatimes.com/*.cms?rel=plus$inline-script
 ||timesofindia.indiatimes.com/common_cube.cms
 ||timesunion.com/*/xhr/api/*/collector
 ||timesunion.com/413gkwMT/init.js
